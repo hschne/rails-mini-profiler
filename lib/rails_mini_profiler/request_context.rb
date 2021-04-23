@@ -4,7 +4,7 @@ module RailsMiniProfiler
   class RequestContext
     attr_reader :request, :traces
 
-    attr_accessor :response, :start_time, :end_time
+    attr_accessor :response
 
     def initialize(request = nil)
       @request = request

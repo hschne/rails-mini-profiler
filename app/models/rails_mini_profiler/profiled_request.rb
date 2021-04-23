@@ -12,10 +12,16 @@ module RailsMiniProfiler
                   :body,
                   :traces
 
+    def initialize(attributes = nil)
+      super
+      @status ||= 200
+      @duration ||= 0
+      @traces ||= []
+    end
+
     class << self
       def from(request_context)
         kwargs = {
-          duration: ((request_context.end_time - request_context.start_time) * 1000).round(3),
           status: request_context.response.status,
           path: request_context.request.path,
           traces: request_context.traces

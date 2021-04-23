@@ -16,8 +16,6 @@ require 'rails_helper'
 
 module RailsMiniProfiler
   RSpec.describe '/profiled_requests', type: :request do
-    let(:valid_attributes) { { id: 1, duration: 10 } }
-
     let(:configuration) { RailsMiniProfiler.configuration }
 
     let(:context) { RailsMiniProfiler.context }
@@ -26,7 +24,7 @@ module RailsMiniProfiler
 
     describe 'GET /index' do
       it 'renders a successful response' do
-        storage.save(ProfiledRequest.new(valid_attributes))
+        storage.save(ProfiledRequest.new)
         get profiled_requests_url
         expect(response).to be_successful
       end
@@ -34,7 +32,7 @@ module RailsMiniProfiler
 
     describe 'GET /show' do
       it 'renders a successful response' do
-        profiled_request = storage.save(ProfiledRequest.new(valid_attributes))
+        profiled_request = storage.save(ProfiledRequest.new)
         get profiled_request_url(profiled_request.id)
         expect(response).to be_successful
       end
@@ -42,7 +40,7 @@ module RailsMiniProfiler
 
     describe 'DELETE /destroy' do
       it 'destroys the requested profiled_request' do
-        profiled_request = storage.save(ProfiledRequest.new(valid_attributes))
+        profiled_request = storage.save(ProfiledRequest.new)
         delete profiled_request_url(profiled_request.id)
 
         expect(storage.find(profiled_request.id)).to be_nil

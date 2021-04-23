@@ -6,6 +6,9 @@ AllCops:
 Layout/LineLength:
   Max: 120
 
+Metrics/AbcSize:
+  Max: 20
+
 Metrics/MethodLength:
   CountAsOne: ['array', 'heredoc']
   IgnoredMethods: ['describe', 'context']

@@ -2,7 +2,6 @@
 
 module RailsMiniProfiler
   class Trace
-
     attr_reader :id, :name, :start, :finish, :duration, :payload
 
     def initialize(**kwargs)

@@ -13,18 +13,15 @@ module RailsMiniProfiler
       render_template.action_view
       render_partial.action_view
       process_action.action_controller
+      rails_mini_profiler.total_time
     ].freeze
 
     def call(env)
       request = Request.new(env)
       return @app.call(env) unless Guard.new(request).profile?
 
-      request_context = RequestContext.new(Request.new(env))
-      self.request_context = request_context
-      request_context.start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-      status, headers, response = @app.call(env)
-      request_context.end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-
+      self.request_context = RequestContext.new(Request.new(env))
+      status, headers, response = ActiveSupport::Notifications.instrument('rack-profiler.total_time') { @app.call(env) }
       request_context.response = Response.new(status, headers, response)
 
       save(request_context)
