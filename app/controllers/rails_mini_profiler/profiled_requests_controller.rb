@@ -8,13 +8,9 @@ module RailsMiniProfiler
 
     def index
       @profiled_requests = storage.all
-
-      render(json: @profiled_requests)
     end
 
-    def show
-      render(json: @profiled_request)
-    end
+    def show; end
 
     def destroy
       storage.destroy(@profiled_request.id)

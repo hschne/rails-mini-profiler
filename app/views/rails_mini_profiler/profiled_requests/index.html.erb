@@ -23,7 +23,6 @@
         <td><%= profiled_request.headers %></td>
         <td><%= profiled_request.body %></td>
         <td><%= link_to 'Show', profiled_request %></td>
-        <td><%= link_to 'Edit', edit_profiled_request_path(profiled_request) %></td>
         <td><%= link_to 'Destroy', profiled_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -31,5 +30,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Profiled Request', new_profiled_request_path %>

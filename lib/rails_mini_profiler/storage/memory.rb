@@ -19,7 +19,7 @@ module RailsMiniProfiler
       end
 
       def all
-        @records.keys
+        @records.values
       end
 
       def find(id)

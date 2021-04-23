@@ -7,7 +7,9 @@ module RailsMiniProfiler
     attr_accessor :id,
                   :status,
                   :duration,
-                  :path
+                  :path,
+                  :headers,
+                  :body,
 
     class << self
       def from(request_context)

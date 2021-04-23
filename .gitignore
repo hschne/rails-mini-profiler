@@ -260,5 +260,6 @@ tags
 # End of https://www.toptal.com/developers/gitignore/api/rubymine+all,vim,vscode,emacs,macos,ruby
 
 .rspec_status
-spec/dummy/db
-spec/dummy/log
+spec/dummy/db/**
+spec/dummy/log/**
+spec/dummy/tmp/**
