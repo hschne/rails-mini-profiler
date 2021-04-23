@@ -18,7 +18,7 @@ module RailsMiniProfiler
       # TODO: This changes based on mount point
       return true if /rails_mini_profiler/.match?(@request.path)
 
-      ignored_paths = RailsMiniProfiler.configuration.ignored_paths
+      ignored_paths = RailsMiniProfiler.configuration.skip_paths
 
       return true if Regexp.union(ignored_paths).match?(@request.path)
 

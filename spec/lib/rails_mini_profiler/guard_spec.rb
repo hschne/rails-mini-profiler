@@ -35,7 +35,7 @@ module RailsMiniProfiler
         let(:request) { Request.new('REQUEST_PATH' => '/ignored') }
 
         it('should be false') do
-          RailsMiniProfiler.configuration.ignored_paths = [/ignored/]
+          RailsMiniProfiler.configuration.skip_paths = [/ignored/]
 
           expect(subject.profile?).to be(false)
         end

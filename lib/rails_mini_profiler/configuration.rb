@@ -2,9 +2,7 @@
 
 module RailsMiniProfiler
   class Configuration
-    attr_accessor :storage
-
-    attr_accessor :ignored_paths
+    attr_accessor :storage, :skip_paths
 
     def initialize
       super
@@ -13,7 +11,7 @@ module RailsMiniProfiler
 
     def reset
       @storage = Storage::Memory
-      @ignored_paths = []
+      @skip_paths = []
     end
   end
 end
