@@ -8,8 +8,8 @@ module RailsMiniProfiler
       app.middleware.use(RailsMiniProfiler::Middleware)
     end
 
-    initializer "rails_mini_profiler.assets.precompile" do |app|
-      app.config.assets.precompile += %w( rails_mini_profiler.js)
+    initializer 'rails_mini_profiler.assets.precompile' do |app|
+      app.config.assets.precompile += %w[rails_mini_profiler.js]
     end
 
     config.generators do |g|

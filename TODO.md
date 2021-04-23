@@ -1,7 +1,9 @@
 # Todo
 
-- Make sure views work
-
+- Add SQL profiling
+- Whitelist based on request params/response codes
+- Ignore asset requests
+- Scope to identified person
 
 # Next
 

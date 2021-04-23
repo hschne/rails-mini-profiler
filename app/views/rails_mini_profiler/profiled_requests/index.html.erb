@@ -5,12 +5,11 @@
 <table>
   <thead>
     <tr>
+      <th>ID</th>
       <th>Status</th>
-      <th>Duration</th>
       <th>Path</th>
-      <th>Headers</th>
-      <th>Body</th>
-      <th colspan="3"></th>
+      <th>Duration</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -19,10 +18,8 @@
       <tr>
         <td><%= profiled_request.id %></td>
         <td><%= profiled_request.status %></td>
-        <td><%= profiled_request.duration %></td>
         <td><%= profiled_request.path %></td>
-        <td><%= profiled_request.headers %></td>
-        <td><%= profiled_request.body %></td>
+        <td><%= profiled_request.duration %> ms</td>
         <td><%= link_to 'Show', profiled_request_path(profiled_request.id) %></td>
         <td><%= link_to 'Destroy', profiled_request_path(profiled_request.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -31,15 +28,3 @@
 </table>
 
 <br>
-
-<h1>HELLO!</h1>
-
-<p>elapsed since page load: <span id="counter">0</span></p>
-
-<script>
-  let loadedAt = new Date().getTime();
-  let updateFn = setInterval(function() {
-    let elapsed = (new Date().getTime() - loadedAt)/1000;
-    document.getElementById("counter").innerHTML = elapsed;
-  }, 200); // update 5x second for maximum fan usage
-</script>

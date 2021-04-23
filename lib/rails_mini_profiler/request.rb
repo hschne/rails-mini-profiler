@@ -6,12 +6,28 @@ module RailsMiniProfiler
       @env = env
     end
 
+    def method
+      @env['REQUEST_METHOD']
+    end
+
+    def headers
+      @env.select { |k, _v| k.start_with? 'HTTP_' }
+    end
+
     def query_string
       @env['QUERY_STRING']
     end
 
     def path
-      @env['PATH_INFO'].sub('//', '/')
+      @env['REQUEST_PATH']
+    end
+
+    private
+
+    def sanitize_headers(headers)
+      headers.collect { |k, v| [k.sub(/^HTTP_/, ''), v] }.collect do |k, v|
+        [k.split('_').collect(&:capitalize).join('-').to_sym, v]
+      end
     end
   end
 end

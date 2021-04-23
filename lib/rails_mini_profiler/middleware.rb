@@ -4,11 +4,13 @@ module RailsMiniProfiler
   class Middleware
     def initialize(app)
       @app = app
-      @configuration = RailsMiniProfiler.configuration
-      @context = Context.instance(@configuration)
+      @context = RailsMiniProfiler.context
     end
 
     def call(env)
+      request = Request.new(env)
+      return @app.call(env) unless Guard.new(request).profile?
+
       request_context = RequestContext.new(Request.new(env))
       request_context.start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       status, headers, response = @app.call(env)
@@ -26,8 +28,6 @@ module RailsMiniProfiler
       record = ProfiledRequest.from(request_context)
       storage_instance = @context.storage_instance
       storage_instance.save(record)
-
-      Rails.logger.info(storage_instance.all)
     end
   end
 end
