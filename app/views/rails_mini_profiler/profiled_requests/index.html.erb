@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Profiled Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Duration</th>
+      <th>Path</th>
+      <th>Headers</th>
+      <th>Body</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @profiled_requests.each do |profiled_request| %>
+      <tr>
+        <td><%= profiled_request.status %></td>
+        <td><%= profiled_request.duration %></td>
+        <td><%= profiled_request.path %></td>
+        <td><%= profiled_request.headers %></td>
+        <td><%= profiled_request.body %></td>
+        <td><%= link_to 'Show', profiled_request %></td>
+        <td><%= link_to 'Edit', edit_profiled_request_path(profiled_request) %></td>
+        <td><%= link_to 'Destroy', profiled_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Profiled Request', new_profiled_request_path %>

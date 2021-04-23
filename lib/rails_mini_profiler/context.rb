@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  class ExecutionContext
+  class Context
     class << self
       def instance(configuration)
         @instance ||= new(configuration)

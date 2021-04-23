@@ -5,7 +5,7 @@ module RailsMiniProfiler
     def initialize(app)
       @app = app
       @configuration = RailsMiniProfiler.configuration
-      @execution_context = ExecutionContext.instance(@configuration)
+      @context = Context.instance(@configuration)
     end
 
     def call(env)
@@ -23,11 +23,11 @@ module RailsMiniProfiler
     private
 
     def save(request_context)
-      record = Record.from(request_context)
-      storage_instance = @execution_context.storage_instance
+      record = ProfiledRequest.from(request_context)
+      storage_instance = @context.storage_instance
       storage_instance.save(record)
 
-      Rails.logger.info(storage_instance.records)
+      Rails.logger.info(storage_instance.all)
     end
   end
 end

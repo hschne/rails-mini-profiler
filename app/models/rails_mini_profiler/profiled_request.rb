@@ -1,17 +1,11 @@
-# frozen_string_literal: true
-
 module RailsMiniProfiler
-  class Record
-    attr_reader :id,
-                :status,
-                :duration,
-                :path
+  class ProfiledRequest
+    include ActiveModel::Model
 
-    def initialize(**kwargs)
-      @duration = kwargs[:duration]
-      @status = kwargs[:status]
-      @path = kwargs[:path]
-    end
+    attr_accessor :id,
+                  :status,
+                  :duration,
+                  :path
 
     class << self
       def from(request_context)

@@ -5,8 +5,7 @@ require 'forwardable'
 require 'rails_mini_profiler/version'
 require 'rails_mini_profiler/storage/memory'
 require 'rails_mini_profiler/configuration'
-require 'rails_mini_profiler/execution_context'
-require 'rails_mini_profiler/record'
+require 'rails_mini_profiler/context'
 require 'rails_mini_profiler/request'
 require 'rails_mini_profiler/response'
 require 'rails_mini_profiler/request_context'
@@ -18,6 +17,10 @@ module RailsMiniProfiler
   class << self
     def configuration
       @configuration ||= Configuration.new
+    end
+
+    def context
+      @context ||= Context.instance(configuration)
     end
 
     def configure

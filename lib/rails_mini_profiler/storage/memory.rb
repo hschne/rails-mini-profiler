@@ -3,8 +3,6 @@
 module RailsMiniProfiler
   module Storage
     class Memory
-      attr_reader :records
-
       def initialize
         @lock = Mutex.new
         @id = 1
@@ -16,6 +14,19 @@ module RailsMiniProfiler
           @records[@id] = record
           @id += 1
         end
+        record
+      end
+
+      def all
+        @records.keys
+      end
+
+      def find(id)
+        @records[id]
+      end
+
+      def destroy(id)
+        @records.delete(id)
       end
     end
   end
