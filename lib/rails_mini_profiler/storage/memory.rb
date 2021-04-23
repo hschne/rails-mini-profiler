@@ -11,6 +11,7 @@ module RailsMiniProfiler
 
       def save(record)
         @lock.synchronize do
+          record.id = @id
           @records[@id] = record
           @id += 1
         end
@@ -22,11 +23,15 @@ module RailsMiniProfiler
       end
 
       def find(id)
-        @records[id]
+        @records[id.to_i]
       end
 
       def destroy(id)
-        @records.delete(id)
+        @records.delete(id.to_i)
+      end
+
+      def clear
+        @records.clear
       end
     end
   end

@@ -1,8 +1,10 @@
-require_dependency "rails_mini_profiler/application_controller"
+# frozen_string_literal: true
+
+require_dependency 'rails_mini_profiler/application_controller'
 
 module RailsMiniProfiler
   class ProfiledRequestsController < ApplicationController
-    before_action :set_profiled_request, only: [:show, :destroy]
+    before_action :set_profiled_request, only: %i[show destroy]
 
     def index
       @profiled_requests = storage.all
@@ -11,11 +13,11 @@ module RailsMiniProfiler
     end
 
     def show
-      render(json: @profiled_request.to_h)
+      render(json: @profiled_request)
     end
 
     def destroy
-      @profiled_request.destroy
+      storage.destroy(@profiled_request.id)
       redirect_to profiled_requests_url, notice: 'Profiled request was successfully destroyed.'
     end
 
@@ -30,7 +32,7 @@ module RailsMiniProfiler
     end
 
     def storage
-      @profiled_requests ||= Context.instance(configuration).storage_instance
+      @storage ||= Context.instance(configuration).storage_instance
     end
   end
 end
