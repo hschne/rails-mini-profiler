@@ -1,5 +1,7 @@
-Rails.application.routes.draw do
-  mount RailsMiniProfiler::Engine => "/rails_mini_profiler"
+# frozen_string_literal: true
 
-  resource :profiles, only: [:show]
+Rails.application.routes.draw do
+  mount RailsMiniProfiler::Engine => '/rails_mini_profiler'
+
+  get '/profile', to: 'profiles#perform'
 end

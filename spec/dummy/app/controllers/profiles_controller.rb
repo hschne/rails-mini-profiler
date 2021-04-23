@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 
 class ProfilesController < ApplicationController
-  def show
-    render(json: { id: 1})
+  def perform
+    head(:ok)
   end
 end

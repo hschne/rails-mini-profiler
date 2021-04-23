@@ -1,6 +1,27 @@
-require "rails_mini_profiler/version"
-require "rails_mini_profiler/engine"
+# frozen_string_literal: true
+
+require 'forwardable'
+
+require 'rails_mini_profiler/version'
+require 'rails_mini_profiler/storage/memory'
+require 'rails_mini_profiler/configuration'
+require 'rails_mini_profiler/execution_context'
+require 'rails_mini_profiler/record'
+require 'rails_mini_profiler/request'
+require 'rails_mini_profiler/response'
+require 'rails_mini_profiler/request_context'
+require 'rails_mini_profiler/middleware'
+
+require 'rails_mini_profiler/engine'
 
 module RailsMiniProfiler
-  # Your code goes here...
+  class << self
+    def configuration
+      @configuration ||= Configuration.new
+    end
+
+    def configure
+      yield(configuration)
+    end
+  end
 end
