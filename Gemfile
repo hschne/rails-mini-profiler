@@ -7,6 +7,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec
 
 group :development do
+  gem 'puma', '~> 5.2'
   gem 'rspec-rails', '~> 4.0'
   gem 'rubocop', '~> 1.7'
   gem 'sqlite3', '~> 1.4'
