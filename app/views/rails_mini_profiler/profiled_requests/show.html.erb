@@ -25,4 +25,14 @@
   <%= @profiled_request.body %>
 </p>
 
+<% @profiled_request.traces.each do |trace| %>
+  <tr>
+    <td><%= trace.id %></td>
+    <td><%= trace.name %></td>
+    <td><%= trace.start %></td>
+    <td><%= trace.finish %></td>
+    <td><%= trace.duration %> ms</td>
+  </tr>
+<% end %>
+
 <%= link_to 'Back', profiled_requests_path %>
