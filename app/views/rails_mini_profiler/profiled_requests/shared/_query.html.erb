@@ -1,0 +1,14 @@
+<tr>
+  <td>
+    <pre><%= query.sql %></pre>
+    <details>
+      <summary>Backtrace</summary>
+      <pre><%= query.backtrace %></pre>
+    </details>
+  </td>
+  </td>
+  <td><%= query.duration %>ms</td>
+  <td><%= query.percent %>%</td>
+  <td>+<%= query.from_start %>ms
+  </td>
+</tr>

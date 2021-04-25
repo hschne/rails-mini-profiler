@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Rack::Profiler</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <style type="text/css">
+    .stats details summary {
+      cursor: pointer;
+      outline: none;
+    }
+
+    .response-info {
+      margin-bottom: 1em;
+    }
+    .response-info pre {
+      max-height: 350px;
+    }
+
+    .pr-steps td:first-child {
+      width: 800px;
+    }
+
+    .step-bar {
+      display: inline-block;
+      background: #777;
+      position: relative;
+      box-sizing: border-box;
+      margin-top: 0.2em;
+      border-radius: 2px;
+      box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15)
+    }
+
+    .step-bar.step-type-step {
+      background: #5bc0de;
+    }
+
+    .step-bar.step-type-sql {
+      background: #f0ad4e;
+    }
+
+    .step-bar.step-type-render-partial, .step-bar.step-type-render-template {
+      background: #5cb85c;
+    }
+
+    .step-bar.step-type-process-action {
+      background: #d9534f;
+    }
+
+    .key-value-list {
+      margin: 1em 0;
+      padding: 1em;
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 13px;
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      overflow-wrap: break-word;
+    }
+
+    .key-value-list li {
+      list-style: none;
+    }
+
+    .pr-queries th {
+      white-space: nowrap;
+    }
+    .pr-queries pre {
+      max-width: 800px;
+      font-size: 12px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1 class="page-header">Rack::Profiler</h1>
+
+  <form class="pr-request-form">
+    <div class="row">
+      <div class="col-md-2">
+        <select id="req-method" class="form-control">
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="PATCH">PATCH</option>
+          <option value="DELETE">DELETE</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <input type="text" id="req-path" class="form-control" placeholder="Path">
+      </div>
+      <div class="col-md-6">
+        <input type="text" id="req-data" class="form-control" placeholder="Data (as query string/form data)">
+      </div>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-success">Profile</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="stats" style="display:none;">
+
+    <hr>
+
+    <div id="response_panel" class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Response</h3>
+      </div>
+      <div id="response" class="panel-body"></div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Steps</h3>
+      </div>
+      <div id="response" class="panel-body">
+        <table class="table pr-steps">
+          <thead>
+          <tr>
+            <th>Step</th>
+            <th>Duration</th>
+            <th>% of Total</th>
+            <th>From Start</th>
+          </tr>
+          </thead>
+          <tbody id="steps"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">SQL Queries <span id="query_count" class="badge"></span></h3>
+      </div>
+      <div id="response" class="panel-body">
+        <table class="table pr-queries">
+          <thead>
+          <tr>
+            <th>Query</th>
+            <th>Duration</th>
+            <th>% of Total</th>
+            <th>From Start</th>
+          </tr>
+          </thead>
+          <tbody id="queries"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<script type="text/template" id="response_tmpl">
+  <div class='response-info'>
+    <strong>Status:</strong> {{ status }}<br>
+  </div>
+  <div class='response-info'>
+    <strong>Headers:</strong>
+    <details>
+      <summary>Toggle</summary>
+      <ul class='key-value-list'>
+        {{ #headers }}
+        <li><strong>{{ key }}:</strong> {{ value }}</li>
+        {{ /headers }}
+      </ul>
+    </details>
+  </div>
+  <div class='response-info'>
+    <strong>Body:</strong>
+    <details><summary>Toggle</summary>
+      <pre>{{ body }}</pre></details>
+  </div>
+</script>
+
+<script type="text/template" id="step_tmpl">
+  <tr>
+    <td>
+      <details><summary>{{ name }}</summary>
+        <ul class='key-value-list'>
+          {{ #payload }}
+          {{ #value }}<li><strong>{{ key }}:</strong> {{ value }}</li>{{/value }}
+          {{ /payload }}
+        </ul>
+      </details>
+      <span class="step-name step-bar step-type-{{ type }}"
+          style="width: {{ percent }}%; left: {{ fromStartPercent }}%">
+            &nbsp;
+          </span>
+    </td>
+    <td>{{ duration }}ms</td>
+    <td>{{ percent }}%</td>
+    <td>+{{ fromStart }}ms</td>
+  </tr>
+</script>
+
+<script type="text/template" id="query_tmpl">
+  <tr>
+    <td>
+      <pre>{{ sql }}</pre>
+      <details><summary>Backtrace</summary>
+        <pre>{{ #backtrace }}{{.}}
+{{ /backtrace }}</pre></details></td>
+    </td>
+    <td>{{ duration }}ms</td>
+    <td>{{ percent }}%</td>
+    <td>+{{ fromStart }}ms</td>
+  </tr>
+</script>
+
+<script type="text/javascript">
+  (function() {
+
+    var responseTmpl = $("#response_tmpl").html(),
+      queryTmpl    = $("#query_tmpl").html(),
+      stepTmpl     = $("#step_tmpl").html()
+
+    $(".pr-request-form").submit( function( evt ) {
+      evt.preventDefault()
+      $(".stats").hide()
+
+      var path = $("#req-path").val()   || "/",
+        type = $("#req-method").val() || "GET",
+        data = $("#req-data").val()
+
+      path += path.indexOf("?") > -1 ? "&" : "?";
+      path += "rack-profiler";
+
+      var exposeKeyValues = function( obj ) {
+        return Object.keys( obj ).map( function( key ) {
+          return { key: key, value: JSON.stringify( obj[key], null, 1 ) }
+        })
+      }
+
+      $(".pr-queries tbody").html('')
+      $(".pr-steps tbody").html('')
+
+      $.ajax( path, { type: type, data: data } )
+        .done(function( data, status, xhr ) {
+          $(".stats").show()
+
+          var rootEvent = data.events.filter(function(event) {
+            return event.name == 'rack-profiler.total_time'
+          })[0]
+
+          var queryCount    = 0,
+            headersKeyVal = exposeKeyValues( data.response.headers ),
+            responseWrap  = $.extend( {}, data.response, { headers: headersKeyVal } )
+
+          try {
+            // pretty-print a JSON response
+            responseWrap.body = JSON.stringify(JSON.parse(responseWrap.body), null, 2);
+          } catch(e) {
+            // can't parse it as JSON, nevermind
+          };
+
+          $('#response').html( Mustache.render( responseTmpl, responseWrap ) )
+          if (data.response.status < 400) {
+            $('#response_panel').removeClass('panel-danger').addClass('panel-success')
+          } else {
+            $('#response_panel').removeClass('panel-success').addClass('panel-danger')
+          }
+
+          var renderEvents = function( events ) {
+            events.map( function( event ) {
+              if ( event.name == "sql.active_record" ) {
+                var sqlEvent = {
+                  sql:       event.payload.sql,
+                  duration:  event.duration.toFixed(2),
+                  percent:   ( event.duration / rootEvent.duration * 100 ).toFixed(2),
+                  fromStart: ( ( event.start - rootEvent.start ) * 1000 ).toFixed(2),
+                  backtrace: event.backtrace
+                }
+                $(".pr-queries tbody").append( Mustache.render(queryTmpl, sqlEvent) )
+                queryCount++
+              }
+
+              var eventType = null
+              switch ( event.name ) {
+                case 'sql.active_record':                eventType = 'sql'; break;
+                case 'render_partial.action_view':       eventType = 'render-partial'; break;
+                case 'render_template.action_view':      eventType = 'render-template'; break;
+                case 'process_action.action_controller': eventType = 'process-action'; break;
+                case 'rack-profiler.step':               eventType = 'step'; break;
+                case 'rack-profiler.total_time':         eventType = 'total-time'; break;
+                default:                                 eventType = 'other'
+              }
+
+              var stepEvent = {
+                name:      event.payload.step_name || event.name,
+                type:      eventType,
+                duration:  event.duration.toFixed(2),
+                percent:   ( event.duration / rootEvent.duration * 100 ).toFixed(2),
+                fromStart: ( ( event.start - rootEvent.start ) * 1000 ).toFixed(2),
+                payload:   exposeKeyValues( event.payload ),
+                fromStartPercent: ( ( event.start - rootEvent.start ) /
+                  ( rootEvent.finish - rootEvent.start ) ) * 100
+              }
+              $(".pr-steps tbody").append( Mustache.render( stepTmpl, stepEvent ) )
+
+            })
+          }
+
+          renderEvents( data.events )
+          $("#query_count").html( queryCount )
+        })
+        .fail(function( _, __, error ) { alert( "Request failed with: " + error ) })
+    })
+
+  })();
+</script>
+</body>
+</html>

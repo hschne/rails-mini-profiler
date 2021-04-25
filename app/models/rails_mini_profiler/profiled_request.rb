@@ -6,6 +6,8 @@ module RailsMiniProfiler
 
     attr_accessor :id,
                   :status,
+                  :start,
+                  :finish,
                   :duration,
                   :path,
                   :headers,
@@ -21,8 +23,12 @@ module RailsMiniProfiler
 
     class << self
       def from(request_context)
+        total_time = request_context.traces.find { |trace| trace.name == 'rails_mini_profiler.total_time' }
         kwargs = {
           status: request_context.response.status,
+          start: total_time&.start,
+          finish: total_time&.finish,
+          duration: ((total_time.finish - total_time.start) * 1000).round(2),
           path: request_context.request.path,
           traces: request_context.traces
         }

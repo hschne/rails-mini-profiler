@@ -21,7 +21,7 @@ module RailsMiniProfiler
       return @app.call(env) unless Guard.new(request).profile?
 
       self.request_context = RequestContext.new(Request.new(env))
-      status, headers, response = ActiveSupport::Notifications.instrument('rack-profiler.total_time') { @app.call(env) }
+      status, headers, response = ActiveSupport::Notifications.instrument('rails_mini_profiler.total_time') { @app.call(env) }
       request_context.response = Response.new(status, headers, response)
 
       save(request_context)

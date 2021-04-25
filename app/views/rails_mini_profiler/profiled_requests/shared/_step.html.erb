@@ -1,0 +1,21 @@
+<tr>
+  <td>
+    <details>
+      <summary><%= step.name %></summary>
+      <ul class='key-value-list'>
+        <%= step.payload %>
+        <%= step.value %>
+        <% step.payload.each do |key, value| %>
+        <li><strong><%= key %>:</strong> <%= value %></li>
+          <% end %>
+      </ul>
+    </details>
+    <span class="step-name step-bar step-type-<%= step.type %>"
+      style="width: <%= step.percent %>; left: <%= step.fromStartPercent %>">
+            &nbsp;
+          </span>
+  </td>
+  <td><%= step.duration %>ms</td>
+  <td><%= step.percent %>%</td>
+  <td>+<%= step.fromStart %>ms</td>
+</tr>
