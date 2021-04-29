@@ -6,6 +6,9 @@ AllCops:
 Layout/LineLength:
   Max: 120
 
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
 Metrics/AbcSize:
   Max: 20
 

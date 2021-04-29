@@ -41,7 +41,7 @@ module RailsMiniProfiler
     def track_trace(trace)
       return if request_context.nil?
 
-      request_context.traces << trace
+      request_context.traces.prepend(trace)
     end
 
     private
@@ -64,9 +64,10 @@ module RailsMiniProfiler
           trace = Trace.new(
             id: id,
             name: name,
-            start: start.to_f.round(2),
-            finish: finish.to_f.round(2),
-            duration: ((finish - start) * 1000),
+            start: start.to_f,
+            finish: finish.to_f,
+            duration: ((finish - start) * 1000).round(2),
+            backtrace: caller(1),
             payload: payload
           )
           track_trace(trace)

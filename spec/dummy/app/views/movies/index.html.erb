@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Movies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Imdb</th>
+      <th>Popularity</th>
+      <th>Budget</th>
+      <th>Revenue</th>
+      <th>Runtime</th>
+      <th>Release date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= movie.title %></td>
+        <td><%= movie.imdb_id %></td>
+        <td><%= movie.popularity %></td>
+        <td><%= movie.budget %></td>
+        <td><%= movie.revenue %></td>
+        <td><%= movie.runtime %></td>
+        <td><%= movie.release_date %></td>
+        <td><%= link_to 'Show', movie %></td>
+        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
+        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Movie', new_movie_path %>

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :movies
   mount RailsMiniProfiler::Engine => '/rails_mini_profiler'
 
-  get '/profile', to: 'profiles#perform'
+  get '/health', to: 'health#ping'
 end

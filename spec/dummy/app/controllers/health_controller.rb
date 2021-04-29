@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProfilesController < ApplicationController
-  def perform
+  def ping
     head(:ok)
   end
 end

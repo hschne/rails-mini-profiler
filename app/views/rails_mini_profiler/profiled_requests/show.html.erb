@@ -48,6 +48,7 @@
         percent: (trace.duration / @profiled_request.duration * 100).round(2),
         fromStart: ((trace.start - @profiled_request.start) * 1000).round(2),
         payload: trace.payload,
+        backtrace: trace.backtrace,
         fromStartPercent: ((trace.start - @profiled_request.start) /
           (@profiled_request.finish - @profiled_request.start)) * 100
       )
