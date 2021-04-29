@@ -2,7 +2,7 @@
 
 module RailsMiniProfiler
   class Request
-    def initialize(env)
+    def initialize(env = {})
       @env = env
     end
 
@@ -23,7 +23,7 @@ module RailsMiniProfiler
     end
 
     def body
-      @env['rack.input'].read
+      @env['rack.input']&.read
     end
 
     private
