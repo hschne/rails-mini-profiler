@@ -67,7 +67,7 @@ module RailsMiniProfiler
             start: start.to_f,
             finish: finish.to_f,
             duration: ((finish - start) * 1000).round(2),
-            backtrace: caller(1),
+            backtrace: Rails.backtrace_cleaner.clean(caller),
             payload: payload
           )
           track_trace(trace)

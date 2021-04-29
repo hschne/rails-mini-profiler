@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProfiledRequestsHelper
   def trace_class(name)
     case name

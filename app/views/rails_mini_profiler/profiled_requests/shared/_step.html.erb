@@ -2,21 +2,20 @@
   <td>
     <details>
       <summary><%= step.name %></summary>
-      <ul class='key-value-list'>
-        <%= step.payload %>
-        <%= step.value %>
-        <% step.payload.each do |key, value| %>
-          <li><strong><%= key %>:</strong> <%= value %></li>
-        <% end %>
-      </ul>
+      <% if step.payload.present? %>
+        <ul class='key-value-list'>
+          <% step.payload.each do |key, value| %>
+            <li><strong><%= key %>:</strong> <%= value %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <% if step.backtrace.present? %>
+        <pre class="key-value-list"><%= step.backtrace %></pre>
+      <% end %>
     </details>
-    <details>
-      <summary>Backtrace</summary>
-      <pre><%= step.backtrace %></pre>
-    </details>
-  <span class="step-name step-bar step-type-<%= trace_class(step.type) %>"
-    style="width: <%= step.percent %>%; left: <%= step.fromStartPercent %>%
-    ">
+    <span class="step-name step-bar step-type-<%= trace_class(step.type) %>"
+      style="width: <%= step.percent %>%; left: <%= step.fromStartPercent %>%
+      ">
             &nbsp;
           </span>
   </td>

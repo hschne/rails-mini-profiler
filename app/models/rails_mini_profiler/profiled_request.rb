@@ -30,7 +30,7 @@ module RailsMiniProfiler
           finish: total_time&.finish,
           duration: ((total_time.finish - total_time.start) * 1000).round(2),
           path: request_context.request.path,
-          traces: request_context.traces
+          traces: request_context.traces.sort_by(&:start)
         }
         new(**kwargs)
       end
