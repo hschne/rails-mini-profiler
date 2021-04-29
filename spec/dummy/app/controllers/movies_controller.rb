@@ -1,19 +1,19 @@
+# frozen_string_literal: true
+
 class MoviesController < ApplicationController
-  before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  before_action :set_movie, only: %i[show edit update destroy]
 
   def index
     @movies = Movie.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @movie = Movie.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @movie = Movie.new(movie_params)
@@ -39,13 +39,14 @@ class MoviesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_movie
-      @movie = Movie.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def movie_params
-      params.require(:movie).permit(:title, :imdb_id, :popularity, :budget, :revenue, :runtime, :release_date)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_movie
+    @movie = Movie.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def movie_params
+    params.require(:movie).permit(:title, :imdb_id, :popularity, :budget, :revenue, :runtime, :release_date)
+  end
 end
