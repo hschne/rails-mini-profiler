@@ -22,6 +22,10 @@ module RailsMiniProfiler
       @env['REQUEST_PATH']
     end
 
+    def body
+      @env['rack.input'].read
+    end
+
     private
 
     def sanitize_headers(headers)

@@ -20,36 +20,37 @@ module RailsMiniProfiler
       request = Request.new(env)
       return @app.call(env) unless Guard.new(request).profile?
 
-      self.request_context = RequestContext.new(Request.new(env))
+      self.profiled_request = ProfiledRequest.new(request: request)
       status, headers, response = ActiveSupport::Notifications.instrument('rails_mini_profiler.total_time') do
         @app.call(env)
       end
-      request_context.response = Response.new(status, headers, response)
+      profiled_request.response = Response.new(status: status, headers: headers, response: response)
 
-      save(request_context)
+      save_request
       [status, headers, response]
     end
 
-    def request_context
-      Thread.current[:rails_mini_profiler_request_context]
+    def profiled_request
+      Thread.current[:rails_mini_profiler_current_request]
     end
 
-    def request_context=(request_context)
-      Thread.current[:rails_mini_profiler_request_context] = request_context
+    def profiled_request=(profiled_request)
+      Thread.current[:rails_mini_profiler_current_request] = profiled_request
     end
 
     def track_trace(trace)
-      return if request_context.nil?
+      return if profiled_request.nil?
 
-      request_context.traces.prepend(trace)
+      profiled_request.traces.append(trace)
     end
 
     private
 
-    def save(request_context)
-      record = ProfiledRequest.from(request_context)
+    def save_request
+      profiled_request.complete!
+
       storage_instance = @context.storage_instance
-      storage_instance.save(record)
+      storage_instance.save(profiled_request)
     end
 
     def subscribe_to_default
@@ -60,15 +61,15 @@ module RailsMiniProfiler
 
     def subscribe(*subscriptions)
       subscriptions.each do |subscription|
-        ActiveSupport::Notifications.monotonic_subscribe(subscription) do |name, start, finish, id, payload|
+        ActiveSupport::Notifications.monotonic_subscribe(subscription) do |event|
           trace = Trace.new(
-            id: id,
-            name: name,
-            start: start.to_f,
-            finish: finish.to_f,
-            duration: ((finish - start) * 1000).round(2),
+            name: event.name,
+            start: event.time.to_f,
+            finish: event.end.to_f,
+            duration: event.duration.to_f.round(2),
+            allocations: event.allocations,
             backtrace: Rails.backtrace_cleaner.clean(caller),
-            payload: payload
+            payload: event.payload
           )
           track_trace(trace)
         end

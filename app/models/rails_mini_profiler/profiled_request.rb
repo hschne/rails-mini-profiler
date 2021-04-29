@@ -5,35 +5,31 @@ module RailsMiniProfiler
     include ActiveModel::Model
 
     attr_accessor :id,
-                  :status,
-                  :start,
-                  :finish,
-                  :duration,
-                  :path,
-                  :headers,
-                  :body,
-                  :traces
+                  :request,
+                  :response
 
-    def initialize(attributes = nil)
-      super
-      @status ||= 200
-      @duration ||= 0
+    attr_reader :start,
+                :finish,
+                :duration,
+                :traces
+
+    delegate :status, to: :response
+    delegate :body, to: :response, prefix: true
+
+    delegate :path, to: :request
+    delegate :headers, :body, to: :request, prefix: true
+
+    def initialize(**kwargs)
+      kwargs.each { |key, value| instance_variable_set("@#{key}", value) }
       @traces ||= []
     end
 
-    class << self
-      def from(request_context)
-        total_time = request_context.traces.find { |trace| trace.name == 'rails_mini_profiler.total_time' }
-        kwargs = {
-          status: request_context.response.status,
-          start: total_time&.start,
-          finish: total_time&.finish,
-          duration: ((total_time.finish - total_time.start) * 1000).round(2),
-          path: request_context.request.path,
-          traces: request_context.traces.sort_by(&:start)
-        }
-        new(**kwargs)
-      end
+    def complete!
+      total_time = traces.find { |trace| trace.name == 'rails_mini_profiler.total_time' }
+      @start = total_time&.start
+      @finish = total_time&.finish
+      @duration = ((@finish - @start) * 1000).round(2)
+      @traces.sort_by!(&:start)
     end
   end
 end
