@@ -34,7 +34,21 @@ module RailsMiniProfiler
       end
       profiled_request.response = Response.new(status: status, headers: headers, response: response)
 
-      save_request
+      save_request!
+
+      content_type = headers['Content-Type']
+      if content_type =~ %r{text/html}
+        modified_response = Rack::Response.new([], status, headers)
+        html = IO.read(File.expand_path('../../app/views/rails_mini_profiler/badge.html.erb', __dir__))
+        template = ERB.new(html)
+        content = template.result(binding)
+        modified_response.write inject(response.body, content)
+        response.close if response.respond_to? :close
+
+        modified_response.finish
+
+        return [status, headers, response]
+      end
       [status, headers, response]
     end
 
@@ -54,11 +68,20 @@ module RailsMiniProfiler
 
     private
 
-    def save_request
+    def save_request!
       profiled_request.complete!
 
       storage_instance = @context.storage_instance
       storage_instance.save(profiled_request)
+    end
+
+    def inject(body, content)
+      index = body.rindex(%r{</body>}i) || body.rindex(%r{</html>}i)
+      if index
+        body.insert(index, content)
+      else
+        body
+      end
     end
 
     def subscribe_to_default
