@@ -1,4 +1,6 @@
-<iframe id=speedscope-iframe></iframe>
+<div id=wrapper>
+  <iframe id=speedscope-iframe></iframe>
+</div>
 <script type="text/javascript">
   const graph = <%= raw @flamegraph %>
   const json = JSON.stringify(graph)
