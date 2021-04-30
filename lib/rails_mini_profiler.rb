@@ -3,6 +3,9 @@
 require 'forwardable'
 
 require 'rails_mini_profiler/version'
+
+require 'rails_mini_profiler/engine'
+
 require 'rails_mini_profiler/storage/memory'
 require 'rails_mini_profiler/configuration'
 require 'rails_mini_profiler/context'
@@ -10,9 +13,9 @@ require 'rails_mini_profiler/request'
 require 'rails_mini_profiler/response'
 require 'rails_mini_profiler/trace'
 require 'rails_mini_profiler/guard'
+require 'rails_mini_profiler/badge'
 require 'rails_mini_profiler/middleware'
 
-require 'rails_mini_profiler/engine'
 
 module RailsMiniProfiler
   class << self

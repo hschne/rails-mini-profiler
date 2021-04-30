@@ -6,6 +6,10 @@
 - Filter asset requests
 - Skip paths
 - UI & Design
+  - Make index page useful
+  - Redesign show profiled request page
+  - Design icon
+  - Pimp badge
 
 # Next
 

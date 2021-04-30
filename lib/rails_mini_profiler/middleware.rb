@@ -22,34 +22,26 @@ module RailsMiniProfiler
 
       self.profiled_request = ProfiledRequest.new(request: request)
       status, headers, response = ActiveSupport::Notifications.instrument('rails_mini_profiler.total_time') do
-        results = nil
-        flamegraph = StackProf.run(
-          mode: :wall,
-          raw: true,
-          aggregate: false,
-          interval: (2 * 1000).to_i
-        ) { results = @app.call(env) }
-        profiled_request.flamegraph = flamegraph
-        results
+        if defined?(StackProf) && StackProf.respond_to?(:run)
+          results = nil
+          flamegraph = StackProf.run(
+            mode: :wall,
+            raw: true,
+            aggregate: false,
+            interval: (2 * 1000).to_i
+          ) { results = @app.call(env) }
+          profiled_request.flamegraph = flamegraph
+          results
+        else
+          @app.call(env)
+        end
       end
-      profiled_request.response = Response.new(status: status, headers: headers, response: response)
 
+      profiled_request.response = Response.new(status: status, headers: headers, response: response)
       save_request!
 
-      content_type = headers['Content-Type']
-      if content_type =~ %r{text/html}
-        modified_response = Rack::Response.new([], status, headers)
-        html = IO.read(File.expand_path('../../app/views/rails_mini_profiler/badge.html.erb', __dir__))
-        template = ERB.new(html)
-        content = template.result(binding)
-        modified_response.write inject(response.body, content)
-        response.close if response.respond_to? :close
-
-        modified_response.finish
-
-        return [status, headers, response]
-      end
-      [status, headers, response]
+      response = modify_response
+      [response.status, response.headers, response.response]
     end
 
     def profiled_request
@@ -75,13 +67,8 @@ module RailsMiniProfiler
       storage_instance.save(profiled_request)
     end
 
-    def inject(body, content)
-      index = body.rindex(%r{</body>}i) || body.rindex(%r{</html>}i)
-      if index
-        body.insert(index, content)
-      else
-        body
-      end
+    def modify_response
+      Badge.new(profiled_request).render
     end
 
     def subscribe_to_default

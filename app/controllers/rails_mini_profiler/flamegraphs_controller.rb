@@ -1,8 +1,9 @@
-require_dependency "rails_mini_profiler/application_controller"
+# frozen_string_literal: true
+
+require_dependency 'rails_mini_profiler/application_controller'
 
 module RailsMiniProfiler
   class FlamegraphsController < ApplicationController
-
     before_action :set_flamegraph, only: %i[show]
 
     def show; end
