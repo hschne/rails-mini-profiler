@@ -12,6 +12,7 @@ group :development do
   gem 'rspec-rails', '~> 4.0'
   gem 'rubocop', '~> 1.7'
   gem 'sqlite3', '~> 1.4'
+  gem 'stackprof'
 end
 
 # To use a debugger

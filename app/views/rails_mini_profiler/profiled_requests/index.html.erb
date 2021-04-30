@@ -21,6 +21,7 @@
         <td><%= profiled_request.path %></td>
         <td><%= profiled_request.duration %> ms</td>
         <td><%= link_to 'Show', profiled_request_path(profiled_request.id) %></td>
+        <td><%= link_to 'Flamegraph', flamegraph_path(profiled_request.id) %></td>
         <td><%= link_to 'Destroy', profiled_request_path(profiled_request.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

@@ -15,5 +15,9 @@ module RailsMiniProfiler
     config.generators do |g|
       g.test_framework :rspec
     end
+
+    initializer 'rails_mini_profiler_add_static assets' do |app|
+      app.middleware.insert_before(ActionDispatch::Static, ActionDispatch::Static, "#{root}/public")
+    end
   end
 end

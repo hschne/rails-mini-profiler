@@ -22,7 +22,15 @@ module RailsMiniProfiler
 
       self.profiled_request = ProfiledRequest.new(request: request)
       status, headers, response = ActiveSupport::Notifications.instrument('rails_mini_profiler.total_time') do
-        @app.call(env)
+        results = nil
+        flamegraph = StackProf.run(
+          mode: :wall,
+          raw: true,
+          aggregate: false,
+          interval: (2 * 1000).to_i
+        ) { results = @app.call(env) }
+        profiled_request.flamegraph = flamegraph
+        results
       end
       profiled_request.response = Response.new(status: status, headers: headers, response: response)
 

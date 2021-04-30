@@ -1,9 +1,7 @@
 # Todo
 
-- Add SQL profiling
-- Ignore asset requests
 - Scope to identified person
-
+- Disable based on person/IP
 
 # Next
 
@@ -18,4 +16,7 @@
 # Future
 
 - Jobs & Mailers
+- Snapshots & Comparison 
+- Replay & Trigger requests
+- Replay & Trigger Jobs
 

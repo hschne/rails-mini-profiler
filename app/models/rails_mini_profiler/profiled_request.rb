@@ -6,7 +6,8 @@ module RailsMiniProfiler
 
     attr_accessor :id,
                   :request,
-                  :response
+                  :response,
+                  :flamegraph
 
     attr_reader :start,
                 :finish,

@@ -1,0 +1,11 @@
+<iframe id=speedscope-iframe></iframe>
+<script type="text/javascript">
+  const graph = <%= raw @flamegraph %>
+  const json = JSON.stringify(graph)
+  const blob = new Blob([json], { type: 'text/plain' })
+  const objUrl = encodeURIComponent(URL.createObjectURL(blob))
+  const iframe = document.getElementById('speedscope-iframe')
+  const baseUrl = window.location.origin;
+  const iframeUrl = baseUrl + '/rails_mini_profiler/speedscope/index.html#profileURL=' + objUrl + '&title=' + 'Flamegraph';
+  iframe.setAttribute('src', iframeUrl)
+</script>
