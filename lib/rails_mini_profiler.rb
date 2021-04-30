@@ -16,7 +16,6 @@ require 'rails_mini_profiler/guard'
 require 'rails_mini_profiler/badge'
 require 'rails_mini_profiler/middleware'
 
-
 module RailsMiniProfiler
   class << self
     def configuration

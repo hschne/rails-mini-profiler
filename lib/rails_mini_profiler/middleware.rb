@@ -21,21 +21,7 @@ module RailsMiniProfiler
       return @app.call(env) unless Guard.new(request).profile?
 
       self.profiled_request = ProfiledRequest.new(request: request)
-      status, headers, response = ActiveSupport::Notifications.instrument('rails_mini_profiler.total_time') do
-        if defined?(StackProf) && StackProf.respond_to?(:run)
-          results = nil
-          flamegraph = StackProf.run(
-            mode: :wall,
-            raw: true,
-            aggregate: false,
-            interval: (2 * 1000).to_i
-          ) { results = @app.call(env) }
-          profiled_request.flamegraph = flamegraph
-          results
-        else
-          @app.call(env)
-        end
-      end
+      headers, response, status = profile(env)
 
       profiled_request.response = Response.new(status: status, headers: headers, response: response)
       save_request!
@@ -59,6 +45,25 @@ module RailsMiniProfiler
     end
 
     private
+
+    def profile(env)
+      ActiveSupport::Notifications.instrument('rails_mini_profiler.total_time') do
+        if defined?(StackProf) && StackProf.respond_to?(:run)
+          results = nil
+          flamegraph = StackProf.run(
+            mode: :wall,
+            raw: true,
+            aggregate: false,
+            interval: (2 * 1000).to_i
+          ) { results = @app.call(env) }
+          profiled_request.flamegraph = flamegraph
+          results
+        else
+          @app.call(env)
+        end
+      end
+      [headers, response, status]
+    end
 
     def save_request!
       profiled_request.complete!
