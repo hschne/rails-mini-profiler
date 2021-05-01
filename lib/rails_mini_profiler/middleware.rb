@@ -21,7 +21,7 @@ module RailsMiniProfiler
       return @app.call(env) unless Guard.new(request).profile?
 
       self.profiled_request = ProfiledRequest.new(request: request)
-      headers, response, status = profile(env)
+      status, headers, response = profile(env)
 
       profiled_request.response = Response.new(status: status, headers: headers, response: response)
       save_request!
@@ -62,7 +62,6 @@ module RailsMiniProfiler
           @app.call(env)
         end
       end
-      [headers, response, status]
     end
 
     def save_request!
