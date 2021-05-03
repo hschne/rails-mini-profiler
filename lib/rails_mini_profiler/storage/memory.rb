@@ -22,9 +22,14 @@ module RailsMiniProfiler
         @records.values
       end
 
+      def all_for_user(user)
+        @records.values.select { |record| record.user = user }
+      end
+
       def find(id)
         @records[id.to_i]
       end
+
 
       def destroy(id)
         @records.delete(id.to_i)

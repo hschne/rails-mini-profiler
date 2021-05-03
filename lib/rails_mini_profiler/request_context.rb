@@ -10,7 +10,8 @@ module RailsMiniProfiler
     end
 
     def user
-      @user ||= @profiler_context.configuration.user_provider.call(@env)
+      # If the user was explicitly set during the request use that, else fall back to ID provided by the user provider
+      @user ||= (User.current_user || @profiler_context.configuration.user_provider.call(@env))
     end
   end
 end

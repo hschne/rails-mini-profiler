@@ -2,8 +2,8 @@
 
 module RailsMiniProfiler
   module Authorization
-    def self.authorize!(env)
-      Thread.current[:rails_mini_profiler_authorized] = @configuration.authorized.call(env)
+    def self.authorize!
+      Thread.current[:rails_mini_profiler_authorized] = true
     end
 
     def self.authorized?

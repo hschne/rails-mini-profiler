@@ -35,5 +35,9 @@ module RailsMiniProfiler
     def authorize!
       RailsMiniProfiler::Authorization.authorize!
     end
+
+    def current_user=(current_user)
+      RailsMiniProfiler::User.current_user = current_user
+    end
   end
 end

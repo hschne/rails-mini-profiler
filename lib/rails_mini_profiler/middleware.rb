@@ -23,14 +23,13 @@ module RailsMiniProfiler
 
       self.profiled_request = ProfiledRequest.new(request: request)
       status, headers, response = profile(env)
-
       return [status, headers, response] unless Authorization.authorized?
 
       profiled_request.response = Response.new(status: status, headers: headers, response: response)
-      save_request!
+      profiled_request.user = request_context.user
+      save_request!(request_context)
 
-      response = modify_response
-      [response.status, response.headers, response.response]
+      render_response
     end
 
     def profiled_request
@@ -48,6 +47,11 @@ module RailsMiniProfiler
     end
 
     private
+
+    def render_response
+      response = modify_response
+      [response.status, response.headers, response.response]
+    end
 
     def profile(env)
       ActiveSupport::Notifications.instrument('rails_mini_profiler.total_time') do
