@@ -2,6 +2,8 @@
 
 module RailsMiniProfiler
   class Request
+    attr_reader :env
+
     def initialize(env = {})
       @env = env
     end

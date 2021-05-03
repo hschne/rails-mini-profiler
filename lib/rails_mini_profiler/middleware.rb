@@ -18,10 +18,13 @@ module RailsMiniProfiler
 
     def call(env)
       request = Request.new(env)
-      return @app.call(env) unless Guard.new(request).profile?
+      request_context = RequestContext.new(@context, request)
+      return @app.call(env) unless Guard.new(request_context).profile?
 
       self.profiled_request = ProfiledRequest.new(request: request)
       status, headers, response = profile(env)
+
+      return [status, headers, response] unless Authorization.authorized?
 
       profiled_request.response = Response.new(status: status, headers: headers, response: response)
       save_request!

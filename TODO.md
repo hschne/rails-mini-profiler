@@ -1,7 +1,6 @@
 # Todo
 
 - Scope to identified person
-- Render badge 
 - Disable based on person/IP
 - Filter asset requests
 - Skip paths

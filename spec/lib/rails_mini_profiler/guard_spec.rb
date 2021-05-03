@@ -6,8 +6,11 @@ module RailsMiniProfiler
   RSpec.describe Guard do
     describe 'profile?' do
       let(:request) { Request.new({}) }
+      let(:configuration) { Configuration.new }
+      let(:profiler_context) { ProfilerContext.new(configuration) }
+      let(:request_context) { RequestContext.new(profiler_context, request) }
 
-      subject { Guard.new(request) }
+      subject { Guard.new(request_context) }
 
       before do
         RailsMiniProfiler.configuration.reset
@@ -35,7 +38,7 @@ module RailsMiniProfiler
         let(:request) { Request.new('REQUEST_PATH' => '/ignored') }
 
         it('should be false') do
-          RailsMiniProfiler.configuration.skip_paths = [/ignored/]
+          configuration.skip_paths = [/ignored/]
 
           expect(subject.profile?).to be(false)
         end

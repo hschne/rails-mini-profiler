@@ -6,9 +6,11 @@ require 'rails_mini_profiler/version'
 
 require 'rails_mini_profiler/engine'
 
+require 'rails_mini_profiler/authorization'
 require 'rails_mini_profiler/storage/memory'
 require 'rails_mini_profiler/configuration'
-require 'rails_mini_profiler/context'
+require 'rails_mini_profiler/profiler_context'
+require 'rails_mini_profiler/request_context'
 require 'rails_mini_profiler/request'
 require 'rails_mini_profiler/response'
 require 'rails_mini_profiler/trace'
@@ -27,7 +29,11 @@ module RailsMiniProfiler
     end
 
     def context
-      @context ||= Context.instance(configuration)
+      @context ||= ProfilerContext.instance(configuration)
+    end
+
+    def authorize!
+      RailsMiniProfiler::Authorization.authorize!
     end
   end
 end

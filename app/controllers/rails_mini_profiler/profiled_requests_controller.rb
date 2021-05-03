@@ -28,7 +28,7 @@ module RailsMiniProfiler
     end
 
     def storage
-      @storage ||= Context.instance(configuration).storage_instance
+      @storage ||= ProfilerContext.instance(configuration).storage_instance
     end
   end
 end

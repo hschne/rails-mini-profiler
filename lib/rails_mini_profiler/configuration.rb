@@ -2,7 +2,10 @@
 
 module RailsMiniProfiler
   class Configuration
-    attr_accessor :storage, :skip_paths
+    attr_accessor :enabled,
+                  :skip_paths,
+                  :storage,
+                  :user_provider
 
     def initialize
       super
@@ -10,8 +13,11 @@ module RailsMiniProfiler
     end
 
     def reset
+      @enabled = true
       @storage = Storage::Memory
       @skip_paths = []
+      @user_provider = proc { |env| Rack::Request.new(env).ip }
+      @authorize = proc { |_env| false }
     end
   end
 end
