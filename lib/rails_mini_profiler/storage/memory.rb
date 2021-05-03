@@ -26,7 +26,6 @@ module RailsMiniProfiler
         @records[id.to_i]
       end
 
-
       def destroy(id)
         @records.delete(id.to_i)
       end
