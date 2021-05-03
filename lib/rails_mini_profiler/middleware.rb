@@ -23,11 +23,11 @@ module RailsMiniProfiler
 
       self.profiled_request = ProfiledRequest.new(request: request)
       status, headers, response = profile(env)
-      return [status, headers, response] unless Authorization.authorized?
+      return [status, headers, response] if request_context.authorized?
 
       profiled_request.response = Response.new(status: status, headers: headers, response: response)
       profiled_request.user = request_context.user
-      save_request!(request_context)
+      save_request!
 
       render_response
     end

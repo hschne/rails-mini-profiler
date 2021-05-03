@@ -5,6 +5,7 @@ module RailsMiniProfiler
     include ActiveModel::Model
 
     attr_accessor :id,
+                  :user,
                   :request,
                   :response,
                   :flamegraph

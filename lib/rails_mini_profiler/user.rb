@@ -2,12 +2,12 @@
 
 module RailsMiniProfiler
   module User
-    def self.current_user=(user)
-      Thread.current[:rails_mini_profiler_current_user] = user
+    def self.current_user
+      Thread.current[:rails_mini_profiler_current_user]
     end
 
-    def self.authorized?
-      Thread.current[:rails_mini_profiler_current_user]
+    def self.current_user=(user)
+      Thread.current[:rails_mini_profiler_current_user] = user
     end
   end
 end

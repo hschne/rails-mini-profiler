@@ -18,10 +18,6 @@ module RailsMiniProfiler
         record
       end
 
-      def all
-        @records.values
-      end
-
       def all_for_user(user)
         @records.values.select { |record| record.user = user }
       end
