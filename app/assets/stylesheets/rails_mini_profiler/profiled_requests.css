@@ -3,70 +3,72 @@
   They will automatically be included in application.css.
 */
 
-.stats details summary {
-  cursor: pointer;
-  outline: none;
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  --main-width: 850px;
 }
 
-.response-info {
-  margin-bottom: 1em;
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-.response-info pre {
-  max-height: 350px;
+/* --------------------------------------- */
+
+header {
+  background: red;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
 }
 
-.pr-steps td:first-child {
-  width: 800px;
+.nav {
+  background: blue;
+  width: var(--main-width);
+  display: flex;
+  justify-content: space-between;
 }
 
-.step-bar {
-  display: inline-block;
-  background: #777;
-  position: relative;
-  box-sizing: border-box;
-  margin-top: 0.2em;
-  border-radius: 2px;
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15)
+
+.left {
+  background: green;
 }
 
-.step-bar.step-type-step {
-  background: #5bc0de;
+.left h1 {
+  margin: 1rem 0;
 }
 
-.step-bar.step-type-sql {
-  background: #f0ad4e;
-}
-
-.step-bar.step-type-render-partial, .step-bar.step-type-render-template {
-  background: #5cb85c;
-}
-
-.step-bar.step-type-process-action {
-  background: #d9534f;
-}
-
-.key-value-list {
-  margin: 1em 0;
-  padding: 1em;
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-  font-size: 13px;
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  overflow-wrap: break-word;
-}
-
-.key-value-list li {
+.right {
+  background: yellow;
+  margin: 0;
+  padding: 0;
   list-style: none;
+  display: flex;
+  align-items: center;
 }
 
-.pr-queries th {
-  white-space: nowrap;
+.right li {
+  padding: 0 1rem;
 }
 
-.pr-queries pre {
-  max-width: 800px;
-  font-size: 12px;
+main {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  background: aqua;
 }
 
+.main-section {
+  width: var(--main-width);
+
+  background: pink;
+}

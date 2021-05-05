@@ -7,16 +7,16 @@
 
   <%= javascript_include_tag "rails_mini_profiler" %>
   <%= stylesheet_link_tag "rails_mini_profiler/application", media: "all" %>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
 <body>
 
 <%= render 'rails_mini_profiler/shared/navbar' %>
 <%= render 'rails_mini_profiler/shared/flashes' %>
-<%= yield %>
+<main>
+  <section class="main-section">
+    <%= yield %>
+  </section>
+</main>
 
 </body>
 </html>
