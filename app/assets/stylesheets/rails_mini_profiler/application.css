@@ -25,9 +25,13 @@ html {
   --grey-400: #9CA3AF;
   --grey-700: #374151;
   --grey-900: #111827;
-;
+
+  --red-500: #EF4444;
+  --red-600: #DC2626;
 
   --main-width: 1056px;
+
+  --primary: var(--red-600);
 
   --border-color: var(--grey-200);
   --text-color: var(--grey-900);

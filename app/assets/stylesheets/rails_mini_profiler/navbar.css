@@ -1,0 +1,50 @@
+.header {
+  margin: 0;
+  padding: 1.5rem 0;
+
+  display: flex;
+  justify-content: center;
+
+  box-shadow: 0 0 20px 0 rgba(0,0,0,.2);
+
+  background: var(--primary);
+}
+
+.header a {
+  color:white;
+  text-decoration: none;
+}
+
+.nav {
+  width: var(--main-width);
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.home {
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+}
+
+.home-logo {
+  width: 64px;
+  height: 64px;
+}
+
+.home-title {
+  padding: 0 0 0 1rem;
+  margin: 0;
+}
+
+.header-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+
+  font-weight: 700;
+}

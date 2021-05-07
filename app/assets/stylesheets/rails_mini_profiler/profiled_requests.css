@@ -3,42 +3,7 @@
   They will automatically be included in application.css.
 */
 
-header {
-  background: red;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-}
 
-.nav {
-  background: blue;
-  width: var(--main-width);
-  display: flex;
-  justify-content: space-between;
-}
-
-
-.left {
-  background: green;
-}
-
-.left h1 {
-  margin: 1rem 0;
-}
-
-.right {
-  background: yellow;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  align-items: center;
-}
-
-.right li {
-  padding: 0 1rem;
-}
 
 main {
   width: 100%;

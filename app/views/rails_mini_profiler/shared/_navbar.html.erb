@@ -1,15 +1,14 @@
-<header>
+<header class="header">
   <nav class="nav">
-    <a class="left" href="<%= profiled_requests_path %>">
-      <%#= inline_svg_tag('rails_mini_profiler/logo', width: '30px', height: '30px') %>
-      <h1 class="title">Rails Mini Profiler </h1>
+    <a class="home" href="<%= profiled_requests_path %>">
+      <%= inline_svg_tag('rails_mini_profiler/logo', class: 'home-logo') %>
+      <h1 class="home-title">Rails Mini Profiler </h1>
     </a>
-    <ul class="right">
+    <ul class="header-links">
       <li>
-        Docs
-      </li>
-      <li>
-        GitHub
+        <a href="https://github.com/hschne/rails_mini_profiler">
+          Docs
+        </a>
       </li>
     </ul>
   </nav>
