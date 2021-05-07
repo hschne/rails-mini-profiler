@@ -64,3 +64,7 @@ main {
   text-decoration: none;
   padding: 0 .25rem;
 }
+
+.request-details {
+  background: yellowgreen;
+}

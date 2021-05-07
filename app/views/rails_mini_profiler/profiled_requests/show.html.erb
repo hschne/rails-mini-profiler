@@ -1,5 +1,5 @@
-<div class="container">
-  <p id="notice"><%= notice %></p>
+<section class="request-details">
+  <h1>Request Details</h1>
 
   <p>
     <strong>Status:</strong>
@@ -25,58 +25,44 @@
     <strong>Body:</strong>
     <%= @profiled_request.request_body %>
   </p>
+</section>
 
+<section class="response-details">
+  <h1>Response Details</h1>
+</section>
 
-  <div class="stats">
+<section>
+  <% traces = @profiled_request.traces %>
+  <% steps = traces
+    .map do |trace|
+    OpenStruct.new(
+      name: trace.name,
+      type: trace.name,
+      duration: trace.duration.round(2),
+      percent: (trace.duration / @profiled_request.duration * 100).round(2),
+      fromStart: ((trace.start - @profiled_request.start) * 1000).round(2),
+      payload: trace.payload,
+      backtrace: trace.backtrace,
+      fromStartPercent: ((trace.start - @profiled_request.start) /
+        (@profiled_request.finish - @profiled_request.start)) * 100
+    )
+  end
+  %>
 
-    <hr>
+  <table class="table pr-steps" style="display: none">
+    <thead>
+    <tr>
+      <th>Step</th>
+      <th>Duration</th>
+      <th>% of Total</th>
+      <th>From Start</th>
+    </tr>
+    </thead>
+    <tbody id="steps">
+    <% steps.each do |step| %>
+      <%= render "rails_mini_profiler/profiled_requests/shared/step", step: step %>
+    <% end %>
+    </tbody>
+  </table>
 
-    <div id="response_panel" class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Response</h3>
-      </div>
-      <div id="response" class="panel-body"></div>
-    </div>
-
-    <% traces = @profiled_request.traces %>
-    <% steps = traces
-      .map do |trace|
-      OpenStruct.new(
-        name: trace.name,
-        type: trace.name,
-        duration: trace.duration.round(2),
-        percent: (trace.duration / @profiled_request.duration * 100).round(2),
-        fromStart: ((trace.start - @profiled_request.start) * 1000).round(2),
-        payload: trace.payload,
-        backtrace: trace.backtrace,
-        fromStartPercent: ((trace.start - @profiled_request.start) /
-          (@profiled_request.finish - @profiled_request.start)) * 100
-      )
-    end
-    %>
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Steps</h3>
-      </div>
-      <div id="response" class="panel-body">
-        <table class="table pr-steps">
-          <thead>
-          <tr>
-            <th>Step</th>
-            <th>Duration</th>
-            <th>% of Total</th>
-            <th>From Start</th>
-          </tr>
-          </thead>
-          <tbody id="steps">
-          <% steps.each do |step| %>
-            <%= render "rails_mini_profiler/profiled_requests/shared/step", step: step %>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  <%= link_to 'Back', profiled_requests_path %>
-</div>
+</section>
