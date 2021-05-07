@@ -21,12 +21,12 @@
       <td>json</td>
       <td class="text-right"><%= profiled_request.duration %> ms</td>
       <td>
-        <%= link_to profiled_request_path(profiled_request.id) do  %>
+        <%= link_to(profiled_request_path(profiled_request.id), title: 'Show Details') do  %>
           <%= inline_svg_tag('rails_mini_profiler/show.svg', options={}) %>
         <% end %>
           </td>
       <td>
-        <%= link_to(flamegraph_path(profiled_request.id), title: 'Flamegraph') do %>
+        <%= link_to(flamegraph_path(profiled_request.id), title: 'Show Flamegraph') do %>
          <%= inline_svg_tag('rails_mini_profiler/graph.svg', options={}) %>
         <% end %>
       </td>

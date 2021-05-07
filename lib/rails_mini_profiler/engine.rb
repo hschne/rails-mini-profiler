@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'inline_svg'
+
 module RailsMiniProfiler
   class Engine < ::Rails::Engine
     isolate_namespace RailsMiniProfiler

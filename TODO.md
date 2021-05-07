@@ -1,10 +1,11 @@
 # Todo
 
 - UI & Design
-  - Make index page useful
+  - Style Header
   - Redesign show profiled request page
-  - Design icon
+  - Add new icon
   - Pimp badge
+  - Disable icons for failed requests etc
 - Write proper readme
 - Show better info for traces
 - Variable mount point

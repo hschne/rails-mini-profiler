@@ -185,7 +185,6 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import
-  inline_svg
   puma (~> 5.2)
   rails_mini_profiler!
   rspec-rails (~> 4.0)

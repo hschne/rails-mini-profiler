@@ -3,7 +3,6 @@
 require 'forwardable'
 
 require 'rails_mini_profiler/version'
-
 require 'rails_mini_profiler/engine'
 
 require 'rails_mini_profiler/authorization'
