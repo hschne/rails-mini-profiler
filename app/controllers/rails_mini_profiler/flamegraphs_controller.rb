@@ -4,6 +4,8 @@ require_dependency 'rails_mini_profiler/application_controller'
 
 module RailsMiniProfiler
   class FlamegraphsController < ApplicationController
+    layout 'rails_mini_profiler/flamegraph'
+
     before_action :set_flamegraph, only: %i[show]
 
     def show; end

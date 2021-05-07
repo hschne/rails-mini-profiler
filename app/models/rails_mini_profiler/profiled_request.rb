@@ -30,7 +30,7 @@ module RailsMiniProfiler
       total_time = traces.find { |trace| trace.name == 'rails_mini_profiler.total_time' }
       @start = total_time&.start
       @finish = total_time&.finish
-      @duration = ((@finish - @start) * 1000).round(2)
+      @duration = ((@finish - @start) * 1000).round
       @traces.sort_by!(&:start)
     end
   end

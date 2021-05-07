@@ -26,14 +26,10 @@
         <% end %>
           </td>
       <td>
-        <%= link_to(flamegraph_path(profiled_request.id)) do %>
+        <%= link_to(flamegraph_path(profiled_request.id), title: 'Flamegraph') do %>
          <%= inline_svg_tag('rails_mini_profiler/graph.svg', options={}) %>
         <% end %>
       </td>
-
-      <a>
-        <img>
-      </a>
     </tr>
   <% end %>
   </tbody>

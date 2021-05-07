@@ -53,12 +53,19 @@ main {
 
 .table {
   width: 100%;
+  /* Hack to get table row borders, see https://stackoverflow.com/a/2586780/2553104 */
   border-collapse: collapse;
-  border: solid 1px var(--border-color);
   border-radius: 5px;
+  border: hidden 1px var(--border-color);
+  box-shadow: 0 0 0 1px var(--border-color);
 }
+
 .table tr {
-  /*border: solid 1px var(--border-color);*/
+  border: solid 1px var(--border-color);
+}
+
+.table tr:hover {
+  background: #efefef;
 }
 
 .table th,
