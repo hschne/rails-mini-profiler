@@ -20,10 +20,17 @@ html {
   margin: 0;
   padding: 0;
 
-  --grey-5: #bbb;
+  --grey-50: #F9FAFB;
+  --grey-200: #E5E7EB;
+  --grey-400: #9CA3AF;
+  --grey-700: #374151;
+  --grey-900: #111827;
+;
 
   --main-width: 1056px;
-  --border-color: var(--grey-5);
+
+  --border-color: var(--grey-200);
+  --text-color: var(--grey-900);
 
   font-family: 'Open Sans', sans-serif;
 }
@@ -33,6 +40,12 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+
+  color: var(--text-color)
+}
+
+h1 {
+  padding: 2rem 0 1rem;
 }
 
 /* --------------------------------------- */

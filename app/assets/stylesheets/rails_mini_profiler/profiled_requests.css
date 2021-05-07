@@ -60,12 +60,22 @@ main {
   box-shadow: 0 0 0 1px var(--border-color);
 }
 
-.table tr {
-  border: solid 1px var(--border-color);
+/*TODO: Rename to request path table style*/
+.table thead tr {
+  color: var(--grey-400);
 }
 
-.table tr:hover {
-  background: #efefef;
+.table thead th {
+  font-weight: 400;
+}
+
+.table tr {
+  border: solid 1px var(--border-color);
+  color: var(--grey-700);
+}
+
+.table tbody tr:hover {
+  background: var(--grey-50);
 }
 
 .table th,
@@ -79,4 +89,13 @@ main {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.request-buttons {
+  text-align: right;
+}
+
+.request-buttons a {
+  text-decoration: none;
+  padding: 0 .25rem;
 }

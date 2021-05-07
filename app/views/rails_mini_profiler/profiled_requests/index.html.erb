@@ -9,7 +9,7 @@
     <th class="text-left">Status</th>
     <th class="text-left">Response</th>
     <th class="text-right">Duration</th>
-    <th class="text-left" colspan="2"></th>
+    <th class="text-left"></th>
   </tr>
   </thead>
 
@@ -20,14 +20,12 @@
       <td><%= profiled_request.status %></td>
       <td>json</td>
       <td class="text-right"><%= profiled_request.duration %> ms</td>
-      <td>
-        <%= link_to(profiled_request_path(profiled_request.id), title: 'Show Details') do  %>
-          <%= inline_svg_tag('rails_mini_profiler/show.svg', options={}) %>
+      <td class="request-buttons">
+        <%= link_to(profiled_request_path(profiled_request.id), title: 'Show Details') do %>
+          <%= inline_svg_tag('rails_mini_profiler/show.svg', options = {}) %>
         <% end %>
-          </td>
-      <td>
         <%= link_to(flamegraph_path(profiled_request.id), title: 'Show Flamegraph') do %>
-         <%= inline_svg_tag('rails_mini_profiler/graph.svg', options={}) %>
+          <%= inline_svg_tag('rails_mini_profiler/graph.svg', options = {}) %>
         <% end %>
       </td>
     </tr>
