@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     rails_mini_profiler (0.1.0)
+      inline_svg
       rails (~> 6.1.3, >= 6.1.3.1)
 
 GEM
@@ -78,6 +79,9 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    inline_svg (1.7.2)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     loofah (2.9.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -181,6 +185,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import
+  inline_svg
   puma (~> 5.2)
   rails_mini_profiler!
   rspec-rails (~> 4.0)

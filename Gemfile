@@ -13,6 +13,7 @@ group :development do
   gem 'rubocop', '~> 1.7'
   gem 'sqlite3', '~> 1.4'
   gem 'stackprof'
+  gem 'inline_svg'
 end
 
 # To use a debugger

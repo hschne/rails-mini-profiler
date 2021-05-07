@@ -2,29 +2,40 @@
 
 <h1>Profiled Requests</h1>
 
-<table>
+<table class="table">
   <thead>
-    <tr>
-      <th>ID</th>
-      <th>Status</th>
-      <th>Path</th>
-      <th>Duration</th>
-      <th colspan="2"></th>
-    </tr>
+  <tr>
+    <th class="text-left">Path</th>
+    <th class="text-left">Status</th>
+    <th class="text-left">Response</th>
+    <th class="text-right">Duration</th>
+    <th class="text-left" colspan="2"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @profiled_requests.each do |profiled_request| %>
-      <tr>
-        <td><%= profiled_request.id %></td>
-        <td><%= profiled_request.status %></td>
-        <td><%= profiled_request.path %></td>
-        <td><%= profiled_request.duration %> ms</td>
-        <td><%= link_to 'Show', profiled_request_path(profiled_request.id) %></td>
-        <td><%= link_to 'Flamegraph', flamegraph_path(profiled_request.id) %></td>
-        <td><%= link_to 'Destroy', profiled_request_path(profiled_request.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <% @profiled_requests.each do |profiled_request| %>
+    <tr>
+      <td class="request-path"><%= profiled_request.path %></td>
+      <td><%= profiled_request.status %></td>
+      <td>json</td>
+      <td class="text-right"><%= profiled_request.duration %> ms</td>
+      <td>
+        <%= link_to profiled_request_path(profiled_request.id) do  %>
+          <%= inline_svg_tag('rails_mini_profiler/show.svg', options={}) %>
+        <% end %>
+          </td>
+      <td>
+        <%= link_to(flamegraph_path(profiled_request.id)) do %>
+         <%= inline_svg_tag('rails_mini_profiler/graph.svg', options={}) %>
+        <% end %>
+      </td>
+
+      <a>
+        <img>
+      </a>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 
