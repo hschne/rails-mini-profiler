@@ -75,7 +75,11 @@ main {
   padding: 0;
 }
 
+
 .data-item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
   list-style: none;
 
   margin-right: 3rem;
@@ -87,5 +91,34 @@ main {
 }
 
 .data-item span {
-  display: block;
+  margin: .25rem 0;
 }
+
+.data-item .request-status {
+  margin: .2rem 0;
+  padding: .1rem .4rem;
+  border-radius: 5px;
+
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .1rem;
+
+  background: var(--grey-200);
+}
+
+.data-item [class^='request-status request-status-2'] {
+  color: white;
+  background: var(--green-400);
+}
+
+.data-item [class^='request-status request-status-4'] {
+  color: white;
+  background: var(--yellow-400);
+}
+
+.data-item [class^='request-status request-status-5'] {
+  color: white;
+  background: var(--red-500);
+}
+
+

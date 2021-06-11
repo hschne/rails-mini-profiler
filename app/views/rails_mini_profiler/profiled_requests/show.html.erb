@@ -4,7 +4,7 @@
   <ul class="request-details-data">
     <li class="data-item">
       <small>Status</small>
-      <span><%= @profiled_request.status %></span>
+      <span class="request-status request-status-<%= @profiled_request.status %>"><%= @profiled_request.status %></span>
     </li>
     <li class="data-item">
       <small>Response Time</small>
@@ -39,8 +39,6 @@
   end
     total_time = steps.shift
   %>
-
-  <span>Total Time <%= total_time.duration %></span>
 
   <table class="table pr-steps" style="">
     <thead>
