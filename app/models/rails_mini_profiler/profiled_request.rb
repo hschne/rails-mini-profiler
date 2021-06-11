@@ -13,6 +13,7 @@ module RailsMiniProfiler
     attr_reader :start,
                 :finish,
                 :duration,
+                :allocations,
                 :traces
 
     delegate :status, to: :response
@@ -31,6 +32,7 @@ module RailsMiniProfiler
       @start = total_time&.start
       @finish = total_time&.finish
       @duration = ((@finish - @start) * 1000).round
+      @allocations = total_time.allocations
       @traces.sort_by!(&:start)
     end
   end

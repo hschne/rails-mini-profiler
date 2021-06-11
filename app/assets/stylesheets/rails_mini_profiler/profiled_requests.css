@@ -66,5 +66,26 @@ main {
 }
 
 .request-details {
-  background: yellowgreen;
+}
+
+.request-details-data {
+  display: flex;
+
+  margin: 0;
+  padding: 0;
+}
+
+.data-item {
+  list-style: none;
+
+  margin-right: 3rem;
+  padding: 0;
+}
+
+.data-item small {
+  color: var(--grey-400);
+}
+
+.data-item span {
+  display: block;
 }

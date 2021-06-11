@@ -1,30 +1,20 @@
 <section class="request-details">
-  <h1>Request Details</h1>
+  <h2> <%= @profiled_request.path %> </h2>
 
-  <p>
-    <strong>Status:</strong>
-    <%= @profiled_request.status %>
-  </p>
-
-  <p>
-    <strong>Duration:</strong>
-    <%= @profiled_request.duration %>
-  </p>
-
-  <p>
-    <strong>Path:</strong>
-    <%= @profiled_request.path %>
-  </p>
-
-  <p>
-    <strong>Headers:</strong>
-    <%= @profiled_request.request_headers %>
-  </p>
-
-  <p>
-    <strong>Body:</strong>
-    <%= @profiled_request.request_body %>
-  </p>
+  <ul class="request-details-data">
+    <li class="data-item">
+      <small>Status</small>
+      <span><%= @profiled_request.status %></span>
+    </li>
+    <li class="data-item">
+      <small>Response Time</small>
+      <span><%= @profiled_request.duration %>ms</span>
+    </li>
+    <li class="data-item">
+      <small>Allocations</small>
+      <span><%= @profiled_request.allocations %></span>
+    </li>
+  </ul>
 </section>
 
 <section class="response-details">
@@ -47,9 +37,12 @@
         (@profiled_request.finish - @profiled_request.start)) * 100
     )
   end
+    total_time = steps.shift
   %>
 
-  <table class="table pr-steps" style="display: none">
+  <span>Total Time <%= total_time.duration %></span>
+
+  <table class="table pr-steps" style="">
     <thead>
     <tr>
       <th>Step</th>

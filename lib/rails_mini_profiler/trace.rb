@@ -2,7 +2,7 @@
 
 module RailsMiniProfiler
   class Trace
-    attr_reader :name, :start, :finish, :duration, :payload, :backtrace
+    attr_reader :name, :start, :finish, :duration, :payload, :backtrace, :allocations
 
     def initialize(**kwargs)
       kwargs.each { |key, value| instance_variable_set("@#{key}", value) }
