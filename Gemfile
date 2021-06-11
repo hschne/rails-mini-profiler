@@ -13,6 +13,7 @@ group :development do
   gem 'rubocop', '~> 1.7'
   gem 'sqlite3', '~> 1.4'
   gem 'stackprof'
+  gem 'guard-livereload', '~> 2.5', require: false
 end
 
 # To use a debugger

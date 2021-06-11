@@ -5,9 +5,13 @@ require 'forwardable'
 require 'rails_mini_profiler/version'
 require 'rails_mini_profiler/engine'
 
+require 'rails_mini_profiler/errors'
+
 require 'rails_mini_profiler/authorization'
 require 'rails_mini_profiler/user'
+
 require 'rails_mini_profiler/storage/memory'
+
 require 'rails_mini_profiler/configuration'
 require 'rails_mini_profiler/profiler_context'
 require 'rails_mini_profiler/request_context'

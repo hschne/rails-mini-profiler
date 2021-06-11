@@ -108,7 +108,7 @@ main {
 
 .data-item [class^='request-status request-status-2'] {
   color: white;
-  background: var(--green-400);
+  background: blue;
 }
 
 .data-item [class^='request-status request-status-4'] {

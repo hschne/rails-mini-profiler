@@ -23,7 +23,11 @@ module RailsMiniProfiler
       end
 
       def find(id)
-        @records[id.to_i]
+        result = @records[id.to_i]
+        raise(RecordNotFound, "Record with id='#{id}' found") unless result
+
+
+        result
       end
 
       def destroy(id)
