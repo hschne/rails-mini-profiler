@@ -29,7 +29,9 @@ module RailsMiniProfiler
       profiled_request.user = request_context.user
       save_request!
 
-      render_response
+      result = render_response
+      self.profiled_request = nil
+      result
     end
 
     def profiled_request

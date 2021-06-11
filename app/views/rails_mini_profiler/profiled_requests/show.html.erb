@@ -1,5 +1,5 @@
 <section class="request-details">
-  <h2> <%= @profiled_request.path %> </h2>
+  <h1> <%= @profiled_request.path %> </h1>
 
   <ul class="request-details-data">
     <li class="data-item">
@@ -37,7 +37,7 @@
         (@profiled_request.finish - @profiled_request.start)) * 100
     )
   end
-    total_time = steps.shift
+    steps.shift
   %>
 
   <table class="table pr-steps" style="">
