@@ -14,7 +14,7 @@ module RailsMiniProfiler
       return @app.call(env) unless Guard.new(request_context).profile?
 
       self.profiled_request = ProfiledRequest.new(request: request)
-      status, headers, response = profile(env)
+      status, headers, response = profile(request)
       return [status, headers, response] if request_context.authorized?
 
       profiled_request.response = Response.new(status: status, headers: headers, response: response)
@@ -50,9 +50,9 @@ module RailsMiniProfiler
       [response.status, response.headers, response.response]
     end
 
-    def profile(env)
+    def profile(request)
       ActiveSupport::Notifications.instrument('rails_mini_profiler.total_time') do
-        Flamegraph.new(profiled_request).record { @app.call(env) }
+        Flamegraph.new(request).record(profiled_request) { @app.call(request.env) }
       end
     end
 

@@ -14,7 +14,6 @@
 - Include memory info
 - Parity with rack-profiler (https://github.com/dawanda/rack-profiler)
   - Backtrace filtering
-  - Subscriptions
 - Parity with rack-mini-profiler:
   - Memory
   - Live request handling (params)

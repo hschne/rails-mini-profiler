@@ -4,6 +4,7 @@ module RailsMiniProfiler
   class Configuration
     attr_accessor :authorize,
                   :enabled,
+                  :flamegraph_enabled,
                   :skip_paths,
                   :storage,
                   :user_provider
@@ -16,6 +17,7 @@ module RailsMiniProfiler
     def reset
       @authorize = proc { |_env| !(Rails.env.development? || Rails.env.test?) }
       @enabled = proc { |_env| !(Rails.env.development? || Rails.env.test?) }
+      @flamegraph_enabled = true
       @skip_paths = []
       @storage = Storage::Memory
       @user_provider = proc { |env| Rack::Request.new(env).ip }

@@ -12,7 +12,7 @@ module RailsMiniProfiler
 
     def render
       params = CGI.parse(@request.query_string).transform_values(&:first).with_indifferent_access
-      return redirect_to(flamegraph_path(@profiled_request.id)) if params[:flamegraph]
+      return redirect_to(flamegraph_path(@profiled_request.id)) if params[:rmp_flamegraph]
 
       false
     end
