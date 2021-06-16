@@ -21,6 +21,8 @@ require 'rails_mini_profiler/trace'
 require 'rails_mini_profiler/guard'
 require 'rails_mini_profiler/redirect'
 require 'rails_mini_profiler/badge'
+require 'rails_mini_profiler/tracers'
+require 'rails_mini_profiler/flamegraph'
 require 'rails_mini_profiler/middleware'
 
 module RailsMiniProfiler

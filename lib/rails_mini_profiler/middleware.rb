@@ -5,16 +5,8 @@ module RailsMiniProfiler
     def initialize(app)
       @app = app
       @context = RailsMiniProfiler.context
-      subscribe_to_default
+      Tracers.setup! { |trace| track_trace(trace) }
     end
-
-    DEFAULT_SUBSCRIPTIONS = %w[
-      sql.active_record
-      render_template.action_view
-      render_partial.action_view
-      process_action.action_controller
-      rails_mini_profiler.total_time
-    ].freeze
 
     def call(env)
       request = Request.new(env)
@@ -60,19 +52,7 @@ module RailsMiniProfiler
 
     def profile(env)
       ActiveSupport::Notifications.instrument('rails_mini_profiler.total_time') do
-        if defined?(StackProf) && StackProf.respond_to?(:run)
-          results = nil
-          flamegraph = StackProf.run(
-            mode: :wall,
-            raw: true,
-            aggregate: false,
-            interval: (2 * 1000).to_i
-          ) { results = @app.call(env) }
-          profiled_request.flamegraph = flamegraph
-          results
-        else
-          @app.call(env)
-        end
+        Flamegraph.new(profiled_request).record { @app.call(env) }
       end
     end
 
@@ -81,29 +61,6 @@ module RailsMiniProfiler
 
       storage_instance = @context.storage_instance
       storage_instance.save(profiled_request)
-    end
-
-    def subscribe_to_default
-      DEFAULT_SUBSCRIPTIONS.each do |event|
-        subscribe(event)
-      end
-    end
-
-    def subscribe(*subscriptions)
-      subscriptions.each do |subscription|
-        ActiveSupport::Notifications.monotonic_subscribe(subscription) do |event|
-          trace = Trace.new(
-            name: event.name,
-            start: event.time.to_f,
-            finish: event.end.to_f,
-            duration: event.duration.to_f.round(2),
-            allocations: event.allocations,
-            backtrace: Rails.backtrace_cleaner.clean(caller),
-            payload: event.payload
-          )
-          track_trace(trace)
-        end
-      end
     end
   end
 end

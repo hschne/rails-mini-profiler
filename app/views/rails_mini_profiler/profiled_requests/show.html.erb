@@ -14,11 +14,17 @@
       <small>Allocations</small>
       <span><%= @profiled_request.allocations %></span>
     </li>
+
   </ul>
+
+  <%= link_to(flamegraph_path(@profiled_request.id), title: 'Show Flamegraph') do %>
+    <%= inline_svg_tag('rails_mini_profiler/graph.svg', options = {}) %>
+  <% end %>
 </section>
 
 <section class="response-details">
   <h1>Response Details</h1>
+
 </section>
 
 <section>
