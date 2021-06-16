@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  class ApplicationController < ActionController::Base
+  class ApplicationController < ::ApplicationController
     rescue_from RecordNotFound, with: :not_found
 
-    def profiler_user
-      @profiler_user ||= RailsMiniProfiler.configuration.user_provider.call(request.env)
+    unless respond_to?(:rmp_user)
+      def rmp_user
+        @rmp_user ||= RailsMiniProfiler.configuration.user_provider.call(request.env)
+      end
     end
 
     private

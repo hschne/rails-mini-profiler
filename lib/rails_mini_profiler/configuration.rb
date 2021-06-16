@@ -14,11 +14,11 @@ module RailsMiniProfiler
     end
 
     def reset
-      @enabled = true
-      @storage = Storage::Memory
-      @skip_paths = []
-      @user_provider = proc { |env| Rack::Request.new(env).ip }
       @authorize = proc { |_env| !(Rails.env.development? || Rails.env.test?) }
+      @enabled = proc { |_env| !(Rails.env.development? || Rails.env.test?) }
+      @skip_paths = []
+      @storage = Storage::Memory
+      @user_provider = proc { |env| Rack::Request.new(env).ip }
     end
   end
 end

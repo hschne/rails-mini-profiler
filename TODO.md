@@ -1,14 +1,12 @@
 # Todo
 
 - UI & Design
-  - Style Header
   - Redesign show profiled request page
   - Add new icon
   - Pimp badge
   - Disable icons for failed requests etc
 - Write proper readme
 - Show better info for traces
-- Variable mount point
 - Test in MT
 
 # Next

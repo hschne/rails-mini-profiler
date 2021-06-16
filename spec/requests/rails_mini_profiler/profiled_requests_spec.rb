@@ -29,7 +29,7 @@ module RailsMiniProfiler
       it 'destroys the requested profiled_request' do
         delete profiled_request_url(stored_request.id)
 
-        expect(storage.find(profiled_request.id)).to be_nil
+        expect { storage.find(profiled_request.id) }.to raise_error(RecordNotFound)
       end
     end
   end

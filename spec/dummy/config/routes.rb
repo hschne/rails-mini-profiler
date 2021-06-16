@@ -2,5 +2,5 @@
 
 Rails.application.routes.draw do
   resources :movies
-  mount RailsMiniProfiler::Engine => '/rails_mini_profiler'
+  mount RailsMiniProfiler::Engine => '/profiler'
 end

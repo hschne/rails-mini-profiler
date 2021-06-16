@@ -7,7 +7,7 @@ module RailsMiniProfiler
     before_action :set_profiled_request, only: %i[show destroy]
 
     def index
-      @profiled_requests = storage.all_for_user(profiler_user)
+      @profiled_requests = storage.all_for_user(rmp_user)
     end
 
     def show; end

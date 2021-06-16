@@ -23,7 +23,7 @@ module RailsMiniProfiler
       end
 
       context 'with profiler mount path' do
-        let(:request) { Request.new('REQUEST_PATH' => '/rails_mini_profiler/1') }
+        let(:request) { Request.new('REQUEST_PATH' => "/#{Engine.routes.find_script_name({})}/1") }
 
         it('should be false') { expect(subject.profile?).to be(false) }
       end

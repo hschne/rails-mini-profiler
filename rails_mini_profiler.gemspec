@@ -3,13 +3,13 @@
 require_relative 'lib/rails_mini_profiler/version'
 
 Gem::Specification.new do |spec|
-  spec.name        = 'rails_mini_profiler'
+  spec.name        = 'rails-mini-profiler'
   spec.version     = RailsMiniProfiler::VERSION
   spec.authors     = ['hschne']
   spec.email       = ['hans.schnedlitz@gmail.com']
 
-  spec.summary = 'An improved version  of rack-mini-profiler, tailed to Ruby on Rails applications'
-  spec.description = 'Hands-on performance profiling for your Rails applications'
+  spec.summary = 'Performance profiling for your Rails app, made simple'
+  spec.description = 'Performance profiling for your Rails app, made simple'
   spec.homepage = 'https://github.com/hschne/rails_mini_profiler'
   spec.license = 'MIT'
 

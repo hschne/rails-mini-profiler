@@ -9,7 +9,7 @@ module RailsMiniProfiler
     end
 
     def profile?
-      return false unless @configuration.enabled
+      return false unless enabled?
 
       return false if ignored_path?
 
@@ -25,8 +25,7 @@ module RailsMiniProfiler
     private
 
     def ignored_path?
-      # TODO: This changes based on mount point
-      return true if /rails_mini_profiler/.match?(@request.path)
+      return true if /#{Engine.routes.find_script_name({})}/.match?(@request.path)
 
       return true if /assets/.match?(@request.path)
 
@@ -35,6 +34,12 @@ module RailsMiniProfiler
       return true if Regexp.union(ignored_paths).match?(@request.path)
 
       false
+    end
+
+    def enabled?
+      return @configuration.enabled unless @configuration.respond_to?(:call)
+
+      @configuration.call(@request.env)
     end
   end
 end

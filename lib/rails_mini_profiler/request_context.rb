@@ -16,7 +16,7 @@ module RailsMiniProfiler
     end
 
     def authorized?
-      @authorized ||= (@profiler_context.configuration.authorize.call(@env) && !Authorization.authorized?)
+      @authorized ||= (@profiler_context.configuration.authorize.call(@env) && Authorization.authorized?)
     end
   end
 end

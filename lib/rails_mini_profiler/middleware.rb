@@ -29,7 +29,7 @@ module RailsMiniProfiler
       profiled_request.user = request_context.user
       save_request!
 
-      result = render_response
+      result = render_response(request)
       self.profiled_request = nil
       result
     end
@@ -50,8 +50,11 @@ module RailsMiniProfiler
 
     private
 
-    def render_response
-      response = modify_response
+    def render_response(request)
+      redirect = Redirect.new(request, profiled_request).render
+      return redirect if redirect
+
+      response = Badge.new(profiled_request).render
       [response.status, response.headers, response.response]
     end
 
@@ -78,10 +81,6 @@ module RailsMiniProfiler
 
       storage_instance = @context.storage_instance
       storage_instance.save(profiled_request)
-    end
-
-    def modify_response
-      Badge.new(profiled_request).render
     end
 
     def subscribe_to_default
