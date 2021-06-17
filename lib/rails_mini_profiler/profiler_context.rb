@@ -8,11 +8,11 @@ module RailsMiniProfiler
       end
     end
 
-    attr_reader :configuration, :storage_instance
+    attr_reader :configuration, :request_repository
 
     def initialize(configuration)
       @configuration = configuration
-      @storage_instance ||= configuration.storage.new
+      @request_repository ||= RequestRepository.new(configuration.storage)
     end
   end
 end

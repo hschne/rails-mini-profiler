@@ -7,6 +7,7 @@ module RailsMiniProfiler
                   :flamegraph_enabled,
                   :skip_paths,
                   :storage,
+                  :storage_options,
                   :user_provider
 
     def initialize
@@ -20,6 +21,8 @@ module RailsMiniProfiler
       @flamegraph_enabled = true
       @skip_paths = []
       @storage = Storage::Memory
+      @storage_options = nil
+      @storage_limit = 50
       @user_provider = proc { |env| Rack::Request.new(env).ip }
     end
   end
