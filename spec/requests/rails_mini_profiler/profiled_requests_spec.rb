@@ -4,12 +4,13 @@ require 'rails_helper'
 
 module RailsMiniProfiler
   RSpec.describe '/profiled_requests', type: :request do
-    let(:configuration) { RailsMiniProfiler.configuration }
+    let(:user) { '127.0.0.1' }
+
     let(:context) { RailsMiniProfiler.context }
-    let(:storage) { context.storage_instance }
+    let(:repository) { ProfiledRequestRepository.create_repository(user) }
 
     let(:profiled_request) { ProfiledRequest.new(request: Request.new, response: Response.new) }
-    let(:stored_request) { storage.save(profiled_request) }
+    let(:stored_request) { repository.create(profiled_request) }
 
     describe 'GET /index' do
       it 'renders a successful response' do
@@ -19,8 +20,15 @@ module RailsMiniProfiler
     end
 
     describe 'GET /show' do
-      it 'renders a successful response' do
+      it 'without item redirects and shows error' do
+        get profiled_request_url(-1)
+
+        expect(flash[:alert]).to be_present
+      end
+
+      it 'with stored item return successfull' do
         get profiled_request_url(stored_request.id)
+
         expect(response).to be_successful
       end
     end
@@ -29,7 +37,7 @@ module RailsMiniProfiler
       it 'destroys the requested profiled_request' do
         delete profiled_request_url(stored_request.id)
 
-        expect { storage.find(profiled_request.id) }.to raise_error(RecordNotFound)
+        expect { repository.find(profiled_request.id) }.to raise_error(RecordNotFound)
       end
     end
   end

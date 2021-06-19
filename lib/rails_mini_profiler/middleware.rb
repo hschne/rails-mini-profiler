@@ -59,8 +59,9 @@ module RailsMiniProfiler
     def save_request!
       profiled_request.complete!
 
-      storage_instance = @context.storage_instance
-      storage_instance.save(profiled_request)
+      user_id = profiled_request.user
+      repository = ProfiledRequestRepository.get(user_id)
+      repository.create(profiled_request)
     end
   end
 end

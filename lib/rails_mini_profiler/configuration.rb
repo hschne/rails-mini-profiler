@@ -6,7 +6,7 @@ module RailsMiniProfiler
                   :enabled,
                   :flamegraph_enabled,
                   :skip_paths,
-                  :storage,
+                  :repository,
                   :storage_options,
                   :storage_limit,
                   :user_provider
@@ -21,7 +21,8 @@ module RailsMiniProfiler
       @enabled = proc { |_env| !(Rails.env.development? || Rails.env.test?) }
       @flamegraph_enabled = true
       @skip_paths = []
-      @storage = Storage::Memory
+      @repository = :memory
+      # TODO: Introduce types for storage options to make it clear which exist
       @storage_options = nil
       @storage_limit = 50
       @user_provider = proc { |env| Rack::Request.new(env).ip }

@@ -8,11 +8,10 @@ module RailsMiniProfiler
       end
     end
 
-    attr_reader :configuration, :request_repository
+    attr_reader :configuration
 
     def initialize(configuration)
       @configuration = configuration
-      @request_repository ||= RequestRepository.new(configuration)
     end
   end
 end

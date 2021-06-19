@@ -7,28 +7,28 @@ module RailsMiniProfiler
     before_action :set_profiled_request, only: %i[show destroy]
 
     def index
-      @profiled_requests = storage.all_for_user(rmp_user)
+      @profiled_requests = repository.find_by
     end
 
     def show; end
 
     def destroy
-      storage.destroy(@profiled_request.id)
+      repository.destroy(@profiled_request.id)
       redirect_to profiled_requests_url, notice: 'Profiled request was successfully destroyed.'
     end
 
     private
 
     def set_profiled_request
-      @profiled_request = storage.find(params[:id])
+      @profiled_request = repository.find(params[:id])
     end
 
     def configuration
       @configuration ||= RailsMiniProfiler.configuration
     end
 
-    def storage
-      @storage ||= ProfilerContext.instance(configuration).storage_instance
+    def repository
+      @repository ||= ProfiledRequestRepository.get(rmp_user)
     end
   end
 end

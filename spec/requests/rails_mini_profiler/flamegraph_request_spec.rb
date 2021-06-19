@@ -4,12 +4,13 @@ require 'rails_helper'
 
 module RailsMiniProfiler
   RSpec.describe 'Flamegraphs', type: :request do
-    let(:configuration) { RailsMiniProfiler.configuration }
+    let(:user) { '127.0.0.1' }
+
     let(:context) { RailsMiniProfiler.context }
-    let(:storage) { context.storage_instance }
+    let(:repository) { ProfiledRequestRepository.create_repository(user) }
 
     let(:profiled_request) { ProfiledRequest.new(request: Request.new, response: Response.new) }
-    let(:stored_request) { storage.save(profiled_request) }
+    let(:stored_request) { repository.create(profiled_request) }
 
     describe 'GET /show' do
       it 'returns http success' do
