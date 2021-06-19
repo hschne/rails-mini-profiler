@@ -67,5 +67,3 @@ module RailsMiniProfiler
     end
   end
 end
-
-

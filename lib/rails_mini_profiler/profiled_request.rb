@@ -35,5 +35,9 @@ module RailsMiniProfiler
       @allocations = total_time.allocations
       @traces.sort_by!(&:start)
     end
+
+    def to_h
+      instance_variables.each_with_object({}) { |var, hash| hash[var.to_s.delete('@')] = instance_variable_get(var) }
+    end
   end
 end
