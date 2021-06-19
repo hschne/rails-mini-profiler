@@ -8,11 +8,12 @@ module RailsMiniProfiler
                   :skip_paths,
                   :storage,
                   :storage_options,
+                  :storage_limit,
                   :user_provider
 
-    def initialize
-      super
+    def initialize(**kwargs)
       reset
+      kwargs.each { |key, value| instance_variable_set("@#{key}", value) }
     end
 
     def reset

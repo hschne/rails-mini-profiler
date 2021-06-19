@@ -3,7 +3,7 @@
 module RailsMiniProfiler
   module Storage
     class Memory
-      def initialize
+      def initialize(_record_type, _configuration)
         @lock = Mutex.new
         @id = 1
         @records = {}

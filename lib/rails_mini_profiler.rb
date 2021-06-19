@@ -9,12 +9,15 @@ require 'rails_mini_profiler/errors'
 
 require 'rails_mini_profiler/authorization'
 require 'rails_mini_profiler/user'
+require 'rails_mini_profiler/request_context'
+require 'rails_mini_profiler/profiled_request'
 
 require 'rails_mini_profiler/storage/memory'
+require 'rails_mini_profiler/storage/redis'
+require 'rails_mini_profiler/repositories/request_repository'
 
 require 'rails_mini_profiler/configuration'
 require 'rails_mini_profiler/profiler_context'
-require 'rails_mini_profiler/request_context'
 require 'rails_mini_profiler/request'
 require 'rails_mini_profiler/response'
 require 'rails_mini_profiler/trace'

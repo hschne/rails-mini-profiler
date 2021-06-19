@@ -118,6 +118,8 @@ GEM
     method_source (1.0.0)
     mini_mime (1.0.3)
     minitest (5.14.4)
+    mock_redis (0.28.0)
+      ruby2_keywords
     multi_json (1.15.0)
     nenv (0.3.0)
     nio4r (2.5.7)
@@ -200,6 +202,7 @@ GEM
     rubocop-ast (1.4.1)
       parser (>= 2.7.1.5)
     ruby-progressbar (1.11.0)
+    ruby2_keywords (0.0.4)
     shellany (0.0.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -225,6 +228,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-import
   guard-livereload (~> 2.5)
+  mock_redis
   puma (~> 5.2)
   rails-mini-profiler!
   rspec-rails (~> 4.0)

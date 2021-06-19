@@ -16,5 +16,9 @@ group :development do
   gem 'stackprof'
 end
 
+group :test do
+  gem 'mock_redis'
+end
+
 # To use a debugger
 # gem 'byebug', group: [:development, :test]

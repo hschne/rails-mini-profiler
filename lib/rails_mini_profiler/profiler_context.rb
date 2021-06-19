@@ -12,7 +12,7 @@ module RailsMiniProfiler
 
     def initialize(configuration)
       @configuration = configuration
-      @request_repository ||= RequestRepository.new(configuration.storage)
+      @request_repository ||= RequestRepository.new(configuration)
     end
   end
 end
