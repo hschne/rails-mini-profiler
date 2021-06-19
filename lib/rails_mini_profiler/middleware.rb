@@ -44,7 +44,7 @@ module RailsMiniProfiler
       status, headers, response = result
       profiled_request.response = Response.new(status: status, headers: headers, response: response)
       profiled_request.user = request_context.user
-      ProfiledRequestRepository.get(request_context.user).create(profiled_request)
+      Repositories::ProfiledRequestRepository.get(request_context.user).create(profiled_request)
     end
 
     def render_response(request)

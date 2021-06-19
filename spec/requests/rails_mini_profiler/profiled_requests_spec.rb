@@ -7,7 +7,7 @@ module RailsMiniProfiler
     let(:user) { '127.0.0.1' }
 
     let(:context) { RailsMiniProfiler.context }
-    let(:repository) { ProfiledRequestRepository.create_repository(user) }
+    let(:repository) { Repositories::ProfiledRequestRepository.create_repository(user) }
 
     let(:profiled_request) { ProfiledRequest.new(request: Request.new, response: Response.new) }
     let(:stored_request) { repository.create(profiled_request) }

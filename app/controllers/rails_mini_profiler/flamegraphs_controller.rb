@@ -21,7 +21,7 @@ module RailsMiniProfiler
     end
 
     def repository
-      @repository ||= ProfiledRequestRepository.get(rmp_user)
+      @repository ||= Repositories::ProfiledRequestRepository.get(rmp_user)
     end
   end
 end
