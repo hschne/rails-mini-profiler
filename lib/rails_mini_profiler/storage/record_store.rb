@@ -22,7 +22,6 @@ module RailsMiniProfiler
 
       def initialize(record_type, configuration)
         @record_type = record_type
-        @record_prefix = @record_type.name.underscore.dasherize
         configuration ||= RailsMiniProfiler.configuration
         @storage_options = configuration.storage_options
       end

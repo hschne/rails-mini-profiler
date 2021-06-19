@@ -8,6 +8,7 @@ module RailsMiniProfiler
       def initialize(record_type, configuration = nil)
         super
         @prefix = @storage_options[:prefix] || 'rmp'
+        @record_prefix = @record_type.name.underscore.dasherize
         @redis = @storage_options[:redis] || StorageClient.create
         @expiration = @storage_options[:expiration] || DEFAULT_EXPIRATION
       end

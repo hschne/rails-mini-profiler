@@ -4,14 +4,10 @@ require 'rails_helper'
 
 module RailsMiniProfiler
   module Storage
-    RSpec.describe RedisRecordStore do
-      let(:redis) { MockRedis.new }
-
+    RSpec.describe MemoryRecordStore do
       let(:record_class) { Dummies::DummyRecord }
 
-      let(:configuration) { Configuration.new(storage_options: { redis: redis }) }
-
-      subject { RedisRecordStore.new(record_class, configuration) }
+      subject { MemoryRecordStore.new(record_class) }
 
       describe 'all' do
         it 'should return all records' do
@@ -59,7 +55,7 @@ module RailsMiniProfiler
           expect(2).to eq(second_result.id)
         end
 
-        it('should save record to redis') do
+        it('should save record') do
           record = record_class.new(value: 'value')
 
           result = subject.create(record)
@@ -99,8 +95,8 @@ module RailsMiniProfiler
           subject.create(record)
 
           subject.clear
-          result = redis.get("#{@prefix}:#{@record_prefix}:next-id")
-          expect(result).to be_nil
+
+          expect(subject.all).to be_empty
         end
 
         it 'should clear records' do

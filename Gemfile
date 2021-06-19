@@ -18,6 +18,7 @@ end
 
 group :test do
   gem 'mock_redis'
+  gem 'simplecov'
 end
 
 # To use a debugger

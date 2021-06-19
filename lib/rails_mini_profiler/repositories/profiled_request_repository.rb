@@ -13,8 +13,8 @@ module RailsMiniProfiler
         clazz = "RailsMiniProfiler::#{storage_type.capitalize}#{name.demodulize}".constantize
         return clazz.new(user_id) unless storage_type == :memory
 
-        # For the memory storage its just simpler to retain a repository per user in memory. Each user keeps their own records
-        # in an individual hash.
+        # For the memory storage its just simpler to retain a repository per user in memory. Each user keeps their own
+        # records in an individual hash.
         @repositories ||= {}
         @repositories[user_id] ||= clazz.new(user_id)
       end

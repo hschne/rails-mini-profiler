@@ -2,7 +2,6 @@
 
 module RailsMiniProfiler
   class RedisProfiledRequestRepository < ProfiledRequestRepository
-
     def initialize(user)
       super
       @redis = Storage::StorageClient.create
@@ -62,6 +61,5 @@ module RailsMiniProfiler
       @redis.del(expired_items)
       @redis.ltrim(user_records_index, 0, @storage_limit - 1)
     end
-
   end
 end

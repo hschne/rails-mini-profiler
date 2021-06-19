@@ -2,7 +2,6 @@
 
 module RailsMiniProfiler
   class Tracers
-
     DEFAULT_SUBSCRIPTIONS = %w[
       sql.active_record
       render_template.action_view

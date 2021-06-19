@@ -14,12 +14,10 @@ module RailsMiniProfiler
       return @app.call(env) unless Guard.new(request_context).profile?
 
       self.profiled_request = ProfiledRequest.new(request: request)
-      status, headers, response = profile(request)
-      return [status, headers, response] if request_context.authorized?
+      result = profile(request)
+      return result if request_context.authorized?
 
-      profiled_request.response = Response.new(status: status, headers: headers, response: response)
-      profiled_request.user = request_context.user
-      save_request!
+      save_request(request_context, result)
 
       result = render_response(request)
       self.profiled_request = nil
@@ -42,6 +40,13 @@ module RailsMiniProfiler
 
     private
 
+    def save_request(request_context, result)
+      status, headers, response = result
+      profiled_request.response = Response.new(status: status, headers: headers, response: response)
+      profiled_request.user = request_context.user
+      ProfiledRequestRepository.get(request_context.user).create(profiled_request)
+    end
+
     def render_response(request)
       redirect = Redirect.new(request, profiled_request).render
       return redirect if redirect
@@ -54,14 +59,6 @@ module RailsMiniProfiler
       ActiveSupport::Notifications.instrument('rails_mini_profiler.total_time') do
         Flamegraph.new(request).record(profiled_request) { @app.call(request.env) }
       end
-    end
-
-    def save_request!
-      profiled_request.complete!
-
-      user_id = profiled_request.user
-      repository = ProfiledRequestRepository.get(user_id)
-      repository.create(profiled_request)
     end
   end
 end
