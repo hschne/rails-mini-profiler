@@ -4,10 +4,10 @@ module RailsMiniProfiler
   class Badge
     include Engine.routes.url_helpers
 
-    def initialize(profiled_request)
+    def initialize(profiled_request, original_response)
       @configuration = RailsMiniProfiler.configuration
       @profiled_request = profiled_request
-      @original_response = @profiled_request.response
+      @original_response = original_response
     end
 
     def render

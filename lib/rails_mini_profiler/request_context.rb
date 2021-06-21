@@ -10,9 +10,9 @@ module RailsMiniProfiler
       @env = request.env
     end
 
-    def user
+    def user_id
       # If the user was explicitly set during the request use that, else fall back to ID provided by the user provider
-      @user ||= (User.current_user || @profiler_context.configuration.user_provider.call(@env))
+      @user_id ||= (User.current_user || @profiler_context.configuration.user_provider.call(@env))
     end
 
     def authorized?

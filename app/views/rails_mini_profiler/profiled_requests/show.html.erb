@@ -1,10 +1,10 @@
 <section class="request-details">
-  <h1> <%= @profiled_request.path %> </h1>
+  <h1> <%= @profiled_request.request_path %> </h1>
 
   <ul class="request-details-data">
     <li class="data-item">
       <small>Status</small>
-      <span class="request-status request-status-<%= @profiled_request.status %>"><%= @profiled_request.status %></span>
+      <span class="request-status request-status-<%= @profiled_request.response_status %>"><%= @profiled_request.response_status %></span>
     </li>
     <li class="data-item">
       <small>Response Time</small>

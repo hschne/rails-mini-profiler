@@ -1,6 +1,6 @@
 class CreateRmp < ActiveRecord::Migration[6.1]
   def change
-    create_table :rails_mini_profiler_profiled_request_records do |t|
+    create_table :rmp_profiled_requests do |t|
       t.string :user_id
       t.datetime :start
       t.datetime :finish
@@ -15,8 +15,8 @@ class CreateRmp < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    create_table :rails_mini_profiler_trace_records do |t|
-      t.references :request_id, null: false, foreign_key: true
+    create_table :rmp_traces do |t|
+      t.references :rmp_profiled_requests, null: false, foreign_key: true
       t.datetime :start
       t.datetime :finish
       t.integer :duration

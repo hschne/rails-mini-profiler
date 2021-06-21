@@ -16,8 +16,8 @@
   <tbody>
   <% @profiled_requests.each do |profiled_request| %>
     <tr>
-      <td class="request-path"><%= profiled_request.path %></td>
-      <td><%= profiled_request.status %></td>
+      <td class="request-path"><%= profiled_request.request_path %></td>
+      <td><%= profiled_request.response_status %></td>
       <td>json</td>
       <td class="text-right"><%= profiled_request.duration %> ms</td>
       <td class="request-buttons">

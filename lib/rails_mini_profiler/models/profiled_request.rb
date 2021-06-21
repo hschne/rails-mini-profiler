@@ -1,0 +1,51 @@
+# frozen_string_literal: true
+
+module RailsMiniProfiler
+  module Models
+    class ProfiledRequest
+      include ActiveModel::Model
+      include ActiveModel::Serialization
+
+      attr_accessor :id,
+                    :user_id,
+                    :start,
+                    :finish,
+                    :duration,
+                    :allocations,
+                    :response_status,
+                    :response_body,
+                    :response_headers,
+                    :request_headers,
+                    :request_body,
+                    :request_path,
+                    :flamegraph,
+                    :traces
+
+      def initialize(**kwargs)
+        kwargs.each { |key, value| instance_variable_set("@#{key}", value) }
+        @traces ||= []
+      end
+
+      def request=(request)
+        @request_body = request.body
+        @request_path = request.path
+        @request_headers = request.headers
+      end
+
+      def response=(response)
+        @response_body = response.response.body
+        @response_headers = response.headers
+        @response_status = response.status
+      end
+
+      def complete!
+        total_time = traces.find { |trace| trace.name == 'rails_mini_profiler.total_time' }
+        @start = total_time&.start
+        @finish = total_time&.finish
+        @duration = ((@finish - @start) * 1000).round
+        @allocations = total_time.allocations
+        @traces.sort_by!(&:start)
+      end
+    end
+  end
+end

@@ -20,7 +20,7 @@ module RailsMiniProfiler
       def subscribe(*subscriptions, &callback)
         subscriptions.each do |subscription|
           ActiveSupport::Notifications.monotonic_subscribe(subscription) do |event|
-            trace = Trace.new(
+            trace = Models::Trace.new(
               name: event.name,
               start: event.time.to_f,
               finish: event.end.to_f,

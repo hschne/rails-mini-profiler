@@ -13,13 +13,14 @@ module RailsMiniProfiler
       request_context = RequestContext.new(@context, request)
       return @app.call(env) unless Guard.new(request_context).profile?
 
-      self.profiled_request = ProfiledRequest.new(request: request)
+      self.profiled_request = Models::ProfiledRequest.new
+      profiled_request.request = request
       result = profile(request)
       return result if request_context.authorized?
 
       save_request(request_context, result)
 
-      result = render_response(request)
+      result = render_response(request, result)
       self.profiled_request = nil
       result
     end
@@ -43,16 +44,20 @@ module RailsMiniProfiler
     def save_request(request_context, result)
       status, headers, response = result
       profiled_request.response = Response.new(status: status, headers: headers, response: response)
-      profiled_request.user = request_context.user
-      Repositories::ProfiledRequestRepository.get(request_context.user).create(profiled_request)
+      profiled_request.user_id = request_context.user_id
+      Repositories::ProfiledRequestRepository.get(request_context.user_id).create(profiled_request)
     end
 
-    def render_response(request)
+    def render_response(request, result)
       redirect = Redirect.new(request, profiled_request).render
       return redirect if redirect
 
-      response = Badge.new(profiled_request).render
-      [response.status, response.headers, response.response]
+      status, headers, response = result
+      original_response = Response.new(status: status,
+                                       headers: headers,
+                                       response: response)
+      modified_response = Badge.new(profiled_request, original_response).render
+      [modified_response.status, modified_response.headers, modified_response.response]
     end
 
     def profile(request)
