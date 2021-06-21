@@ -4,10 +4,10 @@ module RailsMiniProfiler
   class Redirect
     include Engine.routes.url_helpers
 
-    def initialize(request, profiled_request)
+    def initialize(request_context)
       @configuration = RailsMiniProfiler.configuration
-      @request = request
-      @profiled_request = profiled_request
+      @request = request_context.request
+      @profiled_request = request_context.profiled_request
     end
 
     def render

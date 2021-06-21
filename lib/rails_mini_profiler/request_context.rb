@@ -4,6 +4,8 @@ module RailsMiniProfiler
   class RequestContext
     attr_reader :request, :profiler_context
 
+    attr_accessor :response, :profiled_request
+
     def initialize(profiler_context, request)
       @profiler_context = profiler_context
       @request = request

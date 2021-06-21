@@ -4,10 +4,10 @@ module RailsMiniProfiler
   class Badge
     include Engine.routes.url_helpers
 
-    def initialize(profiled_request, original_response)
+    def initialize(request_context)
       @configuration = RailsMiniProfiler.configuration
-      @profiled_request = profiled_request
-      @original_response = original_response
+      @profiled_request = request_context.profiled_request
+      @original_response = request_context.response
     end
 
     def render
@@ -21,9 +21,9 @@ module RailsMiniProfiler
       response = @original_response.response
       response.close if response.respond_to?(:close)
 
-      Response.new(status: @original_response.status,
-                   headers: @original_response.headers,
-                   response: modified_response)
+      ResponseWrapper.new(@original_response.status,
+                          @original_response.headers,
+                          modified_response)
     end
 
     private
