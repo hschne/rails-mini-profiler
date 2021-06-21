@@ -2,6 +2,9 @@ AllCops:
   TargetRubyVersion: 2.7
   NewCops: enable
   SuggestExtensions: false
+  Exclude:
+    - !ruby/regexp /schema\.rb$/
+    - db/migrate/*.rb
 
 Layout/LineLength:
   Max: 120

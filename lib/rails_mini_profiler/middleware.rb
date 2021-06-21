@@ -55,7 +55,6 @@ module RailsMiniProfiler
       redirect = Redirect.new(request_context).render
       return redirect if redirect
 
-
       modified_response = Badge.new(request_context).render
       [modified_response.status, modified_response.headers, modified_response.response]
     end

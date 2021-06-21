@@ -25,7 +25,7 @@ module RailsMiniProfiler
       # TODO: Introduce types for storage options to make it clear which exist
       @storage_options = nil
       @storage =
-      @storage_limit = 50
+        @storage_limit = 50
       @user_provider = proc { |env| Rack::Request.new(env).ip }
     end
   end
