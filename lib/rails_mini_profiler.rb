@@ -11,8 +11,7 @@ require 'rails_mini_profiler/authorization'
 require 'rails_mini_profiler/user'
 require 'rails_mini_profiler/request_context'
 
-require 'rails_mini_profiler/models/profiled_request'
-require 'rails_mini_profiler/models/trace'
+Dir['rails_mini_profiler/models/*.rb'].sort.each { |file| require file }
 
 require 'rails_mini_profiler/storage/storage_client'
 require 'rails_mini_profiler/storage/record_store'
@@ -24,7 +23,7 @@ require 'rails_mini_profiler/repositories/profiled_request/redis_repository'
 
 require 'rails_mini_profiler/configuration'
 require 'rails_mini_profiler/profiler_context'
-require 'rails_mini_profiler/request'
+require 'rails_mini_profiler/request_wrapper'
 require 'rails_mini_profiler/response_wrapper'
 require 'rails_mini_profiler/guard'
 require 'rails_mini_profiler/redirect'
