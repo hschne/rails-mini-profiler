@@ -45,6 +45,7 @@ module RailsMiniProfiler
     def save_request(request_context)
       profiled_request.response = request_context.response
       profiled_request.user_id = request_context.user_id
+      profiled_request.complete!
       result = Repositories::ProfiledRequestRepository.get(request_context.user_id).create(profiled_request)
 
       request_context.profiled_request = result
