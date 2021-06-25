@@ -19,6 +19,7 @@ end
 group :test do
   gem 'mock_redis'
   gem 'simplecov'
+  gem 'rspec-parameterized'
 end
 
 # To use a debugger

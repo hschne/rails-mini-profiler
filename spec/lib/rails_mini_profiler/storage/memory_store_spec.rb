@@ -4,10 +4,10 @@ require 'rails_helper'
 
 module RailsMiniProfiler
   module Storage
-    RSpec.describe MemoryRecordStore do
+    RSpec.describe MemoryStore do
       let(:record_class) { Dummies::DummyRecord }
 
-      subject { MemoryRecordStore.new(record_class) }
+      subject { MemoryStore.new(record_class) }
 
       describe 'all' do
         it 'should return all records' do

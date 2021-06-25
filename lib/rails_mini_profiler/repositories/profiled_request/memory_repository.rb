@@ -6,7 +6,7 @@ module RailsMiniProfiler
       class MemoryRepository < ProfiledRequestRepository
         def initialize(user)
           super
-          @request_store = Storage::MemoryRecordStore.new(ProfiledRequest)
+          @request_store = Storage::MemoryStore.new(ProfiledRequest)
           @storage_limit = RailsMiniProfiler.storage_configuration.max_size
         end
 

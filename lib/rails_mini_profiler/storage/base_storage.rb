@@ -24,6 +24,10 @@ module RailsMiniProfiler
         self.class.configuration
       end
 
+      def name
+        self.class.name
+      end
+
       def to_sym
         self.class.to_sym
       end

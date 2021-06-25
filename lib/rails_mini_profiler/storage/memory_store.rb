@@ -2,7 +2,7 @@
 
 module RailsMiniProfiler
   module Storage
-    class MemoryRecordStore < RecordStore
+    class MemoryStore < RecordStore
       def initialize(record_type, configuration = nil)
         super
         @lock = Mutex.new

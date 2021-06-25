@@ -8,36 +8,43 @@ module RailsMiniProfiler
 
     let(:context) { RailsMiniProfiler.context }
     let(:repository) { Repositories::ProfiledRequestRepository.create_repository(user) }
-
     let(:profiled_request) { Models::ProfiledRequest.new(request: Request.new, response: ResponseWrapper.new) }
     let(:stored_request) { repository.create(profiled_request) }
 
-    describe 'GET /index' do
-      it 'renders a successful response' do
-        get profiled_requests_url
-        expect(response).to be_successful
-      end
-    end
+    where(case_names: ->(a) { "in #{a.to_sym}" }, storage: [Storage::Memory, Storage::ActiveRecord])
 
-    describe 'GET /show' do
-      it 'without item redirects and shows error' do
-        get profiled_request_url(-1)
-
-        expect(flash[:alert]).to be_present
+    with_them do
+      before do
+        RailsMiniProfiler.configure { |configuration| configuration.storage = storage }
       end
 
-      it 'with stored item return successfull' do
-        get profiled_request_url(stored_request.id)
-
-        expect(response).to be_successful
+      describe 'GET /index' do
+        it 'renders a successful response' do
+          get profiled_requests_url
+          expect(response).to be_successful
+        end
       end
-    end
 
-    describe 'DELETE /destroy' do
-      it 'destroys the requested profiled_request' do
-        delete profiled_request_url(stored_request.id)
+      describe 'GET /show' do
+        it 'without item redirects and shows error' do
+          get profiled_request_url(-1)
 
-        expect { repository.find(profiled_request.id) }.to raise_error(RecordNotFound)
+          expect(flash[:alert]).to be_present
+        end
+
+        it 'with stored item return successfull' do
+          get profiled_request_url(stored_request.id)
+
+          expect(response).to be_successful
+        end
+      end
+
+      describe 'DELETE /destroy' do
+        it 'destroys the requested profiled_request' do
+          delete profiled_request_url(stored_request.id)
+
+          expect { repository.find(profiled_request.id) }.to raise_error(RecordNotFound)
+        end
       end
     end
   end

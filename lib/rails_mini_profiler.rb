@@ -20,8 +20,7 @@ require 'rails_mini_profiler/storage/memory'
 
 require 'rails_mini_profiler/storage/record_store'
 require 'rails_mini_profiler/storage/active_record_store'
-require 'rails_mini_profiler/storage/memory_record_store'
-require 'rails_mini_profiler/storage/storage_client'
+require 'rails_mini_profiler/storage/memory_store'
 
 require 'rails_mini_profiler/repositories/profiled_request_repository'
 require 'rails_mini_profiler/repositories/profiled_request/memory_repository'

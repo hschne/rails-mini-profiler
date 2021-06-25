@@ -6,7 +6,7 @@ module RailsMiniProfiler
       class << self
         def get(record_type)
           configuration = RailsMiniProfiler.configuration
-          storage_type = storage_type(configuration.storage)
+          storage_type = configuration.storage.name.demodulize
           @registry ||= {}
           @registry[storage_type] ||= {}
           @registry[storage_type][record_type] ||= create_record_store(storage_type, record_type)
@@ -15,13 +15,8 @@ module RailsMiniProfiler
         private
 
         def create_record_store(storage_type, record_type)
-          clazz = "RailsMiniProfiler::Storage::#{storage_type.capitalize}RecordStore".constantize
+          clazz = "RailsMiniProfiler::Storage::#{storage_type}Store".constantize
           clazz.new(record_type)
-        end
-
-        def storage_type(storage)
-          storage_class = storage.is_a?(Class) ? storage : storage.class
-          storage_class.to_s.demodulize.underscore
         end
       end
 

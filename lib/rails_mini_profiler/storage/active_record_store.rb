@@ -5,8 +5,8 @@ module RailsMiniProfiler
     class ActiveRecordStore < RecordStore
       def initialize(record_type, configuration = nil)
         super
-        key = "#{record_type.underscore}_record_class"
-        clazz = @storage_options[key] || "#{record_type}Record"
+        key = "#{record_type.name.demodulize.underscore}_table"
+        table = @storage_options.public_send(key)
         @record_class = clazz.demodulize
       end
 
