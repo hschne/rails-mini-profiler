@@ -15,8 +15,7 @@ module RailsMiniProfiler
         def storage_client
           @storage_client[@storage_type] ||= begin
             configuration = RailsMiniProfiler.configuration
-            storage_type = configuration.repository
-            storage_options = configuration.storage_options
+            storage_options = configuration.storage.configuration
             new(storage_type, storage_options).create_storage_client
           end
         end

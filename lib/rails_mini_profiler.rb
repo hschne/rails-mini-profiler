@@ -14,13 +14,18 @@ require 'rails_mini_profiler/request_context'
 require 'rails_mini_profiler/models/profiled_request'
 require 'rails_mini_profiler/models/trace'
 
-require 'rails_mini_profiler/storage/storage_client'
+require 'rails_mini_profiler/storage/base_storage'
+require 'rails_mini_profiler/storage/active_record'
+require 'rails_mini_profiler/storage/memory'
+
 require 'rails_mini_profiler/storage/record_store'
+require 'rails_mini_profiler/storage/active_record_store'
 require 'rails_mini_profiler/storage/memory_record_store'
-require 'rails_mini_profiler/storage/redis_record_store'
+require 'rails_mini_profiler/storage/storage_client'
+
 require 'rails_mini_profiler/repositories/profiled_request_repository'
 require 'rails_mini_profiler/repositories/profiled_request/memory_repository'
-require 'rails_mini_profiler/repositories/profiled_request/redis_repository'
+require 'rails_mini_profiler/repositories/profiled_request/active_record_repository'
 
 require 'rails_mini_profiler/configuration'
 require 'rails_mini_profiler/profiler_context'
@@ -43,10 +48,15 @@ module RailsMiniProfiler
       yield(configuration)
     end
 
+    def storage_configuration
+      configuration.storage.configuration
+    end
+
     def context
       @context ||= ProfilerContext.instance(configuration)
     end
 
+    # TODO: Merge authorize with setting current user
     def authorize!
       RailsMiniProfiler::Authorization.authorize!
     end

@@ -9,8 +9,7 @@ module RailsMiniProfiler
         end
 
         def create_repository(user_id)
-          configuration = RailsMiniProfiler.configuration
-          storage_type = configuration.repository
+          storage_type = RailsMiniProfiler.configuration.storage.to_sym
           clazz = "#{module_parent}::ProfiledRequest::#{storage_type.capitalize}Repository".constantize
           return clazz.new(user_id) unless storage_type == :memory
 
