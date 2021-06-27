@@ -11,6 +11,7 @@ require 'rails_mini_profiler/authorization'
 require 'rails_mini_profiler/user'
 require 'rails_mini_profiler/request_context'
 
+require 'rails_mini_profiler/models/base_model'
 require 'rails_mini_profiler/models/profiled_request'
 require 'rails_mini_profiler/models/trace'
 

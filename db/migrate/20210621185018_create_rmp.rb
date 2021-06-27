@@ -11,6 +11,7 @@ class CreateRmp < ActiveRecord::Migration[6.1]
       t.integer :response_status
       t.json :response_body
       t.json :response_headers
+      t.string :request_path
       t.json :request_headers
       t.json :request_body
 
@@ -18,7 +19,7 @@ class CreateRmp < ActiveRecord::Migration[6.1]
     end
 
     create_table :rmp_traces do |t|
-      t.references :rmp_profiled_requests, null: false, foreign_key: true
+      t.belongs_to :rmp_profiled_request, null: false, foreign_key: true
       t.datetime :start
       t.datetime :finish
       t.integer :duration

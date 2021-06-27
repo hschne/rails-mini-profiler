@@ -9,5 +9,9 @@ module RailsMiniProfiler
       @headers = headers
       @response = response
     end
+
+    def body
+      response&.body || {}
+    end
   end
 end

@@ -2,10 +2,7 @@
 
 module RailsMiniProfiler
   module Models
-    class ProfiledRequest
-      include ActiveModel::Model
-      include ActiveModel::Serialization
-
+    class ProfiledRequest < BaseModel
       attr_accessor :id,
                     :user_id,
                     :start,
@@ -22,7 +19,7 @@ module RailsMiniProfiler
                     :traces
 
       def initialize(**kwargs)
-        kwargs.each { |key, value| instance_variable_set("@#{key}", value) }
+        super(**kwargs)
         @traces ||= []
       end
 
@@ -33,7 +30,7 @@ module RailsMiniProfiler
       end
 
       def response=(response)
-        @response_body = response.response.body
+        @response_body = response.body
         @response_headers = response.headers
         @response_status = response.status
       end

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
+require 'active_record/errors'
+
 module RailsMiniProfiler
   module Storage
     class ActiveRecordStore < RecordStore
       def initialize(record_type, configuration = nil)
         super
-        key = "#{record_type.name.demodulize.underscore}_table"
-        table = @storage_options.public_send(key)
-        @record_class = clazz.demodulize
+        @record_class = "#{RailsMiniProfiler}::#{record_type.to_s.demodulize}".constantize
       end
 
       def all
@@ -46,7 +46,7 @@ module RailsMiniProfiler
 
       def find_record(id)
         @record_class.find(id)
-      rescue ActiveRecord::RecordNotFound
+      rescue ::ActiveRecord::RecordNotFound
         raise(RecordNotFound, "Record with id='#{id}' not found")
       end
     end

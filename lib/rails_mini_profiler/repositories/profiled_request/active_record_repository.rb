@@ -7,6 +7,7 @@ module RailsMiniProfiler
         def initialize(user)
           super
           @request_store = Storage::ActiveRecordStore.new(ProfiledRequest)
+          @trace_store = Storage::ActiveRecordStore.new(Trace)
           @storage_limit = RailsMiniProfiler.storage_configuration.max_size
         end
 
@@ -23,7 +24,10 @@ module RailsMiniProfiler
         end
 
         def create(request)
-          @request_store.create(request)
+          ActiveRecord::Base.transaction do
+            request.traces.each { |trace| @trace_store.create(trace) }
+            @request_store.create(request)
+          end
         end
 
         def update(request)

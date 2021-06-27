@@ -2,9 +2,7 @@
 
 module RailsMiniProfiler
   module Models
-    class Flamegraph
-      include ActiveModel::Model
-
+    class Flamegraph < BaseModel
       attr_reader :data
     end
   end
