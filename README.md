@@ -37,6 +37,14 @@ dead simple to use.
 
 ### Configuration
 
+## Development
+
+To annotate models run 
+
+```
+bundle exec annotate --models --exclude tests,fixtures
+```
+
 ## Contributing
 Contribution directions go here.
 

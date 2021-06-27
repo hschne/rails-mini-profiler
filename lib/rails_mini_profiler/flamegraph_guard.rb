@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  class Flamegraph
+  class FlamegraphGuard
     def initialize(request)
       @request = request
     end

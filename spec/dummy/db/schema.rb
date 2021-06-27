@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 2021_06_21_185018) do
     t.date "release_date"
   end
 
+  create_table "rmp_flamegraphs", force: :cascade do |t|
+    t.integer "rmp_profiled_request_id", null: false
+    t.json "data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["rmp_profiled_request_id"], name: "index_rmp_flamegraphs_on_rmp_profiled_request_id"
+  end
+
   create_table "rmp_profiled_requests", force: :cascade do |t|
     t.string "user_id"
     t.datetime "start"
@@ -39,6 +47,7 @@ ActiveRecord::Schema.define(version: 2021_06_21_185018) do
 
   create_table "rmp_traces", force: :cascade do |t|
     t.integer "rmp_profiled_request_id", null: false
+    t.string "name"
     t.datetime "start"
     t.datetime "finish"
     t.integer "duration"
@@ -50,5 +59,6 @@ ActiveRecord::Schema.define(version: 2021_06_21_185018) do
     t.index ["rmp_profiled_request_id"], name: "index_rmp_traces_on_rmp_profiled_request_id"
   end
 
+  add_foreign_key "rmp_flamegraphs", "rmp_profiled_requests"
   add_foreign_key "rmp_traces", "rmp_profiled_requests"
 end

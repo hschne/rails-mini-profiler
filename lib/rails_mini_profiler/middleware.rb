@@ -9,7 +9,7 @@ module RailsMiniProfiler
     end
 
     def call(env)
-      request = Request.new(env)
+      request = RequestWrapper.new(env)
       request_context = RequestContext.new(@context, request)
       return @app.call(env) unless Guard.new(request_context).profile?
 
@@ -62,7 +62,7 @@ module RailsMiniProfiler
 
     def profile(request)
       ActiveSupport::Notifications.instrument('rails_mini_profiler.total_time') do
-        Flamegraph.new(request).record(profiled_request) { @app.call(request.env) }
+        FlamegraphGuard.new(request).record(profiled_request) { @app.call(request.env) }
       end
     end
   end

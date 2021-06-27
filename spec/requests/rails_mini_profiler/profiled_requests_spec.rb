@@ -4,11 +4,13 @@ require 'rails_helper'
 
 module RailsMiniProfiler
   RSpec.describe '/profiled_requests', type: :request do
-    let(:user) { '127.0.0.1' }
+    let(:user_id) { '127.0.0.1' }
 
     let(:context) { RailsMiniProfiler.context }
-    let(:repository) { Repositories::ProfiledRequestRepository.create_repository(user) }
-    let(:profiled_request) { Models::ProfiledRequest.new(request: Request.new, response: ResponseWrapper.new) }
+    let(:repository) { Repositories::ProfiledRequestRepository.create_repository(user_id) }
+    let(:profiled_request) do
+      Models::ProfiledRequest.new(user_id: user_id, request: RequestWrapper.new, response: ResponseWrapper.new)
+    end
     let(:stored_request) { repository.create(profiled_request) }
 
     where(case_names: ->(a) { "in #{a.to_sym}" }, storage: [Storage::Memory, Storage::ActiveRecord])
@@ -18,6 +20,10 @@ module RailsMiniProfiler
     let(:storage) { Storage::ActiveRecord }
     before do
       RailsMiniProfiler.configure { |configuration| configuration.storage = storage }
+    end
+
+    after do
+      RailsMiniProfiler.configure { |configuration| configuration.storage = Storage::Memory }
     end
 
     describe 'GET /index' do

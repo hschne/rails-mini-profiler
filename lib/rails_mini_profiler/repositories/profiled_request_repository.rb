@@ -11,7 +11,7 @@ module RailsMiniProfiler
         def create_repository(user_id)
           storage = RailsMiniProfiler.configuration.storage
           storage_type = storage.name.demodulize
-          clazz = "#{module_parent}::ProfiledRequest::#{storage_type}Repository".constantize
+          clazz = "#{module_parent}::#{storage_type}::ProfiledRequestRepository".constantize
           return clazz.new(user_id) unless storage.to_sym == :memory
 
           # For the memory storage its just simpler to retain a repository per user in memory. Each user keeps their own
@@ -22,7 +22,6 @@ module RailsMiniProfiler
       end
 
       def initialize(user_id)
-        @request_store = Storage::RecordStore.get(ProfiledRequest)
         @user_id = user_id
       end
 

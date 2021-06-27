@@ -20,12 +20,20 @@ class CreateRmp < ActiveRecord::Migration[6.1]
 
     create_table :rmp_traces do |t|
       t.belongs_to :rmp_profiled_request, null: false, foreign_key: true
+      t.string :name
       t.datetime :start
       t.datetime :finish
       t.integer :duration
       t.integer :allocations
       t.json :payload
       t.json :backtrace
+
+      t.timestamps
+    end
+
+    create_table :rmp_flamegraphs do |t|
+      t.belongs_to :rmp_profiled_request, null: false, foreign_key: true
+      t.json :data
 
       t.timestamps
     end

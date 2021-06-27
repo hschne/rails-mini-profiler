@@ -7,7 +7,7 @@ module RailsMiniProfiler
     before_action :set_profiled_request, only: %i[show destroy]
 
     def index
-      @profiled_requests = repository.find_by
+      @profiled_requests = repository.all
     end
 
     def show; end

@@ -258,6 +258,7 @@ DEPENDENCIES
   annotate
   guard-livereload (~> 2.5)
   mock_redis
+  pry
   puma (~> 5.2)
   rails-mini-profiler!
   rspec-parameterized

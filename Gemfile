@@ -13,18 +13,18 @@ group :development do
   gem 'rspec-rails', '~> 4.0'
   gem 'rubocop', '~> 1.7'
   gem 'sqlite3', '~> 1.4'
-  gem 'stackprof'
 end
 
 group :test, :development do
   gem 'activerecord-import'
+  gem 'pry'
+  gem 'stackprof'
 end
 
 group :test do
   gem 'mock_redis'
-  gem 'simplecov'
   gem 'rspec-parameterized'
+  gem 'simplecov'
 end
 
 # To use a debugger
-# gem 'byebug', group: [:development, :test]

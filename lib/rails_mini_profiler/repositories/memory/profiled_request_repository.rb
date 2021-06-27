@@ -2,12 +2,11 @@
 
 module RailsMiniProfiler
   module Repositories
-    module ProfiledRequest
-      class ActiveRecordRepository < ProfiledRequestRepository
+    module Memory
+      class ProfiledRequestRepository < Repositories::ProfiledRequestRepository
         def initialize(user)
           super
-          @request_store = Storage::ActiveRecordStore.new(ProfiledRequest)
-          @trace_store = Storage::ActiveRecordStore.new(Trace)
+          @request_store = Storage::MemoryStore.new(ProfiledRequest)
           @storage_limit = RailsMiniProfiler.storage_configuration.max_size
         end
 
@@ -20,14 +19,11 @@ module RailsMiniProfiler
         end
 
         def find_by(**kwargs)
-          all.where(**kwargs)
+          all.select { |record| kwargs.all? { |k, v| record.public_send(k) == v } }
         end
 
         def create(request)
-          ActiveRecord::Base.transaction do
-            request.traces.each { |trace| @trace_store.create(trace) }
-            @request_store.create(request)
-          end
+          @request_store.create(request)
         end
 
         def update(request)
@@ -39,7 +35,7 @@ module RailsMiniProfiler
         end
 
         def clear
-          all.destroy_all
+          @request_store.clear
         end
       end
     end

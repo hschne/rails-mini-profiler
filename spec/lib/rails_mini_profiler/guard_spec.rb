@@ -5,7 +5,7 @@ require 'rails_helper'
 module RailsMiniProfiler
   RSpec.describe Guard do
     describe 'profile?' do
-      let(:request) { Request.new({}) }
+      let(:request) { RequestWrapper.new({}) }
       let(:configuration) { Configuration.new }
       let(:profiler_context) { ProfilerContext.new(configuration) }
       let(:request_context) { RequestContext.new(profiler_context, request) }
@@ -17,25 +17,25 @@ module RailsMiniProfiler
       end
 
       context 'with path' do
-        let(:request) { Request.new('REQUEST_PATH' => '/') }
+        let(:request) { RequestWrapper.new('PATH_INFO' => '/') }
 
         it('should be true') { expect(subject.profile?).to be(true) }
       end
 
       context 'with profiler mount path' do
-        let(:request) { Request.new('REQUEST_PATH' => "/#{Engine.routes.find_script_name({})}/1") }
+        let(:request) { RequestWrapper.new('PATH_INFO' => "/#{Engine.routes.find_script_name({})}/1") }
 
         it('should be false') { expect(subject.profile?).to be(false) }
       end
 
       context 'with no ignored path' do
-        let(:request) { Request.new('REQUEST_PATH' => '/ignored') }
+        let(:request) { RequestWrapper.new('PATH_INFO' => '/ignored') }
 
         it('should be true') { expect(subject.profile?).to be(true) }
       end
 
       context 'with ignored path match' do
-        let(:request) { Request.new('REQUEST_PATH' => '/ignored') }
+        let(:request) { RequestWrapper.new('PATH_INFO' => '/ignored') }
 
         it('should be false') do
           configuration.skip_paths = [/ignored/]

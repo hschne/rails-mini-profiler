@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  class Request
+  class RequestWrapper
     attr_reader :env
 
     def initialize(env = {})
@@ -21,7 +21,8 @@ module RailsMiniProfiler
     end
 
     def path
-      @env['REQUEST_PATH']
+      # Some requests do not have request path set, we fall back to path info
+      @env['PATH_INFO']
     end
 
     def body
