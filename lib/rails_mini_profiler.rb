@@ -14,6 +14,7 @@ require 'rails_mini_profiler/request_context'
 require 'rails_mini_profiler/models/base_model'
 require 'rails_mini_profiler/models/profiled_request'
 require 'rails_mini_profiler/models/trace'
+require 'rails_mini_profiler/models/flamegraph'
 
 require 'rails_mini_profiler/storage/base_storage'
 require 'rails_mini_profiler/storage/active_record'

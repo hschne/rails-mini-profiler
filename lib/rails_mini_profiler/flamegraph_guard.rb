@@ -13,7 +13,7 @@ module RailsMiniProfiler
       flamegraph = StackProf.run(mode: :wall, raw: true, aggregate: false, interval: (2 * 1000).to_i) do
         result = block.call
       end
-      profiled_request.flamegraph = flamegraph
+      profiled_request.flamegraph = Models::Flamegraph.new(flamegraph)
       result
     end
 

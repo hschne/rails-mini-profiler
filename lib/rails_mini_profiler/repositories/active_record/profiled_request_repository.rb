@@ -24,10 +24,12 @@ module RailsMiniProfiler
                          .except('traces', 'flamegraph')
                          .merge(user_id: @user_id)
           profiled_request.assign_attributes(attributes)
-          request.traces
-            .each { |trace| profiled_request.traces.build(profiled_request: profiled_request, **trace.to_h) }
-          profiled_request.flamegraph = Flamegraph.new(profiled_request: profiled_request,
-                                                       data: request.flamegraph.to_json)
+          if request.flamegraph
+            profiled_request.flamegraph = Flamegraph.new(profiled_request: profiled_request, data: request.flamegraph.data)
+          end
+          request.traces.each do |trace|
+            profiled_request.traces.build(profiled_request: profiled_request, **trace.to_h)
+          end
           profiled_request.save!
           profiled_request
         end

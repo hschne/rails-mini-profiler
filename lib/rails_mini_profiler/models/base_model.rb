@@ -5,7 +5,7 @@ module RailsMiniProfiler
     class BaseModel
       include ActiveModel::Model
 
-      def initialize(**attributes)
+      def initialize(*_args, **attributes)
         super(attributes)
       end
 

@@ -13,7 +13,8 @@ module RailsMiniProfiler
     private
 
     def set_flamegraph
-      @flamegraph_guard = JSON.generate(repository.find(params[:id]).flamegraph)
+      # TODO: Fix request without flamegraph
+      @flamegraph = JSON.generate(repository.find(params[:id]).flamegraph.data)
     end
 
     def configuration
