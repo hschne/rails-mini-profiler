@@ -22,7 +22,7 @@ Metrics/MethodLength:
 
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'context']
-  Exclude: ['**/*.rake']
+  Exclude: ['**/*.rake', '**/*_spec.rb']
 
 Style/StringLiterals:
   Enabled: true
