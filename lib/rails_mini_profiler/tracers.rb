@@ -22,9 +22,9 @@ module RailsMiniProfiler
           ActiveSupport::Notifications.monotonic_subscribe(subscription) do |event|
             trace = Models::Trace.new(
               name: event.name,
-              start: event.time.to_f,
-              finish: event.end.to_f,
-              duration: event.duration.to_f.round(2),
+              start: event.time.to_f * 1000,
+              finish: event.end.to_f * 1000,
+              duration: event.duration.to_f.round,
               allocations: event.allocations,
               backtrace: Rails.backtrace_cleaner.clean(caller),
               payload: event.payload

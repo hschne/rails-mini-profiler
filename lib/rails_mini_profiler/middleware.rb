@@ -13,17 +13,14 @@ module RailsMiniProfiler
       request_context = RequestContext.new(@context, request)
       return @app.call(env) unless Guard.new(request_context).profile?
 
-      self.profiled_request = Models::ProfiledRequest.new
-      profiled_request.request = request
-      result = profile(request)
-      return result if request_context.authorized?
+      result = with_profiled_request(request_context) { profile(request) }
+      request_context.set_default_user!
+      return result unless request_context.authorized?
 
       request_context.response = ResponseWrapper.new(*result)
       save_request(request_context)
 
-      result = render_response(request_context)
-      self.profiled_request = nil
-      result
+      render_response(request_context)
     end
 
     def profiled_request
@@ -43,6 +40,7 @@ module RailsMiniProfiler
     private
 
     def save_request(request_context)
+      profiled_request = request_context.profiled_request
       profiled_request.response = request_context.response
       profiled_request.user_id = request_context.user_id
       profiled_request.complete!
@@ -64,6 +62,15 @@ module RailsMiniProfiler
       ActiveSupport::Notifications.instrument('rails_mini_profiler.total_time') do
         FlamegraphGuard.new(request).record(profiled_request) { @app.call(request.env) }
       end
+    end
+
+    def with_profiled_request(request_context)
+      self.profiled_request = Models::ProfiledRequest.new
+      profiled_request.request = request_context.request
+      request_context.profiled_request = profiled_request
+      result = yield
+      self.profiled_request = nil
+      result
     end
   end
 end

@@ -27,6 +27,9 @@
         <%= link_to(flamegraph_path(profiled_request.id), title: 'Show Flamegraph') do %>
           <%= inline_svg_tag('rails_mini_profiler/graph.svg', options = {}) %>
         <% end %>
+        <%= link_to(profiled_request_path(profiled_request.id), title: 'Show Details', method: :delete) do %>
+          <%= inline_svg_tag('rails_mini_profiler/delete.svg', options = {}) %>
+        <% end %>
       </td>
     </tr>
   <% end %>

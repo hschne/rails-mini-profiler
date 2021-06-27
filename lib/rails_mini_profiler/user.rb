@@ -6,6 +6,10 @@ module RailsMiniProfiler
       Thread.current[:rails_mini_profiler_current_user]
     end
 
+    def self.authorize(user)
+      Thread.current[:rails_mini_profiler_current_user] = user
+    end
+
     def self.current_user=(user)
       Thread.current[:rails_mini_profiler_current_user] = user
     end

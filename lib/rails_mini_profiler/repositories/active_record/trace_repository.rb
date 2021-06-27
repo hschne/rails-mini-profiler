@@ -2,35 +2,19 @@
 
 module RailsMiniProfiler
   module Repositories
-    module Trace
+    module ActiveRecord
       class TraceRepository < Repositories::TraceRepository
-        def initialize
+        def initialize(request_id)
           super
           @record = RailsMiniProfiler::Trace
         end
 
-        def all
-          @record.all
-        end
-
-        def find(id)
-          all.find(id)
-        end
-
-        def find_by(**kwargs)
-          all.where(**kwargs)
-        end
-
-        def create(trace)
-          @record.create(trace.to_h)
-        end
-
-        def destroy(request_id)
-          find(request_id).destroy(request_id)
-        end
-
-        def clear
-          all.destroy_all
+        def insert_all(records)
+          timestamp = ::ActiveRecord::Base.default_timezone == :utc ? Time.now.utc : Time.now
+          inserts = records.map do |record|
+            { rmp_profiled_request_id: @request_id, **record.to_h, created_at: timestamp, updated_at: timestamp }
+          end
+          @record.insert_all(inserts)
         end
       end
     end

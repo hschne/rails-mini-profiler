@@ -13,12 +13,20 @@ module RailsMiniProfiler
     end
 
     def user_id
-      # If the user was explicitly set during the request use that, else fall back to ID provided by the user provider
-      @user_id ||= (User.current_user || @profiler_context.configuration.user_provider.call(@env))
+      @user_id ||= User.current_user
     end
 
     def authorized?
-      @authorized ||= (@profiler_context.configuration.authorize.call(@env) && Authorization.authorized?)
+      @authorized ||= User.current_user.present?
+    end
+
+    def set_default_user!
+      return unless Rails.env.development? || Rails.env.test?
+
+      return if User.current_user
+
+      user = @profiler_context.configuration.user_provider.call(@env)
+      User.current_user = user
     end
   end
 end

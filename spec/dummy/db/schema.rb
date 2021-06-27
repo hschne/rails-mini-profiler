@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 2021_06_21_185018) do
 
   create_table "rmp_profiled_requests", force: :cascade do |t|
     t.string "user_id"
-    t.datetime "start"
-    t.datetime "finish"
+    t.integer "start"
+    t.integer "finish"
     t.integer "duration"
     t.integer "allocations"
     t.integer "response_status"
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 2021_06_21_185018) do
   create_table "rmp_traces", force: :cascade do |t|
     t.integer "rmp_profiled_request_id", null: false
     t.string "name"
-    t.datetime "start"
-    t.datetime "finish"
+    t.integer "start"
+    t.integer "finish"
     t.integer "duration"
     t.integer "allocations"
     t.json "payload"

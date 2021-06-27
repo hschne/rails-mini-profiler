@@ -16,8 +16,7 @@ module RailsMiniProfiler
     end
 
     def reset
-      @authorize = proc { |_env| !(Rails.env.development? || Rails.env.test?) }
-      @enabled = proc { |_env| !(Rails.env.development? || Rails.env.test?) }
+      @enabled = proc { |_env| Rails.env.development? || Rails.env.test? }
       @flamegraph_enabled = true
       @skip_paths = []
       @storage = Storage::Memory

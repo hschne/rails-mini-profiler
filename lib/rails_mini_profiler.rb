@@ -7,7 +7,6 @@ require 'rails_mini_profiler/engine'
 
 require 'rails_mini_profiler/errors'
 
-require 'rails_mini_profiler/authorization'
 require 'rails_mini_profiler/user'
 require 'rails_mini_profiler/request_context'
 
@@ -58,9 +57,8 @@ module RailsMiniProfiler
       @context ||= ProfilerContext.instance(configuration)
     end
 
-    # TODO: Merge authorize with setting current user
-    def authorize!
-      RailsMiniProfiler::Authorization.authorize!
+    def authorize!(current_user)
+      RailsMiniProfiler::User.current_user = current_user
     end
 
     def current_user=(current_user)

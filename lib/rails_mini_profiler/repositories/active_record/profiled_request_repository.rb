@@ -4,6 +4,10 @@ module RailsMiniProfiler
   module Repositories
     module ActiveRecord
       class ProfiledRequestRepository < Repositories::ProfiledRequestRepository
+        def initialize(user_id)
+          super
+        end
+
         def all
           RailsMiniProfiler::ProfiledRequest.where(user_id: @user_id)
         end
@@ -19,19 +23,15 @@ module RailsMiniProfiler
         end
 
         def create(request)
-          profiled_request = RailsMiniProfiler::ProfiledRequest.new
-          attributes = request.to_h
-                         .except('traces', 'flamegraph')
-                         .merge(user_id: @user_id)
-          profiled_request.assign_attributes(attributes)
-          if request.flamegraph
-            profiled_request.flamegraph = Flamegraph.new(profiled_request: profiled_request, data: request.flamegraph.data)
+          ::ActiveRecord::Base.transaction do
+            attributes = request.to_h
+                           .except('traces', 'flamegraph')
+                           .merge(user_id: @user_id)
+            profiled_request = ProfiledRequest.create(attributes)
+            Flamegraph.create(profiled_request: profiled_request, data: request.flamegraph.data)
+            ActiveRecord::TraceRepository.new(profiled_request.id).insert_all(request.traces)
+            profiled_request
           end
-          request.traces.each do |trace|
-            profiled_request.traces.build(profiled_request: profiled_request, **trace.to_h)
-          end
-          profiled_request.save!
-          profiled_request
         end
 
         def update(request)
@@ -44,12 +44,6 @@ module RailsMiniProfiler
 
         def clear
           all.destroy_all
-        end
-
-        private
-
-        def trace_repository(request_id)
-          @trace_repository ||= TraceRepository.get(request_id)
         end
       end
     end
