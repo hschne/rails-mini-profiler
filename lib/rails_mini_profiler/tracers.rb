@@ -20,11 +20,13 @@ module RailsMiniProfiler
       def subscribe(*subscriptions, &callback)
         subscriptions.each do |subscription|
           ActiveSupport::Notifications.monotonic_subscribe(subscription) do |event|
+            start = (event.time.to_f * 100_000).to_i
+            finish = (event.end.to_f * 100_000).to_i
             trace = Models::Trace.new(
               name: event.name,
-              start: event.time.to_f * 1000,
-              finish: event.end.to_f * 1000,
-              duration: event.duration.to_f.round,
+              start: start,
+              finish: finish,
+              duration: finish - start,
               allocations: event.allocations,
               backtrace: Rails.backtrace_cleaner.clean(caller),
               payload: event.payload
