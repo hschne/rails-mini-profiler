@@ -6,8 +6,8 @@ module RailsMiniProfiler
       attr_accessor :data
 
       def initialize(flamegraph)
-       data = flamegraph.to_json || {}
-       super(data: data)
+        data = flamegraph.to_json
+        super(data: data)
       end
     end
   end

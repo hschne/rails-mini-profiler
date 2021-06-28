@@ -13,15 +13,11 @@ module RailsMiniProfiler
     end
     let(:stored_request) { repository.create(profiled_request) }
 
-    where(case_names: ->(a) { "in #{a.to_sym}" }, storage: [Storage::Memory, Storage::ActiveRecord])
+    where(case_names: ->(a) { "in #{a.to_sym}" }, storage: [Storage::ActiveRecord])
 
     with_them do
       before do
         RailsMiniProfiler.configure { |configuration| configuration.storage = storage }
-      end
-
-      after do
-        RailsMiniProfiler.configure { |configuration| configuration.storage = Storage::Memory }
       end
 
       describe 'GET /index' do

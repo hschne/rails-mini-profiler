@@ -9,7 +9,7 @@ module RailsMiniProfiler
     let(:context) { RailsMiniProfiler.context }
     let(:repository) { Repositories::ProfiledRequestRepository.create_repository(user) }
 
-    let(:profiled_request) { Models::ProfiledRequest.new(flamegraph: Models::Flamegraph.new) }
+    let(:profiled_request) { Models::ProfiledRequest.new(flamegraph: Models::Flamegraph.new({})) }
     let(:stored_request) { repository.create(profiled_request) }
 
     describe 'GET /show' do

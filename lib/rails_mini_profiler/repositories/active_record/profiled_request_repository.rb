@@ -20,13 +20,7 @@ module RailsMiniProfiler
 
         def create(request)
           ::ActiveRecord::Base.transaction do
-            attributes = request.to_h
-                           .except('traces', 'flamegraph')
-                           .merge(user_id: @user_id)
-            profiled_request = ProfiledRequest.create(attributes)
-            Flamegraph.create(profiled_request: profiled_request, data: request.flamegraph.data)
-            ActiveRecord::TraceRepository.new(profiled_request.id).insert_all(request.traces)
-            profiled_request
+            save_request(request)
           end
         end
 
@@ -40,6 +34,20 @@ module RailsMiniProfiler
 
         def clear
           all.destroy_all
+        end
+
+        private
+
+        def save_request(request)
+          attributes = request.to_h
+                         .except('traces', 'flamegraph')
+                         .merge(user_id: @user_id)
+          profiled_request = ProfiledRequest.create(attributes)
+          if profiled_request.flamegraph
+            Flamegraph.create(profiled_request: profiled_request, data: request.flamegraph.data)
+          end
+          ActiveRecord::TraceRepository.new(profiled_request.id).insert_all(request.traces) unless request.traces.empty?
+          profiled_request
         end
       end
     end

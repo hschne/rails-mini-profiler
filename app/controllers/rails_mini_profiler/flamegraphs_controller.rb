@@ -14,7 +14,7 @@ module RailsMiniProfiler
 
     def set_flamegraph
       # TODO: Fix request without flamegraph
-      @flamegraph =repository.find(params[:id]).flamegraph.data
+      @flamegraph = repository.find(params[:id]).flamegraph&.data || {}.to_json
     end
 
     def configuration
