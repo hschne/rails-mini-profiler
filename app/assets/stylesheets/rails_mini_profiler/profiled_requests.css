@@ -16,6 +16,26 @@ main {
   width: var(--main-width);
 }
 
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 450px;
+}
+
+.placeholder-image {
+  height: 30%;
+  width: 30%;
+  -webkit-filter: grayscale(1);
+}
+
+.placeholder-text {
+  text-align: center;
+  color: var(--grey-400);
+}
+
 .table {
   width: 100%;
   /* Hack to get table row borders, see https://stackoverflow.com/a/2586780/2553104 */

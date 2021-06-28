@@ -4,10 +4,6 @@ module RailsMiniProfiler
   module Repositories
     module ActiveRecord
       class ProfiledRequestRepository < Repositories::ProfiledRequestRepository
-        def initialize(user_id)
-          super
-        end
-
         def all
           RailsMiniProfiler::ProfiledRequest.where(user_id: @user_id)
         end

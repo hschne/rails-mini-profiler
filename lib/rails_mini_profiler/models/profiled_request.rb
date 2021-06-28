@@ -16,7 +16,8 @@ module RailsMiniProfiler
                     :request_body,
                     :request_path,
                     :flamegraph,
-                    :traces
+                    :traces,
+                    :created_at
 
       def initialize(**kwargs)
         super(**kwargs)
@@ -37,11 +38,12 @@ module RailsMiniProfiler
 
       def complete!
         total_time = traces.find { |trace| trace.name == 'rails_mini_profiler.total_time' }
-        traces.delete_at(0)
+        traces.delete(total_time)
         @start = total_time.start
         @finish = total_time.finish
         @duration = total_time.duration
         @allocations = total_time.allocations
+        @created_at = Time.zone.now
       end
     end
   end

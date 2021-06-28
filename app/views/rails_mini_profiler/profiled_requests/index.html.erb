@@ -1,39 +1,48 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Profiled Requests</h1>
-
-<table class="table">
-  <thead>
-  <tr>
-    <th class="text-left">Path</th>
-    <th class="text-left">Status</th>
-    <th class="text-left">Response</th>
-    <th class="text-right">Duration</th>
-    <th class="text-left"></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @profiled_requests.each do |profiled_request| %>
+<% if @profiled_requests.empty? %>
+  <section class="placeholder">
+    <%= inline_svg_tag('rails_mini_profiler/logo', class: 'placeholder-image') %>
+    <div class="placeholder-text">
+      <h2> There is nothing here yet! </h2>
+      <p>Send some requests to your app for them to show up here</p>
+    </div>
+  </section>
+<% else %>
+  <h1>Profiled Requests</h1>
+  <table class="table">
+    <thead>
     <tr>
-      <td class="request-path"><%= profiled_request.request_path %></td>
-      <td><%= profiled_request.response_status %></td>
-      <td>json</td>
-      <td class="text-right"><%= (profiled_request.duration / 100) %> ms</td>
-      <td class="request-buttons">
-        <%= link_to(profiled_request_path(profiled_request.id), title: 'Show Details') do %>
-          <%= inline_svg_tag('rails_mini_profiler/show.svg', options = {}) %>
-        <% end %>
-        <%= link_to(flamegraph_path(profiled_request.id), title: 'Show Flamegraph') do %>
-          <%= inline_svg_tag('rails_mini_profiler/graph.svg', options = {}) %>
-        <% end %>
-        <%= link_to(profiled_request_path(profiled_request.id), title: 'Show Details', method: :delete) do %>
-          <%= inline_svg_tag('rails_mini_profiler/delete.svg', options = {}) %>
-        <% end %>
-      </td>
+      <th class="text-left">Path</th>
+      <th class="text-left">Status</th>
+      <th class="text-left">Response</th>
+      <th class="text-right">Duration</th>
+      <th class="text-left"></th>
+      <th class="text-left"></th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+    <% @profiled_requests.each do |profiled_request| %>
+      <tr>
+        <td class="request-path"><%= profiled_request.request_path %></td>
+        <td><%= profiled_request.response_status %></td>
+        <td>json</td>
+        <td class="text-right"><%= (profiled_request.duration / 100) %> ms</td>
+        <td class=""><%= time_tag(profiled_request.created_at.in_time_zone(Time.zone)) %></td>
+        <td class="request-buttons">
+          <%= link_to(profiled_request_path(profiled_request.id), title: 'Show Details') do %>
+            <%= inline_svg_tag('rails_mini_profiler/show.svg', options = {}) %>
+          <% end %>
+          <%= link_to(flamegraph_path(profiled_request.id), title: 'Show Flamegraph') do %>
+            <%= inline_svg_tag('rails_mini_profiler/graph.svg', options = {}) %>
+          <% end %>
+          <%= link_to(profiled_request_path(profiled_request.id), title: 'Show Details', method: :delete) do %>
+            <%= inline_svg_tag('rails_mini_profiler/delete.svg', options = {}) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <br>
+<% end %>

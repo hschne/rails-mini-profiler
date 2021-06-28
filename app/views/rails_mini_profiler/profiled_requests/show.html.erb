@@ -34,13 +34,13 @@
     OpenStruct.new(
       name: trace.name,
       type: trace.name,
-      duration: (trace.duration.to_f / 100).round(2),
-      percent: (trace.duration / @profiled_request.duration * 100).round(2),
+      duration: (trace.duration.to_f / 100),
+      percent: (trace.duration.to_f / @profiled_request.duration.to_f * 100).round,
       fromStart: (trace.start - @profiled_request.start).to_f / 100,
       payload: trace.payload,
       backtrace: trace.backtrace,
       fromStartPercent: ((trace.start - @profiled_request.start) /
-        (@profiled_request.finish - @profiled_request.start)) * 100
+        (@profiled_request.finish - @profiled_request.start)) * 10_000
     )
   end
     steps.shift
