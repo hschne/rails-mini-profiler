@@ -46,8 +46,16 @@ module RailsMiniProfiler
           if profiled_request.flamegraph
             Flamegraph.create(profiled_request: profiled_request, data: request.flamegraph.data)
           end
-          ActiveRecord::TraceRepository.new(profiled_request.id).insert_all(request.traces) unless request.traces.empty?
+          insert_traces(profiled_request.id, request.traces) unless request.traces.empty?
           profiled_request
+        end
+
+        def insert_traces(request_id, records)
+          timestamp = Time.zone.now
+          inserts = records.map do |record|
+            { rmp_profiled_request_id: request_id, **record.to_h, created_at: timestamp, updated_at: timestamp }
+          end
+          Trace.insert_all(inserts)
         end
       end
     end

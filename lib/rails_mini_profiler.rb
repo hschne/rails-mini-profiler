@@ -21,9 +21,7 @@ require 'rails_mini_profiler/storage/memory'
 require 'rails_mini_profiler/storage/memory_store'
 
 require 'rails_mini_profiler/repositories/profiled_request_repository'
-require 'rails_mini_profiler/repositories/trace_repository'
 require 'rails_mini_profiler/repositories/active_record/profiled_request_repository'
-require 'rails_mini_profiler/repositories/active_record/trace_repository'
 require 'rails_mini_profiler/repositories/memory/profiled_request_repository'
 
 require 'rails_mini_profiler/configuration'

@@ -11,7 +11,6 @@
 
 # Next
 
-- Include memory info
 - Parity with rack-profiler (https://github.com/dawanda/rack-profiler)
   - Backtrace filtering
 - Parity with rack-mini-profiler:
