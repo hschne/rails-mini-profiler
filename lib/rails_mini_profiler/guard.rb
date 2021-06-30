@@ -39,6 +39,7 @@ module RailsMiniProfiler
     def enabled?
       return @configuration.enabled unless @configuration.respond_to?(:call)
 
+      # TODO: Use request wrapper here for easy access to headers etc
       @configuration.call(@request.env)
     end
   end
