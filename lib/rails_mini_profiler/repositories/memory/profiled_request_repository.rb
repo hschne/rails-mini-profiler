@@ -4,14 +4,13 @@ module RailsMiniProfiler
   module Repositories
     module Memory
       class ProfiledRequestRepository < Repositories::ProfiledRequestRepository
-        def initialize(user)
-          super
-          @request_store = Storage::MemoryStore.new(ProfiledRequest)
-          @storage_limit = RailsMiniProfiler.storage_configuration.max_size
+        def initialize(user, memory_store = Storage::MemoryStore.get(ProfiledRequest))
+          super(user)
+          @request_store = memory_store
         end
 
         def all
-          @request_store.all
+          @request_store.all.select { |item| item.user_id = @user_id }
         end
 
         def find(id)

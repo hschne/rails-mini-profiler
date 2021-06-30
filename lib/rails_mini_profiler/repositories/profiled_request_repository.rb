@@ -12,12 +12,8 @@ module RailsMiniProfiler
           storage = RailsMiniProfiler.configuration.storage
           storage_type = storage.name.demodulize
           clazz = "#{module_parent}::#{storage_type}::ProfiledRequestRepository".constantize
-          return clazz.new(user_id) unless storage.to_sym == :memory
-
-          # For the memory storage its just simpler to retain a repository per user in memory. Each user keeps their own
-          # records in an individual hash.
           @repositories ||= {}
-          @repositories[user_id] ||= clazz.new(user_id)
+          @repositories[clazz] ||= clazz.new(user_id)
         end
       end
 

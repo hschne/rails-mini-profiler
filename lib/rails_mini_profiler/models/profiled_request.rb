@@ -21,6 +21,8 @@ module RailsMiniProfiler
 
       def initialize(**kwargs)
         super(**kwargs)
+        @duration = 0
+        @created_at = Time.zone.now
         @traces ||= []
       end
 

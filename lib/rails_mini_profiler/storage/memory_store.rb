@@ -2,12 +2,28 @@
 
 module RailsMiniProfiler
   module Storage
-    class MemoryStore < RecordStore
-      def initialize(record_type, configuration = nil)
-        super
+    class MemoryStore
+      class << self
+        def get(record_type)
+          registry[record_type] ||= new
+        end
+
+        def reset
+          registry.each_value(&:clear)
+        end
+
+        private
+
+        def registry
+          @registry ||= {}
+        end
+      end
+
+      def initialize(records = {})
+        super()
         @lock = Mutex.new
-        @id = 1
-        @records = {}
+        @records = records
+        @id = records.size + 1
       end
 
       def all

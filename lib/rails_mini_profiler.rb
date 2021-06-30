@@ -18,8 +18,6 @@ require 'rails_mini_profiler/models/flamegraph'
 require 'rails_mini_profiler/storage/base_storage'
 require 'rails_mini_profiler/storage/active_record'
 require 'rails_mini_profiler/storage/memory'
-
-require 'rails_mini_profiler/storage/record_store'
 require 'rails_mini_profiler/storage/memory_store'
 
 require 'rails_mini_profiler/repositories/profiled_request_repository'
