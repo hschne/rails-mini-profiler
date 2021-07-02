@@ -1,8 +1,6 @@
-# frozen_string_literal: true
-
-task :rails_mini_profiler do
+namespace :rails_mini_profiler do
   desc 'Install rails_mini_profiler'
-  task :setup do
+  task :install do
     system 'rails g rails_mini_profiler:install'
   end
 end

@@ -25,5 +25,11 @@ module RailsMiniProfiler
     initializer 'rails_mini_profiler_add_static assets' do |app|
       app.middleware.insert_before(ActionDispatch::Static, ActionDispatch::Static, "#{root}/public")
     end
+
+    rake_tasks do
+      path = File.expand_path(__dir__)
+      puts path
+      Dir.glob("#{path}/tasks/*.rake").each { |f| load f }
+    end
   end
 end
