@@ -1,0 +1,13 @@
+RailsMiniProfiler.configure do |config|
+  # Customize when Rails Mini Profiler should run
+  # config.enabled = proc { |env| Rails.env.development? || request.headers[RMP_ENABLED].present? }
+
+  # Disable Flamegraph generation
+  # config.flamegraph_enabled = false
+
+  # Use RailsMiniProfiler::Storage::ActiveRecord to store profiles in your Database
+  config.storage = RailsMiniProfiler::Storage::Memory
+
+  # Uncomment to customize how users are detected
+  # config.user_provider = proc { |env| Rack::Request.new(env).ip }
+end

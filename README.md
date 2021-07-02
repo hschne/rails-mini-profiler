@@ -7,31 +7,31 @@
 
 Rails performance profiling, made simple.
 
-## Installation
+## What's this? 
 
-Add this line to your application's Gemfile and install and setup Rails Mini Profiler:
+Rails Mini Profiler is a fully-featured, simple performance profiler for your Rails applications. It is a spiritual successor
+to [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler), aimed at extending it's functionality and
+being dead simple to use.
+
+## Getting Started
+
+Add Rails Mini Profiler to your Gemfile:
 
 ```ruby
 gem 'rails-mini-profiler'
 ```
 
+Install the gem and run the installer:
+
 ```bash
-$ bundle install
+bundle install
+rails rail_mini_profiler:install
 ```
 
-Add the following to your `routes.rb`
-
-```ruby
-mount RailsMiniProfiler::Engine => '/profiler'
-```
+That's it. Start your Rails application and perform some requests. You can either click the little hedgehog 🦔 on the top 
+right or navigate to `/rails_mini_profiler` to view request profiles.
 
 ## Usage
-
-Rails Mini Profiler is a fully-featured, simple performance profiler for your Rails application. It is a spiritual successor
-to [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler), providing additional functionality while being
-dead simple to use.
-
-### 
 
 ### Profiling in Production
 
