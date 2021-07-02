@@ -28,16 +28,16 @@ module RailsMiniProfiler
       end
 
       def request=(request)
-        @request_body = request.body
-        @request_method = request.method
-        @request_path = request.path
-        @request_headers = request.headers
+        @request_body = request.body || ''
+        @request_method = request.method || 'GET'
+        @request_path = request.path || ''
+        @request_headers = request.headers || []
       end
 
       def response=(response)
         @response_body = ''
-        @response_headers = response.headers
-        @response_status = response.status
+        @response_headers = response.headers || ''
+        @response_status = response.status || 200
       end
 
       def complete!
