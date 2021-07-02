@@ -52,14 +52,7 @@ main {
 
 .clear-action button {
   background: var(--red-500);
-  border: none;
-  border-radius: .25rem;
   color: white;
-  padding: 0.5em .5em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 1rem;
 }
 
 .table {
@@ -118,7 +111,6 @@ main {
   padding: 0;
 }
 
-
 .data-item {
   display: flex;
   flex-direction: column;
@@ -154,6 +146,18 @@ main {
 [class*='request-method-delete'] {
   color: white;
   background: var(--red-500) !important;
+}
+
+.request-details-actions {
+  margin: 0;
+  padding: 2em 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flamegraph-button button {
+  background: var(--grey-200);
 }
 
 

@@ -57,6 +57,21 @@ h1 {
   padding: 2rem 0 1rem;
 }
 
+button {
+  border: none;
+  border-radius: .25rem;
+  padding: 0.5em .5em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+ box-shadow: 0 .25rem .25rem 0 var(--grey-50);
+}
+
 /* --------------------------------------- */
 
 .text-left {

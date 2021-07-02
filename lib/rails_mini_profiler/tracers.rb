@@ -39,20 +39,23 @@ module RailsMiniProfiler
       def format_payload(event)
         case event.name
         when 'sql.active_record'
-          payload = event.payload.slice(:name, :sql, :binds, :type_casted_binds)
-          payload[:binds] = transform_binds(payload[:binds], payload[:type_casted_binds])
-          payload.delete(:type_casted_binds)
-          payload.reject { |_k, v| v.blank? }
+          transform_sql_event(event)
         when 'render_template.action_view', 'render_partial.action_view'
           event.payload.slice(:identifier, :count)
         when 'process_action.action_controller'
-          payload = event.payload
-                      .slice(:view_runtime, :db_runtime)
-                      .transform_values { |value| value&.round(2) }
-          payload.reject { |_k, v| v.blank? }
+          transform_controller_event(event)
         else
           {}
         end
+      end
+
+      private
+
+      def transform_sql_event(event)
+        payload = event.payload.slice(:name, :sql, :binds, :type_casted_binds)
+        payload[:binds] = transform_binds(payload[:binds], payload[:type_casted_binds])
+        payload.delete(:type_casted_binds)
+        payload.reject { |_k, v| v.blank? }
       end
 
       def transform_binds(binds, type_casted_binds)
@@ -61,6 +64,13 @@ module RailsMiniProfiler
           value = type_casted_binds[i]
           object << { name: name, value: value }
         end
+      end
+
+      def transform_controller_event(event)
+        payload = event.payload
+                    .slice(:view_runtime, :db_runtime)
+                    .transform_values { |value| value&.round(2) }
+        payload.reject { |_k, v| v.blank? }
       end
     end
   end

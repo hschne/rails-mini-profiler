@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 module RailsMiniProfiler
   class Engine < ::Rails::Engine
     isolate_namespace RailsMiniProfiler
