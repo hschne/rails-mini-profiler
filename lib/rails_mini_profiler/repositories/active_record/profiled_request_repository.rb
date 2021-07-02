@@ -5,7 +5,9 @@ module RailsMiniProfiler
     module ActiveRecord
       class ProfiledRequestRepository < Repositories::ProfiledRequestRepository
         def all
-          RailsMiniProfiler::ProfiledRequest.where(user_id: @user_id)
+          RailsMiniProfiler::ProfiledRequest
+            .where(user_id: @user_id)
+            .order(id: :desc)
         end
 
         def find(id)

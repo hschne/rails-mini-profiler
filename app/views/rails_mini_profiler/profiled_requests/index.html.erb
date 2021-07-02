@@ -12,7 +12,7 @@
     <%= link_to(destroy_all_profiled_requests_url,
                 method: :delete,
                 class: 'clear-action',
-                data: {confirm: "This will delete all non-pinned requests. Are you sure?"}) do %>
+                data: { confirm: "This will delete all non-pinned requests. Are you sure?" }) do %>
       <button class="clear-action-button">Clear Requests</button>
     <% end %>
   </div>
@@ -20,6 +20,7 @@
     <thead>
     <tr>
       <th class="text-left">Path</th>
+      <th class="text-left">Method</th>
       <th class="text-left">Status</th>
       <th class="text-left">Response</th>
       <th class="text-right">Duration</th>
@@ -32,7 +33,8 @@
     <% @profiled_requests.each do |profiled_request| %>
       <tr>
         <td class="request-path"><%= profiled_request.request_path %></td>
-        <td><%= profiled_request.response_status %></td>
+        <td> <%= profiled_request.request_method %> </td>
+        <td> <%= profiled_request.response_status %> </td>
         <td>json</td>
         <td class="text-right"><%= (profiled_request.duration / 100) %> ms</td>
         <td class=""><%= time_tag(profiled_request.created_at.in_time_zone(Time.zone)) %></td>

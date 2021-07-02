@@ -10,7 +10,9 @@ module RailsMiniProfiler
         end
 
         def all
-          @request_store.all.select { |item| item.user_id = @user_id }
+          @request_store.all
+            .select { |item| item.user_id = @user_id }
+            .reverse
         end
 
         def find(id)

@@ -4,7 +4,6 @@
 */
 
 
-
 main {
   width: 100%;
 
@@ -53,10 +52,6 @@ main {
   text-decoration: none;
   display: inline-block;
   font-size: 1rem;
-}
-
-.clear-action button:hover {
-  background: var(--red-600);
 }
 
 .table {
@@ -134,31 +129,27 @@ main {
   margin: .25rem 0;
 }
 
-.data-item .request-status {
-  margin: .2rem 0;
-  padding: .1rem .4rem;
-  border-radius: 5px;
-
-  font-size: .9rem;
-  font-weight: 600;
-  letter-spacing: .1rem;
-
-  background: var(--grey-200);
-}
-
-.data-item [class^='request-status request-status-2'] {
+[class*='request-status-2'],
+[class*='request-method-get'] {
   color: white;
-  background: var(--green-400);
+  background: var(--green-400) !important;
 }
 
-.data-item [class^='request-status request-status-4'] {
+[class*='request-status-4'],
+[class*='request-method-put'],
+[class*='request-method-patch'] {
   color: white;
-  background: var(--yellow-400);
+  background: var(--yellow-400) !important;
 }
 
-.data-item [class^='request-status request-status-5'] {
+[class*='request-status-5'],
+[class*='request-method-delete'] {
   color: white;
-  background: var(--red-500);
+  background: var(--red-500) !important;
 }
+
+
+
+
 
 

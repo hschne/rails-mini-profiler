@@ -3,18 +3,19 @@
 - UI & Design
   - Redesign show profiled request page
   - Add new icon
-  - Pimp badge
   - Disable icons for failed requests etc
+    - Remove flamegrpah icons if no flamegraphs
+    - Disable flamegraph icon if no flamegraph
 - Write proper readme
 - Show better info for traces
 - Test in MT
+- Rubydoc
 
 # Next
 
 - Parity with rack-profiler (https://github.com/dawanda/rack-profiler)
   - Backtrace filtering
 - Parity with rack-mini-profiler:
-  - Memory
   - Live request handling (params)
 - Parity with skylight
   - Better UI filtering
@@ -24,11 +25,10 @@
   - View/DB/UI
   - Based on Probe
 - Custom Probes
-- Cleanup requests
-- Pin Requests
 
 # Future
 
+- Pin Requests
 - Per Person Settings
 - Jobs & Mailers
 - Snapshots & Comparison

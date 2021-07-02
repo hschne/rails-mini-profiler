@@ -39,14 +39,17 @@ module RailsMiniProfiler
       def format_payload(event)
         case event.name
         when 'sql.active_record'
-          raw = event.payload.slice(:name, :sql, :binds, :type_casted_binds)
-          raw[:binds] = transform_binds(raw[:binds], raw[:type_casted_binds])
-          raw.delete(:type_casted_binds)
-          raw.reject { |_k, v| v.blank? }
+          payload = event.payload.slice(:name, :sql, :binds, :type_casted_binds)
+          payload[:binds] = transform_binds(payload[:binds], payload[:type_casted_binds])
+          payload.delete(:type_casted_binds)
+          payload.reject { |_k, v| v.blank? }
         when 'render_template.action_view', 'render_partial.action_view'
           event.payload.slice(:identifier, :count)
         when 'process_action.action_controller'
-          event.payload.slice(:view_runtime, :db_runtime).transform_values { |value| value.round(2) }
+          payload = event.payload
+                      .slice(:view_runtime, :db_runtime)
+                      .transform_values { |value| value&.round(2) }
+          payload.reject { |_k, v| v.blank? }
         else
           {}
         end

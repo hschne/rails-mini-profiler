@@ -3,8 +3,12 @@
 
   <ul class="request-details-data">
     <li class="data-item">
+      <small>Method</small>
+      <span class="pill request-method request-method-<%= @profiled_request.request_method.downcase %>"><%= @profiled_request.request_method.capitalize %></span>
+    </li>
+    <li class="data-item">
       <small>Status</small>
-      <span class="request-status request-status-<%= @profiled_request.response_status %>"><%= @profiled_request.response_status %></span>
+      <span class="pill request-status request-status-<%= @profiled_request.response_status %>"><%= @profiled_request.response_status %></span>
     </li>
     <li class="data-item">
       <small>Response Time</small>

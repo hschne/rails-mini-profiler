@@ -66,3 +66,17 @@ h1 {
 .text-right {
   text-align: right;
 }
+
+/* --------------------------------------- */
+
+.pill {
+  margin: .2rem 0;
+  padding: .1rem .4rem;
+  border-radius: 5px;
+
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .1rem;
+
+  background: var(--grey-200);
+}

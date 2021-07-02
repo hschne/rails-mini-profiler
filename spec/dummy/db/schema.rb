@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_185018) do
+ActiveRecord::Schema.define(version: 2021_07_02_114107) do
+
   create_table "movies", force: :cascade do |t|
     t.string "imdb_id"
     t.decimal "popularity", precision: 5, scale: 2
@@ -35,12 +36,13 @@ ActiveRecord::Schema.define(version: 2021_06_21_185018) do
     t.integer "finish"
     t.integer "duration"
     t.integer "allocations"
+    t.string "request_path"
+    t.string "request_method"
+    t.json "request_headers"
+    t.json "request_body"
     t.integer "response_status"
     t.json "response_body"
     t.json "response_headers"
-    t.string "request_path"
-    t.json "request_headers"
-    t.json "request_body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

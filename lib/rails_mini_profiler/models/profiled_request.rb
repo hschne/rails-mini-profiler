@@ -9,6 +9,7 @@ module RailsMiniProfiler
                     :finish,
                     :duration,
                     :allocations,
+                    :request_method,
                     :response_status,
                     :response_body,
                     :response_headers,
@@ -28,6 +29,7 @@ module RailsMiniProfiler
 
       def request=(request)
         @request_body = request.body
+        @request_method = request.method
         @request_path = request.path
         @request_headers = request.headers
       end

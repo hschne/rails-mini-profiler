@@ -8,12 +8,13 @@ class CreateRmp < ActiveRecord::Migration[6.1]
       t.integer :finish
       t.integer :duration
       t.integer :allocations
+      t.string :request_path
+      t.string :request_method
+      t.json :request_headers
+      t.json :request_body
       t.integer :response_status
       t.json :response_body
       t.json :response_headers
-      t.string :request_path
-      t.json :request_headers
-      t.json :request_body
 
       t.timestamps
     end
