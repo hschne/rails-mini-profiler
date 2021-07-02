@@ -17,6 +17,11 @@ module RailsMiniProfiler
       redirect_to profiled_requests_url, notice: 'Profiled request was successfully destroyed.'
     end
 
+    def destroy_all
+      repository.destroy_all
+      redirect_to profiled_requests_url, notice: 'Profiled Requests cleared'
+    end
+
     private
 
     def set_profiled_request

@@ -8,6 +8,14 @@
   </section>
 <% else %>
   <h1>Profiled Requests</h1>
+  <div class="profiled-requests-actions">
+    <%= link_to(destroy_all_profiled_requests_url,
+                method: :delete,
+                class: 'clear-action',
+                data: {confirm: "This will delete all non-pinned requests. Are you sure?"}) do %>
+      <button class="clear-action-button">Clear Requests</button>
+    <% end %>
+  </div>
   <table class="table">
     <thead>
     <tr>

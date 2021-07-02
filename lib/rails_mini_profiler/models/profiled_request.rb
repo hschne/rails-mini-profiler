@@ -33,7 +33,7 @@ module RailsMiniProfiler
       end
 
       def response=(response)
-        @response_body = response.body
+        @response_body = ''
         @response_headers = response.headers
         @response_status = response.status
       end

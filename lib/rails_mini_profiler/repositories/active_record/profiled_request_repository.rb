@@ -32,7 +32,7 @@ module RailsMiniProfiler
           find(request_id).destroy
         end
 
-        def clear
+        def destroy_all
           all.destroy_all
         end
 
