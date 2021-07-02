@@ -12,3 +12,11 @@
 //
 //= require rails-ujs
 //= require_tree .
+
+const profiledRequestNameSearch = document.getElementById("profiled-request-path-search");
+profiledRequestNameSearch.addEventListener("keyup", function(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault()
+    document.getElementById('profiled-request-search-form').submit()
+  }
+})

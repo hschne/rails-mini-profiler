@@ -9,11 +9,14 @@
 <% else %>
   <h1>Profiled Requests</h1>
   <div class="profiled-requests-actions">
+    <%= form_with id: 'profiled-request-search-form', url: profiled_requests_url, method: :get do |form| %>
+      <%= form.search_field :path, id: 'profiled-request-path-search', placeholder: 'Search Path...', class: 'profiled-request-path-search' %>
+    <% end %>
     <%= link_to(destroy_all_profiled_requests_url,
                 method: :delete,
                 class: 'clear-action',
                 data: { confirm: "This will delete all non-pinned requests. Are you sure?" }) do %>
-      <button class="clear-action-button">Clear Requests</button>
+      <button>Clear Requests</button>
     <% end %>
   </div>
   <table class="table">

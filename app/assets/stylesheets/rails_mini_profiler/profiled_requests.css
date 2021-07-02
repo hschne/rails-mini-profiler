@@ -37,9 +37,17 @@ main {
 
 .profiled-requests-actions {
   display: flex;
-  padding: 1em 0;
-  justify-content: right;
+  padding: 1rem 0;
+  justify-content: space-between;
   align-items: center;
+}
+
+.profiled-request-path-search {
+  padding: 0.5rem .5rem;
+  border-radius: .25em;
+
+  border: 1px solid var(--grey-400);
+  color: var(--grey-700) ;
 }
 
 .clear-action button {
@@ -47,7 +55,7 @@ main {
   border: none;
   border-radius: .25rem;
   color: white;
-  padding: 0.25em 1em;
+  padding: 0.5em .5em;
   text-align: center;
   text-decoration: none;
   display: inline-block;

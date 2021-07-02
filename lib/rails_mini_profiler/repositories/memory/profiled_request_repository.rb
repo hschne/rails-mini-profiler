@@ -20,7 +20,10 @@ module RailsMiniProfiler
         end
 
         def find_by(**kwargs)
-          all.select { |record| kwargs.all? { |k, v| record.public_send(k) == v } }
+          path = kwargs.delete(:path)
+          result = all.select { |record| kwargs.all? { |k, v| record.public_send(k) == v } }
+          result = result.select { |record| record.request_path =~ /#{Regexp.escape(path)}/ } if path
+          result
         end
 
         def create(request)

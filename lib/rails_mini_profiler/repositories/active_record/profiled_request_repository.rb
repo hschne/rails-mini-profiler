@@ -17,7 +17,10 @@ module RailsMiniProfiler
         end
 
         def find_by(**kwargs)
-          all.where(**kwargs)
+          path = kwargs.delete(:path)
+          result = all.where(**kwargs)
+          result = result.where('request_path LIKE %?%', path) if path
+          result
         end
 
         def create(request)
