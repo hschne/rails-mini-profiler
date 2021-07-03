@@ -13,9 +13,9 @@
 //= require rails-ujs
 //= require_tree .
 
-const profiledRequestNameSearch = document.getElementById("profiled-request-path-search");
-if ( profiledRequestNameSearch )  {
-  profiledRequestNameSearch.addEventListener("keyup", function(event) {
+const profiledRequestNameSearch = document.getElementById('profiled-request-path-search')
+if (profiledRequestNameSearch) {
+  profiledRequestNameSearch.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
       event.preventDefault()
       document.getElementById('profiled-request-search-form').submit()
@@ -23,18 +23,28 @@ if ( profiledRequestNameSearch )  {
   })
 }
 
-const closePopovers = () => {
-  const traceBars = document.querySelectorAll('.trace-popover');
-  traceBars.forEach((element) => {
-    element.classList.add("hidden");
+document.addEventListener('DOMContentLoaded', () => {
+  const traceBars = document.querySelectorAll('.trace-bar');
+  traceBars.forEach((bar) => {
+    const popover = bar.children[0];
+    tippy(bar, {
+      trigger: 'click',
+      content: popover,
+      theme: 'rmp',
+      maxWidth: '700px',
+      placement: 'bottom',
+      interactive: true,
+      onShow (instance) {
+        instance.popper.querySelector('.popover-close').addEventListener('click', () => {
+          instance.hide()
+        })
+      },
+      onHide (instance) {
+        instance.popper.querySelector('.popover-close').removeEventListener('click', () => {
+          instance.hide()
+        })
+      },
+    })
   })
-}
+}, false);
 
-const togglePopover = (event) => {
-  const popover = event.children[0];
-  const visible = !popover.classList.contains('hidden');
-  closePopovers()
-  if ( !visible ) {
-    popover.classList.remove("hidden");
-  }
-}

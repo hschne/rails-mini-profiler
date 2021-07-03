@@ -1,8 +1,17 @@
 <li class="trace">
   <span class="trace-name" style="width: calc(calc(<%= step.fromStartPercent %>% * .9) + 10%)"><%= step.name %></span>
-  <div onclick="togglePopover(this)" class="trace-bar" style="width: calc(<%= step.percent %>% * .9)">
-    <section class="trace-popover hidden">THIS IS THE MODAL</section>
+  <div class="trace-bar" style="width: calc(<%= step.percent %>% * .9)">
+    <div class="popover">
+      <section class="popover-header">
+        <h1 class="popover-description"><%= step.name %></h1>
+        <button class="popover-close">x</button>
+      </section>
+      <section>
+        THIS IS THE MODAL WITH INCREDIBLY MUCH CONTENTN SO MUCH SO MUCH
+      </section>
   </div>
+
+
 
 <!--  <span><%#= step.duration %>ms</span>-->
 <!--  <span>+<%#= step.fromStart %>ms</span>-->
