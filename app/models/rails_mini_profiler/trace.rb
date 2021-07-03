@@ -6,8 +6,9 @@
 #
 #  id                      :integer          not null, primary key
 #  rmp_profiled_request_id :integer          not null
-#  start                   :datetime
-#  finish                  :datetime
+#  name                    :string
+#  start                   :integer
+#  finish                  :integer
 #  duration                :integer
 #  allocations             :integer
 #  payload                 :json
@@ -19,7 +20,8 @@ module RailsMiniProfiler
   class Trace < ApplicationRecord
     self.table_name = 'rmp_traces'
 
-    belongs_to :profiled_request, class_name: 'RailsMiniProfiler::ProfiledRequest',
-                                  foreign_key: :rmp_profiled_request_id
+    belongs_to :profiled_request,
+               class_name: 'RailsMiniProfiler::ProfiledRequest',
+               foreign_key: :rmp_profiled_request_id
   end
 end

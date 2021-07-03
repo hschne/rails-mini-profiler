@@ -200,6 +200,7 @@ main {
 .popover {
   display: flex;
   flex-direction: column;
+  width: 600px;
   padding: 1em;
   color: black;
 }

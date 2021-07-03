@@ -1,0 +1,27 @@
+<li class="trace">
+  <span class="trace-name" style="width: calc(calc(<%= trace.from_start_percent %>% * .9) + 10%)"><%= trace.description %></span>
+  <div class="trace-bar" style="width: calc(<%= trace.percent %>% * .9)">
+    <div class="popover">
+      <section class="popover-header">
+        <h1 class="popover-description"><%= trace.name %></h1>
+        <button class="popover-close">x</button>
+      </section>
+      <section class="popover-body">
+        <% if trace.payload.present? %>
+          <ul class='key-value-list'>
+            <% trace.payload.each do |key, value| %>
+              <li><strong><%= key %>:</strong> <%= value %></li>
+            <% end %>
+          </ul>
+        <% end %>
+        <% if trace.backtrace.present? %>
+          <pre class="key-value-list"><%= trace.backtrace %></pre>
+        <% end %>
+
+        <div><%= trace.duration %>ms</div>
+        <div><%= trace.percent %>%</div>
+        <div>+<%= trace.from_start %></div>
+      </section>
+    </div>
+  </div>
+</li>

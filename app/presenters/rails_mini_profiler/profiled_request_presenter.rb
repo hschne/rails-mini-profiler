@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class ProfiledRequestPresenter < BasePresenter
+module RailsMiniProfiler
+  class ProfiledRequestPresenter < BasePresenter
+  end
 end

@@ -6,16 +6,17 @@
 #
 #  id               :integer          not null, primary key
 #  user_id          :string
-#  start            :datetime
-#  finish           :datetime
+#  start            :integer
+#  finish           :integer
 #  duration         :integer
 #  allocations      :integer
+#  request_path     :string
+#  request_method   :string
+#  request_headers  :json
+#  request_body     :json
 #  response_status  :integer
 #  response_body    :json
 #  response_headers :json
-#  request_path     :string
-#  request_headers  :json
-#  request_body     :json
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

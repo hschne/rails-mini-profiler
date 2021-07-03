@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 module RailsMiniProfiler
-  RSpec.describe '/profiled_requests', type: :request do
+  RSpec.describe '/', type: :request do
     let(:storage) { Storage::ActiveRecord }
 
     before do

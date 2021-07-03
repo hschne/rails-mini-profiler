@@ -10,7 +10,12 @@ module RailsMiniProfiler
       @profiled_requests = params[:path] ? repository.find_by(path: params[:path]) : repository.all
     end
 
-    def show; end
+    def show
+      @traces = @profiled_request.traces
+                  .map { |trace| Models::Trace.from_model(trace.attributes) }
+                  .map { |trace| present(trace, profiled_request: @profiled_request) }
+                  .sort_by(&:start)
+    end
 
     def destroy
       repository.destroy(@profiled_request.id)
