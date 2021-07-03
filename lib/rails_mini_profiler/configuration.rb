@@ -2,11 +2,10 @@
 
 module RailsMiniProfiler
   class Configuration
-    attr_accessor :authorize,
-                  :enabled,
+    attr_accessor :enabled,
+                  :badge_enabled,
                   :flamegraph_enabled,
                   :skip_paths,
-                  :repository,
                   :storage,
                   :user_provider
 
@@ -17,6 +16,7 @@ module RailsMiniProfiler
 
     def reset
       @enabled = proc { |_env| Rails.env.development? || Rails.env.test? }
+      @badge_enabled = true
       @flamegraph_enabled = true
       @skip_paths = []
       @storage = Storage::Memory

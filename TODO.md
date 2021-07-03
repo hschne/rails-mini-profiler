@@ -9,10 +9,10 @@
 - Write proper readme
 - Show better info for traces
 - Test in MT
-- Rubydoc
 
 # Next
 
+- Rubydoc
 - Parity with rack-profiler (https://github.com/dawanda/rack-profiler)
   - Backtrace filtering
 - Parity with rack-mini-profiler:

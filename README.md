@@ -64,6 +64,17 @@ By clicking on individual traces you can find out even more detailed information
 
 ## Configuration
 
+You can set the following configuration options in Rails Mini Profiler:
+
+| Option               | Default                      | Description                                                           |
+|----------------------|------------------------------|-----------------------------------------------------------------------|
+| `enabled`            | `true` (dev)/ `false` (prod) | Whether or not RMP is enabled                                         |
+| `badge_enabled`      | `true`                       | Should the hedgehog 🦔 badge be injected into pages?                   |
+| `flamegraph_enabled` | `true`                       | Should flamegraphs be recorded automatically?                         |
+| `skip_paths`         | `[]`                         | An array of request paths that should not be profiled. Regex allowed. |
+| `storage`            | `Storage::Memory`            | Which storage to use. See [Storage](#Storage)                         |
+| `user_provider`      | `Rack::Request.new(env).ip`  | How to identify users. See [Users](#Users)                            |
+
 ### Storage
 
 Rails Mini Profiler uses the `RailsMiniProfiler::Memory` storage per default. This means that Profiles are not persisted
