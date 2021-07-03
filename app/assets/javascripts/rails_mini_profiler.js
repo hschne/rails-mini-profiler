@@ -14,9 +14,27 @@
 //= require_tree .
 
 const profiledRequestNameSearch = document.getElementById("profiled-request-path-search");
-profiledRequestNameSearch.addEventListener("keyup", function(event) {
-  if (event.key === 'Enter') {
-    event.preventDefault()
-    document.getElementById('profiled-request-search-form').submit()
+if ( profiledRequestNameSearch )  {
+  profiledRequestNameSearch.addEventListener("keyup", function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      document.getElementById('profiled-request-search-form').submit()
+    }
+  })
+}
+
+const closePopovers = () => {
+  const traceBars = document.querySelectorAll('.trace-popover');
+  traceBars.forEach((element) => {
+    element.classList.add("hidden");
+  })
+}
+
+const togglePopover = (event) => {
+  const popover = event.children[0];
+  const visible = !popover.classList.contains('hidden');
+  closePopovers()
+  if ( !visible ) {
+    popover.classList.remove("hidden");
   }
-})
+}

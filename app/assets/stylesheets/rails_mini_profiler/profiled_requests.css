@@ -178,17 +178,18 @@ main {
 }
 
 .trace-bar {
-  background: linear-gradient(to top right, var(--red-500), var(--red-400));
-  height: 16px;
-  margin: 0;
-  padding: 0;
   position: relative;
+  margin: 0;
+  height: 16px;
+  padding: 0;
+  cursor: pointer;
+  background: linear-gradient(to top right, var(--red-500), var(--red-400));
 }
 
 .trace-name {
   margin: 0;
-  padding: 0 .5em;
   box-sizing: border-box;
+  padding: 0 .5em;
   overflow: hidden;
   font-size: 14px;
   text-align: right;
@@ -196,6 +197,41 @@ main {
   color: var(--grey-700);
 }
 
+.trace-popover {
+  --popover-background: white;
+  z-index: 100;
+  position: absolute;
+  left: calc(50% - 300px);
+  top: 25px;
+  width: 600px;
+  box-sizing: border-box;
+  padding: 1em;
+
+  background: var(--popover-background);
+  box-shadow: 8px 0 30px 4px rgba(0, 0, 0, .2), 8px 4px 10px 0 rgba(0, 0, 0, .05);
+  border-radius: 3px;
+
+  transition: all cubic-bezier(.19,1,.22,1) .2s;
+}
+
+
+.trace-popover:before {
+  position: absolute;
+  left: calc(50% - 8px);
+  top: -8px;
+  height: 0;
+  width: 0;
+  border-left: 8px solid transparent;
+  border-bottom: 8px solid var(--popover-background);
+  border-right: 8px solid transparent;
+  content: ''
+}
+
+.trace-popover.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(.9);
+}
 
 
 
