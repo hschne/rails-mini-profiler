@@ -33,7 +33,7 @@ module RailsMiniProfiler
     end
 
     def repository
-      @repository ||= Repositories::ProfiledRequestRepository.get(rmp_user)
+      @repository ||= Repositories::ProfiledRequestRepository.get(User.get(request.env))
     end
   end
 end

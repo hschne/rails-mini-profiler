@@ -1,17 +1,40 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  module User
-    def self.current_user
-      Thread.current[:rails_mini_profiler_current_user]
+  class User
+    class << self
+      def current_user
+        Thread.current[:rails_mini_profiler_current_user]
+      end
+
+      def get(env)
+        new(Thread.current[:rails_mini_profiler_current_user], env).current_user
+      end
+
+      def authorize(user)
+        Thread.current[:rails_mini_profiler_current_user] = user
+      end
+
+      def current_user=(user)
+        Thread.current[:rails_mini_profiler_current_user] = user
+      end
     end
 
-    def self.authorize(user)
-      Thread.current[:rails_mini_profiler_current_user] = user
+    def initialize(current_user, env)
+      @current_user = current_user
+      @env = env
     end
 
-    def self.current_user=(user)
-      Thread.current[:rails_mini_profiler_current_user] = user
+    def current_user
+      @current_user ||= find_current_user
+    end
+
+    def find_current_user
+      return unless Rails.env.development? || Rails.env.test?
+
+      user = RailsMiniProfiler.configuration.user_provider.call(@env)
+      User.current_user = user
+      user
     end
   end
 end

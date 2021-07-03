@@ -14,7 +14,6 @@ module RailsMiniProfiler
       return @app.call(env) unless Guard.new(request_context).profile?
 
       result = with_profiled_request(request_context) { profile(request) }
-      request_context.set_default_user!
       return result unless request_context.authorized?
 
       request_context.response = ResponseWrapper.new(*result)

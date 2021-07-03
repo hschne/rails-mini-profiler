@@ -17,16 +17,7 @@ module RailsMiniProfiler
     end
 
     def authorized?
-      @authorized ||= User.current_user.present?
-    end
-
-    def set_default_user!
-      return unless Rails.env.development? || Rails.env.test?
-
-      return if User.current_user
-
-      user = @profiler_context.configuration.user_provider.call(@env)
-      User.current_user = user
+      @authorized ||= User.get(@env).present?
     end
   end
 end
