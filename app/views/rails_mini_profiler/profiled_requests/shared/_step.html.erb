@@ -1,25 +1,32 @@
-<tr>
-  <td>
-    <details>
-      <summary><%= step.name %></summary>
-      <% if step.payload.present? %>
-        <ul class='key-value-list'>
-          <% step.payload.each do |key, value| %>
-            <li><strong><%= key %>:</strong> <%= value %></li>
-          <% end %>
-        </ul>
-      <% end %>
-      <% if step.backtrace.present? %>
-        <pre class="key-value-list"><%= step.backtrace %></pre>
-      <% end %>
-    </details>
-    <span class="step-name step-bar step-type-<%= trace_class(step.type) %>"
-      style="width: <%= step.percent %>%; left: <%= step.fromStartPercent %>%
-      ">
-            &nbsp;
-          </span>
-  </td>
-  <td><%= step.duration %>ms</td>
-  <td><%= step.percent %>%</td>
-  <td>+<%= step.fromStart %>ms</td>
-</tr>
+<li class="trace">
+  <span class="trace-name" style="width: calc(calc(<%= step.fromStartPercent %>% * .9) + 10%)"><%= step.name %></span>
+  <div class="trace-bar" style="width: calc(<%= step.percent %>% * .9)"></div>
+<!--  <span><%#= step.duration %>ms</span>-->
+<!--  <span>+<%#= step.fromStart %>ms</span>-->
+</li>
+
+<!--<tr>-->
+<!--  <td>-->
+<!--    <details>-->
+<!--      <summary><%#= step.name %></summary>-->
+      <%# if step.payload.present? %>
+<!--        <ul class='key-value-list'>-->
+          <%# step.payload.each do |key, value| %>
+<!--            <li><strong><%#= key %>:</strong> <%#= value %></li>-->
+          <%# end %>
+<!--        </ul>-->
+      <%# end %>
+      <%# if step.backtrace.present? %>
+<!--        <pre class="key-value-list"><%#= step.backtrace %></pre>-->
+      <%# end %>
+<!--    </details>-->
+<!--    <span class="step-name step-bar step-type-<%#= trace_class(step.type) %>"-->
+<!--      style="width: <%#= step.percent %>%; left: <%#= step.fromStartPercent %>%-->
+<!--      ">-->
+<!--            &nbsp;-->
+<!--          </span>-->
+<!--  </td>-->
+<!--  <td><%#= step.duration %>ms</td>-->
+<!--  <td><%#= step.percent %>%</td>-->
+<!--  <td>+<%#= step.fromStart %>ms</td>-->
+<!--</tr>-->

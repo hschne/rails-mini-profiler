@@ -160,7 +160,41 @@ main {
   background: var(--grey-200);
 }
 
+.trace-list {
+  margin: 0;
+  padding: 0;
+}
 
+.trace {
+  list-style: none;
+  display: flex;
+  padding: .25em 0;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.trace:nth-child(odd) {
+  background: var(--grey-100);
+}
+
+.trace-bar {
+  background: linear-gradient(to top right, var(--red-500), var(--red-400));
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.trace-name {
+  margin: 0;
+  padding: 0 .5em;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-size: 14px;
+  text-align: right;
+  text-overflow: ellipsis;
+  color: var(--grey-700);
+}
 
 
 

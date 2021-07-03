@@ -33,7 +33,8 @@
 </section>
 
 <section>
-  <% traces = @profiled_request.traces %>
+  <h2>Traces</h2>
+  <% traces = @profiled_request.traces.sort_by(&:start) %>
   <% steps = traces
     .map do |trace|
     OpenStruct.new(
@@ -44,26 +45,15 @@
       fromStart: (trace.start - @profiled_request.start).to_f / 100,
       payload: trace.payload,
       backtrace: trace.backtrace,
-      fromStartPercent: ((trace.start - @profiled_request.start) /
-        (@profiled_request.finish - @profiled_request.start)) * 10_000
+      fromStartPercent: ((trace.start - @profiled_request.start).to_f /
+        (@profiled_request.finish - @profiled_request.start)).to_f * 100
     )
   end
   %>
 
-  <table class="table pr-steps" style="">
-    <thead>
-    <tr>
-      <th>Step</th>
-      <th>Duration</th>
-      <th>% of Total</th>
-      <th>From Start</th>
-    </tr>
-    </thead>
-    <tbody id="steps">
+  <ol class="trace-list">
     <% steps.each do |step| %>
       <%= render "rails_mini_profiler/profiled_requests/shared/step", step: step %>
     <% end %>
-    </tbody>
-  </table>
-
+  </ol>
 </section>
