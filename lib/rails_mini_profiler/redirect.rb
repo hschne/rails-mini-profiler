@@ -20,7 +20,7 @@ module RailsMiniProfiler
     private
 
     def redirect_to(location)
-      [301, { 'Location' => location, 'Content-Type' => 'text/html' }, ['Moved Permanently']]
+      [302, { 'Location' => location, 'Content-Type' => 'text/html' }, ['Moved Temporarily']]
     end
   end
 end

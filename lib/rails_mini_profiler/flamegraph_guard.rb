@@ -27,6 +27,7 @@ module RailsMiniProfiler
       params = CGI.parse(@request.query_string).transform_values(&:first).with_indifferent_access
       return params[:rmp_flamegraph] if params[:rmp_flamegraph]
 
+      # TODO: Configuration takes precedence
       RailsMiniProfiler.configuration.flamegraph_enabled
     end
   end

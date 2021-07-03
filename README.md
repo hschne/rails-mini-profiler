@@ -75,6 +75,16 @@ You can set the following configuration options in Rails Mini Profiler:
 | `storage`            | `Storage::Memory`            | Which storage to use. See [Storage](#Storage)                         |
 | `user_provider`      | `Rack::Request.new(env).ip`  | How to identify users. See [Users](#Users)                            |
 
+### Request Configuration
+
+You may override some initialzier configuration by sending requests with attached parameters.
+
+The following parameters are available:
+
+| Option           | Description                                                                                 |
+|------------------|---------------------------------------------------------------------------------------------|
+| `rmp_flamegraph` | Overrides `flamegraph_enabled` If set to `true` will redirect to the flamegraph immediatly. |
+
 ### Storage
 
 Rails Mini Profiler uses the `RailsMiniProfiler::Memory` storage per default. This means that Profiles are not persisted
