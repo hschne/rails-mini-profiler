@@ -13,7 +13,6 @@ Rails Mini Profiler is a fully-featured, simple performance profiler for your Ra
 by [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler), and aims at extending it's functionality while
 being dead simple to use.
 
-
 ## Getting Started
 
 Add Rails Mini Profiler to your Gemfile:
@@ -29,7 +28,7 @@ bundle install
 rails rail_mini_profiler:install
 ```
 
-That's it. Start your Rails application and perform some requests. You can either click the little hedgehog 🦔 on the top 
+Start your Rails application and perform some requests. You can either click the little hedgehog 🦔 on the top 
 right or navigate to `/rails_mini_profiler` to view request profiles.
 
 ## Usage
@@ -48,7 +47,10 @@ Rails.application.routes.draw do
 end
 ```
 
+Once you perform requests against your applications you can inspect them using that route. 
+
 ### Request Overview
+
 TODO: Image goes here
 
 Requests to your application will be profiled automatically. You can all stored requests by navigating to `yourapp/rails_mini_profiler/profiled_requests`.
@@ -62,10 +64,60 @@ By clicking on individual traces you can find out even more detailed information
 
 ### Configuration
 
+#### Storage
 
-Per default, individual users are identifed by their IP address. You may change this by setting a custom user provider: 
+Rails Mini Profiler uses the `RailsMiniProfiler::Memory` storage per default. This means that Profiles are not persisted
+through server restarts or across multiple processes. 
 
-```sql
+It is recommended to use `RailsMiniProfiler::ActiveRecord` instead.
+
+##### ActiveRecord
+
+```
+config.storage = RailsMiniProfiler::ActiveRecord
+```
+
+This will persist profiles in your database, so you have to run a migration:
+
+```bash
+rails rails_mini_profiler:install:migrations
+rails db:migrate
+```
+
+The following further configuration options are available: 
+
+| Configuration            | Description                                      |
+|--------------------------|--------------------------------------------------|
+| `profiled_request_table` | The table to be used to store profiled requests. |
+| `flamegraph_table`       | The table to be used to store flamegraphs.       |
+| `trace_table`            | The table to be used to store traces.            |
+
+
+Rails Mini Profiler does not offer an automatic way to clean up old profiling information. It is recommended you add a sweeper job to clean up old profiled requests periodically (e.g. using [clockwork](https://github.com/adamwiggins/clockwork). For example, with ActiveJob:
+
+```
+# Clockwork
+every(1.month, 'purge rails mini profiler' do
+    ProfiledRequestCleanupJob.perform_later
+end
+
+# ActiveJob
+class ProfiledRequestCleanupJob < ApplicationJob
+  queue_as :default
+
+  def perform(*guests)
+    RailsMiniProfiler::ProfiledRequest.where('created_at < ?', 1.month.ago).destroy_all
+  end
+end
+```
+
+#### Users
+
+Profiling information is segregated by user. That means, you will never see another users profiled requests. 
+
+Per default, individual users are identified by their IP address. You may change this by setting a custom user provider: 
+
+```ruby
 config.user_provider = proc { |env| Rack::Request.new(env).ip }
 ```
 
@@ -97,19 +149,26 @@ RailsMiniProfiler.configure do |config|
 end
 ```
 
-To configure which 
-
-
+Only requests by explicitly set users will be stored. To configure how individual users are identified see [Users](#Users)
 
 ## Development
 
-To annotate models run 
+
+Tests and development runs will use the `Dummy` application, which resides in `spec/dummy`. To run Rails Mini Profiler locally 
+run `rails s`. To run the tests execute: 
+
+```ruby
+bundle exec rspec
+```
+
+RMP uses [Annotate](https://github.com/ctran/annotate_models) to annotate models. Run
 
 ```
 bundle exec annotate --models --exclude tests,fixtures
 ```
 
 ## Contributing
+
 Contribution directions go here.
 
 ## License
