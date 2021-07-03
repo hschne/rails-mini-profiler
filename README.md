@@ -1,4 +1,4 @@
-# RailsMiniProfiler
+# Rails Mini Profiler
 
 [![Gem Version](https://badge.fury.io/rb/graphql-groups.svg)](https://badge.fury.io/rb/graphql-groups)
 [![Build Status](https://github.com/hschne/graphql-groups/workflows/Build/badge.svg)](https://github.com/hschne/graphql-groups/workflows/Build/badge.svg)
@@ -62,16 +62,16 @@ TODO: Image goes here
 This view shows you how your requests spend their time. How much of it is spent in the DB, how much in rendering views? 
 By clicking on individual traces you can find out even more detailed information.
 
-### Configuration
+## Configuration
 
-#### Storage
+### Storage
 
 Rails Mini Profiler uses the `RailsMiniProfiler::Memory` storage per default. This means that Profiles are not persisted
 through server restarts or across multiple processes. 
 
 It is recommended to use `RailsMiniProfiler::ActiveRecord` instead.
 
-##### ActiveRecord
+#### ActiveRecord
 
 ```
 config.storage = RailsMiniProfiler::ActiveRecord
@@ -111,7 +111,7 @@ class ProfiledRequestCleanupJob < ApplicationJob
 end
 ```
 
-#### Users
+### Users
 
 Profiling information is segregated by user. That means, you will never see another users profiled requests. 
 
@@ -152,7 +152,6 @@ end
 Only requests by explicitly set users will be stored. To configure how individual users are identified see [Users](#Users)
 
 ## Development
-
 
 Tests and development runs will use the `Dummy` application, which resides in `spec/dummy`. To run Rails Mini Profiler locally 
 run `rails s`. To run the tests execute: 
