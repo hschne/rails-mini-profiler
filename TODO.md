@@ -1,19 +1,18 @@
 # Todo
 
 - UI & Design
-  - Redesign show profiled request page
   - Add new icon
+  - Show better info for traces
   - Disable icons for failed requests etc
     - Remove flamegrpah icons if no flamegraphs
     - Disable flamegraph icon if no flamegraph
-- Write proper readme
-- Show better info for traces
 - Test in MT
+- Review Readme
 
 # Next
 
 - Rubydoc
-- Accessibility 
+- Accessibility
 - Parity with rack-profiler (https://github.com/dawanda/rack-profiler)
   - Backtrace filtering
 - Parity with rack-mini-profiler:

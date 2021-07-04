@@ -9,6 +9,7 @@ module RailsMiniProfiler
       def install
         route("mount RailsMiniProfiler::Engine => '/rails_mini_profiler'")
         template 'rails_mini_profiler.rb.erb', 'config/initializers/rails_mini_profiler.rb'
+        system('rails rails_mini_profiler:install:migrations')
       end
     end
   end

@@ -28,12 +28,18 @@ bundle install
 rails rail_mini_profiler:install
 ```
 
+Inspect the generated migration in `migrate/YYYYmmDDHHMMSS_create_rmp.rb` and migrate:
+
+```
+rails db:migrate
+```
+
 Start your Rails application and perform some requests. You can either click the little hedgehog 🦔 on the top 
 right or navigate to `/rails_mini_profiler` to view request profiles.
 
 ## Usage
 
-Rails Mini Profiler makes it easy to understand why certain requests perform poorly. 
+Rails Mini Profiler provides detailed information about your requests to help you figure out why certain requests perform poorly. 
 
 Installing it will generate a new initializer `config/initializers/rails_mini_profiler.rb` and add a new
 route: 
@@ -47,7 +53,8 @@ Rails.application.routes.draw do
 end
 ```
 
-Once you perform requests against your applications you can inspect them using that route. 
+Once you perform requests against your applications you can inspect them using that route, or by clicking the badge on the
+top right that is injected into your pages.
 
 ### Request Overview
 
@@ -72,7 +79,7 @@ You can set the following configuration options in Rails Mini Profiler:
 | `badge_enabled`      | `true`                       | Should the hedgehog 🦔 badge be injected into pages?                   |
 | `flamegraph_enabled` | `true`                       | Should flamegraphs be recorded automatically?                         |
 | `skip_paths`         | `[]`                         | An array of request paths that should not be profiled. Regex allowed. |
-| `storage`            | `Storage::Memory`            | Which storage to use. See [Storage](#Storage)                         |
+| `storage`            | `Storage`                    | Storage configuration. See [Storage](#Storage)                         |
 | `user_provider`      | `Rack::Request.new(env).ip`  | How to identify users. See [Users](#Users)                            |
 
 ### Request Configuration
@@ -87,31 +94,14 @@ The following parameters are available:
 
 ### Storage
 
-Rails Mini Profiler uses the `RailsMiniProfiler::Memory` storage per default. This means that Profiles are not persisted
-through server restarts or across multiple processes. 
+Rails Mini Profiler stores profiling information in your database per default. You can configure various details of how
+traces and requests are stored.
 
-It is recommended to use `RailsMiniProfiler::ActiveRecord` instead.
-
-#### ActiveRecord
-
-```
-config.storage = RailsMiniProfiler::ActiveRecord
-```
-
-This will persist profiles in your database, so you have to run a migration:
-
-```bash
-rails rails_mini_profiler:install:migrations
-rails db:migrate
-```
-
-The following further configuration options are available: 
-
-| Configuration            | Description                                      |
-|--------------------------|--------------------------------------------------|
-| `profiled_request_table` | The table to be used to store profiled requests. |
-| `flamegraph_table`       | The table to be used to store flamegraphs.       |
-| `trace_table`            | The table to be used to store traces.            |
+| Configuration            | Default                 | Description                                      |
+|--------------------------|-------------------------|--------------------------------------------------|
+| `profiled_request_table` | `rmp_profiled_requests` | The table to be used to store profiled requests. |
+| `flamegraph_table`       | `rmp_flamegraphs`       | The table to be used to store flamegraphs.       |
+| `trace_table`            | `rmp_traces`            | The table to be used to store traces.            |
 
 
 Rails Mini Profiler does not offer an automatic way to clean up old profiling information. It is recommended you add a sweeper job to clean up old profiled requests periodically (e.g. using [clockwork](https://github.com/adamwiggins/clockwork). For example, with ActiveJob:
@@ -186,6 +176,15 @@ RMP uses [Annotate](https://github.com/ctran/annotate_models) to annotate models
 ```
 bundle exec annotate --models --exclude tests,fixtures
 ```
+
+## Credit
+
+This project was heavily inspired by projects such as [rack-mini-profiler](https://github.com/MiniProfiler/rack-mini-profiler) and
+[rack-profiler](https://github.com/dawanda/rack-profiler). [Skylight](https://www.skylight.io/) are my preferred profiler, and
+were also a huge influence.
+
+Design and logo were graciously provided and implemented by [Lena Schnedlitz](https://github.com/LenaSchnedlitz), without who's
+supreme CSS skills this project would not have been possible :hands_raised:
 
 ## Contributing
 
