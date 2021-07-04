@@ -1,0 +1,82 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.trace-list {
+  margin: 0;
+  padding: 0;
+}
+
+.trace {
+  list-style: none;
+  display: flex;
+  padding: .25em 0;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.trace:nth-child(odd) {
+  background: var(--grey-100);
+}
+
+.trace .trace-bar {
+  position: relative;
+  margin: 0;
+  height: 16px;
+  padding: 0;
+  cursor: pointer;
+  background: linear-gradient(to top right, var(--grey-500), var(--grey-400));
+}
+
+.sequel-trace .trace-bar {
+  background: linear-gradient(to top right, var(--green-500), var(--green-400));
+}
+
+.controller-trace .trace-bar {
+  background: linear-gradient(to top right, var(--yellow-500), var(--yellow-400));
+}
+.render-template-trace .trace-bar,
+.render-partial-trace .trace-bar {
+  background: linear-gradient(to top right, var(--blue-500), var(--blue-400));
+}
+
+.trace-name {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0 .5em;
+  overflow: hidden;
+  font-size: 14px;
+  text-align: right;
+  text-overflow: ellipsis;
+  color: var(--grey-400)
+}
+
+.trace-payload {
+  margin: 0;
+}
+
+.sequel-trace-query {
+  padding: 1em 1em;
+  background: var(--grey-100);
+  overflow: auto;
+  max-height: 100px;
+  white-space: pre-wrap;
+}
+
+.sequel-trace-binds {
+  margin: 0;
+  padding: .5em 1em;
+  margin-bottom: 1em;
+  font-size: 12px;
+  overflow: auto;
+  max-height: 100px;
+  white-space: pre-wrap;
+  background: var(--grey-50);
+}
+
+.trace-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: hidden 1px var(--border-color);
+}

@@ -1,26 +1,37 @@
-<li class="trace">
-  <span class="trace-name" style="width: calc(calc(<%= trace.from_start_percent %>% * .9) + 10%)"><%= trace.description %></span>
-  <div class="trace-bar" style="width: calc(<%= trace.percent %>% * .9)">
+<li class="trace <%= trace.type %>">
+  <span class="trace-name " style="width: calc(calc(<%= trace.from_start_percent %>% * .9) + 10%)"><%= trace.label %></span>
+  <div class="trace-bar" style="width: calc(<%= trace.duration_percent %>% * .9)">
     <div class="popover">
       <section class="popover-header">
-        <h1 class="popover-description"><%= trace.name %></h1>
+        <h1 class="popover-description"><%= trace.description %></h1>
         <button class="popover-close">x</button>
       </section>
       <section class="popover-body">
-        <% if trace.payload.present? %>
-          <ul class='key-value-list'>
-            <% trace.payload.each do |key, value| %>
-              <li><strong><%= key %>:</strong> <%= value %></li>
-            <% end %>
-          </ul>
-        <% end %>
-        <% if trace.backtrace.present? %>
-          <pre class="key-value-list"><%= trace.backtrace %></pre>
-        <% end %>
+        <%= trace.payload %>
+        <table class="trace-table">
+          <thead>
+          <tr>
+            <th class="text-left"></th>
+            <th class="text-right">Response Time</th>
+            <th class="text-right">Allocations</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Total</td>
+            <td class="text-right"><%= trace.duration %>ms</td>
+            <td class="text-right"><%= trace.allocations %></td>
+          </tr>
+          <tr>
+            <td>Relative</td>
+            <td class="text-right"><%= trace.duration_percent %>%</td>
+            <td class="text-right"><%= trace.allocations_percent %>%</td>
+          </tr>
+        </table>
+      </section>
 
-        <div><%= trace.duration %>ms</div>
-        <div><%= trace.percent %>%</div>
-        <div>+<%= trace.from_start %></div>
+      <section class="popover-footer">
+        <pre><%= trace.backtrace %></pre>
       </section>
     </div>
   </div>

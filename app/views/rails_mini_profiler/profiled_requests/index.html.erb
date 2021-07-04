@@ -38,6 +38,7 @@
         <td class="request-path"><%= profiled_request.request_path %></td>
         <td> <%= profiled_request.request_method %> </td>
         <td> <%= profiled_request.response_status %> </td>
+<!--        # TODO: Save response content type-->
         <td>json</td>
         <td class="text-right"><%= (profiled_request.duration / 100) %> ms</td>
         <td class=""><%= time_tag(profiled_request.created_at.in_time_zone(Time.zone)) %></td>

@@ -2,7 +2,7 @@
 
 module RailsMiniProfiler
   class ControllerTracePresenter < TracePresenter
-    def description
+    def label
       'Action Controller'
     end
   end

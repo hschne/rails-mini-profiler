@@ -2,7 +2,7 @@
 
 module RailsMiniProfiler
   class RmpTracePresenter < TracePresenter
-    def description
+    def label
       'Total Time'
     end
   end

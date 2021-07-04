@@ -2,7 +2,7 @@
 
 module RailsMiniProfiler
   class RenderPartialTracePresenter < TracePresenter
-    def description
+    def label
       'Total Time'
     end
   end
