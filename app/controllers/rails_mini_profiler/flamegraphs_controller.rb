@@ -13,16 +13,12 @@ module RailsMiniProfiler
     private
 
     def set_flamegraph
-      # TODO: Fix request without flamegraph
-      @flamegraph = repository.find(params[:id]).flamegraph&.data || {}.to_json
+      @flamegraph = Flamegraph.find(params[:id])
     end
 
     def configuration
       @configuration ||= RailsMiniProfiler.configuration
     end
 
-    def repository
-      @repository ||= Repositories::ProfiledRequestRepository.get(User.get(request.env))
-    end
   end
 end

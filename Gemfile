@@ -22,8 +22,6 @@ group :test, :development do
 end
 
 group :test do
-  gem 'mock_redis'
-  gem 'rspec-parameterized'
   gem 'simplecov'
 end
 

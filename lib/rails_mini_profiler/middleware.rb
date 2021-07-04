@@ -13,40 +13,35 @@ module RailsMiniProfiler
       request_context = RequestContext.new(@context, request)
       return @app.call(env) unless Guard.new(request_context).profile?
 
-      result = with_profiled_request(request_context) { profile(request) }
+      request_context.profiled_request = ProfiledRequest.new
+      result = with_tracing(request_context) { profile(request_context) }
       return result unless request_context.authorized?
 
       request_context.response = ResponseWrapper.new(*result)
-      save_request(request_context)
+      complete(request_context)
 
       render_response(request_context)
     end
 
-    def profiled_request
-      Thread.current[:rails_mini_profiler_current_request]
+    def traces
+      Thread.current[:rails_mini_profiler_traces]
     end
 
-    def profiled_request=(profiled_request)
-      Thread.current[:rails_mini_profiler_current_request] = profiled_request
+    def traces=(traces)
+      Thread.current[:rails_mini_profiler_traces] = traces
     end
 
     def track_trace(trace)
-      return if profiled_request.nil?
+      return if traces.nil?
 
-      profiled_request.traces.append(trace)
+      traces.append(trace)
     end
 
     private
 
-    def save_request(request_context)
-      profiled_request = request_context.profiled_request
-      profiled_request.response = request_context.response
-      profiled_request.user_id = request_context.user_id
-      profiled_request.complete!
-      result = Repositories::ProfiledRequestRepository.get(request_context.user_id).create(profiled_request)
-
-      request_context.profiled_request = result
-      result
+    def complete(request_context)
+      request_context.complete_profiling!
+      request_context.save_results!
     end
 
     def render_response(request_context)
@@ -57,18 +52,18 @@ module RailsMiniProfiler
       [modified_response.status, modified_response.headers, modified_response.response]
     end
 
-    def profile(request)
+    def profile(request_context)
       ActiveSupport::Notifications.instrument('rails_mini_profiler.total_time') do
-        FlamegraphGuard.new(request).record(profiled_request) { @app.call(request.env) }
+        request = request_context.request
+        FlamegraphGuard.new(request_context).record { @app.call(request.env) }
       end
     end
 
-    def with_profiled_request(request_context)
-      self.profiled_request = Models::ProfiledRequest.new
-      profiled_request.request = request_context.request
-      request_context.profiled_request = profiled_request
+    def with_tracing(request_context)
+      self.traces = []
       result = yield
-      self.profiled_request = nil
+      request_context.traces = traces
+      self.traces = nil
       result
     end
   end

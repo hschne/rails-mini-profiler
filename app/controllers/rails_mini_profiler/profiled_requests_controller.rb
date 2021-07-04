@@ -7,38 +7,39 @@ module RailsMiniProfiler
     before_action :set_profiled_request, only: %i[show destroy]
 
     def index
-      @profiled_requests = params[:path] ? repository.find_by(path: params[:path]) : repository.all
+      @profiled_requests = ProfiledRequest.where(user_id: user_id)
+      @profiled_requests = @profiled_requests.where('request_path LIKE %?%', path) if params[:path]
     end
 
     def show
       @traces = @profiled_request.traces
+                  .order(:start)
                   .map { |trace| Models::Trace.from_model(trace.attributes) }
                   .map { |trace| present(trace, profiled_request: @profiled_request) }
-                  .sort_by(&:start)
     end
 
     def destroy
-      repository.destroy(@profiled_request.id)
+      ProfiledRequest.where(user_id: user_id).destroy(@profiled_request.id)
       redirect_to profiled_requests_url, notice: 'Profiled request was successfully destroyed.'
     end
 
     def destroy_all
-      repository.destroy_all
+      ProfiledRequest.where(user_id: user_id).destroy_all
       redirect_to profiled_requests_url, notice: 'Profiled Requests cleared'
     end
 
     private
 
+    def user_id
+      @user_id ||= User.get(request.env)
+    end
+
     def set_profiled_request
-      @profiled_request = repository.find(params[:id])
+      @profiled_request = ProfiledRequest.where(user_id: user_id).find(params[:id])
     end
 
     def configuration
       @configuration ||= RailsMiniProfiler.configuration
-    end
-
-    def repository
-      @repository ||= Repositories::ProfiledRequestRepository.get(User.get(request.env))
     end
   end
 end

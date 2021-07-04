@@ -2,7 +2,7 @@
 
 module RailsMiniProfiler
   class ApplicationController < ::ApplicationController
-    rescue_from RecordNotFound, with: :not_found
+    rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
     before_action :check_current_user
 

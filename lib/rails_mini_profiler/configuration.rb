@@ -19,7 +19,7 @@ module RailsMiniProfiler
       @badge_enabled = true
       @flamegraph_enabled = true
       @skip_paths = []
-      @storage = Storage::Memory
+      @storage = Storage.new
       @user_provider = proc { |env| Rack::Request.new(env).ip }
     end
   end

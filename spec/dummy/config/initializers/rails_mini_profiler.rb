@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 RailsMiniProfiler.configure do |config|
-  config.storage = RailsMiniProfiler::Storage::ActiveRecord
+  config.storage = RailsMiniProfiler::Storage
 end

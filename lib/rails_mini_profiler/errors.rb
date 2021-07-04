@@ -5,5 +5,4 @@ module RailsMiniProfiler
 
   # Storage errors
   StorageError = Class.new(RailsMiniProfilerError)
-  RecordNotFound = Class.new(StorageError)
 end

@@ -18,16 +18,8 @@ require 'rails_mini_profiler/models/query_trace'
 require 'rails_mini_profiler/models/controller_trace'
 require 'rails_mini_profiler/models/flamegraph'
 
-require 'rails_mini_profiler/storage/base_storage'
-require 'rails_mini_profiler/storage/active_record'
-require 'rails_mini_profiler/storage/memory'
-require 'rails_mini_profiler/storage/memory_store'
-
-require 'rails_mini_profiler/repositories/profiled_request_repository'
-require 'rails_mini_profiler/repositories/active_record/profiled_request_repository'
-require 'rails_mini_profiler/repositories/memory/profiled_request_repository'
-
 require 'rails_mini_profiler/configuration'
+require 'rails_mini_profiler/storage'
 require 'rails_mini_profiler/profiler_context'
 require 'rails_mini_profiler/request_wrapper'
 require 'rails_mini_profiler/response_wrapper'

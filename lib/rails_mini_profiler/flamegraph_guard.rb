@@ -2,18 +2,19 @@
 
 module RailsMiniProfiler
   class FlamegraphGuard
-    def initialize(request)
-      @request = request
+    def initialize(request_context)
+      @request_context = request_context
+      @request = request_context.request
     end
 
-    def record(profiled_request, &block)
+    def record(&block)
       return block.call unless enabled?
 
       result = nil
       flamegraph = StackProf.run(mode: :wall, raw: true, aggregate: false, interval: (2 * 1000).to_i) do
         result = block.call
       end
-      profiled_request.flamegraph = Models::Flamegraph.new(flamegraph)
+      @request_context.flamegraph = flamegraph.to_json
       result
     end
 
