@@ -11,6 +11,5 @@ module RailsMiniProfiler
     def description
       "Render #{label}"
     end
-
   end
 end
