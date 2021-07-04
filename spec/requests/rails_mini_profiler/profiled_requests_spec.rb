@@ -8,7 +8,7 @@ module RailsMiniProfiler
 
     describe 'GET /index' do
       it 'renders a successful response' do
-        profiled_request = ProfiledRequest.create(user_id: user_id, request_method: 'GET', duration: 0)
+        ProfiledRequest.create(user_id: user_id, request_method: 'GET', duration: 0)
 
         get profiled_requests_url
 

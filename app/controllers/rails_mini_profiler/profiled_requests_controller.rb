@@ -7,14 +7,13 @@ module RailsMiniProfiler
     before_action :set_profiled_request, only: %i[show destroy]
 
     def index
-      @profiled_requests = ProfiledRequest.where(user_id: user_id)
+      @profiled_requests = ProfiledRequest.where(user_id: user_id).order(id: :desc)
       @profiled_requests = @profiled_requests.where('request_path LIKE %?%', path) if params[:path]
     end
 
     def show
       @traces = @profiled_request.traces
                   .order(:start)
-                  .map { |trace| Models::Trace.from_model(trace.attributes) }
                   .map { |trace| present(trace, profiled_request: @profiled_request) }
     end
 

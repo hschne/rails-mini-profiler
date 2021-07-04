@@ -38,23 +38,23 @@ module RailsMiniProfiler
     # TODO: Add a bunch of validations
 
     def request=(request)
-      @request_body = request.body || ''
-      @request_method = request.method || 'GET'
-      @request_path = request.path || ''
-      @request_headers = request.headers || []
+      self.request_body = request.body || ''
+      self.request_method = request.method || 'GET'
+      self.request_path = request.path || ''
+      self.request_headers = request.headers || []
     end
 
     def response=(response)
-      @response_body = ''
-      @response_headers = response.headers || ''
-      @response_status = response.status || 200
+      self.response_body = ''
+      self.response_headers = response.headers || ''
+      self.response_status = response.status || 200
     end
 
     def total_time=(total_time)
-      @start = total_time.start
-      @finish = total_time.finish
-      @duration = total_time.duration
-      @allocations = total_time.allocations
+      self.start = total_time.start
+      self.finish = total_time.finish
+      self.duration = total_time.duration
+      self.allocations = total_time.allocations
     end
   end
 end

@@ -21,12 +21,11 @@ module RailsMiniProfiler
     end
 
     def complete_profiling!
-      @profiled_request.user_id = user_id
-      @profiled_request.request = @request
-      @profiled_request.response = @response
+      profiled_request.user_id = user_id
+      profiled_request.request = @request
+      profiled_request.response = @response
       total_time = traces.find { |trace| trace.name == 'rails_mini_profiler.total_time' }
-      traces.delete(total_time)
-      @profiled_request.total_time = total_time
+      profiled_request.total_time = total_time
     end
 
     def save_results!

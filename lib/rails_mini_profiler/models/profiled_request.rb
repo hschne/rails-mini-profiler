@@ -2,7 +2,7 @@
 
 module RailsMiniProfiler
   module Models
-    class ProfiledRequest < BaseModel
+    class ProfildRequest < BaseModel
       attr_accessor :id,
                     :user_id,
                     :start,

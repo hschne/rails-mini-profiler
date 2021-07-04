@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  class QueryTracePresenter < TracePresenter
+  class RmpTracePresenter < TracePresenter
     def description
-      model.payload['sql']
+      'Total Time'
     end
   end
 end
