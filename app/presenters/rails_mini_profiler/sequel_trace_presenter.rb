@@ -44,7 +44,6 @@ module RailsMiniProfiler
       model.sql.split.map(&:capitalize).join(' ')
     end
 
-
     def binding_content
       content = simple_binds.collect do |hash|
         flat = hash.to_a.flatten

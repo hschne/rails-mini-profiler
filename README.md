@@ -7,10 +7,10 @@
 
 Rails performance profiling, made simple.
 
-## What's this? 
+## What's this?
 
 Rails Mini Profiler is a fully-featured, simple performance profiler for your Rails applications. It is heavily inspired  
-by [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler), and aims at extending it's functionality while
+by [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler), and aims at extending its functionality while
 being dead simple to use.
 
 ## Getting Started
@@ -34,15 +34,15 @@ Inspect the generated migration in `migrate/YYYYmmDDHHMMSS_create_rmp.rb` and mi
 rails db:migrate
 ```
 
-Start your Rails application and perform some requests. You can either click the little hedgehog 🦔 on the top 
+Start your Rails application and perform some requests. You can either click the little hedgehog 🦔 on the top
 right or navigate to `/rails_mini_profiler` to view request profiles.
 
 ## Usage
 
-Rails Mini Profiler provides detailed information about your requests to help you figure out why certain requests perform poorly. 
+Rails Mini Profiler provides detailed information about your requests to help you figure out why certain requests perform poorly.
 
 Installing it will generate a new initializer `config/initializers/rails_mini_profiler.rb` and add a new
-route: 
+route:
 
 ```ruby
 # routes.rb
@@ -60,13 +60,13 @@ top right that is injected into your pages.
 
 TODO: Image goes here
 
-Requests to your application will be profiled automatically. You can all stored requests by navigating to `yourapp/rails_mini_profiler/profiled_requests`.
+Requests to your application will be profiled automatically. You can view all stored requests by navigating to `yourapp/rails_mini_profiler/profiled_requests`.
 
 ### Request Details
 
 TODO: Image goes here
 
-This view shows you how your requests spend their time. How much of it is spent in the DB, how much in rendering views? 
+This view shows you how your requests spend their time. How much of it is spent in the DB, how much in rendering views?
 By clicking on individual traces you can find out even more detailed information.
 
 ## Configuration
@@ -84,9 +84,7 @@ You can set the following configuration options in Rails Mini Profiler:
 
 ### Request Configuration
 
-You may override some initialzier configuration by sending requests with attached parameters.
-
-The following parameters are available:
+You may override the configuration by sending request parameters. The following parameters are available:
 
 | Option           | Description                                                                                 |
 |------------------|---------------------------------------------------------------------------------------------|
@@ -124,15 +122,15 @@ end
 
 ### Users
 
-Profiling information is segregated by user. That means, you will never see another users profiled requests. 
+Profiling information is segregated by user. That means users cannot see each other's profiled requests.
 
-Per default, individual users are identified by their IP address. You may change this by setting a custom user provider: 
+Per default, individual users are identified by their IP address. You may change this by setting a custom user provider:
 
 ```ruby
 config.user_provider = proc { |env| Rack::Request.new(env).ip }
 ```
 
-You may also explictly set the user from the application itself:
+You may also explicitly set the user from the application itself:
 
 ```ruby
 class ApplicationController < ActionController::Base
@@ -148,7 +146,7 @@ Note that you **must** set the current user when running Rails Mini Profiler in 
 
 ### Profiling in Production
 
-Rails Mini Profiler is not intended for performance reporting. There are other tools for that ( [Skylight](https://www.skylight.io/), 
+Rails Mini Profiler is not intended for performance reporting. There are other tools for that ( [Skylight](https://www.skylight.io/),
 [New Relic](https://newrelic.com/), [DataDog](https://www.datadoghq.com/)...).
 
 However, you can still use it in production to profile specific requests. Since profiling impacts performance, it is recommended
@@ -164,8 +162,7 @@ Only requests by explicitly set users will be stored. To configure how individua
 
 ## Development
 
-Tests and development runs will use the `Dummy` application, which resides in `spec/dummy`. To run Rails Mini Profiler locally 
-run `rails s`. To run the tests execute: 
+Tests and development runs will use the `Dummy` application, which resides in `spec/dummy`. To run Rails Mini Profiler locally execute `rails s`. To run the tests execute:
 
 ```ruby
 bundle exec rspec
@@ -180,11 +177,9 @@ bundle exec annotate --models --exclude tests,fixtures
 ## Credit
 
 This project was heavily inspired by projects such as [rack-mini-profiler](https://github.com/MiniProfiler/rack-mini-profiler) and
-[rack-profiler](https://github.com/dawanda/rack-profiler). [Skylight](https://www.skylight.io/) are my preferred profiler, and
-were also a huge influence.
+[rack-profiler](https://github.com/dawanda/rack-profiler). [Skylight](https://www.skylight.io/) was also a huge influence.
 
-Design and logo were graciously provided and implemented by [Lena Schnedlitz](https://github.com/LenaSchnedlitz), without who's
-supreme CSS skills this project would not have been possible :hands_raised:
+[Lena Schnedlitz](https://github.com/LenaSchnedlitz) designed the Logo and provided great support. Without her supreme CSS skills this project would not have been possible :hands_raised:
 
 ## Contributing
 

@@ -2,12 +2,9 @@
 
 - UI & Design
   - Add new icon
-  - Show better info for traces
-  - Disable icons for failed requests etc
-    - Remove flamegrpah icons if no flamegraphs
-    - Disable flamegraph icon if no flamegraph
-- Test in MT
 - Write tests
+- Test in MT
+- The usual CI
 - Review Readme
 
 # Next
