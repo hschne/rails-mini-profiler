@@ -7,14 +7,20 @@ module RailsMiniProfiler
     before_action :set_profiled_request, only: %i[show destroy]
 
     def index
-      @profiled_requests = ProfiledRequest.where(user_id: user_id).order(id: :desc)
-      @profiled_requests = @profiled_requests.where('request_path LIKE %?%', path) if params[:path]
+      @profiled_requests = ProfiledRequest
+                             .includes(:flamegraph)
+                             .where(user_id: user_id).order(id: :desc)
+      @profiled_requests = @profiled_requests.where('request_path LIKE ?', "%#{params[:path]}%") if params[:path]
+      @profiled_requests = @profiled_requests.map { |request| present(request) }
     end
 
     def show
       @traces = @profiled_request.traces
+      @traces = @traces.where('payload LIKE ?', "%#{params[:search]}%") if params[:search]
+      @traces = @traces
                   .order(:start)
                   .map { |trace| present(trace, profiled_request: @profiled_request) }
+      @profiled_request = present(@profiled_request)
     end
 
     def destroy

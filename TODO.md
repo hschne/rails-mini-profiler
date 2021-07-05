@@ -7,6 +7,7 @@
     - Remove flamegrpah icons if no flamegraphs
     - Disable flamegraph icon if no flamegraph
 - Test in MT
+- Write tests
 - Review Readme
 
 # Next

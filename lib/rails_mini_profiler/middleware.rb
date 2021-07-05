@@ -31,9 +31,10 @@ module RailsMiniProfiler
       Thread.current[:rails_mini_profiler_traces] = traces
     end
 
-    def track_trace(trace)
+    def track_trace(event)
       return if traces.nil?
 
+      trace = Tracers.build_trace(event)
       traces.append(trace)
     end
 

@@ -1,6 +1,6 @@
 <li class="trace <%= trace.type %>">
   <span class="trace-name " style="width: calc(calc(<%= trace.from_start_percent %>% * .9) + 10%)"><%= trace.label %></span>
-  <div class="trace-bar" style="width: calc(<%= trace.duration_percent %>% * .9)">
+  <div class="trace-bar" style="width: max(calc(<%= trace.duration_percent %>% * .9), 5px)">
     <div class="popover">
       <section class="popover-header">
         <h1 class="popover-description"><%= trace.description %></h1>
@@ -30,9 +30,11 @@
         </table>
       </section>
 
-      <section class="popover-footer">
-        <pre><%= trace.backtrace %></pre>
-      </section>
+      <% if trace.backtrace %>
+        <section class="popover-footer">
+          <pre><%= trace.backtrace %></pre>
+        </section>
+      <% end %>
     </div>
   </div>
 </li>

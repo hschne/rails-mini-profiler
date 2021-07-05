@@ -34,7 +34,7 @@ module RailsMiniProfiler
     end
 
     def duration
-      model.duration.to_f / 100
+      formatted_duration(model.duration)
     end
 
     def duration_percent

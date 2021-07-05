@@ -12,11 +12,8 @@ require 'rails_mini_profiler/user'
 require 'rails_mini_profiler/request_context'
 
 require 'rails_mini_profiler/models/base_model'
-require 'rails_mini_profiler/models/profiled_request'
 require 'rails_mini_profiler/models/trace'
-require 'rails_mini_profiler/models/query_trace'
-require 'rails_mini_profiler/models/controller_trace'
-require 'rails_mini_profiler/models/flamegraph'
+
 
 require 'rails_mini_profiler/configuration'
 require 'rails_mini_profiler/storage'

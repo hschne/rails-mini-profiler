@@ -13,12 +13,22 @@
 //= require rails-ujs
 //= require_tree .
 
-const profiledRequestNameSearch = document.getElementById('profiled-request-path-search')
+const profiledRequestNameSearch = document.getElementById('profiled-request-search')
 if (profiledRequestNameSearch) {
   profiledRequestNameSearch.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
       event.preventDefault()
       document.getElementById('profiled-request-search-form').submit()
+    }
+  })
+}
+
+const traceNameSearch = document.getElementById('trace-search')
+if (profiledRequestNameSearch) {
+  profiledRequestNameSearch.addEventListener('keyup', function (event) {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      document.getElementById('trace-form').submit()
     }
   })
 }

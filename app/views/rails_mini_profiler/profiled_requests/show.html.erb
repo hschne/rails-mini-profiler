@@ -4,7 +4,7 @@
   <ul class="request-details-data">
     <li class="data-item">
       <small>Method</small>
-      <span class="pill request-method request-method-<%= @profiled_request.request_method.downcase %>"><%= @profiled_request.request_method %></span>
+      <span class="pill request-method request-method-<%= @profiled_request.request_method %>"><%= @profiled_request.request_method %></span>
     </li>
     <li class="data-item">
       <small>Status</small>
@@ -12,7 +12,7 @@
     </li>
     <li class="data-item">
       <small>Response Time</small>
-      <span><%= (@profiled_request.duration.to_f / 100) %>ms</span>
+      <span><%= @profiled_request.duration %>ms</span>
     </li>
     <li class="data-item">
       <small>Allocations</small>
@@ -24,12 +24,10 @@
 </section>
 
 <section class="request-details-actions">
-  <%= form_with id: 'profiled-request-search-form', url: profiled_requests_url, method: :get do |form| %>
-    <%= form.search_field :path, id: 'profiled-request-path-search', placeholder: 'Search Traces...', class: 'profiled-request-path-search' %>
+  <%= form_with id: 'trace-form', url: profiled_request_url(@profiled_request.id), method: :get do |form| %>
+    <%= form.search_field :search, id: 'trace-search', placeholder: 'Search Traces...', class: 'search-field' %>
   <% end %>
-  <%= link_to(flamegraph_path(@profiled_request.id), title: 'Show Flamegraph', class: 'flamegraph-button') do %>
-    <button>Display Flamegraph</button>
-  <% end %>
+  <%= @profiled_request.flamegraph_button %>
 </section>
 
 <section>

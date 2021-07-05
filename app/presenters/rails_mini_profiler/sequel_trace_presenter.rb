@@ -24,17 +24,26 @@ module RailsMiniProfiler
       model.payload['name'] == 'TRANSACTION'
     end
 
+    def schema?
+      model.payload['name'] == 'SCHEMA'
+    end
+
     def sql_description
       if transaction?
         transaction_description
+      elsif schema?
+        'Load Schema'
       else
         model.payload['name']
       end
     end
 
     def transaction_description
+      # The raw SQL is something like 'BEGIN TRANSACTION', and we just turn it into 'Begin Transaction', which is less
+      # loud and nicer to look at.
       model.sql.split.map(&:capitalize).join(' ')
     end
+
 
     def binding_content
       content = simple_binds.collect do |hash|
