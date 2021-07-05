@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateRmp < ActiveRecord::Migration[6.1]
+class CreateRmp < ActiveRecord::Migration[6.0]
   def change
     create_table :rmp_profiled_requests do |t|
       t.string :user_id
