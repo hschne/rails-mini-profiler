@@ -13,6 +13,8 @@
 
 - Add appraisal, try to move back to older rails versions?
 - Rubydoc
+- JSON compression: 
+  - https://jetrockets.pro/blog/how-to-store-large-json-in-postgresql-with-rails-attributes-api
 - Accessibility
 - Parity with rack-profiler (https://github.com/dawanda/rack-profiler)
   - Backtrace filtering
