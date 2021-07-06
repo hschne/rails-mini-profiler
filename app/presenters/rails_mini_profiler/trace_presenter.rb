@@ -26,8 +26,8 @@ module RailsMiniProfiler
     end
 
     def type
-      # Turn this class name into a dasherized version for use in assigning CSS classes. E.g. 'RmpTracePresenter' becomes
-      # 'rmp-trace'
+      # Turn this class name into a dasherized version for use in assigning CSS classes. E.g. 'RmpTracePresenter'
+      # becomes 'rmp-trace'
       self.class.name.demodulize.delete_suffix('Presenter')
         .underscore
         .dasherize
