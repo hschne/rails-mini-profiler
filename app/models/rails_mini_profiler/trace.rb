@@ -17,7 +17,7 @@
 #  updated_at              :datetime         not null
 #
 module RailsMiniProfiler
-  class Trace < ApplicationRecord
+  class Trace < RailsMiniProfiler::ApplicationRecord
     self.table_name = 'rmp_traces'
     self.inheritance_column = :name
 

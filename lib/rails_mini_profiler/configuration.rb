@@ -2,6 +2,8 @@
 
 module RailsMiniProfiler
   class Configuration
+    attr_reader :logger
+
     attr_accessor :enabled,
                   :badge_enabled,
                   :flamegraph_enabled,
@@ -18,9 +20,18 @@ module RailsMiniProfiler
       @enabled = proc { |_env| Rails.env.development? || Rails.env.test? }
       @badge_enabled = true
       @flamegraph_enabled = true
+      @logger = RailsMiniProfiler::Logger.new(Rails.logger)
       @skip_paths = []
       @storage = Storage.new
       @user_provider = proc { |env| Rack::Request.new(env).ip }
+    end
+
+    def logger=(logger)
+      if logger.nil?
+        @logger.level = Logger::FATAL
+      else
+        @logger = logger
+      end
     end
   end
 end

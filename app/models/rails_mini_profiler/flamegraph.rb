@@ -11,7 +11,7 @@
 #  updated_at              :datetime         not null
 #
 module RailsMiniProfiler
-  class Flamegraph < ApplicationRecord
+  class Flamegraph < RailsMiniProfiler::ApplicationRecord
     self.table_name = 'rmp_flamegraphs'
 
     belongs_to :profiled_request, class_name: 'RailsMiniProfiler::ProfiledRequest',

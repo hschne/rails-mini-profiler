@@ -10,6 +10,8 @@ module RailsMiniProfiler
       @profiler_context = profiler_context
       @request = request
       @env = request.env
+      @saved = false
+      @complete = false
     end
 
     def user_id
@@ -26,6 +28,7 @@ module RailsMiniProfiler
       profiled_request.response = @response
       total_time = traces.find { |trace| trace.name == 'rails_mini_profiler.total_time' }
       profiled_request.total_time = total_time
+      @complete = true
     end
 
     def save_results!
@@ -34,6 +37,15 @@ module RailsMiniProfiler
         profiled_request.save
         insert_traces unless traces.empty?
       end
+      @saved = true
+    end
+
+    def complete?
+      @complete
+    end
+
+    def saved?
+      @saved
     end
 
     private

@@ -21,7 +21,8 @@
 #  updated_at       :datetime         not null
 #
 module RailsMiniProfiler
-  class ProfiledRequest < ApplicationRecord
+  class ProfiledRequest < RailsMiniProfiler::ApplicationRecord
+
     # TODO: Make customizable via configuration
     self.table_name = 'rmp_profiled_requests'
 

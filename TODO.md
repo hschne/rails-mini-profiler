@@ -4,11 +4,14 @@
   - Add new icon
 - Write tests
 - Test in MT
+  - Add proper logging
+  - Handle all errors
 - The usual CI
 - Review Readme
 
 # Next
 
+- Add appraisal, try to move back to older rails versions?
 - Rubydoc
 - Accessibility
 - Parity with rack-profiler (https://github.com/dawanda/rack-profiler)

@@ -14,6 +14,8 @@ require 'rails_mini_profiler/request_context'
 require 'rails_mini_profiler/models/base_model'
 require 'rails_mini_profiler/models/trace'
 
+
+require 'rails_mini_profiler/logger'
 require 'rails_mini_profiler/configuration'
 require 'rails_mini_profiler/storage'
 require 'rails_mini_profiler/profiler_context'
@@ -42,6 +44,10 @@ module RailsMiniProfiler
 
     def context
       @context ||= ProfilerContext.instance(configuration)
+    end
+
+    def logger
+      @logger ||= configuration.logger
     end
 
     def authorize!(current_user)

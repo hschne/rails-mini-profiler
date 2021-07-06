@@ -4,11 +4,14 @@ module RailsMiniProfiler
   class Middleware
     def initialize(app)
       @app = app
+      # TODO: Remove context, its not needed
       @context = RailsMiniProfiler.context
+      @config = RailsMiniProfiler.configuration
       Tracers.setup! { |trace| track_trace(trace) }
     end
 
     def call(env)
+      RailsMiniProfiler.logger.debug('This is a debug message')
       request = RequestWrapper.new(env)
       request_context = RequestContext.new(@context, request)
       return @app.call(env) unless Guard.new(request_context).profile?
@@ -18,9 +21,8 @@ module RailsMiniProfiler
       return result unless request_context.authorized?
 
       request_context.response = ResponseWrapper.new(*result)
-      complete(request_context)
-
-      render_response(request_context)
+      complete!(request_context)
+      request_context.saved? ? render_response(request_context) : result
     end
 
     def traces
@@ -40,9 +42,13 @@ module RailsMiniProfiler
 
     private
 
-    def complete(request_context)
+    def complete!(request_context)
       request_context.complete_profiling!
       request_context.save_results!
+      true
+    rescue ActiveRecord::ActiveRecordError => e
+      RailsMiniProfiler.logger.error("Could not save profile: #{e}")
+      false
     end
 
     def render_response(request_context)
