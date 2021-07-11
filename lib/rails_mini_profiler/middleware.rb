@@ -4,8 +4,6 @@ module RailsMiniProfiler
   class Middleware
     def initialize(app)
       @app = app
-      # TODO: Remove context, its not needed
-      @context = RailsMiniProfiler.context
       @config = RailsMiniProfiler.configuration
       Tracers.setup! { |trace| track_trace(trace) }
     end
@@ -13,7 +11,7 @@ module RailsMiniProfiler
     def call(env)
       RailsMiniProfiler.logger.debug('This is a debug message')
       request = RequestWrapper.new(env)
-      request_context = RequestContext.new(@context, request)
+      request_context = RequestContext.new(request)
       return @app.call(env) unless Guard.new(request_context).profile?
 
       request_context.profiled_request = ProfiledRequest.new

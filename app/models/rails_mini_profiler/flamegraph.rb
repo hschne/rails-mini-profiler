@@ -12,7 +12,7 @@
 #
 module RailsMiniProfiler
   class Flamegraph < RailsMiniProfiler::ApplicationRecord
-    self.table_name = 'rmp_flamegraphs'
+    self.table_name = RailsMiniProfiler.storage_configuration.flamegraphs_table
 
     belongs_to :profiled_request,
                class_name: 'RailsMiniProfiler::ProfiledRequest',

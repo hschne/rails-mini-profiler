@@ -2,6 +2,10 @@
 
 module RailsMiniProfiler
   class ApplicationRecord < ActiveRecord::Base
+    if RailsMiniProfiler.storage_configuration.database.present?
+      establish_connection(RailsMiniProfiler.storage_configuration.database.present?)
+    end
+
     self.abstract_class = true
 
     def self.record_timestamps

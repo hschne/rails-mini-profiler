@@ -2,12 +2,11 @@
 
 module RailsMiniProfiler
   class RequestContext
-    attr_reader :request, :profiler_context
+    attr_reader :request
 
     attr_accessor :response, :profiled_request, :traces, :flamegraph
 
-    def initialize(profiler_context, request)
-      @profiler_context = profiler_context
+    def initialize(request)
       @request = request
       @env = request.env
       @saved = false

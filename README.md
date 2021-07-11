@@ -106,12 +106,12 @@ You may override the configuration by sending request parameters. The following 
 Rails Mini Profiler stores profiling information in your database per default. You can configure various details of how
 traces and requests are stored.
 
-| Configuration            | Default                 | Description                                      |
-|--------------------------|-------------------------|--------------------------------------------------|
-| `profiled_request_table` | `rmp_profiled_requests` | The table to be used to store profiled requests. |
-| `flamegraph_table`       | `rmp_flamegraphs`       | The table to be used to store flamegraphs.       |
-| `trace_table`            | `rmp_traces`            | The table to be used to store traces.            |
-
+| Configuration             | Default                 | Description                                                                                               |
+|---------------------------|-------------------------|-----------------------------------------------------------------------------------------------------------|
+| `database`                | `nil`                   | Set a custom database to be used for storing profiler information. Uses `connect_to` for profiler records |
+| `profiled_requests_table` | `rmp_profiled_requests` | The table to be used to store profiled requests.                                                          |
+| `flamegraphs_table`       | `rmp_flamegraphs`       | The table to be used to store flamegraphs.                                                                |
+| `traces_table`            | `rmp_traces`            | The table to be used to store traces.                                                                     |
 
 Rails Mini Profiler does not offer an automatic way to clean up old profiling information. It is recommended you add a sweeper job to clean up old profiled requests periodically (e.g. using [clockwork](https://github.com/adamwiggins/clockwork). For example, with ActiveJob:
 

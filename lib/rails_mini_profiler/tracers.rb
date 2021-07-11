@@ -36,7 +36,6 @@ module RailsMiniProfiler
 
       def subscribe(*subscriptions, &callback)
         subscriptions.each do |subscription|
-          # TODO: Use monotonic if rails 6.1
           ActiveSupport::Notifications.subscribe(subscription) do |event|
             callback.call(event)
           end

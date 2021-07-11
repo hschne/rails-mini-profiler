@@ -18,9 +18,8 @@
 #
 module RailsMiniProfiler
   class Trace < RailsMiniProfiler::ApplicationRecord
-    self.table_name = 'rmp_traces'
+    self.table_name = RailsMiniProfiler.storage_configuration.traces_table
     self.inheritance_column = :name
-
 
     belongs_to :profiled_request,
                class_name: 'RailsMiniProfiler::ProfiledRequest',

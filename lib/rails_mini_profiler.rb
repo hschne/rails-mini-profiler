@@ -17,7 +17,6 @@ require 'rails_mini_profiler/models/trace'
 require 'rails_mini_profiler/logger'
 require 'rails_mini_profiler/configuration'
 require 'rails_mini_profiler/storage'
-require 'rails_mini_profiler/profiler_context'
 require 'rails_mini_profiler/request_wrapper'
 require 'rails_mini_profiler/response_wrapper'
 require 'rails_mini_profiler/guard'
@@ -39,10 +38,6 @@ module RailsMiniProfiler
 
     def storage_configuration
       configuration.storage.configuration
-    end
-
-    def context
-      @context ||= ProfilerContext.instance(configuration)
     end
 
     def logger

@@ -22,8 +22,7 @@
 #
 module RailsMiniProfiler
   class ProfiledRequest < RailsMiniProfiler::ApplicationRecord
-    # TODO: Make customizable via configuration
-    self.table_name = 'rmp_profiled_requests'
+    self.table_name = RailsMiniProfiler.storage_configuration.profiled_requests_table
 
     has_one :flamegraph,
             class_name: 'RailsMiniProfiler::Flamegraph',
@@ -34,8 +33,6 @@ module RailsMiniProfiler
              class_name: 'RailsMiniProfiler::Trace',
              foreign_key: :rmp_profiled_request_id,
              dependent: :destroy
-
-    # TODO: Add a bunch of validations
 
     def request=(request)
       self.request_body = request.body || ''

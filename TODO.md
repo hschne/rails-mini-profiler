@@ -11,25 +11,21 @@
 
 # Next
 
-- Collapse/Compress Traces
-- Add pagination
-- N+1 detection
-- Switch between memory/time mode 
-- Add appraisal, try to move back to older rails versions?
-- Filter Traces
-  - View/DB/UI
-  - Based on Trace Type
+- UX Improvements
+  - Collapse/Compress Traces
+  - Add pagination
+  - N+1 detection
+  - Switch between memory/time mode 
+  - Filter Traces
+    - View/DB/UI
+    - Based on Trace Type
+  - Accessibility
+  - Backtrace filtering (Parity with rack-profiler (https://github.com/dawanda/rack-profiler))
+- Add appraisal, try to support to older rails versions?
 - Rubydoc
-- JSON compression: 
-  - https://jetrockets.pro/blog/how-to-store-large-json-in-postgresql-with-rails-attributes-api
-- Accessibility
-- Parity with rack-profiler (https://github.com/dawanda/rack-profiler)
-  - Backtrace filtering
-- Parity with rack-mini-profiler:
-  - Live request handling (params)
-- Parity with skylight
-  - Better UI filtering
-  - Probes
+- Code Cleanup
+  - Validations on Models
+  - Use Rails 6.1 features (monotonic subscribe, multiple databases)
 
 # Future
 

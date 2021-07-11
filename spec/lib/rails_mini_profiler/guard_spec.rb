@@ -7,14 +7,9 @@ module RailsMiniProfiler
     describe 'profile?' do
       let(:request) { RequestWrapper.new({}) }
       let(:configuration) { Configuration.new }
-      let(:profiler_context) { ProfilerContext.new(configuration) }
-      let(:request_context) { RequestContext.new(profiler_context, request) }
+      let(:request_context) { RequestContext.new(request) }
 
-      subject { Guard.new(request_context) }
-
-      before do
-        RailsMiniProfiler.configuration.reset
-      end
+      subject { Guard.new(request_context, configuration: configuration) }
 
       context 'with path' do
         let(:request) { RequestWrapper.new('PATH_INFO' => '/') }

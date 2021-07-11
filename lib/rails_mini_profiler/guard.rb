@@ -2,10 +2,10 @@
 
 module RailsMiniProfiler
   class Guard
-    def initialize(request_context)
+    def initialize(request_context, configuration: RailsMiniProfiler.configuration)
       @request_context = request_context
       @request = request_context.request
-      @configuration = request_context.profiler_context.configuration
+      @configuration = configuration
     end
 
     def profile?
@@ -39,7 +39,6 @@ module RailsMiniProfiler
     def enabled?
       return @configuration.enabled unless @configuration.respond_to?(:call)
 
-      # TODO: Use request wrapper here for easy access to headers etc
       @configuration.call(@request.env)
     end
   end

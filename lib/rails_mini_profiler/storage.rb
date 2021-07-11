@@ -4,7 +4,7 @@ module RailsMiniProfiler
   class Storage
     class << self
       def configuration
-        @configuration ||= new.configuration
+        @configuration ||= new
       end
 
       def configure
@@ -12,17 +12,18 @@ module RailsMiniProfiler
       end
     end
 
-    attr_accessor :profiled_request_table, :trace_table, :flamegraph_table
+    attr_accessor :database, :profiled_requests_table, :traces_table, :flamegraphs_table
 
     def initialize(**kwargs)
+      defaults!
       kwargs.each { |key, value| instance_variable_set("@#{key}", value) }
     end
 
     def defaults!
-      super
-      @profiled_request_table = 'profiled_requests'
-      @flamegraph_table = 'flamegraphs'
-      @trace_table = 'traces'
+      @database = nil
+      @profiled_requests_table = 'rmp_profiled_requests'
+      @flamegraphs_table = 'rmp_flamegraphs'
+      @traces_table = 'rmp_traces'
     end
   end
 end
