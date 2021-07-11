@@ -83,14 +83,15 @@ you may have to amend your content security policy. See [Troubleshooting](#Troub
 
 You can set the following configuration options in Rails Mini Profiler:
 
-| Option               | Default                      | Description                                                           |
-|----------------------|------------------------------|-----------------------------------------------------------------------|
-| `enabled`            | `true` (dev)/ `false` (prod) | Whether or not RMP is enabled                                         |
-| `badge_enabled`      | `true`                       | Should the hedgehog 🦔 badge be injected into pages?                   |
-| `flamegraph_enabled` | `true`                       | Should flamegraphs be recorded automatically?                         |
-| `skip_paths`         | `[]`                         | An array of request paths that should not be profiled. Regex allowed. |
-| `storage`            | `Storage`                    | Storage configuration. See [Storage](#Storage)                         |
-| `user_provider`      | `Rack::Request.new(env).ip`  | How to identify users. See [Users](#Users)                            |
+| Option               | Default                      | Description                                                                                     |
+|----------------------|------------------------------|-------------------------------------------------------------------------------------------------|
+| `enabled`            | `true` (dev)/ `false` (prod) | Whether or not RMP is enabled                                                                   |
+| `badge_enabled`      | `true`                       | Should the hedgehog 🦔 badge be injected into pages?                                            |
+| `badge_position`     | `'top-left'`                 | Where to display the badge. Options are `'top-left', 'top-right', 'bottom-left, 'bottom-right'` |
+| `flamegraph_enabled` | `true`                       | Should flamegraphs be recorded automatically?                                                   |
+| `skip_paths`         | `[]`                         | An array of request paths that should not be profiled. Regex allowed.                           |
+| `storage`            | `Storage`                    | Storage configuration. See [Storage](#Storage)                                                  |
+| `user_provider`      | `Rack::Request.new(env).ip`  | How to identify users. See [Users](#Users)                                                      |
 
 ### Request Configuration
 

@@ -33,8 +33,10 @@ module RailsMiniProfiler
         transaction_description
       elsif schema?
         'Load Schema'
-      else
+      elsif model.payload['name'].present?
         model.payload['name']
+      else
+        model.payload['sql'].truncate(15)
       end
     end
 

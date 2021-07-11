@@ -6,6 +6,7 @@ module RailsMiniProfiler
 
     attr_accessor :enabled,
                   :badge_enabled,
+                  :badge_position,
                   :flamegraph_enabled,
                   :skip_paths,
                   :storage,
@@ -19,6 +20,7 @@ module RailsMiniProfiler
     def reset
       @enabled = proc { |_env| Rails.env.development? || Rails.env.test? }
       @badge_enabled = true
+      @badge_position = 'top-left'
       @flamegraph_enabled = true
       @logger = RailsMiniProfiler::Logger.new(Rails.logger)
       @skip_paths = []

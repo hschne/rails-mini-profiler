@@ -40,8 +40,22 @@ module RailsMiniProfiler
 
     def badge_content
       html = IO.read(File.expand_path('../../app/views/rails_mini_profiler/badge.html.erb', __dir__))
+      @position = css_position
       template = ERB.new(html)
       template.result(binding)
+    end
+
+    def css_position
+      case RailsMiniProfiler.configuration.badge_position
+      when 'top-right'
+        'top: 5px; right: 5px;'
+      when 'bottom-left'
+        'bottom: 5px; left: 5px;'
+      when 'bottom-right'
+        'bottom: 5px; right: 5px;'
+      else
+        'top: 5px; left: 5px;'
+      end
     end
   end
 end
