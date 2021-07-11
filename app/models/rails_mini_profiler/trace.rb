@@ -5,7 +5,7 @@
 # Table name: rmp_traces
 #
 #  id                      :integer          not null, primary key
-#  rmp_profiled_request_id :integer          not null
+#  rmp_profiled_request_id :bigint           not null
 #  name                    :string
 #  start                   :integer
 #  finish                  :integer
@@ -21,14 +21,6 @@ module RailsMiniProfiler
     self.table_name = 'rmp_traces'
     self.inheritance_column = :name
 
-    SUBCLASSES = {
-      RailsMiniProfiler::ControllerTrace => 'process_action.action_controller',
-      RailsMiniProfiler::SequelTrace => 'sql.active_record',
-      RailsMiniProfiler::InstantiationTrace => 'instantiation.active_record',
-      RailsMiniProfiler::RmpTrace => 'rails_mini_profiler.total_time',
-      RailsMiniProfiler::RenderTemplateTrace => 'render_template.action_view',
-      RailsMiniProfiler::RenderPartialTrace => 'render_partial.action_view'
-    }.freeze
 
     belongs_to :profiled_request,
                class_name: 'RailsMiniProfiler::ProfiledRequest',
@@ -36,7 +28,15 @@ module RailsMiniProfiler
 
     class << self
       def find_sti_class(name)
-        SUBCLASSES.invert[name] || self
+        subclasses = {
+          RailsMiniProfiler::ControllerTrace => 'process_action.action_controller',
+          RailsMiniProfiler::SequelTrace => 'sql.active_record',
+          RailsMiniProfiler::InstantiationTrace => 'instantiation.active_record',
+          RailsMiniProfiler::RmpTrace => 'rails_mini_profiler.total_time',
+          RailsMiniProfiler::RenderTemplateTrace => 'render_template.action_view',
+          RailsMiniProfiler::RenderPartialTrace => 'render_partial.action_view'
+        }
+        subclasses.invert[name] || self
       end
     end
   end

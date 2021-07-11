@@ -46,6 +46,7 @@ module RailsMiniProfiler
 
     def response=(response)
       self.response_body = ''
+      self.response_media_type = response.media_type
       self.response_headers = response.headers || ''
       self.response_status = response.status || 200
     end

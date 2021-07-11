@@ -15,6 +15,7 @@ class CreateRmp < ActiveRecord::Migration[6.0]
       t.integer :response_status
       t.json :response_body
       t.json :response_headers
+      t.string :response_media_type
 
       t.timestamps
     end
@@ -34,7 +35,7 @@ class CreateRmp < ActiveRecord::Migration[6.0]
 
     create_table :rmp_flamegraphs do |t|
       t.belongs_to :rmp_profiled_request, null: false, foreign_key: true
-      t.json :data
+      t.binary :data
 
       t.timestamps
     end

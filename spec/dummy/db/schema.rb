@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 2021_07_02_114107) do
   end
 
   create_table "rmp_flamegraphs", force: :cascade do |t|
-    t.integer "rmp_profiled_request_id", null: false
-    t.json "data"
+    t.bigint "rmp_profiled_request_id", null: false
+    t.binary "data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["rmp_profiled_request_id"], name: "index_rmp_flamegraphs_on_rmp_profiled_request_id"
@@ -43,12 +43,13 @@ ActiveRecord::Schema.define(version: 2021_07_02_114107) do
     t.integer "response_status"
     t.json "response_body"
     t.json "response_headers"
+    t.string "response_media_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "rmp_traces", force: :cascade do |t|
-    t.integer "rmp_profiled_request_id", null: false
+    t.bigint "rmp_profiled_request_id", null: false
     t.string "name"
     t.integer "start"
     t.integer "finish"

@@ -13,7 +13,7 @@ module RailsMiniProfiler
     private
 
     def set_flamegraph
-      @flamegraph = Flamegraph.find(params[:id]).data
+      @flamegraph = Flamegraph.find(params[:id]).json_data
     end
 
     def configuration

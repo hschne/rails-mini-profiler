@@ -11,10 +11,11 @@
 
 # Next
 
-- Add appraisal, try to move back to older rails versions?
 - Collapse/Compress Traces
+- Add pagination
 - N+1 detection
 - Switch between memory/time mode 
+- Add appraisal, try to move back to older rails versions?
 - Filter Traces
   - View/DB/UI
   - Based on Trace Type

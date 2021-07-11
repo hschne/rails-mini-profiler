@@ -47,6 +47,8 @@ module RailsMiniProfiler
     end
 
     def binding_content
+      return nil if simple_binds.empty?
+
       content = simple_binds.collect do |hash|
         flat = hash.to_a.flatten
         "#{flat.first}=#{flat.second}"
