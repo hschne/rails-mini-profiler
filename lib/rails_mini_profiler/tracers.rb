@@ -4,6 +4,7 @@ module RailsMiniProfiler
   class Tracers
     DEFAULT_SUBSCRIPTIONS = %w[
       sql.active_record
+      instantiation.active_record
       render_template.action_view
       render_partial.action_view
       process_action.action_controller
@@ -51,7 +52,7 @@ module RailsMiniProfiler
         when 'process_action.action_controller'
           transform_controller_event(event)
         else
-          {}
+          event.payload
         end
       end
 

@@ -4,14 +4,20 @@
   - Add new icon
 - Write tests
 - Test in MT
-  - Add proper logging
-  - Handle all errors
+  - GraphQL requests
 - The usual CI
 - Review Readme
+  - Create screenshots, screencast
 
 # Next
 
 - Add appraisal, try to move back to older rails versions?
+- Collapse/Compress Traces
+- N+1 detection
+- Switch between memory/time mode 
+- Filter Traces
+  - View/DB/UI
+  - Based on Trace Type
 - Rubydoc
 - JSON compression: 
   - https://jetrockets.pro/blog/how-to-store-large-json-in-postgresql-with-rails-attributes-api
@@ -23,14 +29,10 @@
 - Parity with skylight
   - Better UI filtering
   - Probes
-- Collapse Traces
-- Filter Traces
-  - View/DB/UI
-  - Based on Probe
-- Custom Probes
 
 # Future
 
+- Custom Probes
 - Pin Requests
 - Per Person Settings
 - Jobs & Mailers

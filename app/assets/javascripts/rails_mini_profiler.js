@@ -13,6 +13,7 @@
 //= require rails-ujs
 //= require_tree .
 
+// Request Search
 const profiledRequestNameSearch = document.getElementById('profiled-request-search')
 if (profiledRequestNameSearch) {
   profiledRequestNameSearch.addEventListener('keyup', function (event) {
@@ -23,6 +24,9 @@ if (profiledRequestNameSearch) {
   })
 }
 
+// Profiled Request Table
+
+// Trace Search
 const traceNameSearch = document.getElementById('trace-search')
 if (profiledRequestNameSearch) {
   profiledRequestNameSearch.addEventListener('keyup', function (event) {
@@ -33,10 +37,29 @@ if (profiledRequestNameSearch) {
   })
 }
 
+function setupTable() {
+  const profiledRequestTable = document.getElementById('profiled-requests-table');
+  if (profiledRequestTable) {
+    const rows = profiledRequestTable.getElementsByTagName('tr')
+    for (let i = 0; i < rows.length; i++) {
+      const currentRow = profiledRequestTable.rows[i]
+      const link = currentRow.dataset.link
+      const createClickHandler = function (currentRow) {
+        return function () {
+          window.location.href = link
+        }
+      }
+      currentRow.onclick = createClickHandler(currentRow)
+    }
+  }
+}
+
+
+// Trace Bar Popovers
 document.addEventListener('DOMContentLoaded', () => {
-  const traceBars = document.querySelectorAll('.trace-bar');
+  const traceBars = document.querySelectorAll('.trace-bar')
   traceBars.forEach((bar) => {
-    const popover = bar.children[0];
+    const popover = bar.children[0]
     tippy(bar, {
       trigger: 'click',
       content: popover,
@@ -56,5 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
       },
     })
   })
-}, false);
+
+  setupTable();
+
+
+}, false)
 

@@ -19,7 +19,7 @@
       <button>Clear Requests</button>
     <% end %>
   </div>
-  <table class="table">
+  <table id="profiled-requests-table" class="table">
     <thead>
     <tr>
       <th class="text-left">Path</th>
@@ -34,7 +34,7 @@
 
     <tbody>
     <% @profiled_requests.each do |profiled_request| %>
-      <tr>
+      <tr data-link="<%= profiled_request_path(profiled_request.id)%>">
         <td class="request-path"><%= profiled_request.request_path %></td>
         <td> <%= profiled_request.request_method %> </td>
         <td> <%= profiled_request.response_status %> </td>
@@ -47,7 +47,7 @@
             <%= inline_svg_tag('rails_mini_profiler/show.svg', options = {}) %>
           <% end %>
           <%= profiled_request.flamegraph_icon %>
-          <%= link_to(profiled_request_path(profiled_request.id), title: 'Show Details', method: :delete) do %>
+          <%= link_to(profiled_request_path(profiled_request.id), title: 'Delete Request', method: :delete) do %>
             <%= inline_svg_tag('rails_mini_profiler/delete.svg', options = {}) %>
           <% end %>
         </td>

@@ -29,6 +29,10 @@
   background: linear-gradient(to top right, var(--grey-500), var(--grey-400));
 }
 
+.instantiation-trace .trace-bar {
+  background: linear-gradient(to top right, var(--green-400), var(--green-300));
+}
+
 .sequel-trace .trace-bar {
   background: linear-gradient(to top right, var(--green-500), var(--green-400));
 }
@@ -36,6 +40,7 @@
 .controller-trace .trace-bar {
   background: linear-gradient(to top right, var(--yellow-500), var(--yellow-400));
 }
+
 .render-template-trace .trace-bar,
 .render-partial-trace .trace-bar {
   background: linear-gradient(to top right, var(--blue-500), var(--blue-400));

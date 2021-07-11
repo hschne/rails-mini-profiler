@@ -76,10 +76,15 @@ main {
 .table tr {
   border: solid 1px var(--border-color);
   color: var(--grey-700);
+  cursor: pointer;
+}
+
+.table tr:nth-child(even) {
+  background: var(--grey-50);
 }
 
 .table tbody tr:hover {
-  background: var(--grey-50);
+  background: var(--grey-100);
 }
 
 .table th,
@@ -96,13 +101,22 @@ main {
 }
 
 .request-buttons {
+  z-index: 1;
   text-align: right;
 }
 
 .request-buttons a {
   text-decoration: none;
   padding: 0 .25rem;
+  color: var(--grey-700);
 }
+
+.request-buttons a:active,
+.request-buttons a:focus-visible,
+.request-buttons a:hover {
+  color: var(--blue-500);
+}
+
 
 .request-details-data {
   display: flex;

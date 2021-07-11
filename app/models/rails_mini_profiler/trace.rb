@@ -24,6 +24,7 @@ module RailsMiniProfiler
     SUBCLASSES = {
       RailsMiniProfiler::ControllerTrace => 'process_action.action_controller',
       RailsMiniProfiler::SequelTrace => 'sql.active_record',
+      RailsMiniProfiler::InstantiationTrace => 'instantiation.active_record',
       RailsMiniProfiler::RmpTrace => 'rails_mini_profiler.total_time',
       RailsMiniProfiler::RenderTemplateTrace => 'render_template.action_view',
       RailsMiniProfiler::RenderPartialTrace => 'render_partial.action_view'
