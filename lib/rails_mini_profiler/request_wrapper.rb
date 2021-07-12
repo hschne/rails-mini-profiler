@@ -2,31 +2,22 @@
 
 module RailsMiniProfiler
   class RequestWrapper
-    attr_reader :env
+    attr_reader :body,
+                :method,
+                :path,
+                :query_string,
+                :env
 
     def initialize(env = {})
       @env = env
-    end
-
-    def method
-      @env['REQUEST_METHOD']
+      @method = @env['REQUEST_METHOD'] || 'GET'
+      @query_string = @env['QUERY_STRING'] || ''
+      @path = @env['PATH_INFO'] || '/'
+      @body = @env['rack.input']&.read || ''
     end
 
     def headers
-      @env.select { |k, _v| k.start_with? 'HTTP_' }
-    end
-
-    def query_string
-      @env['QUERY_STRING']
-    end
-
-    def path
-      # Some requests do not have request path set, we fall back to path info
-      @env['PATH_INFO']
-    end
-
-    def body
-      @env['rack.input']&.read
+      @env.select { |k, _v| k.start_with? 'HTTP_' } || []
     end
 
     private

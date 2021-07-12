@@ -12,11 +12,21 @@ module RailsMiniProfiler
     end
 
     def body
-      response&.body || {}
+      return '' unless json? || xml?
+
+      response&.body || ''
     end
 
     def media_type
       @media_type ||= @rack_response.media_type
+    end
+
+    def json?
+      media_type =~ %r{application/json}
+    end
+
+    def xml?
+      media_type =~ %r{application/xml}
     end
   end
 end
