@@ -41,6 +41,10 @@ module RailsMiniProfiler
       (model.duration.to_f / @profiled_request.duration * 100).round
     end
 
+    def allocations
+      formatted_allocations(model.allocations)
+    end
+
     def allocations_percent
       (model.allocations.to_f / @profiled_request.allocations * 100).round
     end

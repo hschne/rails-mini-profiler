@@ -1,0 +1,8 @@
+{
+  id: movie.id,
+  imdb_id: movie.imdb_id,
+  popularity: movie.popularity,
+  revenue: movie.revenue,
+  title: movie.title,
+  runtime: movie.runtime
+}

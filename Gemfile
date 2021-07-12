@@ -18,6 +18,7 @@ end
 group :test, :development do
   gem 'activerecord-import'
   gem 'pry'
+  gem 'jb'
   gem 'stackprof'
 end
 

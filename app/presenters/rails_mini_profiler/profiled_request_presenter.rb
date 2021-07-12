@@ -6,6 +6,10 @@ module RailsMiniProfiler
       formatted_duration(model.duration)
     end
 
+    def allocations
+      formatted_allocations(model.allocations)
+    end
+
     def created_at
       time_tag(model.created_at.in_time_zone(Time.zone))
     end
