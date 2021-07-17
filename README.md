@@ -2,9 +2,9 @@
 
 # Rails Mini Profiler
 
-Performance profiling for Rails, made simple.
+<img alt="logo" src="logo.png" width="300px" height="auto">
 
-<img alt="logo" src="logo.png" style="border-radius: 50%;">
+### Performance profiling for Rails, made simple.
 
 [![Gem Version](https://badge.fury.io/rb/graphql-groups.svg)](https://badge.fury.io/rb/graphql-groups)
 [![Build Status](https://github.com/hschne/graphql-groups/workflows/Build/badge.svg)](https://github.com/hschne/graphql-groups/workflows/Build/badge.svg)
@@ -14,9 +14,7 @@ Performance profiling for Rails, made simple.
 
 ## What's this?
 
-Rails Mini Profiler is a fully-featured performance profiler for your Rails applications. It is heavily inspired  
-by [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler), and aims at extending its functionality while
-being easy to use.
+Rails Mini Profiler is a fully-featured performance profiler for your Rails applications. It is heavily inspired  by [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler), and aims at extending its functionality while being easy to use.
 
 ## Getting Started
 
@@ -33,14 +31,14 @@ bundle install
 rails rail_mini_profiler:install
 ```
 
-Inspect the generated migration in `migrate/YYYYmmDDHHMMSS_create_rmp.rb` and migrate:
+Inspect the generated migration in `db/migrate` and run it:
 
 ```
 rails db:migrate
 ```
 
 Start your Rails application and perform some requests. You can either click the little hedgehog 🦔 on the top
-right or navigate to `/rails_mini_profiler` to view request profiles.
+right or navigate to `/rails_mini_profiler` to view collected performance metrics.
 
 ## Usage
 
