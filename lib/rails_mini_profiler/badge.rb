@@ -2,6 +2,7 @@
 
 module RailsMiniProfiler
   class Badge
+    include InlineSvg::ActionView::Helpers
     include Engine.routes.url_helpers
 
     def initialize(request_context)

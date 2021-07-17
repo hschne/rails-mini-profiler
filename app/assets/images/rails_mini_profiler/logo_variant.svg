@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1070" height="1070" viewBox="0 0 1070 1070" version="1.1">
+  <style>path{fill:none;stroke-width:64;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4}</style>
+  <defs>
+    <linearGradient id="lightShadow">
+      <stop offset="0" style="stop-color:#c22121;stop-opacity:1"/>
+      <stop offset="1" style="stop-color:#9c1a1a;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="darkShadow">
+      <stop offset="0" style="stop-color:#9c1a1a;stop-opacity:1"/>
+      <stop offset="1" style="stop-color:#9c1a1a;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="pinkToOrange">
+      <stop offset="0" style="stop-color:#f21d88"/>
+      <stop offset="0.8" style="stop-color:#dc2626"/>
+      <stop offset="1" style="stop-color:#f23c1d"/>
+    </linearGradient>
+    <linearGradient xlink:href="#pinkToOrange" id="default" gradientUnits="userSpaceOnUse" x1="1246.198" y1="1275.081" x2="111.563" y2="237.888"/>
+    <linearGradient xlink:href="#pinkToOrange" id="eye" gradientUnits="userSpaceOnUse" x1="660" y1="738.714" x2="761.286" y2="637.429"/>
+    <linearGradient xlink:href="#darkShadow" id="leftLeg" gradientUnits="userSpaceOnUse" x1="279" y1="791" x2="279" y2="855"/>
+    <linearGradient xlink:href="#darkShadow" id="rightLeg" gradientUnits="userSpaceOnUse" x1="407" y1="791" x2="407" y2="855"/>
+    <linearGradient xlink:href="#lightShadow" id="nose" gradientUnits="userSpaceOnUse" x1="794.286" y1="535" x2="919" y2="663"/>
+  </defs>
+  <circle r="32" cy="663" cx="727" style="fill:url(#eye)"/>
+  <path d="m279 791v64" style="stroke:url(#default)"/>
+  <path d="m279 791.505v64" style="stroke:url(#leftLeg)"/>
+  <path d="m407 791v64" style="stroke:url(#default)"/>
+  <path d="m407 791v64" style="stroke:url(#rightLeg)"/>
+  <path d="m599 791c-30.074 0-64 18.798-64 64" style="stroke:url(#default)"/>
+  <path d="m791 535c15.784 70.529 40.556 124.09 128 128-14.698 70.947-39.743 124.835-128 128h-64c-34.335 7.22-63.695 19.822-64 64" style="stroke-linejoin:round;stroke:url(#default)"/>
+  <path d="m791 535c15.784 70.529 40.556 124.09 128 128-14.698 70.947-39.743 124.835-128 128h-64c-34.335 7.22-63.695 19.822-64 64" style="stroke-linejoin:round;stroke:url(#nose)"/>
+  <path d="m151 791h202c78.323 0 129.769-51.336 182-128 52.231-76.664 96.239-126.245 192-128h67.286c0 0-4.243-24-6.422-31-2.18-7-5.583 23-10.475 11-4.892-12-11.273-66-19.41-81-8.137-15-18.029 9-29.942-7C716.122 411 702.187 373 685.964 340 669.741 325 651.23 351 630.165 339 609.101 327 585.482 277 559.043 270 532.604 263 503.345 299 471 299 438.655 299 409.396 263 382.957 270.125 356.518 277.25 342.899 317.5 321.835 330 300.77 342.5 262.259 337.25 246.036 353.375 229.813 369.5 235.878 407 223.964 425c-11.914 18-41.806 16.5-49.942 34.625-8.137 18.125 5.482 65.875 0.59 82.375-4.892 16.5-24.295 31.75-26.475 44.875C145.957 600 161 611 161 619c0 21.333-20 42.667-20 64 0 21.333 20 26.667 20 48 0 21.333-5.959 39.677-10 60z" style="stroke:url(#default)"/>
+</svg>

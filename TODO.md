@@ -5,6 +5,7 @@
 - Write tests
 - Test in MT
   - GraphQL requests
+  - Extract query name
 - The usual CI
 - Review Readme
   - Create screenshots, screencast
