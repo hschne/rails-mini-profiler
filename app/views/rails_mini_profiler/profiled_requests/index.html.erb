@@ -19,25 +19,41 @@
       <button>Clear Requests</button>
     <% end %>
   </div>
-  <ul class="profiled-requests-list">
+  <table id="profiled-requests-table" class="table">
+    <thead>
+    <tr>
+      <th class="text-left">Path</th>
+      <th class="text-left">Method</th>
+      <th class="text-left">Status</th>
+      <th class="text-left">Media Type</th>
+      <th class="text-right">Duration</th>
+      <th class="text-left"></th>
+      <th class="text-left"></th>
+    </tr>
+    </thead>
+
+    <tbody>
     <% @profiled_requests.each do |profiled_request| %>
-      <li data-link="<%= profiled_request_path(profiled_request.id) %>">
-        <span class="request-path"><%= profiled_request.request_path %></span>
-        <span> <%= profiled_request.request_method %> </span>
-        <span> <%= profiled_request.response_status %> </span>
-        <span> <%= profiled_request.response_media_type %> </span>
-        <span class="text-right"><%= profiled_request.duration %> ms</span>
-        <span class=""><%= profiled_request.created_at %></span>
-        <span class="request-buttons">
-    <%= link_to(profiled_request_path(profiled_request.id), title: 'Show Details') do %>
-    <%= inline_svg_tag('rails_mini_profiler/show.svg', options = {}) %>
-    <% end %>
+      <tr data-link="<%= profiled_request_path(profiled_request.id)%>">
+        <td class="request-path"><%= profiled_request.request_path %></td>
+        <td> <%= profiled_request.request_method %> </td>
+        <td> <%= profiled_request.response_status %> </td>
+        <td> <%= profiled_request.response_media_type %> </td>
+        <td class="text-right"><%= profiled_request.duration %> ms</td>
+        <td class=""><%= profiled_request.created_at %></td>
+        <td class="request-buttons">
+          <%= link_to(profiled_request_path(profiled_request.id), title: 'Show Details') do %>
+            <%= inline_svg_tag('rails_mini_profiler/show.svg', options = {}) %>
+          <% end %>
           <%= profiled_request.flamegraph_icon %>
           <%= link_to(profiled_request_path(profiled_request.id), title: 'Delete Request', method: :delete) do %>
-    <%= inline_svg_tag('rails_mini_profiler/delete.svg', options = {}) %>
+            <%= inline_svg_tag('rails_mini_profiler/delete.svg', options = {}) %>
+          <% end %>
+        </td>
+      </tr>
     <% end %>
-            </span>
-      </li>
-    <% end %>
-  </ul>
+    </tbody>
+  </table>
+
+  <br>
 <% end %>

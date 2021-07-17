@@ -55,14 +55,6 @@ main {
   color: white;
 }
 
-.profiled-requests-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  background: violet;
-}
-
 .table {
   width: 100%;
   /* Hack to get table row borders, see https://stackoverflow.com/a/2586780/2553104 */
