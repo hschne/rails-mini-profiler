@@ -1,10 +1,10 @@
 <div align="center">
 
-# Rails Profiler
+# Rails Mini Profiler
 
-Rails performance profiling, made simple.
+Performance profiling for Rails, made simple.
 
-<img alt="logo" src="logo.png" style="border-radius: 50%">
+<img alt="logo" src="logo.png" style="border-radius: 50%;">
 
 [![Gem Version](https://badge.fury.io/rb/graphql-groups.svg)](https://badge.fury.io/rb/graphql-groups)
 [![Build Status](https://github.com/hschne/graphql-groups/workflows/Build/badge.svg)](https://github.com/hschne/graphql-groups/workflows/Build/badge.svg)
