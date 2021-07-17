@@ -37,9 +37,10 @@ module RailsMiniProfiler
     end
 
     def enabled?
-      return @configuration.enabled unless @configuration.respond_to?(:call)
+      enabled = @configuration.enabled
+      return enabled unless enabled.respond_to?(:call)
 
-      @configuration.call(@request.env)
+      enabled.call(@request.env)
     end
   end
 end

@@ -3,14 +3,17 @@
 - Write tests
 - Test in MT
   - GraphQL requests
-  - Extract query name
 - The usual CI
 - Review Readme
   - Create screenshots, screencast
 
 # Next
 
-- UX Improvements
+- Request List UX
+  - Filter 
+  - View Params, Request Names
+  - Add pagination
+- Trace UX
   - Collapse/Compress Traces
   - Add pagination
   - N+1 detection

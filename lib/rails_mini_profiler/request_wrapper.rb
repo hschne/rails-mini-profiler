@@ -13,7 +13,7 @@ module RailsMiniProfiler
       @method = @env['REQUEST_METHOD'] || 'GET'
       @query_string = @env['QUERY_STRING'] || ''
       @path = @env['PATH_INFO'] || '/'
-      @body = @env['rack.input']&.read || ''
+      @body = read_body
     end
 
     def headers
@@ -21,6 +21,15 @@ module RailsMiniProfiler
     end
 
     private
+
+    def read_body
+      ''
+      # return '' unless @env['rack.input']
+      #
+      # body = @env['rack.input'].read
+      # @env['rack.input'].rewind
+      # body
+    end
 
     def sanitize_headers(headers)
       headers.collect { |k, v| [k.sub(/^HTTP_/, ''), v] }.collect do |k, v|

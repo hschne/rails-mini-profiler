@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1070" height="1070" viewBox="0 0 1070 1070" version="1.1">
-  <style>path{fill:none;stroke-width:64;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4}</style>
+<svg id='logo' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1070" height="1070" viewBox="0 0 1070 1070" version="1.1">
+  <style>#logo path{fill:none;stroke-width:64;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4}</style>
   <defs>
     <linearGradient id="shadow">
       <stop offset="0" style="stop-color:#ffffff"/>
