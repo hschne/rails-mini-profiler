@@ -1,6 +1,6 @@
 <% if @profiled_requests.empty? %>
   <section class="placeholder">
-    <%= inline_svg_tag('rails_mini_profiler/logo', class: 'placeholder-image') %>
+    <%= inline_svg_tag('rails_mini_profiler/logo_variant', class: 'placeholder-image') %>
     <div class="placeholder-text">
       <h2> There is nothing here yet! </h2>
       <p>Send some requests to your app for them to show up here</p>
@@ -35,7 +35,7 @@
     <tbody>
     <% @profiled_requests.each do |profiled_request| %>
       <tr data-link="<%= profiled_request_path(profiled_request.id)%>">
-        <td class="request-path"><%= profiled_request.request_path %></td>
+        <td class="request-path"><%= profiled_request.request_name %></td>
         <td> <%= profiled_request.request_method %> </td>
         <td> <%= profiled_request.response_status %> </td>
         <td> <%= profiled_request.response_media_type %> </td>
@@ -47,7 +47,7 @@
           <% end %>
           <%= profiled_request.flamegraph_icon %>
           <%= link_to(profiled_request_path(profiled_request.id), title: 'Delete Request', method: :delete) do %>
-            <%= inline_svg_tag('rails_mini_profiler/delete.svg', options = {}) %>
+            <%= inline_svg_tag('rails_mini_profiler/delete.svg') %>
           <% end %>
         </td>
       </tr>

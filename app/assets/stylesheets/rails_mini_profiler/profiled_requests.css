@@ -27,7 +27,7 @@ main {
 .placeholder-image {
   height: 30%;
   width: 30%;
-  -webkit-filter: grayscale(1);
+  -webkit-filter: grayscale(1) brightness(2.5);
 }
 
 .placeholder-text {

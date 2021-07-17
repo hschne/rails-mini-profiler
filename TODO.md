@@ -1,7 +1,5 @@
 # Todo
 
-- UI & Design
-  - Add new icon
 - Write tests
 - Test in MT
   - GraphQL requests

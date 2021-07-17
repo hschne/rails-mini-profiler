@@ -2,6 +2,10 @@
 
 module RailsMiniProfiler
   class ProfiledRequestPresenter < BasePresenter
+    def request_name
+      model.request_path
+    end
+
     def duration
       formatted_duration(model.duration)
     end
