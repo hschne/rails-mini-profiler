@@ -116,6 +116,12 @@ main {
   color: var(--blue-500);
 }
 
+.request-buttons a.link-disabled {
+  cursor: default;
+  pointer-events: none;
+  text-decoration: none;
+  color: var(--grey-200);
+}
 
 .request-details-data {
   display: flex;

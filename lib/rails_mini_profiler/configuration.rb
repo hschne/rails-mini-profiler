@@ -8,6 +8,7 @@ module RailsMiniProfiler
                   :badge_enabled,
                   :badge_position,
                   :flamegraph_enabled,
+                  :flamegraph_sample_rate,
                   :skip_paths,
                   :storage,
                   :user_provider
@@ -22,6 +23,7 @@ module RailsMiniProfiler
       @badge_enabled = true
       @badge_position = 'top-left'
       @flamegraph_enabled = true
+      @flamegraph_sample_rate = 0.5
       @logger = RailsMiniProfiler::Logger.new(Rails.logger)
       @skip_paths = []
       @storage = Storage.new

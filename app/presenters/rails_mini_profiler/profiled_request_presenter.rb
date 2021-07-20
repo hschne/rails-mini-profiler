@@ -19,14 +19,22 @@ module RailsMiniProfiler
     end
 
     def flamegraph_icon
-      return nil unless model.flamegraph.present?
+      return nil unless RailsMiniProfiler.configuration.flamegraph_enabled
 
-      link_to(flamegraph_path(model.id), title: 'Show Flamegraph', class: 'flamegraph-button') do
-        inline_svg_tag('rails_mini_profiler/graph.svg')
+      if model.flamegraph.present?
+        link_to(flamegraph_path(model.id), title: 'Show Flamegraph') do
+          inline_svg_tag('rails_mini_profiler/graph.svg')
+        end
+      else
+        link_to(flamegraph_path(model.id), title: 'No Flamegraph present for this request', class: 'link-disabled') do
+          inline_svg_tag('rails_mini_profiler/graph.svg')
+        end
       end
     end
 
     def flamegraph_button
+      return nil unless RailsMiniProfiler.configuration.flamegraph_enabled
+
       return nil unless model.flamegraph.present?
 
       link_to(flamegraph_path(model.id), title: 'Show Flamegraph', class: 'flamegraph-button') do

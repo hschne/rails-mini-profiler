@@ -9,7 +9,6 @@ module RailsMiniProfiler
     end
 
     def call(env)
-      RailsMiniProfiler.logger.debug('This is a debug message')
       request = RequestWrapper.new(env)
       request_context = RequestContext.new(request)
       return @app.call(env) unless Guard.new(request_context).profile?

@@ -2,18 +2,31 @@
 
 module RailsMiniProfiler
   class FlamegraphGuard
-    def initialize(request_context)
+    def initialize(request_context, configuration: RailsMiniProfiler.configuration)
       @request_context = request_context
       @request = request_context.request
+      @configuration = configuration
     end
 
     def record(&block)
       return block.call unless enabled?
 
+      sample_rate = @configuration.flamegraph_sample_rate
+      if StackProf.running?
+        RailsMiniProfiler.logger.debug('Stackprof is already running, cannot record Flamegraph')
+        return block.call
+      end
+
       result = nil
-      flamegraph = StackProf.run(mode: :wall, raw: true, aggregate: false, interval: (2 * 1000).to_i) do
+      flamegraph = StackProf.run(mode: :wall, raw: true, aggregate: false, interval: (sample_rate * 1000).to_i) do
         result = block.call
       end
+
+      unless flamegraph
+        RailsMiniProfiler.logger.debug('Failed to record Flamegraph, possibly due to concurrent requests')
+        return result
+      end
+
       @request_context.flamegraph = flamegraph.to_json
       result
     end

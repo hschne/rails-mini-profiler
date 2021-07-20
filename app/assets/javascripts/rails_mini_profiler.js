@@ -27,8 +27,8 @@ function setupRequestSearch() {
 
 function setupTraceSearch() {
   const traceNameSearch = document.getElementById('trace-search')
-  if (profiledRequestNameSearch) {
-    profiledRequestNameSearch.addEventListener('keyup', function (event) {
+  if (traceNameSearch) {
+    traceNameSearch.addEventListener('keyup', function (event) {
       if (event.key === 'Enter') {
         event.preventDefault()
         document.getElementById('trace-form').submit()

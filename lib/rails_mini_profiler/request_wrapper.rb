@@ -23,12 +23,11 @@ module RailsMiniProfiler
     private
 
     def read_body
-      ''
-      # return '' unless @env['rack.input']
-      #
-      # body = @env['rack.input'].read
-      # @env['rack.input'].rewind
-      # body
+      return '' unless @env['rack.input']
+
+      body = @env['rack.input'].read
+      @env['rack.input'].rewind
+      body
     end
 
     def sanitize_headers(headers)

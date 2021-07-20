@@ -86,15 +86,16 @@ you may have to amend your content security policy. See [Troubleshooting](#Troub
 
 You can set the following configuration options in Rails Mini Profiler:
 
-| Option               | Default                      | Description                                                                                     |
-|----------------------|------------------------------|-------------------------------------------------------------------------------------------------|
-| `enabled`            | `true` (dev)/ `false` (prod) | Whether or not RMP is enabled                                                                   |
-| `badge_enabled`      | `true`                       | Should the hedgehog 🦔 badge be injected into pages?                                            |
-| `badge_position`     | `'top-left'`                 | Where to display the badge. Options are `'top-left', 'top-right', 'bottom-left, 'bottom-right'` |
-| `flamegraph_enabled` | `true`                       | Should flamegraphs be recorded automatically?                                                   |
-| `skip_paths`         | `[]`                         | An array of request paths that should not be profiled. Regex allowed.                           |
-| `storage`            | `Storage`                    | Storage configuration. See [Storage](#Storage)                                                  |
-| `user_provider`      | `Rack::Request.new(env).ip`  | How to identify users. See [Users](#Users)                                                      |
+| Option                   | Default                      | Description                                                                                     |
+|--------------------------|------------------------------|-------------------------------------------------------------------------------------------------|
+| `enabled`                | `true` (dev)/ `false` (prod) | Whether or not RMP is enabled                                                                   |
+| `badge_enabled`          | `true`                       | Should the hedgehog 🦔 badge be injected into pages?                                            |
+| `badge_position`         | `'top-left'`                 | Where to display the badge. Options are `'top-left', 'top-right', 'bottom-left, 'bottom-right'` |
+| `flamegraph_enabled`     | `true`                       | Should flamegraphs be recorded automatically?                                                   |
+| `flamegraph_sample_rate` | `0.5`                        | The flamegraph sample rate. How many snapshots per millisecond are created.                     |
+| `skip_paths`             | `[]`                         | An array of request paths that should not be profiled. Regex allowed.                           |
+| `storage`                | `Storage`                    | Storage configuration. See [Storage](#Storage)                                                  |
+| `user_provider`          | `Rack::Request.new(env).ip`  | How to identify users. See [Users](#Users)                                                      |
 
 ### Request Configuration
 
@@ -187,6 +188,13 @@ Rails.application.config.content_security_policy do |policy|
     ...
 end
 ```
+
+### Some requests have no Flamegraphs attached? 
+
+[StackProf](https://github.com/tmm1/stackprof), which is used for recording Flamegraphs, does not work on concurrent requests. 
+Because of this, concurrent requests may skip recording a Flamegraph.
+
+It is recommended that you resend _only_ the request you wish to get a Flamegraph for.
 
 ## Credit
 
