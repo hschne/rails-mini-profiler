@@ -23,7 +23,5 @@ Any other relevant information. For example, why do you consider this a bug and 
 
 ### Technical details
 
-* Python version: Run `python --version`.
-* Django version: Look in your requirements.txt, or run `pip show django | grep Version`.
-* Wagtail version: Look at the bottom of the Settings menu in the Wagtail admin, or run `pip show wagtail | grep Version:`.
-* Browser version: You can use https://www.whatsmybrowser.org/ to find this out.
+* Rails version: Run `rails --version` to find out.
+* Ruby version: Run `ruby -v` to find out.
