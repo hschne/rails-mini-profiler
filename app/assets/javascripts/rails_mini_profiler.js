@@ -13,31 +13,31 @@
 //= require rails-ujs
 //= require_tree .
 
-// Request Search
-const profiledRequestNameSearch = document.getElementById('profiled-request-search')
-if (profiledRequestNameSearch) {
-  profiledRequestNameSearch.addEventListener('keyup', function (event) {
-    if (event.key === 'Enter') {
-      event.preventDefault()
-      document.getElementById('profiled-request-search-form').submit()
-    }
-  })
+function setupRequestSearch() {
+  const profiledRequestNameSearch = document.getElementById('profiled-request-search')
+  if (profiledRequestNameSearch) {
+    profiledRequestNameSearch.addEventListener('keyup', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault()
+        document.getElementById('profiled-request-search-form').submit()
+      }
+    })
+  }
 }
 
-// Profiled Request Table
-
-// Trace Search
-const traceNameSearch = document.getElementById('trace-search')
-if (profiledRequestNameSearch) {
-  profiledRequestNameSearch.addEventListener('keyup', function (event) {
-    if (event.key === 'Enter') {
-      event.preventDefault()
-      document.getElementById('trace-form').submit()
-    }
-  })
+function setupTraceSearch() {
+  const traceNameSearch = document.getElementById('trace-search')
+  if (profiledRequestNameSearch) {
+    profiledRequestNameSearch.addEventListener('keyup', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault()
+        document.getElementById('trace-form').submit()
+      }
+    })
+  }
 }
 
-function setupTable() {
+function setupRequestTable() {
   const profiledRequestTable = document.getElementById('profiled-requests-table');
   if (profiledRequestTable) {
     const rows = profiledRequestTable.getElementsByTagName('tr')
@@ -54,9 +54,7 @@ function setupTable() {
   }
 }
 
-
-// Trace Bar Popovers
-document.addEventListener('DOMContentLoaded', () => {
+function setupTraceBars () {
   const traceBars = document.querySelectorAll('.trace-bar')
   traceBars.forEach((bar) => {
     const popover = bar.children[0]
@@ -79,9 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
       },
     })
   })
+}
 
-  setupTable();
 
-
+// Trace Bar Popovers
+document.addEventListener('DOMContentLoaded', () => {
+  setupRequestTable();
+  setupRequestSearch();
+  setupTraceBars();
+  setupTraceSearch();
 }, false)
 

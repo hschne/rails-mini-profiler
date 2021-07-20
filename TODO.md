@@ -1,9 +1,6 @@
 # Todo
 
 - Write tests
-- Test in MT
-  - GraphQL requests
-- The usual CI
 - Review Readme
   - Create screenshots, screencast
 
@@ -23,7 +20,9 @@
     - Based on Trace Type
   - Accessibility
   - Backtrace filtering (Parity with rack-profiler (https://github.com/dawanda/rack-profiler))
-- Add appraisal, try to support to older rails versions?
+- Operations
+  - Add Codeclimate
+  - Add appraisal, try to support to older rails versions?
 - Rubydoc
 - Code Cleanup
   - Validations on Models

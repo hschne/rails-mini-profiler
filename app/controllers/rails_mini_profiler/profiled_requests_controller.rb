@@ -29,7 +29,12 @@ module RailsMiniProfiler
     end
 
     def destroy_all
-      ProfiledRequest.where(user_id: user_id).destroy_all
+      ProfiledRequest.transaction do
+        requests_table_name = RailsMiniProfiler.storage_configuration.profiled_requests_table.to_sym
+        Flamegraph.joins(:profiled_request).where(requests_table_name => { user_id: user_id }).delete_all
+        Trace.joins(:profiled_request).where(requests_table_name => { user_id: user_id }).delete_all
+        ProfiledRequest.where(requests_table_name => { user_id: user_id }).delete_all
+      end
       redirect_to profiled_requests_url, notice: 'Profiled Requests cleared'
     end
 

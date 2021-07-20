@@ -188,20 +188,6 @@ Rails.application.config.content_security_policy do |policy|
 end
 ```
 
-## Development
-
-Tests and development runs will use the `Dummy` application, which resides in `spec/dummy`. To run Rails Mini Profiler locally execute `rails s`. To run the tests execute:
-
-```ruby
-bundle exec rspec
-```
-
-RMP uses [Annotate](https://github.com/ctran/annotate_models) to annotate models. Run
-
-```
-bundle exec annotate --models --exclude tests,fixtures
-```
-
 ## Credit
 
 This project was heavily inspired by projects such as [rack-mini-profiler](https://github.com/MiniProfiler/rack-mini-profiler) and
@@ -211,7 +197,8 @@ This project was heavily inspired by projects such as [rack-mini-profiler](https
 
 ## Contributing
 
-Contribution directions go here.
+See [Contributing](CONTRIBUTING.md)
 
 ## License
+
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

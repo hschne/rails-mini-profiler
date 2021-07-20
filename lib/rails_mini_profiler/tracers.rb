@@ -57,7 +57,11 @@ module RailsMiniProfiler
 
       def transform_sql_event(event)
         payload = event.payload.slice(:name, :sql, :binds, :type_casted_binds)
-        payload[:binds] = transform_binds(payload[:binds], payload[:type_casted_binds])
+        typecasted_binds = payload[:type_casted_binds]
+        # Sometimes, typecasted binds are a proc. Not sure why. In those instances, we extract the typecasted
+        # values from the proc by executing call.
+        typecasted_binds = typecasted_binds.respond_to?(:call) ? typecasted_binds.call : typecasted_binds
+        payload[:binds] = transform_binds(payload[:binds], typecasted_binds)
         payload.delete(:type_casted_binds)
         payload.reject { |_k, v| v.blank? }
       end
