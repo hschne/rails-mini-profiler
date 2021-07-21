@@ -54,7 +54,7 @@ GEM
     activerecord (6.1.3.1)
       activemodel (= 6.1.3.1)
       activesupport (= 6.1.3.1)
-    activerecord-import (1.0.8)
+    activerecord-import (1.2.0)
       activerecord (>= 3.2)
     activestorage (6.1.3.1)
       actionpack (= 6.1.3.1)
@@ -234,18 +234,18 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  activerecord-import
-  annotate
+  activerecord-import (~> 1.2)
+  annotate (~> 3.1)
   guard-livereload (~> 2.5)
-  jb
-  pry
+  jb (~> 0.8)
+  pry (~> 0.1)
   puma (~> 5.2)
   rails_mini_profiler!
   rspec-rails (~> 4.0)
   rubocop (~> 1.7)
   simplecov
   sqlite3 (~> 1.4)
-  stackprof
+  stackprof (~> 0.2)
 
 BUNDLED WITH
    2.2.14
