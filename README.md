@@ -68,13 +68,13 @@ Requests to your application will be profiled automatically. You can view all st
 ### Request Details
 
 <p align="center">
-    ![trace](docs/images/trace.png)
+  <img alt="Light" src="docs/images/trace.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-    ![sequel](docs/images/sequel.png)
+  <img alt="Dark" src="docs/images/sequel" width="45%">
 </p>
 
 This view shows you how your requests spend their time. How much of it is spent in the DB, how much in rendering views?
-By clicking on individual traces you can find out even more detailed information.
+By clicking on individual traces you can find out detailed information. 
 
 ### Flamegraphs
 
@@ -83,7 +83,7 @@ incur a significant performance penalty, and can take a up a lot of space.
 
 To change the default behaviour see [Configuration](#Configuration). 
 
-Flamegraphs are rendered using [Speedscope](https://github.com/jlfwong/speedscope). If you notice that Flamegraphs are not rendering
+Flamegraphs are rendered using [Speedscope](https://github.com/jlfwong/speedscope). If Flamegraphs are not rendering
 you may have to amend your content security policy. See [Troubleshooting](#Troubleshooting)
 
 ## Configuration
