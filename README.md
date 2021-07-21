@@ -61,7 +61,7 @@ top right that is injected into your pages.
 
 ### Request Overview
 
-![overview](docs/images/overview.png)]
+![overview](docs/images/overview.png)
 
 Requests to your application will be profiled automatically. You can view all stored requests by navigating to `yourapp/rails_mini_profiler/profiled_requests`.
 
