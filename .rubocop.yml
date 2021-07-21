@@ -3,6 +3,7 @@ AllCops:
   NewCops: enable
   SuggestExtensions: false
   Exclude:
+    - vendor/**/*
     - !ruby/regexp /schema\.rb$/
     - db/migrate/*.rb
 
