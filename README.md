@@ -14,7 +14,7 @@
 
 ## What's this?
 
-Rails Mini Profiler is a fully-featured performance profiler for your Rails applications. It is heavily inspired  by [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler), and aims at extending its functionality while being easy to use.
+Rails Mini Profiler is a fully-featured performance profiler for your Rails applications. It is heavily inspired by [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler), and aims at extending its functionality while being easy to use.
 
 ## Getting Started
 
@@ -61,7 +61,7 @@ top right that is injected into your pages.
 
 ### Request Overview
 
-[![overview](docs/images/overview.png)](docs/images/overview.png)
+![overview](docs/images/overview.png)]
 
 Requests to your application will be profiled automatically. You can view all stored requests by navigating to `yourapp/rails_mini_profiler/profiled_requests`.
 
@@ -74,14 +74,14 @@ Requests to your application will be profiled automatically. You can view all st
 </p>
 
 This view shows you how your requests spend their time. How much of it is spent in the DB, how much in rendering views?
-By clicking on individual traces you can find out detailed information. 
+By clicking on individual traces you can find out detailed information.
 
 ### Flamegraphs
 
 Rails Mini Profiler per default records Flamegraphs for every profiled request for convenience. Note that Flamegraphs recording
-incur a significant performance penalty, and can take a up a lot of space.
+incur a significant performance penalty, and can take up a lot of space.
 
-To change the default behaviour see [Configuration](#Configuration). 
+To change the default behavior see [Configuration](#Configuration).
 
 Flamegraphs are rendered using [Speedscope](https://github.com/jlfwong/speedscope). If Flamegraphs are not rendering
 you may have to amend your content security policy. See [Troubleshooting](#Troubleshooting)
@@ -141,7 +141,7 @@ end
 
 ### Users
 
-Profiling information is segregated by user. That means users cannot see each other's profiled requests.
+Profiling information is segregated by user ID. That means users cannot see each other's profiled requests.
 
 Per default, individual users are identified by their IP address. You may change this by setting a custom user provider:
 
@@ -184,7 +184,7 @@ Only requests by explicitly set users will be stored. To configure how individua
 ### Flamegraphs are not rendering?
 
 Flamegraphs are loaded into [Speedscope](https://github.com/jlfwong/speedscope) using an Iframe and URI Encoded blobs (see [source](https://github.com/hschne/rails-mini-profiler/blob/main/app/views/rails_mini_profiler/flamegraphs/show.html.erb))
-If your browser gives you warnings about blocking content due to CSP you _must_ enable `blob` as default source: 
+If your browser gives you warnings about blocking content due to CSP you _must_ enable `blob` as default source:
 
 ```ruby
 Rails.application.config.content_security_policy do |policy|
@@ -193,9 +193,9 @@ Rails.application.config.content_security_policy do |policy|
 end
 ```
 
-### Some requests have no Flamegraphs attached? 
+### Some requests have no Flamegraphs attached?
 
-[StackProf](https://github.com/tmm1/stackprof), which is used for recording Flamegraphs, does not work on concurrent requests. 
+[StackProf](https://github.com/tmm1/stackprof), which is used for recording Flamegraphs, does not work on concurrent requests.
 Because of this, concurrent requests may skip recording a Flamegraph.
 
 It is recommended that you resend _only_ the request you wish to get a Flamegraph for.
