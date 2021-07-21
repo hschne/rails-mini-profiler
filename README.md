@@ -2,7 +2,7 @@
 
 # Rails Mini Profiler
 
-<img alt="logo" src="logo.png" width="300px" height="auto">
+<img alt="logo" src="docs/images/logo.png" width="300px" height="auto">
 
 ### Performance profiling for Rails, made simple.
 
