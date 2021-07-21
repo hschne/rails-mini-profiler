@@ -61,13 +61,17 @@ top right that is injected into your pages.
 
 ### Request Overview
 
-TODO: Image goes here
+![overview](docs/images/overview.png)
 
 Requests to your application will be profiled automatically. You can view all stored requests by navigating to `yourapp/rails_mini_profiler/profiled_requests`.
 
 ### Request Details
 
-TODO: Image goes here
+<p align="center">
+    ![trace](docs/images/trace.png)
+&nbsp; &nbsp; &nbsp; &nbsp;
+    ![sequel](docs/images/sequel.png)
+</p>
 
 This view shows you how your requests spend their time. How much of it is spent in the DB, how much in rendering views?
 By clicking on individual traces you can find out even more detailed information.
