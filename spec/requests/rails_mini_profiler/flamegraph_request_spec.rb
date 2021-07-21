@@ -9,9 +9,9 @@ module RailsMiniProfiler
     describe 'GET /show' do
       it 'returns http success' do
         profiled_request = ProfiledRequest.create(user_id: user_id)
-        flamegraph = Flamegraph.create(profiled_request: profiled_request, data: {})
+        Flamegraph.create(profiled_request: profiled_request, data: {})
 
-        get flamegraph_path(flamegraph.id)
+        get flamegraph_path(profiled_request.id)
 
         expect(response).to have_http_status(:success)
       end

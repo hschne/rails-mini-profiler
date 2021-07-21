@@ -1,5 +1,6 @@
 # Todo
 
+- Investigate Websocket Requests
 - Write tests 
 - Review Readme
   - Create screenshots, screencast

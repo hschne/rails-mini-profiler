@@ -5,8 +5,8 @@ module RailsMiniProfiler
     include InlineSvg::ActionView::Helpers
     include Engine.routes.url_helpers
 
-    def initialize(request_context)
-      @configuration = RailsMiniProfiler.configuration
+    def initialize(request_context, configuration: RailsMiniProfiler.configuration)
+      @configuration = configuration
       @profiled_request = request_context.profiled_request
       @original_response = request_context.response
     end
@@ -33,7 +33,7 @@ module RailsMiniProfiler
       body = @original_response.response.body
       index = body.rindex(%r{</body>}i) || body.rindex(%r{</html>}i)
       if index
-        body.insert(index, badge_content)
+        body.dup.insert(index, badge_content)
       else
         body
       end
