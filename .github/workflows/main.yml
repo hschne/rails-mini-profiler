@@ -35,7 +35,7 @@ jobs:
 
     - name: Run Tests ✅
       run: |
-        bundle exec rake rspec
+        bundle exec rake spec
 
     - name: Run RuboCop 🚓
       run: |

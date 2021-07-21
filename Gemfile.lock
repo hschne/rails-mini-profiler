@@ -243,7 +243,7 @@ DEPENDENCIES
   rails_mini_profiler!
   rspec-rails (~> 4.0)
   rubocop (~> 1.7)
-  simplecov
+  simplecov (~> 0.21)
   sqlite3 (~> 1.4)
   stackprof (~> 0.2)
 
