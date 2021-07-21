@@ -28,14 +28,14 @@ module RailsMiniProfiler
     class << self
       def find_sti_class(name)
         subclasses = {
-          RailsMiniProfiler::ControllerTrace => 'process_action.action_controller',
-          RailsMiniProfiler::SequelTrace => 'sql.active_record',
-          RailsMiniProfiler::InstantiationTrace => 'instantiation.active_record',
-          RailsMiniProfiler::RmpTrace => 'rails_mini_profiler.total_time',
-          RailsMiniProfiler::RenderTemplateTrace => 'render_template.action_view',
-          RailsMiniProfiler::RenderPartialTrace => 'render_partial.action_view'
+          'process_action.action_controller' => RailsMiniProfiler::ControllerTrace,
+          'sql.active_record' => RailsMiniProfiler::SequelTrace,
+          'instantiation.active_record' => RailsMiniProfiler::InstantiationTrace,
+          'rails_mini_profiler.total_time' => RailsMiniProfiler::RmpTrace,
+          'render_template.action_view' => RailsMiniProfiler::RenderTemplateTrace,
+          'render_partial.action_view' => RailsMiniProfiler::RenderPartialTrace
         }
-        subclasses.invert[name] || self
+        subclasses[name] || self
       end
     end
   end

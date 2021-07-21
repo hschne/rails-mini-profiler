@@ -13,7 +13,7 @@ module RailsMiniProfiler
 
       sample_rate = @configuration.flamegraph_sample_rate
       if StackProf.running?
-        RailsMiniProfiler.logger.debug('Stackprof is already running, cannot record Flamegraph')
+        RailsMiniProfiler.logger.error('Stackprof is already running, cannot record Flamegraph')
         return block.call
       end
 
@@ -23,7 +23,7 @@ module RailsMiniProfiler
       end
 
       unless flamegraph
-        RailsMiniProfiler.logger.debug('Failed to record Flamegraph, possibly due to concurrent requests')
+        RailsMiniProfiler.logger.error('Failed to record Flamegraph, possibly due to concurrent requests')
         return result
       end
 

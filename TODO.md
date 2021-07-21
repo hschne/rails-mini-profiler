@@ -1,7 +1,6 @@
 # Todo
 
 - Write tests 
-- Fix concurrent Flamegraph requests
 - Review Readme
   - Create screenshots, screencast
 

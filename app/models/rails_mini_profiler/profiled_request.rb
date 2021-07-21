@@ -35,9 +35,9 @@ module RailsMiniProfiler
              dependent: :destroy
 
     def request=(request)
-      self.request_body = request.body || ''
+      self.request_body = request.body
       self.request_headers = request.headers
-      self.request_method = request.method || 'GET'
+      self.request_method = request.method
       self.request_path = request.path
       self.request_query_string = request.query_string
     end
@@ -45,8 +45,8 @@ module RailsMiniProfiler
     def response=(response)
       self.response_body = response.body
       self.response_media_type = response.media_type
-      self.response_headers = response.headers || ''
-      self.response_status = response.status || 200
+      self.response_headers = response.headers
+      self.response_status = response.status
     end
 
     def total_time=(total_time)

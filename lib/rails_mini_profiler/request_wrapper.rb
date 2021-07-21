@@ -29,11 +29,5 @@ module RailsMiniProfiler
       @env['rack.input'].rewind
       body
     end
-
-    def sanitize_headers(headers)
-      headers.collect { |k, v| [k.sub(/^HTTP_/, ''), v] }.collect do |k, v|
-        [k.split('_').collect(&:capitalize).join('-').to_sym, v]
-      end
-    end
   end
 end
