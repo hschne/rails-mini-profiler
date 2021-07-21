@@ -5,29 +5,16 @@ on: [push,pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env: # $BUNDLE_GEMFILE must be set at the job level, so it is set for all steps
+      BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}.gemfile
+      BUNDLE_WITHOUT: 'development'
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.0.0
-
-    - name: Setup gem cache
-      uses: actions/cache@v2
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
-
-    - name: Bundle install
-      run: |
-        gem install bundler -v 2.2.14
-        bundle config deployment true
-        bundle config set without 'development'
-        bundle config path vendor/bundle
-        bundle install --jobs 4
-      shell: bash
+        bundler-cache: true
 
     - name: Setup DB 🗄️
       run: |
