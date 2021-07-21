@@ -61,7 +61,7 @@ top right that is injected into your pages.
 
 ### Request Overview
 
-![overview](docs/images/overview.png)
+[![overview](docs/images/overview.png)](docs/images/overview.png)
 
 Requests to your application will be profiled automatically. You can view all stored requests by navigating to `yourapp/rails_mini_profiler/profiled_requests`.
 
@@ -70,7 +70,7 @@ Requests to your application will be profiled automatically. You can view all st
 <p align="center">
   <img alt="Light" src="docs/images/trace.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="Dark" src="docs/images/sequel" width="45%">
+  <img alt="Dark" src="docs/images/sequel.png" width="45%">
 </p>
 
 This view shows you how your requests spend their time. How much of it is spent in the DB, how much in rendering views?
