@@ -31,7 +31,7 @@ jobs:
 
     - name: Setup DB 🗄️
       run: |
-        rails db:setup
+        bundle exec rails db:setup
 
     - name: Run Tests ✅
       run: |
