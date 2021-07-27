@@ -26,3 +26,11 @@ jobs:
     - name: Run RuboCop 🚓
       run: |
         bundle exec rake rubocop
+
+    - name: Report Coverage
+      uses: paambaati/codeclimate-action@v2.6.0
+      env:
+        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+      with:
+        # Coverage is already generated in test step, need to run anything again
+        coverageCommand: echo '' > /dev/null
