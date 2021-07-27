@@ -206,14 +206,14 @@ end
 [StackProf](https://github.com/tmm1/stackprof), which is used for recording Flamegraphs, does not work on concurrent requests.
 Because of this, concurrent requests may skip recording a Flamegraph.
 
-It is recommended that you resend _only_ the request you wish to get a Flamegraph for.
+It is recommended that you resend _only_ the request you wish to build a Flamegraph for.
 
 ## Credit
 
 This project was heavily inspired by projects such as [rack-mini-profiler](https://github.com/MiniProfiler/rack-mini-profiler) and
 [rack-profiler](https://github.com/dawanda/rack-profiler). [Skylight](https://www.skylight.io/) was also a huge influence.
 
-[Lena Schnedlitz](https://github.com/LenaSchnedlitz) designed the Logo and provided great support. Without her supreme CSS skills this project would not have been possible :hands_raised:
+[Lena Schnedlitz](https://github.com/LenaSchnedlitz) designed the Logo and provided great support. Without her supreme CSS skills this project would not have been possible 🙌
 
 ## Contributing
 
