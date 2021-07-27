@@ -9,6 +9,8 @@ module RailsMiniProfiler
         get movies_url(1)
 
         expect(response).to be_successful
+
+        expect(ProfiledRequest.exists?(request_path: '/movies.1')).to be(true)
       end
     end
   end

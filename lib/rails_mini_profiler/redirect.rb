@@ -5,7 +5,6 @@ module RailsMiniProfiler
     include Engine.routes.url_helpers
 
     def initialize(request_context)
-      @configuration = RailsMiniProfiler.configuration
       @request = request_context.request
       @profiled_request = request_context.profiled_request
     end

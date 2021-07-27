@@ -5,12 +5,7 @@ module RailsMiniProfiler
     def self.new(logger)
       logger = logger.dup
 
-      logger.formatter = if logger.formatter
-                           logger.formatter.dup
-                         else
-                           # Ensure we set a default formatter so we aren't extending nil!
-                           ActiveSupport::Logger::SimpleFormatter.new
-                         end
+      logger.formatter = logger.formatter ? logger.formatter.dup : ActiveSupport::Logger::SimpleFormatter.new
 
       logger.formatter.extend Formatter
       logger.extend(self)
