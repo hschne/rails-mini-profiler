@@ -30,14 +30,14 @@ Rails Mini Profiler is an easy-to-use performance profiler for your Rails applic
 Add Rails Mini Profiler to your Gemfile:
 
 ```ruby
-gem 'rails-mini-profiler'
+gem 'rails_mini_profiler'
 ```
 
 Install the gem and run the installer:
 
 ```bash
 bundle install
-rails rail_mini_profiler:install
+rails rails_mini_profiler:install
 ```
 
 Inspect the generated migration in `db/migrate` and run it:
@@ -60,7 +60,7 @@ route:
 # routes.rb
 Rails.application.routes.draw do
   ...
-  
+
   mount RailsMiniProfiler::Engine => '/rails_mini_profiler'
 end
 ```
@@ -163,8 +163,8 @@ You may also explicitly set the user from the application itself:
 ```ruby
 class ApplicationController < ActionController::Base
   ...
-  
-  before_action do 
+
+  before_action do
     RailsMiniProfiler::User.authorize(current_user.id)
   end
 end
