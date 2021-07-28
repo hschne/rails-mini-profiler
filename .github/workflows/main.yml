@@ -15,6 +15,10 @@ jobs:
         ruby-version: 3.0.0
         bundler-cache: true
 
+    - name: Run RuboCop 🚓
+      run: |
+        bundle exec rake rubocop
+
     - name: Setup DB 🗄️
       run: |
         bundle exec rails db:setup
@@ -22,12 +26,11 @@ jobs:
     - name: Run Tests ✅
       run: |
         bundle exec rake spec
-
-    - name: Run RuboCop 🚓
-      run: |
-        bundle exec rake rubocop
+      env:
+        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
 
     - name: Report Coverage
       uses: paambaati/codeclimate-action@v2.7.5
       env:
         CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+
