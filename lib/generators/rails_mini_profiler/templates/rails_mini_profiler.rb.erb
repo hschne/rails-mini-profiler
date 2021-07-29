@@ -6,7 +6,7 @@ RailsMiniProfiler.configure do |config|
   # config.flamegraph_enabled = false
 
   # Use RailsMiniProfiler::Storage::ActiveRecord to store profiles in your Database
-  config.storage = RailsMiniProfiler::Storage::Memory
+  config.storage = RailsMiniProfiler::Storage
 
   # Uncomment to customize how users are detected
   # config.user_provider = proc { |env| Rack::Request.new(env).ip }
