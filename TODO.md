@@ -2,8 +2,9 @@
 
 - Investigate Websocket Requests
 - Write tests 
-- Review Readme
-  - Create screenshots, screencast
+- Update Readme to include rack comparison
+- Add generator tests/setup tests
+  - Add appraisal, try to support to older rails versions?
 
 # Next
 
@@ -21,9 +22,6 @@
     - Based on Trace Type
   - Accessibility
   - Backtrace filtering (Parity with rack-profiler (https://github.com/dawanda/rack-profiler))
-- Operations
-  - Add Codeclimate
-  - Add appraisal, try to support to older rails versions?
 - Rubydoc
 - Code Cleanup
   - Validations on Models
