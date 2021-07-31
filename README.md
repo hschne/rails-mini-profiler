@@ -15,7 +15,9 @@
 
 ## What's this?
 
-Rails Mini Profiler is an easy-to-use performance profiler for your Rails applications. It is heavily inspired by [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler) and other APM tools. See also [Why Rails Mini Profiler?](#why-rails-mini-profiler). To see it in action out the preview below:
+Rails Mini Profiler is an easy-to-use performance profiler for your Rails applications. It is heavily inspired by [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler) and other APM tools. To find out how it stacks up against those check out [Why Rails Mini Profiler](#why-rails-mini-profiler)? 
+
+To see it in action view the preview below:
 
 <div align="center">
 
