@@ -8,6 +8,8 @@
 
 [![Gem Version](https://badge.fury.io/rb/rails_mini_profiler.svg)](https://badge.fury.io/rb/rails_mini_profiler)
 [![Main](https://github.com/hschne/rails-mini-profiler/actions/workflows/main.yml/badge.svg)](https://github.com/hschne/rails-mini-profiler/actions/workflows/main.yml)
+[![Main](https://img.shields.io/github/license/hschne/rails-mini-profiler)](https://img.shields.io/github/license/hschne/rails-mini-profiler)
+
 [![Maintainability](https://api.codeclimate.com/v1/badges/1fcc2f4d01ab5bf7a260/maintainability)](https://codeclimate.com/github/hschne/rails-mini-profiler/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/1fcc2f4d01ab5bf7a260/test_coverage)](https://codeclimate.com/github/hschne/rails-mini-profiler/test_coverage)
 
