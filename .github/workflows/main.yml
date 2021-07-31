@@ -31,6 +31,8 @@ jobs:
     - name: Run Tests ✅
       run: |
         bundle exec rake spec
+      env:
+        COVERAGE: true
 
     - name: Report Coverage
       uses: paambaati/codeclimate-action@v2.7.5
