@@ -7,10 +7,10 @@
 #  id                      :integer          not null, primary key
 #  rmp_profiled_request_id :bigint           not null
 #  name                    :string
-#  start                   :integer
-#  finish                  :integer
+#  start                   :bigint
+#  finish                  :bigint
 #  duration                :integer
-#  allocations             :integer
+#  allocations             :bigint
 #  payload                 :json
 #  backtrace               :json
 #  created_at              :datetime         not null

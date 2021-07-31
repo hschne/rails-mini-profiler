@@ -6,10 +6,10 @@
 #
 #  id                   :integer          not null, primary key
 #  user_id              :string
-#  start                :integer
-#  finish               :integer
+#  start                :bigint
+#  finish               :bigint
 #  duration             :integer
-#  allocations          :integer
+#  allocations          :bigint
 #  request_path         :string
 #  request_query_string :string
 #  request_method       :string

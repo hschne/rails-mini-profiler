@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_02_114107) do
+ActiveRecord::Schema.define(version: 2021_07_31_132836) do
 
   create_table "movies", force: :cascade do |t|
     t.string "imdb_id"
@@ -32,10 +32,10 @@ ActiveRecord::Schema.define(version: 2021_07_02_114107) do
 
   create_table "rmp_profiled_requests", force: :cascade do |t|
     t.string "user_id"
-    t.integer "start"
-    t.integer "finish"
+    t.bigint "start"
+    t.bigint "finish"
     t.integer "duration"
-    t.integer "allocations"
+    t.bigint "allocations"
     t.string "request_path"
     t.string "request_query_string"
     t.string "request_method"
@@ -53,10 +53,10 @@ ActiveRecord::Schema.define(version: 2021_07_02_114107) do
   create_table "rmp_traces", force: :cascade do |t|
     t.bigint "rmp_profiled_request_id", null: false
     t.string "name"
-    t.integer "start"
-    t.integer "finish"
+    t.bigint "start"
+    t.bigint "finish"
     t.integer "duration"
-    t.integer "allocations"
+    t.bigint "allocations"
     t.json "payload"
     t.json "backtrace"
     t.datetime "created_at", precision: 6, null: false
