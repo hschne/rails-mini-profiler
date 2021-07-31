@@ -1,13 +1,16 @@
 name: Main
 
-on: [push,pull_request]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
       BUNDLE_WITHOUT: 'development'
-      CC_TEST_REPORTER_ID: '640d490defec165928507980a40f2eec5bbc84a85b79018af7e5e618481c74be'
+      CC_TEST_REPORTER_ID: "${{secrets.CC_TEST_REPORTER_ID}}"
 
     steps:
     - uses: actions/checkout@v2
@@ -31,3 +34,27 @@ jobs:
 
     - name: Report Coverage
       uses: paambaati/codeclimate-action@v2.7.5
+
+    - name: Lint Commits
+      uses: wagoid/commitlint-github-action@v4
+
+    - name: Generate Release 📝
+      uses: GoogleCloudPlatform/release-please-action@v2
+      id: release
+      with:
+        release-type: ruby
+        package-name: rails_mini_profiler
+        bump-minor-pre-major: true
+        version-file: "lib/rails_mini_profiler/version.rb"
+
+    - name: Publish Gem 💎
+      if: ${{ steps.release.outputs.release_created }}
+      run: |
+        mkdir -p $HOME/.gem
+        touch $HOME/.gem/credentials
+        chmod 0600 $HOME/.gem/credentials
+        printf -- "---\n:rubygems_api_key: ${RUBYGEMS_API_KEY}\n" > $HOME/.gem/credentials
+        gem build *.gemspec
+        gem push *.gem
+      env:
+        RUBYGEMS_API_KEY: "${{secrets.RUBYGEMS_API_KEY}}"

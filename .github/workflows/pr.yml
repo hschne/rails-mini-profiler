@@ -1,0 +1,32 @@
+name: Main
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      BUNDLE_WITHOUT: 'development'
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0.0
+        bundler-cache: true
+
+    - name: Run RuboCop 🚓
+      run: |
+        bundle exec rake rubocop
+
+    - name: Setup DB 🗄️
+      run: |
+        bundle exec rails db:setup
+
+    - name: Run Tests ✅
+      run: |
+        bundle exec rake spec
+
+    - name: Lint Commits
+      uses: wagoid/commitlint-github-action@v4
