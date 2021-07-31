@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_114107) do
     t.string "response_media_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_at"], name: "index_rmp_profiled_requests_on_created_at"
   end
 
   create_table "rmp_traces", force: :cascade do |t|

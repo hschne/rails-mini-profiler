@@ -19,6 +19,8 @@ class CreateRmp < ActiveRecord::Migration[6.0]
       t.string :response_media_type
 
       t.timestamps
+
+      t.index :created_at
     end
 
     create_table :rmp_traces do |t|

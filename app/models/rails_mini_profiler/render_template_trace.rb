@@ -16,6 +16,10 @@
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #
+# Indexes
+#
+#  index_rmp_traces_on_rmp_profiled_request_id  (rmp_profiled_request_id)
+#
 module RailsMiniProfiler
   class RenderTemplateTrace < Trace
     store :payload, accessors: %i[identifier]

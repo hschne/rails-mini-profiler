@@ -10,6 +10,10 @@
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #
+# Indexes
+#
+#  index_rmp_flamegraphs_on_rmp_profiled_request_id  (rmp_profiled_request_id)
+#
 module RailsMiniProfiler
   class Flamegraph < RailsMiniProfiler::ApplicationRecord
     self.table_name = RailsMiniProfiler.storage_configuration.flamegraphs_table

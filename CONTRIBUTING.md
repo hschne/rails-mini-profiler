@@ -55,7 +55,7 @@ Finally, go to [GitHub](https://github.com/hschne/rails-mini-profiler) and creat
 RMP uses [Annotate](https://github.com/ctran/annotate_models) to annotate models. When making changes to the schema, run
 
 ```
-bundle exec annotate --models --exclude tests,fixtures
+bundle exec annotate -i --models --exclude tests,fixtures 
 ```
 
 to update model annotations.

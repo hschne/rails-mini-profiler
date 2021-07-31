@@ -4,21 +4,27 @@
 #
 # Table name: rmp_profiled_requests
 #
-#  id               :integer          not null, primary key
-#  user_id          :string
-#  start            :integer
-#  finish           :integer
-#  duration         :integer
-#  allocations      :integer
-#  request_path     :string
-#  request_method   :string
-#  request_headers  :json
-#  request_body     :json
-#  response_status  :integer
-#  response_body    :json
-#  response_headers :json
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  id                   :integer          not null, primary key
+#  user_id              :string
+#  start                :integer
+#  finish               :integer
+#  duration             :integer
+#  allocations          :integer
+#  request_path         :string
+#  request_query_string :string
+#  request_method       :string
+#  request_headers      :json
+#  request_body         :text
+#  response_status      :integer
+#  response_body        :text
+#  response_headers     :json
+#  response_media_type  :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#
+# Indexes
+#
+#  index_rmp_profiled_requests_on_created_at  (created_at)
 #
 module RailsMiniProfiler
   class ProfiledRequest < RailsMiniProfiler::ApplicationRecord
