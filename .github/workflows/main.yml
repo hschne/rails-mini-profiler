@@ -48,7 +48,7 @@ jobs:
       id: release
       with:
         release-type: ruby
-        package-name: rails_mini_profiler
+        package-name: rails-mini-profiler
         bump-minor-pre-major: true
         version-file: "lib/rails_mini_profiler/version.rb"
 
