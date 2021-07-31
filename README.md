@@ -208,6 +208,17 @@ As such, compared to `rack-mini-profiler`, it does not support non-Rails apps (e
 
 ## Troubleshooting
 
+### Upgrading
+
+Rails Mini Profiler is in early development. As such, breaking changes may still be introduced on a regular basis. While Rails Mini Profiler is in pre-release we do not offer upgrade migrations.
+
+If an upgrade to Rails Mini Profiler breaks your application, we recommend that you drop the offending tables and re-run migrations for the latest version: 
+
+```
+rails rails_mini_profiler:install:migrations
+rails db:migrate
+```
+
 ### Flamegraphs are not rendering?
 
 Flamegraphs are loaded into [Speedscope](https://github.com/jlfwong/speedscope) using an Iframe and URI Encoded blobs (see [source](https://github.com/hschne/rails-mini-profiler/blob/main/app/views/rails_mini_profiler/flamegraphs/show.html.erb))
