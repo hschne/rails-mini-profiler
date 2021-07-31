@@ -5,6 +5,8 @@ Thank you for helping out with Rails Mini Profiler! :heart:
 We welcome all support, whether on bug reports, code, design, reviews, tests,
 documentation, translations or just feature requests.
 
+If you are interested in what's planned for the future, check the [Next Release](https://github.com/hschne/rails-mini-profiler/projects/1) and [Backlog](https://github.com/hschne/rails-mini-profiler/projects/2) projects to get an overview.
+
 ## Using the Issue Tracker
 
 Please use [GitHub issues](https://github.com/wagtail/wagtail/issues) to submit bugs or feature requests. 
