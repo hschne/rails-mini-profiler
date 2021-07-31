@@ -47,8 +47,10 @@ bundle exec rspec
 We care about quality. Before opening your PR make sure to adhere to the repository code style and verify that all tests
 still pass. Run `rake` to execute both tests and [Rubocop](https://github.com/rubocop/rubocop)
 
-Finally, go to [GitHub](https://github.com/hschne/rails-mini-profiler) and create a new Pull Request! :rocket:
+Rails Mini Profiler uses [convential commits](https://www.conventionalcommits.org/en/v1.0.0/#summary). Before opening your pull request,
+consider updating your commit messages accordingly. This is not a must, but maintainers may squash your commits to adhere to the guidelines.
 
+Finally, go to [GitHub](https://github.com/hschne/rails-mini-profiler) and create a new Pull Request! :rocket:
 
 ### Other
 
