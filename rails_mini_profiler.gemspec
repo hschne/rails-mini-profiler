@@ -3,19 +3,23 @@
 require_relative 'lib/rails_mini_profiler/version'
 
 Gem::Specification.new do |spec|
-  spec.name        = 'rails_mini_profiler'
-  spec.version     = RailsMiniProfiler::VERSION
-  spec.authors     = ['hschne']
-  spec.email       = ['hans.schnedlitz@gmail.com']
+  spec.name = 'rails_mini_profiler'
+  spec.version = RailsMiniProfiler::VERSION
+  spec.authors = ['hschne']
+  spec.email = ['hans.schnedlitz@gmail.com']
 
   spec.summary = 'Performance profiling for your Rails app, made simple'
   spec.description = 'Performance profiling for your Rails app, made simple'
   spec.homepage = 'https://github.com/hschne/rails-mini-profiler'
   spec.license = 'MIT'
 
-  spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = spec.homepage
-  spec.metadata['changelog_uri'] = "#{spec.homepage}/CHANGELOG.md"
+  spec.metadata = {
+    'bug_tracker_uri' => "#{spec.homepage}/issues",
+    'changelog_uri' => "#{spec.homepage}/blob/main/CHANGELOG.md",
+    'documentation_uri' => spec.homepage.to_s,
+    'homepage_uri' => spec.homepage.to_s,
+    'source_code_uri' => spec.homepage.to_s
+  }
 
   spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
