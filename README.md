@@ -15,7 +15,7 @@
 
 ## What's this?
 
-Rails Mini Profiler is an easy-to-use performance profiler for your Rails applications. It is heavily inspired by [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler) and other APM tools. Check out a short video preview below:
+Rails Mini Profiler is an easy-to-use performance profiler for your Rails applications. It is heavily inspired by [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler) and other APM tools. See also [Why Rails Mini Profiler?](#why-rails-mini-profiler). To see it in action out the preview below:
 
 <div align="center">
 
@@ -23,7 +23,7 @@ Rails Mini Profiler is an easy-to-use performance profiler for your Rails applic
 
 </div>
 
-**Note**: This gem is in early development and I'm looking for contributors. Try it out and leave some feedback, it really goes a long way in helping me out with development. Any  [feature request](https://github.com/hschne/rails-mini-profiler/issues/new?assignees=&labels=type%3ABug&template=FEATURE_REQUEST.md&title=) or [bug report](https://github.com/hschne/rails-mini-profiler/issues/new?assignees=&labels=type%3AEnhancement&template=BUG_REPORT.md&title=) is welcome. If you like this project, leave a star to show your support! ⭐
+**Note**: This gem is in early development and I'm looking for contributors. Try it out and leave some feedback, it really goes a long way in helping me out with development. Any [feature request](https://github.com/hschne/rails-mini-profiler/issues/new?assignees=&labels=type%3ABug&template=FEATURE_REQUEST.md&title=) or [bug report](https://github.com/hschne/rails-mini-profiler/issues/new?assignees=&labels=type%3AEnhancement&template=BUG_REPORT.md&title=) is welcome. If you like this project, leave a star to show your support! ⭐
 
 ## Getting Started
 
@@ -47,7 +47,7 @@ rails db:migrate
 ```
 
 Start your Rails application and perform some requests. You can either click the little hedgehog 🦔 on the top
-right or navigate to `/rails_mini_profiler` to view collected performance metrics.
+left or navigate to `/rails_mini_profiler` to view collected performance metrics.
 
 ## Usage
 
@@ -100,7 +100,7 @@ you may have to amend your content security policy. See [Troubleshooting](#Troub
 You can set the following configuration options in Rails Mini Profiler:
 
 | Option                   | Default                      | Description                                                                                     |
-|--------------------------|------------------------------|-------------------------------------------------------------------------------------------------|
+| ------------------------ | ---------------------------- | ----------------------------------------------------------------------------------------------- |
 | `enabled`                | `true` (dev)/ `false` (prod) | Whether or not RMP is enabled                                                                   |
 | `badge_enabled`          | `true`                       | Should the hedgehog 🦔 badge be injected into pages?                                            |
 | `badge_position`         | `'top-left'`                 | Where to display the badge. Options are `'top-left', 'top-right', 'bottom-left, 'bottom-right'` |
@@ -115,7 +115,7 @@ You can set the following configuration options in Rails Mini Profiler:
 You may override the configuration by sending request parameters. The following parameters are available:
 
 | Option           | Description                                                                                 |
-|------------------|---------------------------------------------------------------------------------------------|
+| ---------------- | ------------------------------------------------------------------------------------------- |
 | `rmp_flamegraph` | Overrides `flamegraph_enabled` If set to `true` will redirect to the flamegraph immediatly. |
 
 ### Storage
@@ -124,7 +124,7 @@ Rails Mini Profiler stores profiling information in your database per default. Y
 traces and requests are stored.
 
 | Configuration             | Default                 | Description                                                                                               |
-|---------------------------|-------------------------|-----------------------------------------------------------------------------------------------------------|
+| ------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------- |
 | `database`                | `nil`                   | Set a custom database to be used for storing profiler information. Uses `connect_to` for profiler records |
 | `profiled_requests_table` | `rmp_profiled_requests` | The table to be used to store profiled requests.                                                          |
 | `flamegraphs_table`       | `rmp_flamegraphs`       | The table to be used to store flamegraphs.                                                                |
@@ -142,7 +142,7 @@ end
 class ProfiledRequestCleanupJob < ApplicationJob
   queue_as :default
 
-  def perform(*guests)
+  def perform
     RailsMiniProfiler::ProfiledRequest.where('created_at < ?', 1.month.ago).destroy_all
   end
 end
@@ -187,6 +187,22 @@ end
 ```
 
 Only requests by explicitly set users will be stored. To configure how individual users are identified see [Users](#Users)
+
+## Why Rails Mini Profiler?
+
+Improving the performance of any application is a 3-step process. You have to answer these questions:
+
+1. What is slow?
+2. Why is it slow?
+3. Did my solution fix the slowness?
+
+I'm a huge fan of [rack-mini-profiler](https://github.com/MiniProfiler/rack-mini-profiler), and AMP tools such as [Skylight](https://www.skylight.io/) or [Scout APM](https://scoutapm.com), and each of these tools has its place.
+
+APM tools are excellent for profiling your app in production - aka. they show you what is slow - and offer _some_ hints as to what causes the slowdown. `rack-mini-profiler` can do some sampling in production, but excels at providing detailed insight into _why_ something is slow, using Flamegraphs and detailed query information.
+
+Rails Mini Profiler improves upon `rack-mini-profiler` in the latter regard. It is a developer tool, rather than a monitoring tool, and sets a big focus on developer experience. Simply put, it aims to be the best tool available to help you figure out _why_ specific requests are slow.
+
+As such, compared to `rack-mini-profiler`, it does not support non-Rails apps (e.g. Sinatra) or production sampling, but provides a much better user experience and better supports API-only applications.
 
 ## Troubleshooting
 
