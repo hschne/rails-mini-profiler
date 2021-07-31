@@ -4,10 +4,10 @@ class CreateRmp < ActiveRecord::Migration[6.0]
   def change
     create_table :rmp_profiled_requests do |t|
       t.string :user_id
-      t.integer :start
-      t.integer :finish
+      t.bigint :start
+      t.bigint :finish
       t.integer :duration
-      t.integer :allocations
+      t.bigint :allocations
       t.string :request_path
       t.string :request_query_string
       t.string :request_method
@@ -26,10 +26,10 @@ class CreateRmp < ActiveRecord::Migration[6.0]
     create_table :rmp_traces do |t|
       t.belongs_to :rmp_profiled_request, null: false, foreign_key: true
       t.string :name
-      t.integer :start
-      t.integer :finish
+      t.bigint :start
+      t.bigint :finish
       t.integer :duration
-      t.integer :allocations
+      t.bigint :allocations
       t.json :payload
       t.json :backtrace
 
