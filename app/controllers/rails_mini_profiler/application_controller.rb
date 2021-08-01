@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  class ApplicationController < ::ApplicationController
+  class ApplicationController < ActionController::Base
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
     before_action :check_current_user
