@@ -221,6 +221,28 @@ rails rails_mini_profiler:install:migrations
 rails db:migrate
 ```
 
+### Support for API-Only Apps
+
+Rails Mini Profiler supports API-only apps, but you have to make some small adjustments to use it. At the top of `application.rb` add [Sprockets](https://github.com/rails/sprockets-rails):
+
+```
+require "sprockets/railtie"
+```
+
+Then, modify `application.rb`:
+
+```
+module ApiOnly
+  class Application < Rails::Application
+    
+    config.api_only = true # Either set this to false
+    config.middleware.use ActionDispatch::Flash # Or add this
+  end
+end
+```
+
+**Note: Sprockets and flash are currently required for some of Rails Mini Profiler's UI features. These modifications may no longer be needed in the future.
+
 ### Flamegraphs are not rendering?
 
 Flamegraphs are loaded into [Speedscope](https://github.com/jlfwong/speedscope) using an Iframe and URI Encoded blobs (see [source](https://github.com/hschne/rails-mini-profiler/blob/main/app/views/rails_mini_profiler/flamegraphs/show.html.erb))
