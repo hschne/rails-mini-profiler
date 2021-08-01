@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
+  # Thin wrappers around request/response classes
+  #
+  # @api private
   module Models
+    # A pseudo model to be used to wrap profiling information. We can't use regular models, as their connecting
+    # to the database results in problems when profiling.
     class BaseModel
       include ActiveModel::Model
 
