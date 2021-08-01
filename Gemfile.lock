@@ -252,7 +252,6 @@ DEPENDENCIES
   rails_mini_profiler!
   rspec-rails (~> 4.0)
   rubocop (~> 1.18)
-  ruby-progressbar (~> 1.11)
   rubyzip (~> 2.3)
   simplecov (~> 0.21)
   sqlite3 (~> 1.4)
