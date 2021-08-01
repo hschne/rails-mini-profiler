@@ -56,11 +56,21 @@ Finally, go to [GitHub](https://github.com/hschne/rails-mini-profiler) and creat
 
 ### Other
 
+#### Annotate
+
 RMP uses [Annotate](https://github.com/ctran/annotate_models) to annotate models. When making changes to the schema, run
 
-```
+```bash
 bundle exec annotate -i --models --exclude tests,fixtures 
 ```
 
 to update model annotations.
 
+#### Speedscope
+
+RMP uses [Speescope](https://github.com/jlfwong/speedscope) for Flamegraph rendering. To update to the latest release of
+Speedscope run
+
+```bash
+rake speedscope:update
+```
