@@ -32,7 +32,7 @@ module RailsMiniProfiler
 
     def save_results!
       ActiveRecord::Base.transaction do
-        profiled_request.flamegraph = Flamegraph.new(data: flamegraph) if flamegraph.present?
+        profiled_request.flamegraph = RailsMiniProfiler::Flamegraph.new(data: flamegraph) if flamegraph.present?
         profiled_request.save
         insert_traces unless traces.empty?
       end
