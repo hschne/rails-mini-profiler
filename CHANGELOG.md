@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.3](https://www.github.com/hschne/rails-mini-profiler/compare/v0.1.2...v0.1.3) (2021-08-02)
+
+
+### Bug Fixes
+
+* revert internalize external assets ([8719c0b](https://www.github.com/hschne/rails-mini-profiler/commit/8719c0b8bcb0babd42d322969fbbd5bbcdd9abeb))
+
 ### [0.1.2](https://www.github.com/hschne/rails-mini-profiler/compare/v0.1.1...v0.1.2) (2021-08-02)
 
 
