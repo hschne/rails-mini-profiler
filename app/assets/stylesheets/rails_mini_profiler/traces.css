@@ -71,7 +71,7 @@
 
 .sequel-trace-binds {
   margin: 0 0 1em 0;
-  padding: .5em 1em;
+  padding: .5em 0;
   font-size: 12px;
   overflow: auto;
   max-height: 100px;
