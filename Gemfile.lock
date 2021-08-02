@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_mini_profiler (0.1.1)
+    rails_mini_profiler (0.1.2)
       inline_svg
       rails (>= 6.0)
 
@@ -86,8 +86,8 @@ GEM
     eventmachine (1.2.7)
     ffi (1.15.3)
     formatador (0.3.0)
-    globalid (0.4.2)
-      activesupport (>= 4.2.0)
+    globalid (0.5.2)
+      activesupport (>= 5.0)
     guard (2.18.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
