@@ -12,6 +12,8 @@
 //
 //= require rails-ujs
 //= require_tree .
+//= require popper
+//= require tippy
 
 function setupRequestSearch() {
   const profiledRequestNameSearch = document.getElementById('profiled-request-search')
