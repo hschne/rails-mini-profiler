@@ -136,7 +136,7 @@ traces and requests are stored.
 
 Rails Mini Profiler does not offer an automatic way to clean up old profiling information. It is recommended you add a sweeper job to clean up old profiled requests periodically (e.g. using [clockwork](https://github.com/adamwiggins/clockwork). For example, with ActiveJob:
 
-```
+```ruby
 # Clockwork
 every(1.month, 'purge rails mini profiler' do
     ProfiledRequestCleanupJob.perform_later

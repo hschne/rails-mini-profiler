@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
+  # The Rails Mini Profiler engine
+  #
+  # Injects a a custom [Middleware] into an existing Rails app to record request profiling information.
   class Engine < ::Rails::Engine
     isolate_namespace RailsMiniProfiler
 
