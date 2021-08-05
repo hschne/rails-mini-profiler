@@ -245,6 +245,8 @@ end
 
 ### Flamegraphs are not rendering?
 
+Flamegraphs are rendered using [StackProf](https://github.com/tmm1/stackprof), so your app needs to have `gem "stackprof"` available. If absent, this feature is not enabled.
+
 Flamegraphs are loaded into [Speedscope](https://github.com/jlfwong/speedscope) using an Iframe and URI Encoded blobs (see [source](https://github.com/hschne/rails-mini-profiler/blob/main/app/views/rails_mini_profiler/flamegraphs/show.html.erb))
 If your browser gives you warnings about blocking content due to CSP you _must_ enable `blob` as default source:
 
