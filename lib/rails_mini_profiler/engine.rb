@@ -12,7 +12,11 @@ module RailsMiniProfiler
     end
 
     initializer 'rails_mini_profiler.assets.precompile', group: :all do |app|
-      app.config.assets.precompile += %w[rails_mini_profiler.js rails_mini_profiler/application.css]
+      app.config.assets.precompile += %w[
+        rails_mini_profiler.js
+        rails_mini_profiler/application.css
+        vendor/assets/images
+      ]
     end
 
     config.generators do |g|

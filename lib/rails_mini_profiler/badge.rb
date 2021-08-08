@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
+require_relative '../../app/helpers/rails_mini_profiler/application_helper'
+
 module RailsMiniProfiler
   # Wraps functionality to render an interactive badge on top of HTML responses
   #
   # @api private
   class Badge
     include InlineSvg::ActionView::Helpers
+    include RailsMiniProfiler::ApplicationHelper
     include Engine.routes.url_helpers
 
     # @param request_context [RequestContext] The current request context
@@ -60,7 +63,7 @@ module RailsMiniProfiler
       template.result(binding)
     end
 
-    # Transform the configuration position into CSS styles
+    # Transform the configuration position into CSS style positions
     #
     # @return String The badge position as CSS style
     def css_position
