@@ -8,7 +8,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/rails_mini_profiler.svg)](https://badge.fury.io/rb/rails_mini_profiler)
 [![Main](https://github.com/hschne/rails-mini-profiler/actions/workflows/main.yml/badge.svg)](https://github.com/hschne/rails-mini-profiler/actions/workflows/main.yml)
-[![Main](https://img.shields.io/github/license/hschne/rails-mini-profiler)](https://img.shields.io/github/license/hschne/rails-mini-profiler)
+[![License](https://img.shields.io/github/license/hschne/rails-mini-profiler)](https://img.shields.io/github/license/hschne/rails-mini-profiler)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/1fcc2f4d01ab5bf7a260/maintainability)](https://codeclimate.com/github/hschne/rails-mini-profiler/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/1fcc2f4d01ab5bf7a260/test_coverage)](https://codeclimate.com/github/hschne/rails-mini-profiler/test_coverage)
@@ -91,13 +91,16 @@ By clicking on individual traces you can find out detailed information.
 
 ### Flamegraphs
 
-Rails Mini Profiler per default records Flamegraphs for every profiled request for convenience. Note that Flamegraphs recording
-incur a significant performance penalty, and can take up a lot of space.
+Rails Mini Profiler automatically records Flamegraphs for profiled requests. To enable this feature, add [Stackprof](https://github.com/tmm1/stackprof)
+to your Gemfile: 
 
-To change the default behavior see [Configuration](#Configuration).
+```ruby
+gem 'stackprof'
+```
 
-Flamegraphs are rendered using [Speedscope](https://github.com/jlfwong/speedscope). If Flamegraphs are not rendering
-you may have to amend your content security policy. See [Troubleshooting](#Troubleshooting)
+For convenience, Flamegraphs are recorded for every request. This may incur a significant performance penalty. To change the default behavior see [Configuration](#Configuration).
+
+Flamegraphs are rendered using [Speedscope](https://github.com/jlfwong/speedscope). See [Troubleshooting](#Troubleshooting) if Flamegraphs are not rendering correctly.
 
 ## Configuration
 
@@ -243,9 +246,15 @@ end
 
 **Note: Sprockets and flash are currently required for some of Rails Mini Profiler's UI features. These modifications may no longer be needed in the future.
 
-### Flamegraphs are not rendering?
+### No Flamegraphs are being recored?
 
-Flamegraphs are rendered using [StackProf](https://github.com/tmm1/stackprof), so your app needs to have `gem "stackprof"` available. If absent, this feature is not enabled.
+Make sure you have added [StackProf](https://github.com/tmm1/stackprof) to your Gemfile.
+
+```ruby
+gem 'stackprof'
+```
+
+### Flamegraphs are not rendering?
 
 Flamegraphs are loaded into [Speedscope](https://github.com/jlfwong/speedscope) using an Iframe and URI Encoded blobs (see [source](https://github.com/hschne/rails-mini-profiler/blob/main/app/views/rails_mini_profiler/flamegraphs/show.html.erb))
 If your browser gives you warnings about blocking content due to CSP you _must_ enable `blob` as default source:
