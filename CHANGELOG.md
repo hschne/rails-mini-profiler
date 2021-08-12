@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.1](https://www.github.com/hschne/rails-mini-profiler/compare/v0.2.0...v0.2.1) (2021-08-12)
+
+
+### Bug Fixes
+
+* limit vendor folder, fixes [#33](https://www.github.com/hschne/rails-mini-profiler/issues/33) ([e9facf4](https://www.github.com/hschne/rails-mini-profiler/commit/e9facf4c583a4742b162b9da177d443ef11adf08))
+
 ## [0.2.0](https://www.github.com/hschne/rails-mini-profiler/compare/v0.1.3...v0.2.0) (2021-08-12)
 
 
