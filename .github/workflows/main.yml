@@ -50,7 +50,7 @@ jobs:
         release-type: ruby
         package-name: rails-mini-profiler
         bump-minor-pre-major: true
-        version-file: "lib/rails_mini_profiler/version.rb"
+        version-file: "./lib/rails_mini_profiler/version.rb"
 
     - name: Publish Gem 💎
       if: ${{ steps.release.outputs.release_created }}
