@@ -4,6 +4,7 @@ AllCops:
   SuggestExtensions: false
   Exclude:
     - vendor/**/*
+    - node_modules/**/*
     - !ruby/regexp /schema\.rb$/
     - db/migrate/*.rb
 

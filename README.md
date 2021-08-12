@@ -104,7 +104,7 @@ Flamegraphs are rendered using [Speedscope](https://github.com/jlfwong/speedscop
 
 ## Configuration
 
-You can set the following configuration options in Rails Mini Profiler:
+Rails Mini Profiler provides a wide array of configuration options. You can find details below. For an example configuration check `initializers/rails_mini_profiler.rb` (or [the template file](https://github.com/hschne/rails-mini-profiler/blob/main/lib/generators/rails_mini_profiler/templates/rails_mini_profiler.rb.erb)).
 
 | Option                   | Default                      | Description                                                                                     |
 | ------------------------ | ---------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -169,8 +169,6 @@ You may also explicitly set the user from the application itself:
 
 ```ruby
 class ApplicationController < ActionController::Base
-  ...
-
   before_action do
     RailsMiniProfiler::User.authorize(current_user.id)
   end

@@ -50,7 +50,7 @@ module RailsMiniProfiler
     #
     # @return [Storage] a new storage configuration
     def storage_configuration
-      configuration.storage.configuration
+      configuration.storage
     end
 
     # Access the current logger

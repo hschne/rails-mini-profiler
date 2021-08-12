@@ -25,6 +25,7 @@ module RailsMiniProfiler
       # @yieldreturn [Storage] a new storage configuration object
       def configure
         yield(configuration)
+        configuration
       end
     end
 
