@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.0](https://www.github.com/hschne/rails-mini-profiler/compare/v0.1.3...v0.2.0) (2021-08-12)
+
+
+### Features
+
+* serve assets locally, fixes [#17](https://www.github.com/hschne/rails-mini-profiler/issues/17) ([6f62d55](https://www.github.com/hschne/rails-mini-profiler/commit/6f62d5584f934e7e61fd0735c4ab00718f1be6c3))
+
+
+### Bug Fixes
+
+* improve storage configuration and docs, fixes [#27](https://www.github.com/hschne/rails-mini-profiler/issues/27) ([#28](https://www.github.com/hschne/rails-mini-profiler/issues/28)) ([68f1869](https://www.github.com/hschne/rails-mini-profiler/commit/68f18690b4f805f6826a5cacea60cd411089bc3e))
+
 ### [0.1.3](https://www.github.com/hschne/rails-mini-profiler/compare/v0.1.2...v0.1.3) (2021-08-02)
 
 
