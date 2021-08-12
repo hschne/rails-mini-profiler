@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.2](https://www.github.com/hschne/rails-mini-profiler/compare/v0.2.1...v0.2.2) (2021-08-12)
+
+
+### Bug Fixes
+
+* testfix ([ecf4b8a](https://www.github.com/hschne/rails-mini-profiler/commit/ecf4b8ab3e7bd180d504f9d7e51d91ac67fc03b2))
+
 ### [0.2.1](https://www.github.com/hschne/rails-mini-profiler/compare/v0.2.0...v0.2.1) (2021-08-12)
 
 
