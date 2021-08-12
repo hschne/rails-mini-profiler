@@ -3,7 +3,7 @@
 module RailsMiniProfiler
   class ApplicationRecord < ActiveRecord::Base
     if RailsMiniProfiler.storage_configuration.database.present?
-      establish_connection(RailsMiniProfiler.storage_configuration.database.present?)
+      establish_connection(RailsMiniProfiler.storage_configuration.database)
     end
 
     self.abstract_class = true
