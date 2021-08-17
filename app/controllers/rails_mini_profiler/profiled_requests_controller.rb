@@ -55,7 +55,7 @@ module RailsMiniProfiler
     def payload_column
       if ActiveRecord::Base.connection.adapter_name == 'PostgreSQL'
         # Cast json field to text to have access to the LIKE operator
-        'payload:text'
+        'payload::text'
       else
         'payload'
       end
