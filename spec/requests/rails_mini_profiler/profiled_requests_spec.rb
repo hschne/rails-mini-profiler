@@ -30,6 +30,14 @@ module RailsMiniProfiler
 
         expect(response).to be_successful
       end
+
+      it 'with stored item, and search, return successful' do
+        profiled_request = ProfiledRequest.create(user_id: user_id, request_method: 'GET', duration: 0)
+
+        get profiled_request_url(profiled_request.id, search: 'hello')
+
+        expect(response).to be_successful
+      end
     end
 
     describe 'DELETE /destroy' do
