@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.2](https://www.github.com/hschne/rails-mini-profiler/compare/v0.2.1...v0.2.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* cast json column to text on PostgreSQL ([#37](https://www.github.com/hschne/rails-mini-profiler/issues/37)) ([76d6ec2](https://www.github.com/hschne/rails-mini-profiler/commit/76d6ec209fb1f6a04e3e46e3c7d1f3c6ed369fdf))
+
 ### [0.2.1](https://www.github.com/hschne/rails-mini-profiler/compare/v0.2.0...v0.2.1) (2021-08-12)
 
 
