@@ -16,7 +16,7 @@ module RailsMiniProfiler
 
     def show
       @traces = @profiled_request.traces
-      @traces = @traces.where('payload LIKE ?', "%#{params[:search]}%") if params[:search]
+      @traces = @traces.where("#{payload_column} LIKE ?", "%#{params[:search]}%") if params[:search]
       @traces = @traces
                   .order(:start)
                   .map { |trace| present(trace, profiled_request: @profiled_request) }
@@ -50,6 +50,15 @@ module RailsMiniProfiler
 
     def configuration
       @configuration ||= RailsMiniProfiler.configuration
+    end
+
+    def payload_column
+      if ActiveRecord::Base.connection.adapter_name == 'PostgreSQL'
+        # Cast json field to text to have access to the LIKE operator
+        'payload:text'
+      else
+        'payload'
+      end
     end
   end
 end
