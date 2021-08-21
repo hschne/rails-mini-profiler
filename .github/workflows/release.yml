@@ -24,7 +24,7 @@ jobs:
   release:
     needs: prepare-release
     runs-on: ubuntu-latest
-#    if: ${{ needs.prepare-release.outputs.release_created }}
+    if: ${{ needs.prepare-release.outputs.release_created }}
 
     steps:
       - uses: actions/checkout@v2
@@ -42,6 +42,7 @@ jobs:
         with:
           node-version: 14
           cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install Packages
         uses: bahmutov/npm-install@v1
