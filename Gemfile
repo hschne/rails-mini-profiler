@@ -8,7 +8,6 @@ gemspec
 
 group :development do
   gem 'annotate', '~> 3.1'
-  gem 'guard-livereload', '~> 2.5', require: false
   gem 'httparty', '~> 0.18.1', require: false
   gem 'puma', '~> 5.4'
   gem 'rubyzip', '~> 2.3', require: false
