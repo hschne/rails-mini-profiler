@@ -41,6 +41,7 @@ jobs:
         bundle exec rake spec
       env:
         COVERAGE: true
+        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
 
     - name: Report Coverage
       if: github.ref == 'refs/heads/main'
