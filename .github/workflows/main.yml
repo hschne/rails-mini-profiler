@@ -45,7 +45,7 @@ jobs:
         COVERAGE: true
 
     - name: Report Coverage
-      if: github.ref == 'ref/head/main'
+      if: github.ref == 'refs/head/main'
       uses: paambaati/codeclimate-action@v2.7.5
       env:
         CC_TEST_REPORTER_ID: "${{secrets.CC_TEST_REPORTER_ID}}"
@@ -73,9 +73,6 @@ jobs:
 
       - name: Install Packages
         uses: bahmutov/npm-install@v1
-
-      - name: Compile Assets
-        run: npm run build
 
       - name: Run RuboCop 🚓
         run: bundle exec rake rubocop
