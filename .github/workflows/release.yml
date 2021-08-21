@@ -2,15 +2,13 @@ name: release
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   prepare-release:
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
-      version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}
 
     steps:
       - uses: actions/checkout@v2
@@ -29,6 +27,8 @@ jobs:
     if: ${{ needs.prepare-release.outputs.release_created }}
 
     steps:
+      - uses: actions/checkout@v
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -62,13 +62,6 @@ jobs:
 
       - name: Publish Package 📦
         run: |
-          npm version --no-git-tag-version ${{ needs.prepare-release.outputs.version }}'
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_API_TOKEN }}
-
-      - name: Commit Package Version
-        uses: EndBug/add-and-commit@v7
-        with:
-          add: "['package.json', 'package-lock.json']"
-          message: "chore: bump npm version to ${{ needs.prepare-release.outputs.version }}"
