@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.3.1](https://www.github.com/hschne/rails-mini-profiler/compare/v0.3.0...v0.3.1) (2021-08-21)
+
+
+### Bug Fixes
+
+* improve error handling for non-webpack setups ([9541976](https://www.github.com/hschne/rails-mini-profiler/commit/954197601531bd9bd3704db2c6a463e69e5b5819))
+
 ## [0.3.0](https://www.github.com/hschne/rails-mini-profiler/compare/v0.2.1...v0.3.0) (2021-08-21)
 
 
