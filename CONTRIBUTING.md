@@ -23,11 +23,16 @@ Create a fork of Rails Mini Profiler and clone your fork locally. Create a new b
 git checkout -b add-awesome-new-feature
 ```
 
-Setup RMP locally by executing 
+Setup RMP locally by executing:
 
-```
+```bash
+# Setup Rails
 bundle install
 rails db:setup
+
+# Install Node and build assets
+npm install
+npm run build
 ```
 
 Then code away!
@@ -40,17 +45,26 @@ is such an app and  resides in `spec/dummy`.
 To manually test your changes simply run `rails server` on the root level of your application. To execute the test suite
 run 
 
-```ruby
+```bash
 bundle exec rspec
+```
+
+### Working with Assets
+
+Javascript and CSS are packaged as a separate node module and bundled using [Rollup](https://rollupjs.org/guide/en/). 
+For continuous compilation and live preview first start your Rails server and then run:
+
+```bash
+npm run watch
 ```
 
 ### Prepping your PR
 
-We care about quality. Before opening your PR make sure to adhere to the repository code style and verify that all tests
+Before opening your PR make sure to adhere to the repository code style and verify that all tests
 still pass. Run `rake` to execute both tests and [Rubocop](https://github.com/rubocop/rubocop)
 
 Rails Mini Profiler uses [convential commits](https://www.conventionalcommits.org/en/v1.0.0/#summary). Before opening your pull request,
-consider updating your commit messages accordingly. This is not a must, but maintainers may squash your commits to adhere to the guidelines.
+consider updating your commit messages accordingly. If your commits don't adhere to conventional commits maintainers will squash your commits to adhere to the guidelines.
 
 Finally, go to [GitHub](https://github.com/hschne/rails-mini-profiler) and create a new Pull Request! :rocket:
 

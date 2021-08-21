@@ -8,5 +8,14 @@ module RailsMiniProfiler
       yield(presenter) if block_given?
       presenter
     end
+
+    def inline_svg(path, options = {})
+      if defined?(Webpacker::Engine)
+        path = "media/images/#{path}"
+        inline_svg_pack_tag(path, options)
+      else
+        inline_svg_tag(path, options)
+      end
+    end
   end
 end

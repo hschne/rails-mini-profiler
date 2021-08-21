@@ -5,8 +5,8 @@ AllCops:
   Exclude:
     - vendor/**/*
     - node_modules/**/*
-    - !ruby/regexp /schema\.rb$/
     - db/migrate/*.rb
+    - !ruby/regexp /schema\.rb$/
 
 Layout/LineLength:
   Max: 120

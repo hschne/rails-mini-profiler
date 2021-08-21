@@ -23,11 +23,11 @@ module RailsMiniProfiler
 
       if model.flamegraph.present?
         link_to(flamegraph_path(model.id), title: 'Show Flamegraph') do
-          inline_svg_tag('rails_mini_profiler/graph.svg')
+          inline_svg('graph.svg')
         end
       else
         link_to(flamegraph_path(model.id), title: 'No Flamegraph present for this request', class: 'link-disabled') do
-          inline_svg_tag('rails_mini_profiler/graph.svg')
+          inline_svg('graph.svg')
         end
       end
     end

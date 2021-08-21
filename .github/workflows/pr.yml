@@ -19,6 +19,18 @@ jobs:
         ruby-version: 3.0.0
         bundler-cache: true
 
+    - name: Set up Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+        cache: 'npm'
+
+    - name: Install Packages
+      uses: bahmutov/npm-install@v1
+
+    - name: Compile Assets
+      run: npm run build
+
     - name: Run RuboCop 🚓
       run: |
         bundle exec rake rubocop
