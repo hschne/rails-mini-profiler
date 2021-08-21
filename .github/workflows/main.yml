@@ -9,15 +9,10 @@ on:
       - main
 
 jobs:
-  check:
+  test:
     runs-on: ubuntu-latest
-    env:
-      CC_TEST_REPORTER_ID: "${{secrets.CC_TEST_REPORTER_ID}}"
-
     steps:
     - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
@@ -39,10 +34,6 @@ jobs:
     - name: Compile Assets
       run: npm run build
 
-    - name: Run RuboCop 🚓
-      run: |
-        bundle exec rake rubocop
-
     - name: Setup DB 🗄️
       run: |
         bundle exec rails db:setup
@@ -53,11 +44,50 @@ jobs:
       env:
         COVERAGE: true
 
-    - name: Lint Commits
-      uses: wagoid/commitlint-github-action@v4
-
     - name: Report Coverage
       if: github.ref == 'ref/head/main'
       uses: paambaati/codeclimate-action@v2.7.5
       env:
         CC_TEST_REPORTER_ID: "${{secrets.CC_TEST_REPORTER_ID}}"
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.0
+          bundler-cache: true
+        env:
+          BUNDLE_WITHOUT: 'development'
+
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          cache: 'npm'
+
+      - name: Install Packages
+        uses: bahmutov/npm-install@v1
+
+      - name: Compile Assets
+        run: npm run build
+
+      - name: Run RuboCop 🚓
+        run: bundle exec rake rubocop
+
+      - name: Run Linter 🔎
+        run: npm run lint
+
+      - name: Lint Commits
+        uses: wagoid/commitlint-github-action@v4
+
+      - name: Report Coverage
+        if: github.ref == 'ref/head/main'
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: "${{secrets.CC_TEST_REPORTER_ID}}"

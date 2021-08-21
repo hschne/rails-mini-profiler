@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "test": "jest",
+    "lint": "eslint --ignore-path .gitignore .",
     "watch": "browser-sync start --proxy localhost:3000 --files 'app/javascript/**/*,app/views/**/*' | rollup -c -w",
     "build": "NODE_ENV=production rollup -c"
   },
