@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Generate Release 📝
+      - name: Generate Release 🗒️
         uses: GoogleCloudPlatform/release-please-action@v2
         id: release
         with:

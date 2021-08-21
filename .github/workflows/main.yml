@@ -69,8 +69,8 @@ jobs:
       - name: Run RuboCop 🚓
         run: bundle exec rake rubocop
 
-      - name: Run Linter 🔎
+      - name: Run JS Linter 🔎
         run: npm run lint
 
-      - name: Lint Commits
+      - name: Lint Commits 📝
         uses: wagoid/commitlint-github-action@v4
