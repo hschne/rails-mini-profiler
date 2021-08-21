@@ -61,8 +61,21 @@ jobs:
         env:
           RUBYGEMS_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
 
+      - name: Bump Version
+        id: bump-version
+        run: |
+          version=$(cat lib/rails_mini_profiler/version.rb | grep VERSION | cut -d'"' -f2)
+          npm version --no-git-tag-version $version
+          echo "::set-output name=version::$version"
+
       - name: Publish Package 📦
         run: |
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_API_TOKEN }}
+
+      - name: Commit Files
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: "['package.json', 'package-lock.json']"
+          message: "chore: bump npm version to ${{ steps.bump-version.outputs.version }}"
