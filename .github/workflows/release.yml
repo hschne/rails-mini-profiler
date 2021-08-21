@@ -24,7 +24,7 @@ jobs:
   release:
     needs: prepare-release
     runs-on: ubuntu-latest
-    if: ${{ needs.prepare-release.outputs.release_created }}
+#    if: ${{ needs.prepare-release.outputs.release_created }}
 
     steps:
       - uses: actions/checkout@v

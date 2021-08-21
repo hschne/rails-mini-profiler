@@ -42,8 +42,10 @@ jobs:
       env:
         COVERAGE: true
 
+    - run: echo ${{ github.ref }}
+
     - name: Report Coverage
-      if: github.ref == 'refs/head/main'
+      if: github.ref == 'refs/heads/master'
       uses: paambaati/codeclimate-action@v2.7.5
       env:
         CC_TEST_REPORTER_ID: "${{secrets.CC_TEST_REPORTER_ID}}"
@@ -80,9 +82,3 @@ jobs:
 
       - name: Lint Commits
         uses: wagoid/commitlint-github-action@v4
-
-      - name: Report Coverage
-        if: github.ref == 'ref/head/main'
-        uses: paambaati/codeclimate-action@v2.7.5
-        env:
-          CC_TEST_REPORTER_ID: "${{secrets.CC_TEST_REPORTER_ID}}"
