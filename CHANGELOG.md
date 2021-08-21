@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/hschne/rails-mini-profiler/compare/v0.2.1...v0.3.0) (2021-08-21)
+
+
+### Features
+
+* add webpacker support, see [#8](https://www.github.com/hschne/rails-mini-profiler/issues/8) ([#39](https://www.github.com/hschne/rails-mini-profiler/issues/39)) ([a0f17f3](https://www.github.com/hschne/rails-mini-profiler/commit/a0f17f3088307474d7428fc8487c51fb2f0746cf))
+
+
+### Bug Fixes
+
+* cast json column to text on PostgreSQL ([#37](https://www.github.com/hschne/rails-mini-profiler/issues/37)) ([76d6ec2](https://www.github.com/hschne/rails-mini-profiler/commit/76d6ec209fb1f6a04e3e46e3c7d1f3c6ed369fdf))
+
 ### [0.2.1](https://www.github.com/hschne/rails-mini-profiler/compare/v0.2.0...v0.2.1) (2021-08-12)
 
 
