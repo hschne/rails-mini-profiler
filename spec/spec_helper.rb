@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'simplecov'
-SimpleCov.start { enable_coverage :branch } if ENV['COVERAGE']
+SimpleCov.start if ENV['COVERAGE']
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
