@@ -1,15 +1,17 @@
 name: main
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
     env:
-      BUNDLE_WITHOUT: 'development'
       CC_TEST_REPORTER_ID: "${{secrets.CC_TEST_REPORTER_ID}}"
 
     steps:
@@ -22,6 +24,8 @@ jobs:
       with:
         ruby-version: 3.0.0
         bundler-cache: true
+      env:
+        BUNDLE_WITHOUT: 'development'
 
     - name: Set up Node
       uses: actions/setup-node@v2
@@ -49,75 +53,11 @@ jobs:
       env:
         COVERAGE: true
 
-    - name: Report Coverage
-      uses: paambaati/codeclimate-action@v2.7.5
-
     - name: Lint Commits
       uses: wagoid/commitlint-github-action@v4
 
-  prepare-release:
-    runs-on: ubuntu-latest
-    env:
-      BUNDLE_WITHOUT: 'development'
-    outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
-      version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Generate Release 📝
-        uses: GoogleCloudPlatform/release-please-action@v2
-        id: release
-        with:
-          release-type: ruby
-          package-name: rails-mini-profiler
-          bump-minor-pre-major: true
-          version-file: "lib/rails_mini_profiler/version.rb"
-
-  release:
-    needs: prepare-release
-    runs-on: ubuntu-latest
-    if: ${{ needs.prepare-release.outputs.release_created }}
-
-    steps:
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.0.0
-          bundler-cache: true
-
-      - name: Set up Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
-          cache: 'npm'
-
-      - name: Install Packages
-        uses: bahmutov/npm-install@v1
-
-      - name: Compile Assets
-        run: npm run build
-
-      - name: Publish Gem 💎
-        run: |
-          mkdir -p $HOME/.gem
-          touch $HOME/.gem/credentials
-          chmod 0600 $HOME/.gem/credentials
-          printf -- "---\n:rubygems_api_key: ${RUBYGEMS_API_KEY}\n" > $HOME/.gem/credentials
-          gem build *.gemspec
-          gem push *.gem
-        env:
-          RUBYGEMS_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
-
-      - name: Publish Package 📦
-        run: |
-          npm version --no-git-tag-version ${{ needs.prepare-release.outputs.version }}'
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_TOKEN }}
-
-      - name: Commit Package Version
-        uses: EndBug/add-and-commit@v7
-        with:
-          add: "['package.json', 'package-lock.json']"
-          message: "chore: bump npm version to ${{ needs.prepare-release.outputs.version }}"
+    - name: Report Coverage
+      if: github.ref == 'ref/head/main'
+      uses: paambaati/codeclimate-action@v2.7.5
+      env:
+        CC_TEST_REPORTER_ID: "${{secrets.CC_TEST_REPORTER_ID}}"
