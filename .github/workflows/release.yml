@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
+      version: ${{ steps.release.outputs.release_created.major }}.${{ steps.release.outputs.release_created.minor }}.${{ steps.release.outputs.release_created.patch }}
 
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +20,6 @@ jobs:
           release-type: ruby
           package-name: rails-mini-profiler
           bump-minor-pre-major: true
-          version-file: "lib/rails_mini_profiler/version.rb"
 
   release:
     needs: prepare-release
@@ -29,6 +29,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Update Gem Version
+        run: |
+          version=${{ needs.prepare-release.outputs.version }}
+          sed -i "s|\(VERSION = \)'.*'|\1'$version'|" lib/rails_mini_profiler/version.rb
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -36,6 +41,7 @@ jobs:
           bundler-cache: true
         env:
           BUNDLE_WITHOUT: 'development'
+          BUNDLE_DEPLOYMENT: false # An incremented version number means we can't use deployment
 
       - name: Set up Node
         uses: actions/setup-node@v2
@@ -50,6 +56,17 @@ jobs:
       - name: Compile Assets
         run: npm run build
 
+      - name: Bump Package Version
+        id: bump-version
+        run: |
+          npm version --no-git-tag-version ${{ needs.prepare-release.outputs.version }}
+
+      - name: Commit Updated Files
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: "['Gemfile.lock', 'package.json', 'package-lock.json']"
+          message: "chore: update files for ${{ needs.prepare-release.outputs.version }}"
+
       - name: Publish Gem 💎
         run: |
           mkdir -p $HOME/.gem
@@ -61,21 +78,8 @@ jobs:
         env:
           RUBYGEMS_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
 
-      - name: Bump Version
-        id: bump-version
-        run: |
-          version=$(cat lib/rails_mini_profiler/version.rb | grep VERSION | cut -d'"' -f2)
-          npm version --no-git-tag-version $version
-          echo "::set-output name=version::$version"
-
       - name: Publish Package 📦
         run: |
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_API_TOKEN }}
-
-      - name: Commit Files
-        uses: EndBug/add-and-commit@v7
-        with:
-          add: "['package.json', 'package-lock.json']"
-          message: "chore: bump npm version to ${{ steps.bump-version.outputs.version }}"
