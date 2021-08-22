@@ -2,7 +2,9 @@
 
 module RailsMiniProfiler
   class ApplicationController < ActionController::Base
-    rescue_from ActiveRecord::RecordNotFound, with: :not_found
+    include Pagy::Backend
+
+    rescue_from ActiveRecord::RecordNotFound, with: ->(error) { handle(error, 404) }
 
     before_action :check_current_user
 
@@ -17,8 +19,11 @@ module RailsMiniProfiler
 
     private
 
-    def not_found(error)
-      redirect_back(fallback_location: profiled_requests_path, alert: error.to_s)
+    def handle(error, status = 500)
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: profiled_requests_path, alert: error.to_s) }
+        format.json { render status: status, json: { message: error.to_s } }
+      end
     end
 
     def check_current_user

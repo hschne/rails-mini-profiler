@@ -2,6 +2,7 @@
 
 require 'forwardable'
 require 'inline_svg'
+require 'pagy'
 
 require 'rails_mini_profiler/version'
 require 'rails_mini_profiler/engine'
@@ -14,7 +15,8 @@ require 'rails_mini_profiler/models/trace'
 
 require 'rails_mini_profiler/logger'
 require 'rails_mini_profiler/configuration'
-require 'rails_mini_profiler/storage'
+require 'rails_mini_profiler/configuration/storage'
+require 'rails_mini_profiler/configuration/user_interface'
 require 'rails_mini_profiler/request_wrapper'
 require 'rails_mini_profiler/response_wrapper'
 require 'rails_mini_profiler/guard'

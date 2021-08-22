@@ -30,6 +30,7 @@ module RailsMiniProfiler
                   :flamegraph_sample_rate,
                   :skip_paths,
                   :storage,
+                  :ui,
                   :user_provider
 
     def initialize(**kwargs)
@@ -47,6 +48,7 @@ module RailsMiniProfiler
       @logger = RailsMiniProfiler::Logger.new(Rails.logger)
       @skip_paths = []
       @storage = Storage.new
+      @ui = UserInterface.new
       @user_provider = proc { |env| Rack::Request.new(env).ip }
     end
 

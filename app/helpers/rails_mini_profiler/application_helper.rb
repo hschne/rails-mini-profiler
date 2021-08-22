@@ -2,6 +2,8 @@
 
 module RailsMiniProfiler
   module ApplicationHelper
+    include Pagy::Frontend
+
     def present(model, presenter_class = nil, **kwargs)
       klass = presenter_class || "#{model.class}Presenter".constantize
       presenter = klass.new(model, self, **kwargs)
