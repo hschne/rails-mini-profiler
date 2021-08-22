@@ -42,6 +42,23 @@ module RailsMiniProfiler
           end
         end
 
+        context 'with badge disabled' do
+          let(:configuration) { Configuration.new(ui: UserInterface.new(badge_enabled: false)) }
+
+          let(:original_response) do
+            OpenStruct.new(
+              status: 200,
+              response: OpenStruct.new(body: '<body>content</body>'),
+              headers: { 'Content-Type' => 'text/html' }
+            )
+          end
+
+          it 'should not inject badge' do
+            new_body = subject.render.response.body
+            expect(new_body).to eq('<body>content</body>')
+          end
+        end
+
         context 'with body tag' do
           let(:original_response) do
             OpenStruct.new(
@@ -51,7 +68,7 @@ module RailsMiniProfiler
             )
           end
 
-          it('should inject badge') do
+          it 'should inject badge' do
             new_body = subject.render.response.body.first
             expect(new_body).to match(/rails-mini-profiler-badge/)
           end

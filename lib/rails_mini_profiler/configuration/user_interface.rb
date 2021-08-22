@@ -3,6 +3,12 @@
 module RailsMiniProfiler
   # Configure various aspects about Rails Mini Profilers UI.
   #
+  # @!attribute badge_enabled
+  #   @see Badge
+  #   @return [Boolean] if the badge should be enabled
+  # @!attribute badge_position
+  #   @see Badge
+  #   @return [String] the position of the interactive HTML badge
   # @!attribute page_size
   #   @return [Integer] how many items to render per page in list views
   class UserInterface
@@ -23,7 +29,9 @@ module RailsMiniProfiler
       end
     end
 
-    attr_accessor :page_size
+    attr_accessor :badge_enabled,
+                  :badge_position,
+                  :page_size
 
     def initialize(**kwargs)
       defaults!
@@ -32,6 +40,8 @@ module RailsMiniProfiler
 
     # Reset the configuration to default values
     def defaults!
+      @badge_enabled = true
+      @badge_position = 'top-left'
       @page_size = 25
     end
   end

@@ -7,9 +7,6 @@ module RailsMiniProfiler
   #   @return [Logger] the current logger
   # @!attribute enabled
   #   @return [Boolean] if the profiler is enabled
-  # @!attribute badge_position
-  #   @see Badge
-  #   @return [String] the position of the interactive HTML badge.
   # @!attribute flamegraph_enabled
   #   @return [Boolean] if Flamegraph recording is enabled
   # @!attribute flamegraph_sample_rate
@@ -18,14 +15,14 @@ module RailsMiniProfiler
   #   @return [Array<String>] a list of regex patterns for paths to skip
   # @!attribute storage
   #   @return [Storage] the storage configuration
+  # @!attribute ui
+  #   @return [UserInterface] the ui configuration
   # @!attribute user_provider
   #   @return [Proc] a proc to identify a user based on a rack env
   class Configuration
     attr_reader :logger
 
     attr_accessor :enabled,
-                  :badge_enabled,
-                  :badge_position,
                   :flamegraph_enabled,
                   :flamegraph_sample_rate,
                   :skip_paths,
@@ -41,8 +38,6 @@ module RailsMiniProfiler
     # Reset the configuration to default values
     def reset
       @enabled = proc { |_env| Rails.env.development? || Rails.env.test? }
-      @badge_enabled = true
-      @badge_position = 'top-left'
       @flamegraph_enabled = true
       @flamegraph_sample_rate = 0.5
       @logger = RailsMiniProfiler::Logger.new(Rails.logger)
