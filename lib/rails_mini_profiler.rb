@@ -2,6 +2,7 @@
 
 require 'forwardable'
 require 'inline_svg'
+require 'pagy'
 
 require 'rails_mini_profiler/version'
 require 'rails_mini_profiler/engine'

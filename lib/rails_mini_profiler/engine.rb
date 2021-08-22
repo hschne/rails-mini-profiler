@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../../config/initalizers/pagy'
+
 module RailsMiniProfiler
   # The Rails Mini Profiler engine
   #

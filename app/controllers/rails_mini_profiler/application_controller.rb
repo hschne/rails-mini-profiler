@@ -2,6 +2,8 @@
 
 module RailsMiniProfiler
   class ApplicationController < ActionController::Base
+    include Pagy::Backend
+
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
     before_action :check_current_user
