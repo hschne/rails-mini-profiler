@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
-      version: ${{ steps.release.outputs.release_created.major }}.${{ steps.release.outputs.release_created.minor }}.${{ steps.release.outputs.release_created.patch }}
+      version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}
 
     steps:
       - uses: actions/checkout@v2
