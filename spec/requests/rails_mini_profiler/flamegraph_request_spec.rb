@@ -5,11 +5,12 @@ require 'rails_helper'
 module RailsMiniProfiler
   RSpec.describe 'Flamegraphs', type: :request do
     let(:user_id) { '127.0.0.1' }
+    let(:default_format) { 'text/html' }
 
     describe 'GET /show' do
       it 'returns http success' do
         profiled_request = ProfiledRequest.create(user_id: user_id)
-        Flamegraph.create(profiled_request: profiled_request, data: {})
+        Flamegraph.create(profiled_request: profiled_request, data: { id: 1 })
 
         get flamegraph_path(profiled_request.id)
 

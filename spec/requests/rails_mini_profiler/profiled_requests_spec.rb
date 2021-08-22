@@ -8,11 +8,44 @@ module RailsMiniProfiler
 
     describe 'GET /index' do
       it 'renders a successful response' do
-        ProfiledRequest.create(user_id: user_id, request_method: 'GET', duration: 0)
+        profiled_request = ProfiledRequest.create(user_id: user_id)
 
         get profiled_requests_url
 
-        expect(response).to be_successful
+        expect(response_json.dig(0, 'id')).to eq(profiled_request.id)
+      end
+
+      context 'with search' do
+        it 'with matching item returns successful' do
+          profiled_request = ProfiledRequest.create(user_id: user_id, request_path: '/first/second')
+          ProfiledRequest.create(user_id: user_id, request_path: '/first/third')
+
+          get profiled_requests_url(path: 'second')
+
+          result = response_json
+          expect(result.size).to eq(1)
+          expect(result.dig(0, 'id')).to eq(profiled_request.id)
+        end
+      end
+
+      context 'with pagination' do
+        before(:each) do
+          Pagy::VARS[:items] = 2
+        end
+
+        after(:each) do
+          Pagy::VARS[:items] = 40
+        end
+
+        it 'with stored items returns items' do
+          profiled_request = ProfiledRequest.create(user_id: user_id)
+          ProfiledRequest.create(user_id: user_id)
+          ProfiledRequest.create(user_id: user_id)
+
+          get profiled_requests_url(page: 2)
+
+          expect(response_json.dig(0, 'id')).to eq(profiled_request.id)
+        end
       end
     end
 
@@ -20,23 +53,27 @@ module RailsMiniProfiler
       it 'without item redirects and shows error' do
         get profiled_request_url(-1)
 
-        expect(flash[:alert]).to be_present
+        expect(response).to be_not_found
       end
 
-      it 'with stored item return successful' do
-        profiled_request = ProfiledRequest.create(user_id: user_id, request_method: 'GET', duration: 0)
+      it 'with stored item returns successful' do
+        profiled_request = ProfiledRequest.create(user_id: user_id)
 
         get profiled_request_url(profiled_request.id)
 
-        expect(response).to be_successful
+        expect(response_json['id']).to eq(profiled_request.id)
       end
 
-      it 'with stored item, and search, return successful' do
-        profiled_request = ProfiledRequest.create(user_id: user_id, request_method: 'GET', duration: 0)
+      context 'with search' do
+        it 'with traces returns successful' do
+          profiled_request = ProfiledRequest.create(user_id: user_id)
+          profiled_request.traces.create(payload: { sample: 'one' })
+          trace = profiled_request.traces.create(payload: { sample: 'two' })
 
-        get profiled_request_url(profiled_request.id, search: 'hello')
+          get profiled_request_url(profiled_request.id, search: 'two')
 
-        expect(response).to be_successful
+          expect(response_json.dig('traces', 0, 'id')).to eq(trace.id)
+        end
       end
     end
 

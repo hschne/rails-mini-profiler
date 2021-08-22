@@ -3,6 +3,7 @@ PATH
   specs:
     rails_mini_profiler (0.3.0)
       inline_svg (~> 1.7)
+      jb (~> 0.8)
       pagy (~> 4.11)
       rails (>= 6.0)
 
@@ -224,4 +225,4 @@ DEPENDENCIES
   stackprof (~> 0.2)
 
 BUNDLED WITH
-   2.2.24
+   2.2.26
