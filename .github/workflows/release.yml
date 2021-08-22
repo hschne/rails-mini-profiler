@@ -20,6 +20,7 @@ jobs:
           release-type: ruby
           package-name: rails-mini-profiler
           bump-minor-pre-major: true
+          version-file: '' # Don't set the version file, we do version increments ourselves on release
 
   release:
     needs: prepare-release
