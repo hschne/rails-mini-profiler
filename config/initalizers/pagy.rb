@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-Pagy::VARS[:items] = 40
+Pagy::VARS[:items] = 25
