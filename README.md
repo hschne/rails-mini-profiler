@@ -109,8 +109,6 @@ Rails Mini Profiler provides a wide array of configuration options. You can find
 | Name                     | Default                      | Description                                                                                     |
 |--------------------------|------------------------------|-------------------------------------------------------------------------------------------------|
 | `enabled`                | `true` (dev)/ `false` (prod) | Whether or not RMP is enabled                                                                   |
-| `badge_enabled`          | `true`                       | Should the hedgehog 🦔 badge be injected into pages?                                             |
-| `badge_position`         | `'top-left'`                 | Where to display the badge. Options are `'top-left', 'top-right', 'bottom-left, 'bottom-right'` |
 | `flamegraph_enabled`     | `true`                       | Should flamegraphs be recorded automatically?                                                   |
 | `flamegraph_sample_rate` | `0.5`                        | The flamegraph sample rate. How many snapshots per millisecond are created.                     |
 | `skip_paths`             | `[]`                         | An array of request paths that should not be profiled. Regex allowed.                           |
@@ -160,9 +158,11 @@ end
 
 Rails Mini Profiler allows you to configure various UI features. 
 
-| Name        | Default | Description                              |
-|-------------|---------|------------------------------------------|
-| `page_size` | `25`    | The page size for lists shown in the UI. |
+| Name             | Default      | Description                                                                                     |
+|------------------|--------------|-------------------------------------------------------------------------------------------------|
+| `badge_enabled`  | `true`       | Should the hedgehog 🦔 badge be injected into pages?                                             |
+| `badge_position` | `'top-left'` | Where to display the badge. Options are `'top-left', 'top-right', 'bottom-left, 'bottom-right'` |
+| `page_size`      | `25`         | The page size for lists shown in the UI.                                                        |
 
 ### Users
 
@@ -224,7 +224,13 @@ As such, compared to `rack-mini-profiler`, it does not support non-Rails apps (e
 
 Rails Mini Profiler is in early development. As such, breaking changes may still be introduced on a regular basis. While Rails Mini Profiler is in pre-release we do not offer upgrade migrations.
 
-If an upgrade to Rails Mini Profiler breaks your application, we recommend that you drop the offending tables and re-run migrations for the latest version: 
+If an upgrade to Rails Mini Profiler breaks your application, we recommend that you clean house and start over. Re-run the initializer and overwrite existing files: 
+
+```bash
+rails rails_mini_profiler:install
+```
+
+If only the DB schema is out of date, drop the offending tables and re-run migrations for the latest version: 
 
 ```
 rails rails_mini_profiler:install:migrations

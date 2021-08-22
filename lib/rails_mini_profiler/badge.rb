@@ -26,6 +26,8 @@ module RailsMiniProfiler
       content_type = @original_response.headers['Content-Type']
       return @original_response unless content_type =~ %r{text/html}
 
+      return @original_response unless @configuration.ui.badge_enabled
+
       modified_response = Rack::Response.new([], @original_response.status, @original_response.headers)
       modified_response.write(modified_body)
       modified_response.finish
@@ -67,7 +69,7 @@ module RailsMiniProfiler
     #
     # @return String The badge position as CSS style
     def css_position
-      case @configuration.badge_position
+      case @configuration.ui.badge_position
       when 'top-right'
         'top: 5px; right: 5px;'
       when 'bottom-left'
