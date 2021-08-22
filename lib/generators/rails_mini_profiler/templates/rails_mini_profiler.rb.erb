@@ -19,6 +19,9 @@ RailsMiniProfiler.configure do |config|
   # config.storage.traces_table = :rmp_traces
   # config.storage.flamegraphs_table = :rmp_flamegraphs
 
+  # Configure the Rails Mini Profiler User Interface
+  # config.ui.page_size = 25
+
   # Customize how users are detected
   config.user_provider = proc { |env| Rack::Request.new(env).ip }
 end

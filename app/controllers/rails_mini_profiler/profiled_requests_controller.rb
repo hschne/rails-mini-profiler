@@ -11,7 +11,7 @@ module RailsMiniProfiler
                              .includes(:flamegraph)
                              .where(user_id: user_id).order(id: :desc)
       @profiled_requests = @profiled_requests.where('request_path LIKE ?', "%#{params[:path]}%") if params[:path]
-      @pagy, @profiled_requests = pagy(@profiled_requests)
+      @pagy, @profiled_requests = pagy(@profiled_requests, items: configuration.ui.page_size)
       @profiled_requests = @profiled_requests.map { |request| present(request) }
     end
 

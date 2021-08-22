@@ -30,11 +30,11 @@ module RailsMiniProfiler
 
       context 'with pagination' do
         before(:each) do
-          Pagy::VARS[:items] = 2
+          RailsMiniProfiler.configuration.ui.page_size = 2
         end
 
         after(:each) do
-          Pagy::VARS[:items] = 40
+          RailsMiniProfiler.configuration.ui.defaults!
         end
 
         it 'with stored items returns items' do

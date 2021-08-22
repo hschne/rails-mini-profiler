@@ -106,22 +106,23 @@ Flamegraphs are rendered using [Speedscope](https://github.com/jlfwong/speedscop
 
 Rails Mini Profiler provides a wide array of configuration options. You can find details below. For an example configuration check `initializers/rails_mini_profiler.rb` (or [the template file](https://github.com/hschne/rails-mini-profiler/blob/main/lib/generators/rails_mini_profiler/templates/rails_mini_profiler.rb.erb)).
 
-| Option                   | Default                      | Description                                                                                     |
-| ------------------------ | ---------------------------- | ----------------------------------------------------------------------------------------------- |
+| Name                     | Default                      | Description                                                                                     |
+|--------------------------|------------------------------|-------------------------------------------------------------------------------------------------|
 | `enabled`                | `true` (dev)/ `false` (prod) | Whether or not RMP is enabled                                                                   |
-| `badge_enabled`          | `true`                       | Should the hedgehog 🦔 badge be injected into pages?                                            |
+| `badge_enabled`          | `true`                       | Should the hedgehog 🦔 badge be injected into pages?                                             |
 | `badge_position`         | `'top-left'`                 | Where to display the badge. Options are `'top-left', 'top-right', 'bottom-left, 'bottom-right'` |
 | `flamegraph_enabled`     | `true`                       | Should flamegraphs be recorded automatically?                                                   |
 | `flamegraph_sample_rate` | `0.5`                        | The flamegraph sample rate. How many snapshots per millisecond are created.                     |
 | `skip_paths`             | `[]`                         | An array of request paths that should not be profiled. Regex allowed.                           |
-| `storage`                | `Storage`                    | Storage configuration. See [Storage](#Storage)                                                  |
+| `storage`                | `Storage.new`                | Storage configuration. See [Storage](#Storage).                                                 |
+| `ui`                     | `UserInterface.new`          | UI configuration. See [UI](#UI).                                                                |
 | `user_provider`          | `Rack::Request.new(env).ip`  | How to identify users. See [Users](#Users)                                                      |
 
 ### Request Configuration
 
 You may override the configuration by sending request parameters. The following parameters are available:
 
-| Option           | Description                                                                                 |
+| Name           | Description                                                                                 |
 | ---------------- | ------------------------------------------------------------------------------------------- |
 | `rmp_flamegraph` | Overrides `flamegraph_enabled` If set to `true` will redirect to the flamegraph immediatly. |
 
@@ -130,7 +131,7 @@ You may override the configuration by sending request parameters. The following 
 Rails Mini Profiler stores profiling information in your database per default. You can configure various details of how
 traces and requests are stored.
 
-| Configuration             | Default                 | Description                                                                                               |
+| Name                      | Default                 | Description                                                                                               |
 | ------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------- |
 | `database`                | `nil`                   | Set a custom database to be used for storing profiler information. Uses `connect_to` for profiler records |
 | `profiled_requests_table` | `rmp_profiled_requests` | The table to be used to store profiled requests.                                                          |
@@ -154,6 +155,14 @@ class ProfiledRequestCleanupJob < ApplicationJob
   end
 end
 ```
+
+### UI
+
+Rails Mini Profiler allows you to configure various UI features. 
+
+| Name        | Default | Description                              |
+|-------------|---------|------------------------------------------|
+| `page_size` | `25`    | The page size for lists shown in the UI. |
 
 ### Users
 
