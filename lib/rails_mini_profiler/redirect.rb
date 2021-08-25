@@ -19,7 +19,7 @@ module RailsMiniProfiler
     # @return [Array] response with status 302 and the new location to redirect to
     def render
       params = CGI.parse(@request.query_string).transform_values(&:first).with_indifferent_access
-      return redirect_to(flamegraph_path(@profiled_request.id)) if params[:rmp_flamegraph]
+      return redirect_to(flamegraph_path(@profiled_request.id)) if params[:rmp_flamegraph].present?
 
       false
     end

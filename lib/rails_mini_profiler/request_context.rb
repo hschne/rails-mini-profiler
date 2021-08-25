@@ -73,7 +73,12 @@ module RailsMiniProfiler
 
       timestamp = Time.zone.now
       inserts = traces.map do |trace|
-        { rmp_profiled_request_id: profiled_request.id, **trace.to_h, created_at: timestamp, updated_at: timestamp }
+        {
+          rmp_profiled_request_id: profiled_request.id,
+          created_at: timestamp,
+          updated_at: timestamp,
+          **trace.to_h.symbolize_keys # Symbolize keys needed for Ruby 2.6
+        }
       end
       RailsMiniProfiler::Trace.insert_all(inserts)
     end
