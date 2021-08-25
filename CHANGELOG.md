@@ -1,5 +1,13 @@
 # Changelog
 
+### [0.3.1](https://www.github.com/hschne/rails-mini-profiler/compare/v0.3.0...v0.3.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* badge enabled and config ([#44](https://www.github.com/hschne/rails-mini-profiler/issues/44)) ([abf9487](https://www.github.com/hschne/rails-mini-profiler/commit/abf948711dcb1d82cbc02f342c2997d4b3c2e6d4))
+* improve error handling for non-webpack setups ([9541976](https://www.github.com/hschne/rails-mini-profiler/commit/954197601531bd9bd3704db2c6a463e69e5b5819))
+
 ## [0.3.0](https://www.github.com/hschne/rails-mini-profiler/compare/v0.2.1...v0.3.0) (2021-08-21)
 
 
