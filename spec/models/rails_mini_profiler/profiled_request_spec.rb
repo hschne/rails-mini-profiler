@@ -6,7 +6,7 @@ module RailsMiniProfiler
   RSpec.describe ProfiledRequest, type: :model do
     describe 'request' do
       let(:request_wrapper) do
-        OpenStruct.new(
+        RequestWrapper.new(
           body: 'body',
           headers: { header: 'value' },
           method: 'GET',

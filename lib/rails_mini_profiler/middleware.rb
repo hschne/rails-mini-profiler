@@ -9,7 +9,7 @@ module RailsMiniProfiler
     end
 
     def call(env)
-      request = RequestWrapper.new(env)
+      request = RequestWrapper.new(env: env)
       request_context = RequestContext.new(request)
       return @app.call(env) unless Guard.new(request_context).profile?
 

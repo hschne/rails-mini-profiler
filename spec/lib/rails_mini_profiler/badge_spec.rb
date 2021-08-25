@@ -5,7 +5,7 @@ require 'rails_helper'
 module RailsMiniProfiler
   RSpec.describe Badge do
     describe 'render' do
-      let(:request) { RequestWrapper.new({}) }
+      let(:request) { RequestWrapper.new }
       let(:original_response) { ResponseWrapper.new }
       let(:profiled_request) { ProfiledRequest.new(id: 1) }
       let(:configuration) { Configuration.new }
