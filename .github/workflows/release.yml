@@ -38,16 +38,21 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0.0
           bundler-cache: true
         env:
           BUNDLE_WITHOUT: 'development'
           BUNDLE_DEPLOYMENT: false # An incremented version number means we can't use deployment
 
+      - name: Read Node Version
+        id: node-version
+        run: |
+          version=$(cat .tool-versions| grep nodejs | cut -d' ' -f2)
+          echo "::set-output name=version::$version"
+
       - name: Set up Node
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: '${{ steps.node-version.outputs.version }}'
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
 
