@@ -42,15 +42,19 @@ jobs:
         env:
           BUNDLE_WITHOUT: 'development'
 
-      - name: Update Gem Version
+      - name: Release Version
+        id: release-version
         run: |
           if [[ ${{github.event_name == 'workflow_dispatch'}} ]]; then
             version=${{ github.event.inputs.version }}
           else
             version=${{ needs.prepare-release.outputs.version }}
           fi
-          sed -i "s|\(VERSION = \)'.*'|\1'$version'|" lib/rails_mini_profiler/version.rb
-          echo "Set version to $version"
+          echo "::set-output name=version::$version"
+
+      - name: Update Gem Version
+        run: |
+          sed -i "s|\(VERSION = \)'.*'|\1'${{ steps.release-version.outputs.version }}'|" lib/rails_mini_profiler/version.rb
 
       - name: Update Gemfile.lock
         run: |
