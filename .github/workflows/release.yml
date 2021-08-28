@@ -55,6 +55,8 @@ jobs:
       - name: Update Gemfile.lock
         run: |
           bundle install --jobs 4
+        env:
+          BUNDLE_DEPLOYMENT: 'false'
 
       - name: Read Node Version
         id: node-version
