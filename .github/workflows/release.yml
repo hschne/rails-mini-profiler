@@ -100,7 +100,7 @@ jobs:
         run: |
           npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_KEY }}
 
       - name: Commit Updated Files 📤
         uses: EndBug/add-and-commit@v7
