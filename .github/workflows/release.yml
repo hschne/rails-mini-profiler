@@ -25,7 +25,7 @@ jobs:
   release:
     needs: prepare-release
     runs-on: ubuntu-latest
-    if: ${{ needs.prepare-release.outputs.release_created }}
+#    if: ${{ needs.prepare-release.outputs.release_created }}
 
     steps:
       - uses: actions/checkout@v2
@@ -41,7 +41,7 @@ jobs:
           bundler-cache: true
         env:
           BUNDLE_WITHOUT: 'development'
-          BUNDLE_DEPLOYMENT: false # An incremented version number means we can't use deployment
+          BUNDLE_DEPLOYMENT: 'false' # An incremented version number means we can't use deployment
 
       - name: Read Node Version
         id: node-version
