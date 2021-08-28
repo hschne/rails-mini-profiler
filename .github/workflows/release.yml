@@ -35,6 +35,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+        env:
+          BUNDLE_WITHOUT: 'development'
+
       - name: Update Gem Version
         run: |
           if [[ ${{github.event_name == 'workflow_dispatch'}} ]]; then
@@ -45,13 +52,9 @@ jobs:
           sed -i "s|\(VERSION = \)'.*'|\1'$version'|" lib/rails_mini_profiler/version.rb
           echo "Set version to $version"
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-        env:
-          BUNDLE_WITHOUT: 'development'
-          BUNDLE_DEPLOYMENT: 'false' # An incremented version number means we can't use deployment
+      - name: Update Gemfile.lock
+        run: |
+          bundle install --jobs 4
 
       - name: Read Node Version
         id: node-version
@@ -77,12 +80,6 @@ jobs:
         run: |
           npm version --no-git-tag-version ${{ needs.prepare-release.outputs.version }}
 
-      - name: Commit Updated Files
-        uses: EndBug/add-and-commit@v7
-        with:
-          add: "['Gemfile.lock', 'package.json', 'package-lock.json']"
-          message: "chore: update files for ${{ needs.prepare-release.outputs.version }}"
-
       - name: Publish Gem 💎
         run: |
           mkdir -p $HOME/.gem
@@ -99,3 +96,9 @@ jobs:
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_API_TOKEN }}
+
+      - name: Commit Updated Files
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: "['Gemfile.lock', 'package.json', 'package-lock.json']"
+          message: "chore: update files for ${{ needs.prepare-release.outputs.version }}"
