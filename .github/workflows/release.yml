@@ -52,15 +52,6 @@ jobs:
           fi
           echo "::set-output name=version::$version"
 
-      - name: Update Gem Version
-        run: |
-          sed -i "s|\(VERSION = \)'.*'|\1'${{ steps.release-version.outputs.version }}'|" lib/rails_mini_profiler/version.rb
-
-      - name: Update Gemfile.lock
-        run: |
-          bundle config unset deployment
-          bundle install --jobs 4
-
       - name: Read Node Version
         id: node-version
         run: |
@@ -80,10 +71,19 @@ jobs:
       - name: Compile Assets
         run: npm run build
 
+      - name: Bump Gem Version
+        run: |
+          sed -i "s|\(VERSION = \)'.*'|\1'${{ steps.release-version.outputs.version }}'|" lib/rails_mini_profiler/version.rb
+
+      - name: Update Gemfile.lock
+        run: |
+          bundle config unset deployment
+          bundle install --jobs 4
+
       - name: Bump Package Version
         id: bump-version
         run: |
-          npm version --no-git-tag-version ${{ needs.prepare-release.outputs.version }}
+          npm version --no-git-tag-version ${{ steps.release-version.outputs.version }}
 
       - name: Publish Gem 💎
         run: |
@@ -102,8 +102,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_API_TOKEN }}
 
-      - name: Commit Updated Files
+      - name: Commit Updated Files 📤
         uses: EndBug/add-and-commit@v7
         with:
           add: "['Gemfile.lock', 'package.json', 'package-lock.json']"
-          message: "chore: update files for ${{ needs.prepare-release.outputs.version }}"
+          message: "chore: post-release ${{ needs.prepare-release.outputs.version }}"
