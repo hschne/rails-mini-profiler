@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.4.0](https://www.github.com/hschne/rails-mini-profiler/compare/v0.3.0...v0.4.0) (2021-08-28)
+
+
+### Features
+
+* add support for older ruby versions, fixes [#48](https://www.github.com/hschne/rails-mini-profiler/issues/48) ([#49](https://www.github.com/hschne/rails-mini-profiler/issues/49)) ([97061c4](https://www.github.com/hschne/rails-mini-profiler/commit/97061c478da59f02975d88e2883e4a0e3bad4ef5))
+* add support for rails 6.0, fixes [#52](https://www.github.com/hschne/rails-mini-profiler/issues/52) ([#51](https://www.github.com/hschne/rails-mini-profiler/issues/51)) ([63371f6](https://www.github.com/hschne/rails-mini-profiler/commit/63371f6558cb6009ff73a56a7f0e0fa3bccc46cd))
+
+
+### Bug Fixes
+
+* badge enabled and config ([#44](https://www.github.com/hschne/rails-mini-profiler/issues/44)) ([abf9487](https://www.github.com/hschne/rails-mini-profiler/commit/abf948711dcb1d82cbc02f342c2997d4b3c2e6d4))
+* improve error handling for non-webpack setups ([9541976](https://www.github.com/hschne/rails-mini-profiler/commit/954197601531bd9bd3704db2c6a463e69e5b5819))
+
 ## [0.3.0](https://www.github.com/hschne/rails-mini-profiler/compare/v0.2.1...v0.3.0) (2021-08-21)
 
 
