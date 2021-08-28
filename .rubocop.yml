@@ -5,6 +5,7 @@ AllCops:
   Exclude:
     - vendor/**/*
     - node_modules/**/*
+    - gemfiles/**/*
     - db/migrate/*.rb
     - !ruby/regexp /schema\.rb$/
 

@@ -300,3 +300,6 @@ spec/dummy/tmp/**
 
 dist
 vendor/assets
+
+gemfiles/*.gemfile.lock
+gemfiles/.bundle

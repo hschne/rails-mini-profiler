@@ -46,10 +46,10 @@ To manually test your changes simply run `rails server` on the root level of you
 run 
 
 ```bash
-bundle exec rspec
+bundle exec rake spec
 ```
 
-### Working with Assets
+#### Working with Assets
 
 Javascript and CSS are packaged as a separate node module and bundled using [Rollup](https://rollupjs.org/guide/en/). 
 For continuous compilation and live preview first start your Rails server and then run:
@@ -57,6 +57,8 @@ For continuous compilation and live preview first start your Rails server and th
 ```bash
 npm run watch
 ```
+
+
 
 ### Prepping your PR
 
@@ -87,4 +89,13 @@ Speedscope run
 
 ```bash
 rake speedscope:update
+```
+
+#### Appraisals
+
+To locally test against multiple Rails versions use [Appraisal](https://github.com/thoughtbot/appraisal):
+
+```bash
+bundle exec appraisal install
+bundle exec appraisal rake spec
 ```
