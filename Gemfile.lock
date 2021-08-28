@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_mini_profiler (0.3.0)
+    rails_mini_profiler (0.4.0)
       inline_svg (~> 1.7)
       jb (~> 0.8)
       pagy (~> 4.11)
