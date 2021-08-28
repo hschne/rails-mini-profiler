@@ -3,6 +3,11 @@ name: release
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The release version'
+        required: true
 
 jobs:
   prepare-release:
@@ -20,20 +25,25 @@ jobs:
           release-type: ruby
           package-name: rails-mini-profiler
           bump-minor-pre-major: true
-          version-file: 'version.rb' # Don't set the version file, we do version increments ourselves on release
+          version-file: 'dummy.rb' # Don't set the version file, we do version increments ourselves on release
 
   release:
     needs: prepare-release
     runs-on: ubuntu-latest
-#    if: ${{ needs.prepare-release.outputs.release_created }}
+    if: needs.prepare-release.outputs.release_created || github.event_name == 'workflow_dispatch'
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Update Gem Version
         run: |
-          version=${{ needs.prepare-release.outputs.version }}
+          if [[ ${{github.event_name == 'workflow_dispatch'}} ]]; then
+            version=${{ github.event.inputs.version }}
+          else
+            version=${{ needs.prepare-release.outputs.version }}
+          fi
           sed -i "s|\(VERSION = \)'.*'|\1'$version'|" lib/rails_mini_profiler/version.rb
+          echo "Set version to $version"
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
