@@ -24,6 +24,7 @@
   "homepage": "https://github.com/hschne/rails-mini-profiler#readme",
   "devDependencies": {
     "@babel/core": "^7.15.0",
+    "@babel/eslint-parser": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^20.0.0",
@@ -44,6 +45,8 @@
     "sass": "^1.37.5"
   },
   "dependencies": {
+    "stimulus": "^2.0.0",
+    "tailwindcss-stimulus-components": "^2.2.2",
     "tippy.js": "^6.3.1"
   }
 }
