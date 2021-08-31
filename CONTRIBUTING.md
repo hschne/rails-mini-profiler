@@ -17,7 +17,7 @@ Thanks for considering to help make Rails Mini Profiler better! :raised_hands:
 
 ### Setting Up
 
-Create a fork of Rails Mini Profiler and clone your fork locally. Create a new branch for your change, e.g.
+Create a fork of Rails Mini Profiler and clone it locally. Create a new branch for your change, e.g.
 
 ```shell
 git checkout -b add-awesome-new-feature
