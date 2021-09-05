@@ -98,5 +98,8 @@ jobs:
       - name: Run JS Linter 🔎
         run: npm run lint
 
+      - name: Run SCSS Linter ✨
+        run: npm run lint:scss
+
       - name: Lint Commits 📝
         uses: wagoid/commitlint-github-action@v4

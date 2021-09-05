@@ -1,41 +1,44 @@
-import { Controller } from 'stimulus'
+import { Controller } from "stimulus";
 
 export default class extends Controller {
   static targets = ["filter"];
 
   apply() {
-    location.href =  `${window.location.pathname}?${this.params}`;
+    location.href = `${window.location.pathname}?${this.params}`;
   }
 
   post() {
-    const token = document.head.querySelector('meta[name="csrf-token"]').content
+    const token = document.head.querySelector(
+      'meta[name="csrf-token"]'
+    ).content;
     const path = `${window.location.pathname}/destroy_all?${this.params}`;
     fetch(path, {
-      method: 'DELETE',
-      redirect: 'follow',
+      method: "DELETE",
+      redirect: "follow",
       headers: {
-        'Content-Type':'application/json',
-         credentials: 'same-origin'
+        "Content-Type": "application/json",
+        credentials: "same-origin",
       },
-      body: JSON.stringify({ authenticity_token: token })
-    }).then(response => {
+      body: JSON.stringify({ authenticity_token: token }),
+    }).then((response) => {
       if (response.redirected) {
-        window.location.href = response.url
+        window.location.href = response.url;
       }
-    })
+    });
   }
 
   get params() {
     return this.activeFilterTargets()
-      .map((t) => `${t.name}=${t.value}`).join("&");
+      .map((t) => `${t.name}=${t.value}`)
+      .join("&");
   }
 
   activeFilterTargets() {
-    return this.filterTargets
-      .filter(function(target) {
-        if (target.type === 'checkbox' || target.type === 'radio') return target.checked;
+    return this.filterTargets.filter(function (target) {
+      if (target.type === "checkbox" || target.type === "radio")
+        return target.checked;
 
-        return target.value.length > 0;
-      })
+      return target.value.length > 0;
+    });
   }
 }

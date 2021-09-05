@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-idiomatic-order"
+  ],
+  "plugins": [
+    "stylelint-order",
+    "stylelint-prettier",
+    "stylelint-scss"
+  ]
+}

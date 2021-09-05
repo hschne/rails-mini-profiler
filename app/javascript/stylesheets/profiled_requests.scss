@@ -1,11 +1,9 @@
-
 @import 'components/profiled_request_table/placeholder';
 @import 'components/profiled_request_table/profiled_request_table';
 
 main {
-  width: 100%;
-
   display: flex;
+  width: 100%;
   justify-content: center;
 }
 
@@ -13,12 +11,11 @@ main {
   width: var(--main-width);
 }
 
-
 .search-field {
-  padding: .5rem;
-  border-radius: 5px;
   box-sizing: border-box;
+  padding: 0.5rem;
   border: 1px solid var(--grey-400);
+  border-radius: 5px;
 }
 
 .request-details-data {
@@ -27,21 +24,20 @@ main {
 }
 
 .request-details-actions {
-  margin: 0;
-  padding: 0 0 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 0 1rem;
+  margin: 0;
 }
 
 .data-item {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  list-style: none;
-
-  margin-right: 3rem;
   padding: 0;
+  margin-right: 3rem;
+  list-style: none;
 }
 
 .data-item small {
@@ -49,26 +45,30 @@ main {
 }
 
 .data-item span {
-  margin: .25rem 0;
+  margin: 0.25rem 0;
 }
 
 [class*='request-status-2'],
 [class*='request-method-get'] {
-  color: white;
   background: var(--green-400) !important;
+  color: white;
 }
 
 [class*='request-status-4'],
 [class*='request-method-put'],
 [class*='request-method-patch'] {
-  color: white;
   background: var(--yellow-400) !important;
+  color: white;
 }
 
 [class*='request-status-5'],
 [class*='request-method-delete'] {
-  color: white;
   background: var(--red-500) !important;
+  color: white;
+}
+
+.flamegraph-button button {
+  background: var(--grey-200);
 }
 
 .clear-action button {
@@ -77,18 +77,13 @@ main {
   font-weight: 600;
 
   &:hover {
-    background: var(--red-600)
+    background: var(--red-600);
   }
-}
-
-
-.flamegraph-button button {
-  background: var(--grey-200);
 }
 
 .profiled-requests-header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }

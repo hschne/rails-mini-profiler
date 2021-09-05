@@ -1,13 +1,10 @@
 .header {
-  margin: 0;
-  padding: 1.5rem 0;
-
   display: flex;
   justify-content: center;
-
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, .2);
-
+  padding: 1.5rem 0;
+  margin: 0;
   background: var(--primary);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .header a {
@@ -16,16 +13,14 @@
 }
 
 .nav {
-  width: var(--main-width);
-
   display: flex;
+  width: var(--main-width);
   justify-content: space-between;
 }
 
 .home {
   display: flex;
   align-items: center;
-
   text-decoration: none;
 }
 
@@ -40,11 +35,10 @@
 }
 
 .header-links {
-  margin: 0;
-  padding: 0;
-  list-style: none;
   display: flex;
   align-items: center;
-
+  padding: 0;
+  margin: 0;
   font-weight: 700;
+  list-style: none;
 }
