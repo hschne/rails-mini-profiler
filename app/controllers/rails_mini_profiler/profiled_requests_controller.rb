@@ -8,7 +8,7 @@ module RailsMiniProfiler
 
     def index
       @profiled_requests = ProfiledRequest.where(user_id: user_id).order(id: :desc)
-      search = ProfiledRequestSearch.new(scope: @profiled_requests, **index_params.to_h.symbolize_keys)
+      search = ProfiledRequestSearch.new(index_params, scope: @profiled_requests)
       @pagy, @profiled_requests = pagy(search.results, items: configuration.ui.page_size)
       @profiled_requests = @profiled_requests.map { |request| present(request) }
     end
@@ -29,17 +29,30 @@ module RailsMiniProfiler
 
     def destroy_all
       ProfiledRequest.transaction do
-        requests_table_name = RailsMiniProfiler.storage_configuration.profiled_requests_table.to_sym
-        profiled_requests = ProfiledRequest.where(requests_table_name => { user_id: user_id })
-        profiled_requests = ProfiledRequestSearch.new(scope: profiled_requests, **index_params).results
+        profiled_requests = ProfiledRequest.where(user_id: user_id)
+        profiled_requests = ProfiledRequestSearch.new(index_params, scope: profiled_requests).results
         Flamegraph.joins(:profiled_request).merge(profiled_requests).delete_all
-        Trace.joins(:profiled_request).where(requests_table_name => { user_id: user_id }).delete_all
+        Trace.joins(:profiled_request).merge(profiled_requests).delete_all
         profiled_requests.delete_all
       end
-      redirect_to profiled_requests_url, notice: 'Profiled Requests cleared'
+      redirect_to profiled_requests_url, notice: 'Profiled requests cleared', status: :see_other
     end
 
     private
+
+    def destroy_profiled_requests
+      ProfiledRequest.transaction do
+        requests_table_name = RailsMiniProfiler.storage_configuration.profiled_requests_table.to_sym
+        profiled_requests = ProfiledRequest.where(requests_table_name => { user_id: user_id })
+        profiled_requests = ProfiledRequestSearch.new(index_params, scope: profiled_requests).results
+        Flamegraph.joins(:profiled_request).merge(profiled_requests).delete_all
+        Trace
+          .joins(:profiled_request)
+          .merge(profiled_requests)
+          .where(requests_table_name => { user_id: user_id }).delete_all
+        profiled_requests.delete_all
+      end
+    end
 
     def index_params
       params.permit(:path, :duration, id: [], method: [], media_type: [], status: [])

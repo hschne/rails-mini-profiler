@@ -4,8 +4,11 @@
     <%= label_tag nil do %>
       <%= check_box_tag 'selected[]', nil,
                         params.fetch(:selected, []).size == @pagy.items,
-                        class: "request-buttons",
-                        data: { action: 'click->selectable#checkAll' }
+                        class: "request-checkbox",
+                        data: {
+                          action: 'click->selectable#selectAll',
+                          'selectable-target': 'all'
+                        }
       %>
     <% end %>
   </th>

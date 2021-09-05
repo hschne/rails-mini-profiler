@@ -2,11 +2,13 @@
 
 module RailsMiniProfiler
   class BaseSearch
-    def initialize(**kwargs)
+    def initialize(params = nil, **kwargs)
       config = self.class.config
-      @scope = kwargs.delete(:scope) || (config[:scope] && instance_eval(&config[:scope]))
-      @options = (kwargs.delete(:options) || config[:options]).stringify_keys
-      @params = kwargs.stringify_keys.slice(*@options.keys)
+      options = params&.to_h || {}
+      options = options.merge(kwargs)
+      @scope = options.delete(:scope) || (config[:scope] && instance_eval(&config[:scope]))
+      @options = (options.delete(:options) || config[:options]).stringify_keys
+      @params = options.stringify_keys.slice(*@options.keys)
     end
 
     def results
