@@ -9,6 +9,7 @@ import Checklist from '../js/checklist_controller'
 import Selectable from '../js/select_controller'
 import Filter from '../js/filter_controller'
 import Search from '../js/search_controller'
+import Enable from '../js/enable_controller'
 
 const application = Application.start();
 
@@ -17,6 +18,7 @@ application.register('checklist', Checklist)
 application.register('selectable', Selectable)
 application.register('filters', Filter)
 application.register('search', Search)
+application.register('enable', Enable)
 
 
 function setupTraceSearch() {

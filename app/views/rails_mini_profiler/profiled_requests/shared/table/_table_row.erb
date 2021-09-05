@@ -3,10 +3,11 @@
     <%= label_tag nil do %>
       <%= check_box_tag 'id[]', profiled_request.id,
                         params.fetch(:selected, []).include?(profiled_request.id),
-                        class: "request-buttons",
+                        class: "request-checkbox",
                         data: {
                           'selectable-target': 'selectable',
-                          'filters-target': 'filter'
+                          'filters-target': 'filter',
+                           action: 'click->selectable#onSelected'
                         },
                         onclick: "event.stopPropagation();" %>
     <% end %>

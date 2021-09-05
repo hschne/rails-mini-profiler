@@ -4,8 +4,7 @@
 @import 'profiled_requests';
 @import 'traces';
 @import 'components/pagination';
-@import 'components/profiled_request_table/placeholder';
-@import 'components/profiled_request_table/profiled_request_table';
+@import 'components/page_header/page_header';
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
@@ -82,10 +81,6 @@ body {
   color: var(--text-color)
 }
 
-h1 {
-  padding: 2rem 0 1rem;
-}
-
 button, .button {
   border: none;
   border-radius: .25rem;
@@ -95,6 +90,11 @@ button, .button {
   display: inline-block;
   font-size: 1rem;
   cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    background: var(--grey-200);
+  }
 }
 
 button:hover {
@@ -128,6 +128,16 @@ button.none {
 
 .hidden {
   display: none;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }
 
 /* --------------------------------------- */
