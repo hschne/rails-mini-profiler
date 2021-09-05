@@ -3,17 +3,21 @@ import '../stylesheets/rails-mini-profiler.scss'
 import tippy from 'tippy.js'
 import 'tippy.js/dist/tippy.css'
 
-function setupRequestSearch() {
-  const profiledRequestNameSearch = document.getElementById('profiled-request-search')
-  if (profiledRequestNameSearch) {
-    profiledRequestNameSearch.addEventListener('keyup', function (event) {
-      if (event.key === 'Enter') {
-        event.preventDefault()
-        document.getElementById('profiled-request-search-form').submit()
-      }
-    })
-  }
-}
+import { Application } from 'stimulus'
+import { Dropdown } from 'tailwindcss-stimulus-components'
+import Checklist from '../js/checklist_controller'
+import Selectable from '../js/select_controller'
+import Filter from '../js/filter_controller'
+import Search from '../js/search_controller'
+
+const application = Application.start();
+
+application.register('dropdown', Dropdown)
+application.register('checklist', Checklist)
+application.register('selectable', Selectable)
+application.register('filters', Filter)
+application.register('search', Search)
+
 
 function setupTraceSearch() {
   const traceNameSearch = document.getElementById('trace-search')
@@ -30,8 +34,8 @@ function setupTraceSearch() {
 function setupRequestTable() {
   const profiledRequestTable = document.getElementById('profiled-requests-table');
   if (profiledRequestTable) {
-    const rows = profiledRequestTable.getElementsByTagName('tr')
-    for (let i = 0; i < rows.length; i++) {
+    const rows = profiledRequestTable.rows;
+    for (let i = 1; i < rows.length; i++) {
       const currentRow = profiledRequestTable.rows[i]
       const link = currentRow.dataset.link
       const createClickHandler = function () {
@@ -39,7 +43,10 @@ function setupRequestTable() {
           window.location.href = link
         }
       }
-      currentRow.onclick = createClickHandler(currentRow)
+      if (link) {
+        currentRow.onclick = createClickHandler(currentRow)
+
+      }
     }
   }
 }
@@ -73,7 +80,6 @@ function setupTraceBars () {
 // Trace Bar Popovers
 document.addEventListener('DOMContentLoaded', () => {
   setupRequestTable();
-  setupRequestSearch();
   setupTraceBars();
   setupTraceSearch();
 }, false)

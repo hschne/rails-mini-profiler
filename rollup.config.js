@@ -62,6 +62,7 @@ const input = 'app/javascript/packs/rails-mini-profiler.js'
 export default [
   {
     input: input,
+    context: 'window',
     output: {
       file: pkg.main,
       format: 'umd',
@@ -73,6 +74,7 @@ export default [
   },
   {
     input: input,
+    context: 'window',
     output: {
       file: "vendor/assets/javascripts/rails-mini-profiler.js",
       format: 'umd',

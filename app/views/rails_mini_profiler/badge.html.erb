@@ -25,13 +25,13 @@
       transition: opacity 0.3s;
   }
 
-  #rails-mini-profiler-badge-icon {
+  #logo-variant {
     height: 18px;
     width: 18px;
     padding-bottom: 2px;
   }
 </style>
 <a id="rails-mini-profiler-badge" href="<%= profiled_request_path(@profiled_request.id) %>" data-turbolinks="false" title="View performance data">
-  <%= inline_svg('logo_variant.svg', id: "rails-mini-profiler-badge-icon") %>
+  <%= inline_svg('logo_variant.svg') %>
   <%= (@profiled_request.duration.to_f / 100).round %>ms
 </a>

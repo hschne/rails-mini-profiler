@@ -1,0 +1,43 @@
+.table {
+  width: 100%;
+  table-layout: fixed;
+  /* Hack to get table row borders, see https://stackoverflow.com/a/2586780/2553104 */
+  border-collapse: collapse;
+  border-radius: 5px;
+  border: hidden 1px var(--border-color);
+  box-shadow: 0 0 0 1px var(--border-color);
+}
+
+.table thead tr {
+  color: var(--grey-400);
+  border: hidden 1px var(--border-color);
+  box-shadow: 0 0 0 1px var(--border-color);
+}
+
+.table thead th {
+  font-weight: 400;
+}
+
+.table-filter-icon {
+  width: 14px;
+  margin-left: .5rem;
+}
+
+.table tbody tr:not(.no-row){
+  border: solid 1px var(--border-color);
+  color: var(--grey-700);
+  cursor: pointer;
+}
+
+.table tr:nth-child(even) {
+  background: var(--grey-50);
+}
+
+.table tbody tr:not(.no-row):hover {
+  background: var(--grey-100);
+}
+
+.table th,
+.table td {
+  padding: 0.5rem 1rem;
+}
