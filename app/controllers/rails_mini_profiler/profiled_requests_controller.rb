@@ -40,20 +40,6 @@ module RailsMiniProfiler
 
     private
 
-    def destroy_profiled_requests
-      ProfiledRequest.transaction do
-        requests_table_name = RailsMiniProfiler.storage_configuration.profiled_requests_table.to_sym
-        profiled_requests = ProfiledRequest.where(requests_table_name => { user_id: user_id })
-        profiled_requests = ProfiledRequestSearch.new(index_params, scope: profiled_requests).results
-        Flamegraph.joins(:profiled_request).merge(profiled_requests).delete_all
-        Trace
-          .joins(:profiled_request)
-          .merge(profiled_requests)
-          .where(requests_table_name => { user_id: user_id }).delete_all
-        profiled_requests.delete_all
-      end
-    end
-
     def index_params
       params.permit(:path, :duration, id: [], method: [], media_type: [], status: [])
     end

@@ -9,18 +9,12 @@
 .pagy-nav > .page.active,
 .pagy-nav > .page > a {
   padding: 0.5rem 1rem;
-
-  color: var(--grey-900);
-
-  background: white;
   border: 1px solid var(--border-color);
   border-right: none;
-  text-decoration: none;
+  background: white;
+  color: var(--grey-900);
   cursor: pointer;
-
-  &:hover {
-    background: var(--grey-100);
-  }
+  text-decoration: none;
 }
 
 .pagy-nav > .page.prev a,
@@ -30,15 +24,15 @@
 
 .pagy-nav > .page.next a,
 .pagy-nav > .page.next.disabled {
-  border-radius: 0 5px 5px 0;
   border-right: 1px solid var(--border-color);
+  border-radius: 0 5px 5px 0;
 }
 
 .pagy-nav > .page.active {
-  cursor: default;
-  background: var(--red-500);
   border-color: var(--red-500);
+  background: var(--red-500);
   color: white;
+  cursor: default;
 
   &:hover {
     background: var(--red-500);
@@ -46,9 +40,16 @@
 }
 
 .pagy-nav > .page.disabled {
-  cursor: default;
   color: var(--grey-500);
+  cursor: default;
+
   &:hover {
     background: white;
   }
+}
+
+.pagy-nav > .page.disabled:hover,
+.pagy-nav > .page.active:hover,
+.pagy-nav > .page > a:hover {
+  background: var(--grey-100);
 }

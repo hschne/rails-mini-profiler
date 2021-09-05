@@ -1,17 +1,15 @@
 .flash {
-  margin-top: 1rem;
   padding: 1rem 1rem;
-
+  margin-top: 1rem;
   border-radius: 5px;
 }
 
 .flash-error {
-  color: white;
   background: var(--red-500);
+  color: white;
 }
 
 .flash-notice {
-  color: white;
   background: var(--green-400);
-
+  color: white;
 }

@@ -1,34 +1,33 @@
 
 .placeholder {
-  width: 100%;
   display: flex;
+  width: 100%;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   padding-bottom: 2rem;
-
-  align-items: center;
 }
 
 .placeholder-image {
-  height: 30%;
   width: 30%;
+  height: 30%;
   -webkit-filter: grayscale(1) brightness(2.5);
 }
 
 .placeholder-text {
   padding: 1rem 0;
-  text-align: center;
   color: var(--grey-400);
+  text-align: center;
 }
 
 .placeholder-link {
   color: var(--grey-400);
 
   &:visited {
-    color: var(--grey-400)
+    color: var(--grey-400);
   }
 
   &:hover {
-    color: var(--grey-900)
+    color: var(--grey-900);
   }
 }

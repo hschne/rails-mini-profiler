@@ -1,14 +1,14 @@
 .trace-list {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 .trace {
-  list-style: none;
   display: flex;
-  padding: .25em 0;
   align-items: center;
   justify-content: flex-start;
+  padding: 0.25em 0;
+  list-style: none;
 }
 
 .trace:nth-child(odd) {
@@ -17,11 +17,11 @@
 
 .trace .trace-bar {
   position: relative;
-  margin: 0;
   height: 16px;
   padding: 0;
-  cursor: pointer;
+  margin: 0;
   background: linear-gradient(to top right, var(--grey-500), var(--grey-400));
+  cursor: pointer;
 }
 
 .instantiation-trace .trace-bar {
@@ -42,14 +42,14 @@
 }
 
 .trace-name {
-  margin: 0;
-  box-sizing: border-box;
-  padding: 0 .5em;
   overflow: hidden;
+  box-sizing: border-box;
+  padding: 0 0.5em;
+  margin: 0;
+  color: var(--grey-400);
   font-size: 14px;
   text-align: right;
   text-overflow: ellipsis;
-  color: var(--grey-400)
 }
 
 .trace-payload {
@@ -57,26 +57,26 @@
 }
 
 .sequel-trace-query {
-  padding: 1em 1em;
-  background: var(--grey-100);
   overflow: auto;
   max-height: 100px;
+  padding: 1em 1em;
+  background: var(--grey-100);
   white-space: pre-wrap;
 }
 
 .sequel-trace-binds {
-  margin: 0 0 1em 0;
-  padding: .5em 1em;
-  font-size: 12px;
   overflow: auto;
   max-height: 100px;
-  white-space: pre-wrap;
+  padding: 0.5em 1em;
+  margin: 0 0 1em 0;
   background: var(--grey-50);
+  font-size: 12px;
+  white-space: pre-wrap;
 }
 
 .trace-table {
-  margin-top: 1em;
   width: 100%;
-  border-collapse: collapse;
   border: hidden 1px var(--border-color);
+  margin-top: 1em;
+  border-collapse: collapse;
 }

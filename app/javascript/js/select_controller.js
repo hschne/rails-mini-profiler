@@ -11,7 +11,7 @@ export default class extends Controller {
   }
 
   onSelected () {
-    this.allTarget.indeterminate = !!this._indeterminate;
+    this.allTarget.indeterminate = !!this._indeterminate
     this._dispatch('change', { count: this.selectedCount })
   }
 

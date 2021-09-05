@@ -1,17 +1,27 @@
 .table {
   width: 100%;
-  table-layout: fixed;
+  border: hidden 1px var(--border-color);
+
   /* Hack to get table row borders, see https://stackoverflow.com/a/2586780/2553104 */
   border-collapse: collapse;
   border-radius: 5px;
-  border: hidden 1px var(--border-color);
   box-shadow: 0 0 0 1px var(--border-color);
+  table-layout: fixed;
+}
+
+.table th,
+.table td {
+  padding: 0.5rem 1rem;
 }
 
 .table thead tr {
-  color: var(--grey-400);
   border: hidden 1px var(--border-color);
   box-shadow: 0 0 0 1px var(--border-color);
+  color: var(--grey-400);
+}
+
+.table tr:nth-child(even) {
+  background: var(--grey-50);
 }
 
 .table thead th {
@@ -20,73 +30,61 @@
 
 .table-filter-icon {
   width: 14px;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
 
-.table tbody tr:not(.no-row){
+.table tbody tr:not(.no-row) {
   border: solid 1px var(--border-color);
   color: var(--grey-700);
   cursor: pointer;
-}
-
-.table tr:nth-child(even) {
-  background: var(--grey-50);
 }
 
 .table tbody tr:not(.no-row):hover {
   background: var(--grey-100);
 }
 
-.table th,
-.table td {
-  padding: 0.5rem 1rem;
-}
-
 .request-checkbox {
   z-index: 1;
+  width: 1rem;
   height: 1rem;
-  width: 1rem
 }
 
 .dropdown-body {
-  padding: .33rem .5rem;
+  padding: 0.33rem 0.5rem;
 }
 
 .dropdown-search-field {
-  padding: .5rem .5rem;
-  border-radius: 5px;
+  padding: 0.5rem 0.5rem;
   border: 1px solid var(--grey-400);
+  border-radius: 5px;
   color: var(--grey-700);
 }
 
-
-.dropdown-toggle  {
-  color: inherit;
+.dropdown-toggle {
   display: flex;
   align-items: center;
+  color: inherit;
 
   &:hover {
-    color: var(--grey-900)
+    color: var(--grey-900);
   }
 }
 
 .dropdown-container {
   position: absolute;
-  margin-top: .3em;
   z-index: 1;
-
   display: flex;
-  flex-direction: column;
   overflow: hidden;
   min-width: 240px;
   box-sizing: border-box;
-
-  cursor: default;
-  background: white;
-  color: var(--grey-400);
+  flex-direction: column;
   border: 1px solid var(--grey-200);
+  margin-top: 0.3em;
+  background: white;
   border-radius: 5px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  color: var(--grey-400);
+  cursor: default;
 }
 
 .dropdown-search {
@@ -100,40 +98,39 @@
 }
 
 .dropdown-entry {
-  text-decoration: none;
   display: flex;
-  padding: .33rem 1rem;
+  padding: 0.33rem 1rem;
+  text-decoration: none;
 
   &:hover {
+    background: var(--grey-100);
     color: var(--grey-900);
-    background: var(--grey-100)
   }
 }
 
 .dropdown-entry input {
-  margin-right: .5em;
+  margin-right: 0.5em;
 }
 
 .dropdown-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: .5rem 1rem;
-
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
   border-bottom: 1px solid var(--grey-200);
-  font-size: .833rem;
   background: var(--grey-100);
+  font-size: 0.833rem;
   text-align: left;
 }
 
 .dropdown-header button {
   padding: 0;
   border: none;
+  background: none;
+  color: var(--grey-500);
+  font-size: 0.833rem;
   outline: none;
   text-decoration: underline;
-  background: none;
-  font-size: .833rem;
-  color: var(--grey-500);
 
   &:hover {
     box-shadow: none;
@@ -143,13 +140,13 @@
 
 .dropdown-footer {
   width: 100%;
+  padding: 0.5rem;
+  border: none;
+  background: var(--red-500);
   border-radius: 0;
-  padding: .5rem;
   color: white;
   font-weight: 600;
-  border: none;
   outline: none;
-  background: var(--red-500);
 
   &:hover {
     background: var(--red-600);
@@ -157,27 +154,26 @@
 }
 
 .dropdown-search-button {
-  padding: 0.5em .5em;
+  display: inline-block;
+  padding: 0.5em 0.5em;
+  border: none;
+  background: var(--red-500);
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 1rem;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  background: var(--red-500);
-  color: white;
-  font-weight: 600;
 
   &:hover {
-    background: var(--red-600)
+    background: var(--red-600);
   }
 }
 
 .request-path {
-  max-width: 280px;
-
-  white-space: nowrap;
   overflow: hidden;
+  max-width: 280px;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
