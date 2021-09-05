@@ -7,13 +7,15 @@
   "globals": {
     "ENV": true
   },
+  "parser": "@babel/eslint-parser",
   "extends": "eslint:recommended",
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
   "ignorePatterns": [
-    "public"
+    "public",
+    "node_modules"
   ],
   "rules": {
   }

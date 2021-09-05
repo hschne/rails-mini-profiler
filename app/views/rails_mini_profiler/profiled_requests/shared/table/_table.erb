@@ -1,0 +1,14 @@
+<table
+  id="profiled-requests-table"
+  class="table">
+  <%= render "rails_mini_profiler/profiled_requests/shared/table/table_head" %>
+  <tbody>
+  <% if @profiled_requests.empty? %>
+    <%= render "rails_mini_profiler/profiled_requests/shared/table/placeholder" %>
+  <% else %>
+    <% @profiled_requests.each do |profiled_request| %>
+      <%= render "rails_mini_profiler/profiled_requests/shared/table/table_row", profiled_request: profiled_request %>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>

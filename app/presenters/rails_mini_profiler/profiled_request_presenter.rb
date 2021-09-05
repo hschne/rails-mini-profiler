@@ -15,21 +15,14 @@ module RailsMiniProfiler
     end
 
     def created_at
-      time_tag(model.created_at.in_time_zone(Time.zone))
-    end
-
-    def flamegraph_icon
-      return nil unless RailsMiniProfiler.configuration.flamegraph_enabled
-
-      if model.flamegraph.present?
-        link_to(flamegraph_path(model.id), title: 'Show Flamegraph') do
-          inline_svg('graph.svg')
-        end
-      else
-        link_to(flamegraph_path(model.id), title: 'No Flamegraph present for this request', class: 'link-disabled') do
-          inline_svg('graph.svg')
-        end
-      end
+      from_time = Time.now
+      created_at = model.created_at.in_time_zone(Time.zone)
+      distance = if from_time - created_at < 5.minutes
+                   'Now'
+                 else
+                   "#{distance_of_time_in_words(from_time, created_at)} ago"
+                 end
+      time_tag(created_at) { content_tag('span', distance) }
     end
 
     def flamegraph_button
