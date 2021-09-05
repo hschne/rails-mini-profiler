@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.4.1](https://www.github.com/hschne/rails-mini-profiler/compare/v0.4.0...v0.4.1) (2021-09-05)
+
+
+### Bug Fixes
+
+* handle non-sprockets apps, fixes [#55](https://www.github.com/hschne/rails-mini-profiler/issues/55) ([#57](https://www.github.com/hschne/rails-mini-profiler/issues/57)) ([a80dbad](https://www.github.com/hschne/rails-mini-profiler/commit/a80dbad6505a5ad1ae8c737f80f586a3e5a7b10e))
+
 ## [0.4.0](https://www.github.com/hschne/rails-mini-profiler/compare/v0.3.0...v0.4.0) (2021-08-28)
 
 
