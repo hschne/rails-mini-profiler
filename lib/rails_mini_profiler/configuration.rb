@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'rails_mini_profiler/configuration/storage'
+require 'rails_mini_profiler/configuration/user_interface'
+
 module RailsMiniProfiler
   # The main Rails Mini Profiler configuration object
   #

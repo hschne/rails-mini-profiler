@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RailsMiniProfiler
   module Tracing
     class ViewTrace < Trace
@@ -6,7 +8,7 @@ module RailsMiniProfiler
       end
 
       def transform!
-        @event.payload.slice(:identifier, :count)
+        @payload.slice!(:identifier, :count)
       end
     end
   end

@@ -7,24 +7,21 @@ require 'pagy'
 require 'rails_mini_profiler/version'
 require 'rails_mini_profiler/engine'
 
+require 'rails_mini_profiler/models/base_model'
+require 'rails_mini_profiler/tracing'
+require 'rails_mini_profiler/configuration'
+
 require 'rails_mini_profiler/user'
 require 'rails_mini_profiler/request_context'
-
-require 'rails_mini_profiler/models/base_model'
-require 'rails_mini_profiler/models/trace'
-
 require 'rails_mini_profiler/logger'
-require 'rails_mini_profiler/configuration'
-require 'rails_mini_profiler/configuration/storage'
-require 'rails_mini_profiler/configuration/user_interface'
 require 'rails_mini_profiler/request_wrapper'
 require 'rails_mini_profiler/response_wrapper'
 require 'rails_mini_profiler/guard'
 require 'rails_mini_profiler/flamegraph_guard'
 require 'rails_mini_profiler/redirect'
 require 'rails_mini_profiler/badge'
-require 'rails_mini_profiler/tracers'
 require 'rails_mini_profiler/middleware'
+
 
 # Main namespace for Rails Mini Profiler
 module RailsMiniProfiler

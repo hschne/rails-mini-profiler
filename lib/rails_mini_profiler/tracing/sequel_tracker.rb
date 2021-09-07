@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RailsMiniProfiler
   module Tracing
     class SqlTracker
