@@ -12,7 +12,7 @@ module RailsMiniProfiler
     end
 
     def inline_svg(path, options = {})
-      if defined?(Webpacker::Engine)
+      if defined?(Webpacker::Engine) && RailsMiniProfiler.configuration.ui.webpacker_enabled
         path = "media/images/#{path}"
         inline_svg_pack_tag(path, options)
       else

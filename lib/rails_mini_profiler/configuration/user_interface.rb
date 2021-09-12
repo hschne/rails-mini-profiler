@@ -11,6 +11,8 @@ module RailsMiniProfiler
   #   @return [String] the position of the interactive HTML badge
   # @!attribute page_size
   #   @return [Integer] how many items to render per page in list views
+  # @!attribute webpacker_enabled
+  #   @return [Boolean] if webpacker assets should be used. Disable to fall back to the asset pipeline
   class UserInterface
     class << self
       # Construct a new UI configuration instance
@@ -31,7 +33,8 @@ module RailsMiniProfiler
 
     attr_accessor :badge_enabled,
                   :badge_position,
-                  :page_size
+                  :page_size,
+                  :webpacker_enabled
 
     def initialize(**kwargs)
       defaults!
@@ -43,6 +46,7 @@ module RailsMiniProfiler
       @badge_enabled = true
       @badge_position = 'top-left'
       @page_size = 25
+      @webpacker_enabled = true
     end
   end
 end

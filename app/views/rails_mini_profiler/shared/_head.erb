@@ -3,7 +3,7 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <% if defined?(Webpacker::Engine) %>
+  <% if defined?(Webpacker::Engine) && RailsMiniProfiler.configuration.ui.webpacker_enabled  %>
     <%= javascript_pack_tag "rails-mini-profiler" %>
     <%= stylesheet_pack_tag 'rails-mini-profiler' %>
   <% else %>

@@ -23,6 +23,7 @@ RailsMiniProfiler.configure do |config|
   # config.ui.badge_enabled = true
   # config.ui.badge_position = 'top-left'
   # config.ui.page_size = 25
+  # config.ui.webpacker_enabled = true
 
   # Customize how users are detected
   config.user_provider = proc { |env| Rack::Request.new(env).ip }
