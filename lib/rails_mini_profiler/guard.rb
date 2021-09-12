@@ -34,12 +34,30 @@ module RailsMiniProfiler
     def ignored_path?
       return true if /#{Engine.routes.find_script_name({})}/.match?(@request.path)
 
-      return true if /assets/.match?(@request.path)
+      return true if asset_path?
+
+      return true if actioncable_request?
 
       ignored_paths = @configuration.skip_paths
       return true if Regexp.union(ignored_paths).match?(@request.path)
 
       false
+    end
+
+    # Is the current request an asset request, e.g. to webpacker packs or assets?
+    #
+    # @return [Boolean] if the request path matches packs or assets
+    def asset_path?
+      %r{^/packs}.match?(@request.path) || %r{^/assets}.match?(@request.path)
+    end
+
+    # Is the current request an actioncable ping
+    #
+    # @return [Boolean] if the request path matches the mount path of actioncable
+    def actioncable_request?
+      return false unless defined?(ActionCable)
+
+      /#{ActionCable.server.config.mount_path}/.match?(@request.path)
     end
 
     # Is the profiler enabled?

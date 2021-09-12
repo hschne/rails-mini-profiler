@@ -17,16 +17,34 @@ module RailsMiniProfiler
         it('should be true') { expect(subject.profile?).to be(true) }
       end
 
+      context 'with no ignored path' do
+        let(:request) { RequestWrapper.new(path: '/ignored') }
+
+        it('should be true') { expect(subject.profile?).to be(true) }
+      end
+
       context 'with profiler mount path' do
         let(:request) { RequestWrapper.new(path: "/#{Engine.routes.find_script_name({})}/1") }
 
         it('should be false') { expect(subject.profile?).to be(false) }
       end
 
-      context 'with no ignored path' do
-        let(:request) { RequestWrapper.new(path: '/ignored') }
+      context 'with pack path' do
+        let(:request) { RequestWrapper.new(path: '/packs/js/abc') }
 
-        it('should be true') { expect(subject.profile?).to be(true) }
+        it('should be false') { expect(subject.profile?).to be(false) }
+      end
+
+      context 'with asset path' do
+        let(:request) { RequestWrapper.new(path: '/assets/images/abc') }
+
+        it('should be false') { expect(subject.profile?).to be(false) }
+      end
+
+      context 'with actioncable path' do
+        let(:request) { RequestWrapper.new(path: ActionCable.server.config.mount_path) }
+
+        it('should be false') { expect(subject.profile?).to be(false) }
       end
 
       context 'with ignored path match' do
