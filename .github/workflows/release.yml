@@ -45,7 +45,7 @@ jobs:
       - name: Release Version
         id: release-version
         run: |
-          if [[ ${{github.event_name == 'workflow_dispatch'}} ]]; then
+          if [[ ${{github.event_name}} == 'workflow_dispatch' ]]; then
             version=${{ github.event.inputs.version }}
           else
             version=${{ needs.prepare-release.outputs.version }}
