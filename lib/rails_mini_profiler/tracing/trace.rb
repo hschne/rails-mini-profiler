@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  module Models
+  module Tracing
     # A simplified representation of a trace.
     #
     # Is transformed into [RailsMiniProfiler::Trace] when recording has finished.
@@ -30,8 +30,16 @@ module RailsMiniProfiler
     #   @return [DateTime] the last updated date
     #
     # @api private
-    class Trace < BaseModel
+    class Trace < RailsMiniProfiler::Models::BaseModel
       attr_accessor :id, :name, :start, :finish, :duration, :payload, :backtrace, :allocations, :created_at, :updated_at
+
+      def ignore?
+        false
+      end
+
+      def transform!
+        self
+      end
     end
   end
 end
