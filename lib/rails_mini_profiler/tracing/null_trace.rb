@@ -2,12 +2,6 @@
 
 module RailsMiniProfiler
   module Tracing
-    class NullTrace < Trace
-
-    end
-
-    def is_null?
-      true
-    end
+    class NullTrace < Trace; end
   end
 end

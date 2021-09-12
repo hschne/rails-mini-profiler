@@ -22,7 +22,6 @@ require 'rails_mini_profiler/redirect'
 require 'rails_mini_profiler/badge'
 require 'rails_mini_profiler/middleware'
 
-
 # Main namespace for Rails Mini Profiler
 module RailsMiniProfiler
   class << self
