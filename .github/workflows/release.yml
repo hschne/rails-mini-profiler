@@ -106,4 +106,4 @@ jobs:
         uses: EndBug/add-and-commit@v7
         with:
           add: "['Gemfile.lock', 'package.json', 'package-lock.json']"
-          message: "chore: post-release ${{ needs.prepare-release.outputs.version }}"
+          message: "chore: post-release ${{ steps.release-version.outputs.version }}"
