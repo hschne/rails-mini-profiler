@@ -3,9 +3,11 @@
 module RailsMiniProfiler
   module Tracing
     class NullTrace < Trace
-      def ignore?
-        true
-      end
+
+    end
+
+    def is_null?
+      true
     end
   end
 end

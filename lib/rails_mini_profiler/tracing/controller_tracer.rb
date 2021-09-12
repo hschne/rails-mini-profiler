@@ -2,13 +2,14 @@
 
 module RailsMiniProfiler
   module Tracing
-    class ControllerTrace < Trace
-      def transform!
-        payload = @payload
+    class ControllerTracer < Tracer
+      def trace
+        payload = @event[:payload]
                     .slice(:view_runtime, :db_runtime)
                     .transform_values { |value| value&.round(2) }
         payload.reject { |_k, v| v.blank? }
-        @payload = payload
+        @event[:payload] = payload
+        super
       end
     end
   end

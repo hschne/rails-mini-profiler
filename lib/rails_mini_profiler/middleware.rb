@@ -34,7 +34,7 @@ module RailsMiniProfiler
       return if traces.nil?
 
       trace = RailsMiniProfiler::Tracing::TraceFactory.create(event)
-      traces.append(trace) unless trace.ignore?
+      traces.append(trace) unless trace.is_a?(RailsMiniProfiler::Tracing::NullTrace)
     end
 
     private

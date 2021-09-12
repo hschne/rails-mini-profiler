@@ -15,11 +15,7 @@ module RailsMiniProfiler
       end
 
       def create
-        trace = trace_class.new(**options)
-        return NullTrace.new if trace.ignore?
-
-        trace.transform!
-        trace
+        trace_class.new(@event).trace
       end
 
       private
@@ -27,28 +23,14 @@ module RailsMiniProfiler
       def trace_class
         case @event.name
         when 'sql.active_record'
-          SequelTrace
+          SequelTracer
         when 'render_template.action_view', 'render_partial.action_view'
-          ViewTrace
+          ViewTracer
         when 'process_action.action_controller'
-          ControllerTrace
+          ControllerTracer
         else
-          Trace
+          Tracer
         end
-      end
-
-      def options
-        start = (@event.time.to_f * 100_000).to_i
-        finish = (@event.end.to_f * 100_000).to_i
-        {
-          name: @event.name,
-          start: start,
-          finish: finish,
-          duration: finish - start,
-          allocations: @event.allocations,
-          backtrace: Rails.backtrace_cleaner.clean(caller),
-          payload: @event.payload
-        }
       end
     end
   end

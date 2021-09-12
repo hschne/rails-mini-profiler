@@ -2,13 +2,11 @@
 
 module RailsMiniProfiler
   module Tracing
-    class SequelTrace < Trace
-      def ignore?
-        !SqlTracker.new(name: payload[:name], query: payload[:sql]).track?
-      end
+    class SequelTracer < Tracer
+      def trace
+        return NullTrace.new if ignore?
 
-      def transform!
-        payload = @payload.slice(:name, :sql, :binds, :type_casted_binds)
+        payload = @event[:payload].slice(:name, :sql, :binds, :type_casted_binds)
         typecasted_binds = payload[:type_casted_binds]
         # Sometimes, typecasted binds are a proc. Not sure why. In those instances, we extract the typecasted
         # values from the proc by executing call.
@@ -16,7 +14,8 @@ module RailsMiniProfiler
         payload[:binds] = transform_binds(payload[:binds], typecasted_binds)
         payload.delete(:type_casted_binds)
         payload.reject { |_k, v| v.blank? }
-        @payload = payload
+        @event[:payload] = payload
+        super
       end
 
       private
@@ -27,6 +26,11 @@ module RailsMiniProfiler
           value = type_casted_binds[i]
           object << { name: name, value: value }
         end
+      end
+
+      def ignore?
+        payload = @event[:payload]
+        !SqlTracker.new(name: payload[:name], query: payload[:sql]).track?
       end
     end
   end
