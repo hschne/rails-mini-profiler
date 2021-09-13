@@ -9,7 +9,7 @@ gemspec
 group :development do
   gem 'annotate', '~> 3.1'
   gem 'appraisal', '~> 2.4'
-  gem 'httparty', '~> 0.18.1', require: false
+  gem 'httparty', '~> 0.19.0', require: false
   gem 'puma', '~> 5.4'
   gem 'rubyzip', '~> 2.3', require: false
 end
