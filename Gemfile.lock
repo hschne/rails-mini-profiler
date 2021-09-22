@@ -124,7 +124,7 @@ GEM
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    puma (5.4.0)
+    puma (5.5.0)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
@@ -225,7 +225,7 @@ DEPENDENCIES
   httparty (~> 0.19.0)
   jb (~> 0.8)
   pry (~> 0.14)
-  puma (~> 5.4)
+  puma (~> 5.5)
   rails_mini_profiler!
   rspec-rails (~> 5.0)
   rubocop (~> 1.21)
