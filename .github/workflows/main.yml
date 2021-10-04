@@ -61,7 +61,7 @@ jobs:
     - name: Report Coverage
       # We don't need to upload coverage multiple times, just do it for latest versions, and only on master
       if: github.ref == 'refs/heads/main' && matrix.ruby-version == 3.0 && matrix.rails-version == 6.1
-      uses: paambaati/codeclimate-action@v2.7.5
+      uses: paambaati/codeclimate-action@v3.0.0
       env:
         CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
 
