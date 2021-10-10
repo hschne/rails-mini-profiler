@@ -59,7 +59,7 @@ module RailsMiniProfiler
     #
     # @return String The badge HTML content to be injected
     def badge_content
-      html = IO.read(File.expand_path('../../app/views/rails_mini_profiler/badge.html.erb', __dir__))
+      html = File.read(File.expand_path('../../app/views/rails_mini_profiler/badge.html.erb', __dir__))
       @position = css_position
       template = ERB.new(html)
       template.result(binding)
