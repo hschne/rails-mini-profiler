@@ -80,3 +80,31 @@
   margin-top: 1em;
   border-collapse: collapse;
 }
+
+.backtrace {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em;
+  background: var(--grey-100);
+}
+
+.backtrace button {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+  background: none;
+  color: var(--grey-500);
+  transition: color 200ms ease-in-out;
+}
+
+.backtrace button.copied {
+  color: var(--green-400);
+}
+
+.backtrace button svg {
+  width: 20px;
+  height: 20px;
+}

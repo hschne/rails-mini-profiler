@@ -32,7 +32,22 @@
 
       <% if trace.backtrace %>
         <section class="popover-footer">
-          <pre><%= trace.backtrace %></pre>
+          <div
+            class="backtrace"
+            data-controller="clipboard"
+            data-clipboard-filter=".+?(?=:in)"
+            data-clipboard-copied-class="copied"
+          >
+            <pre data-clipboard-target="source"><%= trace.backtrace %></pre>
+            <button
+              title="Copy to clipboard"
+              type="button"
+              data-action="clipboard#copy"
+              data-clipboard-target="button"
+            >
+              <%= inline_svg('copy.svg') %>
+          </button>
+          </div>
         </section>
       <% end %>
     </div>
