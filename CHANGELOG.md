@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.5.1](https://www.github.com/hschne/rails-mini-profiler/compare/v0.5.0...v0.5.1) (2021-10-10)
+
+
+### Bug Fixes
+
+* do not profile actioncable and asset paths ([#65](https://www.github.com/hschne/rails-mini-profiler/issues/65)) ([72a1b06](https://www.github.com/hschne/rails-mini-profiler/commit/72a1b069b4fddedc81b40ce6b9528ea7b1852279))
+
 ## [0.5.0](https://www.github.com/hschne/rails-mini-profiler/compare/v0.4.0...v0.5.0) (2021-09-12)
 
 
