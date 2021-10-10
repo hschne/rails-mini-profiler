@@ -54,8 +54,8 @@
     "stylelint-scss": "^3.20.1"
   },
   "dependencies": {
-    "stimulus": "^2.0.0",
-    "tailwindcss-stimulus-components": "^2.2.2",
+    "@hotwired/stimulus": "^3.0.0",
+    "tailwindcss-stimulus-components": "^3.0.0",
     "tippy.js": "^6.3.1"
   }
 }

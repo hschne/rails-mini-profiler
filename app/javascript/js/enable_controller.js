@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus'
+import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = ["enable"];
@@ -15,9 +15,8 @@ export default class extends Controller {
     if (event.type.match(/rmp:select:.*/)) {
       if (event.detail.count > 0) {
         this.enable();
-      }
-      else {
-        this.disable()
+      } else {
+        this.disable();
       }
     }
   }
