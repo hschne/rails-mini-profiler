@@ -7,6 +7,10 @@ export default class extends Controller {
     location.href = `${window.location.pathname}?${this.params}`;
   }
 
+  reset() {
+    location.href = `${window.location.pathname}`;
+  }
+
   post() {
     const token = document.head.querySelector(
       'meta[name="csrf-token"]'

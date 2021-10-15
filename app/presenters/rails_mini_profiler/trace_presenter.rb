@@ -2,9 +2,12 @@
 
 module RailsMiniProfiler
   class TracePresenter < BasePresenter
-    def initialize(trace, view, profiled_request:)
+    def initialize(trace, view, context: {})
       super(trace, view)
-      @profiled_request = profiled_request
+      @start = context[:start]
+      @finish = context[:finish]
+      @total_duration = context[:total_duration]
+      @total_allocations = context[:total_allocations]
     end
 
     def label
@@ -38,7 +41,7 @@ module RailsMiniProfiler
     end
 
     def duration_percent
-      (model.duration.to_f / @profiled_request.duration * 100).round
+      (model.duration.to_f / @total_duration * 100).round
     end
 
     def allocations
@@ -46,16 +49,15 @@ module RailsMiniProfiler
     end
 
     def allocations_percent
-      (model.allocations.to_f / @profiled_request.allocations * 100).round
+      (model.allocations.to_f / @total_allocations * 100).round
     end
 
     def from_start
-      (model.start - @profiled_request.start).to_f / 100
+      (model.start - @start).to_f / 100
     end
 
     def from_start_percent
-      ((model.start - @profiled_request.start).to_f /
-        (@profiled_request.finish - @profiled_request.start)).to_f * 100
+      ((model.start - @start).to_f / (@finish - @start)).to_f * 100
     end
   end
 end

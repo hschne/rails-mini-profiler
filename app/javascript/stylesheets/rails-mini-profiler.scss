@@ -1,10 +1,15 @@
 @import 'flashes';
 @import 'flamegraph';
-@import 'navbar';
 @import 'profiled_requests';
 @import 'traces';
+@import 'components/buttons';
+@import 'components/input';
+@import 'components/navbar';
 @import 'components/pagination';
-@import 'components/page_header/page_header';
+@import 'components/page_header';
+@import 'components/dropdown';
+@import 'components/placeholder';
+@import 'components/trace';
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
 @font-face {
@@ -70,36 +75,14 @@ body {
   color: var(--text-color);
 }
 
-button,
-.button {
-  display: inline-block;
-  padding: 0.5em 0.5em;
-  border: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  font-size: 1rem;
-  text-align: center;
-  text-decoration: none;
-
-  &:disabled {
-    background: var(--grey-200);
-    cursor: not-allowed;
-  }
+main {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
-button:hover {
-  box-shadow: 0 0.25rem 0.25rem 0 var(--grey-50);
-}
-
-button.none {
-  padding: 0;
-  border: none;
-  background: none;
-  outline: none;
-
-  &:hover {
-    box-shadow: none;
-  }
+.main-section {
+  width: var(--main-width);
 }
 
 /* --------------------------------------- */

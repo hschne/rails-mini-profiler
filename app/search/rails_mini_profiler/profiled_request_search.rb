@@ -27,7 +27,6 @@ module RailsMiniProfiler
     end
 
     option(:duration) do |scope, value|
-      value = value.tr('>', '').to_i * 100
       scope.where('duration > :duration', duration: value)
     end
   end

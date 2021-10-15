@@ -1,0 +1,93 @@
+.trace {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.25em 0;
+  list-style: none;
+}
+
+.trace:nth-child(odd) {
+  background: var(--grey-100);
+}
+
+.trace .trace-bar {
+  position: relative;
+  height: 16px;
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(to top right, var(--grey-500), var(--grey-400));
+  cursor: pointer;
+}
+
+.instantiation-trace .trace-bar {
+  background: linear-gradient(to top right, var(--green-400), var(--green-300));
+}
+
+.sequel-trace .trace-bar {
+  background: linear-gradient(to top right, var(--green-500), var(--green-400));
+}
+
+.controller-trace .trace-bar {
+  background: linear-gradient(to top right, var(--yellow-500), var(--yellow-400));
+}
+
+.render-template-trace .trace-bar,
+.render-partial-trace .trace-bar {
+  background: linear-gradient(to top right, var(--blue-500), var(--blue-400));
+}
+
+.trace-name {
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 0 0.5em;
+  margin: 0;
+  color: var(--grey-400);
+  font-size: 14px;
+  text-align: right;
+  text-overflow: ellipsis;
+}
+
+.trace-payload {
+  margin: 0;
+}
+
+.sequel-trace-query {
+  overflow: auto;
+  max-height: 100px;
+  padding: 1em 1em;
+  background: var(--grey-100);
+  white-space: pre-wrap;
+}
+
+.sequel-trace-binds {
+  overflow: auto;
+  max-height: 100px;
+  padding: 0.5em 1em;
+  margin: 0 0 1em 0;
+  background: var(--grey-50);
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+
+.backtrace {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em;
+  background: var(--grey-100);
+}
+
+.backtrace button {
+  overflow: auto;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+  background: none;
+  color: var(--grey-500);
+}
+
+.backtrace button svg {
+  width: 20px;
+  height: 20px;
+}

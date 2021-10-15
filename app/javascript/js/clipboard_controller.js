@@ -36,11 +36,18 @@ export default class extends Controller {
     }
 
     const copiedClass = this.data.get("copiedClass");
-    console.log(copiedClass);
-    this.buttonTarget.classList.add(copiedClass);
+    if (copiedClass) {
+      this.buttonTarget.classList.add(copiedClass);
+    }
+    const copiedMessage = this.data.get("copiedMessage");
+    const content = this.buttonTarget.innerHTML;
+    if (copiedMessage) {
+      this.buttonTarget.innerHTML = copiedMessage;
+    }
 
     this.timeout = setTimeout(() => {
       this.buttonTarget.classList.remove(copiedClass);
+      this.buttonTarget.innerHTML = content;
     }, this.successDuration);
   }
 }
