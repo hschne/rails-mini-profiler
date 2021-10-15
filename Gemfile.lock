@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_mini_profiler (0.4.0)
+    rails_mini_profiler (0.6.0)
       inline_svg (~> 1.7)
       jb (~> 0.8)
       pagy (~> 4.11)
@@ -102,12 +102,12 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    marcel (1.0.1)
+    marcel (1.0.2)
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.0901)
-    mini_mime (1.1.1)
+    mini_mime (1.1.2)
     mini_portile2 (2.6.1)
     minitest (5.14.4)
     multi_xml (0.6.0)
