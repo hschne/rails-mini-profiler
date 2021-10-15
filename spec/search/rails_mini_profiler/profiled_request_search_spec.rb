@@ -73,18 +73,9 @@ module RailsMiniProfiler
           request = ProfiledRequest.create(duration: 10_001)
           ProfiledRequest.create(duration: 10_000)
 
-          results = ProfiledRequestSearch.results(scope: ProfiledRequest.all, duration: '>100')
+          results = ProfiledRequestSearch.results(scope: ProfiledRequest.all, duration: 10_000)
 
           expect(results).to eq([request])
-        end
-
-        it 'returns profiled requests with any duration' do
-          first = ProfiledRequest.create(duration: 101)
-          second = ProfiledRequest.create(duration: 100)
-
-          results = ProfiledRequestSearch.results(scope: ProfiledRequest.all, duration: 'any')
-
-          expect(results).to eq([first, second])
         end
       end
     end

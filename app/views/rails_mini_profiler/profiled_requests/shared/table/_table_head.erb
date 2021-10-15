@@ -23,7 +23,7 @@
                                 placeholder: 'Search Path',
                                 class: 'dropdown-search-field',
                                 data: { 'filters-target': 'filter' } %>
-          <%= form.submit 'Search', class: 'dropdown-search-button', data: { action: 'click->search#submit' } -%>
+          <%= form.submit 'Search', class: 'btn-red', data: { action: 'click->search#submit' } -%>
         <% end %>
       </div>
     </div>
@@ -74,7 +74,7 @@
       </button>
     </div>
   </th>
-  <th style="width: 15%" class="" data-controller="dropdown">
+  <th style="width: 15%;" class="" data-controller="dropdown">
     <button data-action="click->dropdown#toggle click@window->dropdown#hide" data-dropdown-target="button" class="dropdown-toggle none">
       Media Type <%= inline_svg('filter.svg', class: 'table-filter-icon') %> </button>
     <div data-controller="checklist" data-dropdown-target="menu" class="dropdown-container hidden">
@@ -97,7 +97,7 @@
       </button>
     </div>
   </th>
-  <th style="width: 10%" class="text-left" data-controller="dropdown">
+  <th style="width: 10%;" class="text-left" data-controller="dropdown">
     <button data-action="click->dropdown#toggle click@window->dropdown#hide" data-dropdown-target="button" class="dropdown-toggle none">
       Duration <%= inline_svg('filter.svg', class: 'table-filter-icon') %> </button>
     <div data-controller="checklist" data-dropdown-target="menu" class="dropdown-container hidden">
@@ -107,12 +107,12 @@
           Clear filter
         </button>
       </div>
-      <% %w[>100ms >250ms].each do |duration| %>
+      <% [100_00, 250_00].each do |duration| %>
         <%= label_tag nil, class: "dropdown-entry" do %>
-          <%= radio_button_tag 'duration', duration, params.fetch(:duration, []).include?(duration),
+          <%= radio_button_tag 'duration', duration.to_s , params.fetch(:duration, []).include?(duration.to_s),
                                class: "",
                                data: { target: "filters.filter" } %>
-          <%= duration %>
+          <%= "> #{duration / 100}ms" %>
         <% end %>
       <% end %>
       <button class="dropdown-footer" data-action="filters#apply">
@@ -120,6 +120,6 @@
       </button>
     </div>
   </th>
-  <th style="width: 15%" class="text-left">Date</th>
+  <th style="width: 15%;" class="text-left">Date</th>
 </tr>
 </thead>

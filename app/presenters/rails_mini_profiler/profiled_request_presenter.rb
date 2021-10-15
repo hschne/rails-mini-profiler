@@ -30,8 +30,8 @@ module RailsMiniProfiler
 
       return nil unless model.flamegraph.present?
 
-      link_to(flamegraph_path(model.id), title: 'Show Flamegraph', class: 'flamegraph-button') do
-        content_tag('button', 'Flamegraph')
+      link_to(flamegraph_path(model.id), title: 'Show Flamegraph') do
+        content_tag('button', 'Flamegraph', class: 'btn-grey')
       end
     end
   end

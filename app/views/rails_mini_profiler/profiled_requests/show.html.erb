@@ -1,6 +1,8 @@
 <section class="page-header">
   <h1> <%= @profiled_request.request_path %> </h1>
+</section>
 
+<div class="profiled-request-details">
   <ul class="request-details-data">
     <li class="data-item">
       <small>Method</small>
@@ -18,23 +20,8 @@
       <small>Allocations</small>
       <span><%= @profiled_request.allocations %></span>
     </li>
-
   </ul>
-
-</section>
-
-<section class="request-details-actions">
-  <%= form_with id: 'trace-form', url: profiled_request_url(@profiled_request.id), method: :get do |form| %>
-    <%= form.search_field :search, id: 'trace-search', placeholder: 'Search Traces...', class: 'search-field' %>
-  <% end %>
   <%= @profiled_request.flamegraph_button %>
-</section>
+</div>
 
-<section>
-  <h2>Traces</h2>
-  <ol class="trace-list">
-    <% @traces.each do |trace| %>
-      <%= render "rails_mini_profiler/profiled_requests/shared/trace", trace: trace %>
-    <% end %>
-  </ol>
-</section>
+<%= render "rails_mini_profiler/profiled_requests/show/trace_list" %>

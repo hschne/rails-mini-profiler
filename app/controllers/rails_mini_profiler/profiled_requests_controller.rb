@@ -14,11 +14,16 @@ module RailsMiniProfiler
     end
 
     def show
-      @traces = @profiled_request.traces
-      @traces = @traces.where("#{payload_column} LIKE ?", "%#{params[:search]}%") if params[:search]
-      @traces = @traces
+      search = TraceSearch.new(show_params, scope: @profiled_request.traces)
+      context = {
+        start: @profiled_request.start,
+        finish: @profiled_request.finish,
+        total_duration: @profiled_request.duration,
+        total_allocations: @profiled_request.allocations
+      }
+      @traces = search.results
                   .order(:start)
-                  .map { |trace| present(trace, profiled_request: @profiled_request) }
+                  .map { |trace| present(trace, context: context) }
       @profiled_request = present(@profiled_request)
     end
 
@@ -39,6 +44,10 @@ module RailsMiniProfiler
     end
 
     private
+
+    def show_params
+      params.permit(:payload, :duration, :allocations, name: [])
+    end
 
     def index_params
       params.permit(:path, :duration, id: [], method: [], media_type: [], status: [])

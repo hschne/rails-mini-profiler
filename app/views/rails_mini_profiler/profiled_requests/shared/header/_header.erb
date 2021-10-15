@@ -12,9 +12,8 @@
                    }) -%>
     <%= link_to(destroy_all_profiled_requests_url,
                 method: :delete,
-                class: 'clear-action',
                 data: { confirm: "This will delete all requests. Are you sure?" }) do %>
-      <%= button_tag('Delete All') %>
+      <%= button_tag('Delete All', class: 'btn-red') %>
     <% end %>
   </div>
 </div>

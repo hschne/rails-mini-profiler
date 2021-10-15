@@ -1,0 +1,12 @@
+<section class="trace-list">
+  <%= render "rails_mini_profiler/profiled_requests/show/trace_list_header" %>
+  <% if @traces.empty? %>
+    <%= render "rails_mini_profiler/profiled_requests/show/trace_list_placeholder" %>
+  <% else %>
+    <ol>
+      <% @traces.each do |trace| %>
+        <%= render "rails_mini_profiler/profiled_requests/show/trace", trace: trace %>
+      <% end %>
+    </ol>
+  <% end %>
+</section>

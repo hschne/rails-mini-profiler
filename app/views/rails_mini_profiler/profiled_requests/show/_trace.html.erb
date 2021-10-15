@@ -8,7 +8,7 @@
       </section>
       <section class="popover-body">
         <%= trace.payload %>
-        <table class="trace-table">
+        <table class="trace-details-table">
           <thead>
           <tr>
             <th class="text-left"></th>
@@ -36,8 +36,7 @@
             class="backtrace"
             data-controller="clipboard"
             data-clipboard-filter=".+?(?=:in)"
-            data-clipboard-copied-class="copied"
-          >
+            data-clipboard-copied-message="Copied" >
             <pre data-clipboard-target="source"><%= trace.backtrace %></pre>
             <button
               title="Copy to clipboard"

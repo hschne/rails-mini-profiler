@@ -6,8 +6,8 @@ module RailsMiniProfiler
   RSpec.describe TracePresenter, type: :model do
     let(:view_context) { ProfiledRequestsController.new.view_context }
     let(:trace) { Trace.new }
-    let(:profiled_request) { ProfiledRequest.new }
-    subject { TracePresenter.new(trace, view_context, profiled_request: profiled_request) }
+    let(:context) { { start: 0, finish: 0, total_duration: 0, total_allocations: 0 } }
+    subject { TracePresenter.new(trace, view_context, context: context) }
 
     describe 'label' do
       it 'is empty' do
@@ -54,7 +54,8 @@ module RailsMiniProfiler
     end
 
     describe 'duration percent' do
-      let(:profiled_request) { ProfiledRequest.new(duration: 10_000) }
+      let(:context) { { start: 0, finish: 0, total_duration: 10_000, total_allocations: 0 } }
+
       let(:trace) { Trace.new(duration: 1_000) }
 
       it 'returns percent' do
@@ -71,7 +72,7 @@ module RailsMiniProfiler
     end
 
     describe 'allocations percent' do
-      let(:profiled_request) { ProfiledRequest.new(allocations: 10_000) }
+      let(:context) { { start: 0, finish: 0, total_duration: 0, total_allocations: 10_000 } }
       let(:trace) { Trace.new(allocations: 1_000) }
 
       it 'returns percent' do
@@ -80,7 +81,7 @@ module RailsMiniProfiler
     end
 
     describe 'from start' do
-      let(:profiled_request) { ProfiledRequest.new(start: 0) }
+      let(:context) { { start: 0 } }
       let(:trace) { Trace.new(start: 2000) }
 
       it 'returns difference' do
@@ -89,7 +90,7 @@ module RailsMiniProfiler
     end
 
     describe 'from start percent' do
-      let(:profiled_request) { ProfiledRequest.new(start: 0, finish: 10_000) }
+      let(:context) { { start: 0, finish: 10_000, total_duration: 0, total_allocations: 0 } }
       let(:trace) { Trace.new(start: 2000, finish: 4000) }
 
       it 'returns percentage difference' do

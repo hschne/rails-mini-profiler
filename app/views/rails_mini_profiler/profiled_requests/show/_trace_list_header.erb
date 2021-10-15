@@ -1,0 +1,87 @@
+<div class="trace-list-header" data-controller="filters">
+  <div class="trace-list-filters">
+    <%= form_with url: profiled_request_url(@profiled_request.id), method: :get do |form| %>
+      <%= form.search_field :payload,
+                            value: params[:payload],
+                            placeholder: 'Search Traces...',
+                            class: 'search-field',
+                            data: { 'filters-target': 'filter' } %>
+    <% end %>
+    <div data-controller="dropdown">
+      <button data-action="click->dropdown#toggle click@window->dropdown#hide" data-dropdown-target="button" class="dropdown-toggle none" >
+        Type <%= inline_svg('filter.svg', class: 'table-filter-icon') %> </button>
+      <div data-controller="checklist" data-dropdown-target="menu" class="dropdown-container hidden">
+        <div class="dropdown-header">
+          Select Type...
+          <button class="clear-filters" data-action="checklist#checkNone">
+            Clear filter
+          </button>
+        </div>
+        <% trace_names = %w[process_action.action_controller sql.active_record instantiation.active_record render_template.action_view render_partial.action_view] %>
+        <% trace_names.each do |name| %>
+          <%= label_tag nil, class: "dropdown-entry" do %>
+            <%= check_box_tag 'name[]', name, params.fetch(:name, []).include?(name),
+                              class: "",
+                              data: { 'filters-target': "filter" } %>
+            <%= trace_display_name(name) %>
+          <% end %>
+        <% end %>
+        <button class="dropdown-footer" data-action="filters#apply">
+          Apply
+        </button>
+      </div>
+    </div>
+
+    <div data-controller="dropdown">
+      <button data-action="click->dropdown#toggle click@window->dropdown#hide" data-dropdown-target="button" class="dropdown-toggle none">
+        Duration <%= inline_svg('filter.svg', class: 'table-filter-icon') %> </button>
+      <div data-controller="checklist" data-dropdown-target="menu" class="dropdown-container hidden">
+        <div class="dropdown-header">
+          Select Duration...
+          <button class="clear-filters" data-action="checklist#checkNone filters#apply">
+            Clear filter
+          </button>
+        </div>
+        <% [100_00, 250_00, 500_00].each do |duration| %>
+          <%= label_tag nil, class: "dropdown-entry" do %>
+            <%= radio_button_tag 'duration', duration.to_s, params.fetch(:duration, []).include?(duration.to_s),
+                                 class: "",
+                                 data: { target: "filters.filter" } %>
+            <%= "> #{formatted_duration(duration)}ms" %>
+          <% end %>
+        <% end %>
+        <button class="dropdown-footer" data-action="filters#apply">
+          Apply
+        </button>
+      </div>
+    </div>
+
+    <div data-controller="dropdown">
+      <button data-action="click->dropdown#toggle click@window->dropdown#hide" data-dropdown-target="button" class="dropdown-toggle none">
+        Allocations <%= inline_svg('filter.svg', class: 'table-filter-icon') %> </button>
+      <div data-controller="checklist" data-dropdown-target="menu" class="dropdown-container hidden">
+        <div class="dropdown-header">
+          Select Allocation...
+          <button class="clear-filters" data-action="filters#apply">
+            Clear filter
+          </button>
+        </div>
+        <!-- https://twitter.com/nateberkopec/status/1442648442149367809-->
+        <% [10_000, 100_000, 1_000_000, 10_000_000].each do |allocations| %>
+          <%= label_tag nil, class: "dropdown-entry" do %>
+            <%= radio_button_tag 'allocations', allocations.to_s, params.fetch(:allocations, []).include?(allocations.to_s),
+                                 class: "",
+                                 data: { target: "filters.filter" } %>
+            <%= "> #{formatted_allocations(allocations)}" %>
+          <% end %>
+        <% end %>
+        <button class="dropdown-footer" data-action="filters#apply">
+          Apply
+        </button>
+      </div>
+    </div>
+  </div>
+  <%= link_to(profiled_request_url(@profiled_request.id)) do %>
+    <%= button_tag('Clear All', class: 'btn-red') %>
+  <% end %>
+</div>

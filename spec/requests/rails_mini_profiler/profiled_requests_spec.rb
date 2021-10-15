@@ -65,12 +65,12 @@ module RailsMiniProfiler
       end
 
       context 'with search' do
-        it 'with traces returns successful' do
+        it 'by payload returns matching traces' do
           profiled_request = ProfiledRequest.create(user_id: user_id)
           profiled_request.traces.create(payload: { sample: 'one' })
           trace = profiled_request.traces.create(payload: { sample: 'two' })
 
-          get profiled_request_url(profiled_request.id, search: 'two')
+          get profiled_request_url(profiled_request.id, payload: 'two')
 
           expect(response_json.dig('traces', 0, 'id')).to eq(trace.id)
         end
