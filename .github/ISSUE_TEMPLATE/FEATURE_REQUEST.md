@@ -2,7 +2,7 @@
 name: "\U0001F680 Feature request"
 about: Suggest an idea for improving Rails Mini Profiler
 title: ''
-labels: enhancement
+labels: feature 🚀
 assignees: ''
 
 ---
