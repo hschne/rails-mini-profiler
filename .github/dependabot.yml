@@ -7,6 +7,9 @@ updates:
     versioning-strategy: increase
     schedule:
       interval: weekly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
 
   - package-ecosystem: github-actions
     directory: '/'
