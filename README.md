@@ -174,7 +174,7 @@ You may change this by setting a custom user provider:
 config.user_provider = proc { |env| Rack::Request.new(env).ip }
 ```
 
-You may also explicitly set the user by modifying your application controller. 
+You may also explicitly set the user by modifying your application controller (or the controller you have configured as UI base controller):
 
 ```ruby
 class ApplicationController < ActionController::Base
@@ -184,7 +184,7 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-The Rails Mini Profiler UI uses `config.user_provider` to authenticate users that try to access it. You may change this by specifying a  `rmp_user` in your application controller:
+The Rails Mini Profiler UI uses `config.user_provider` to authenticate users. Use `rmp_user` to overwrite this.
 
 ```
 class ApplicationController < ActionController::Base
@@ -229,9 +229,6 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-
-Note that you **must** explicitly authorize users in production. Without additional configuration (as outlined in [Authorization](#Authorization) ) no requests will be profiled and requests to the Rails Mini Profiler UI will be redirected to the application root.
-
 ## Why Rails Mini Profiler?
 
 Improving the performance of any application is a 3-step process. You have to answer these questions:
@@ -240,13 +237,13 @@ Improving the performance of any application is a 3-step process. You have to an
 2. Why is it slow?
 3. Did my solution fix the slowness?
 
-I'm a huge fan of [rack-mini-profiler](https://github.com/MiniProfiler/rack-mini-profiler), and AMP tools such as [Skylight](https://www.skylight.io/) or [Scout APM](https://scoutapm.com), and each of these tools has its place.
+I'm a huge fan of [rack-mini-profiler](https://github.com/MiniProfiler/rack-mini-profiler), and APM tools such as [Skylight](https://www.skylight.io/) or [Scout APM](https://scoutapm.com). Each of these tools has its own areas where it succeeds.
 
-APM tools are excellent for profiling your app in production - aka. they show you what is slow - and offer _some_ hints as to what causes the slowdown. `rack-mini-profiler` can do some sampling in production, but excels at providing detailed insight into _why_ something is slow, using Flamegraphs and detailed query information.
+APM tools are excellent for profiling your app in production - aka. they show you what is slow - and offer _some_ hints as to what causes the slowdown. `rack-mini-profiler` can do some sampling in production, but excels at providing detailed insight into _why_ something is slow by providing Flamegraphs and detailed query information.
 
 Rails Mini Profiler improves upon `rack-mini-profiler` in the latter regard. It is a developer tool, rather than a monitoring tool, and sets a big focus on developer experience. Simply put, it aims to be the best tool available to help you figure out _why_ specific requests are slow.
 
-As such, compared to `rack-mini-profiler`, it does not support non-Rails apps (e.g. Sinatra) or production sampling, but provides a much better user experience and better supports API-only applications.
+As such, compared to `rack-mini-profiler`, it does not support non-Rails apps (e.g. Sinatra) or production sampling, but provides a much better user experience and better support for API-only applications.
 
 ## Troubleshooting
 
