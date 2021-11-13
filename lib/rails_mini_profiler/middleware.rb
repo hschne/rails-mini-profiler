@@ -20,6 +20,8 @@ module RailsMiniProfiler
       request_context.response = ResponseWrapper.new(*result)
       complete!(request_context)
       request_context.saved? ? render_response(request_context) : result
+    ensure
+      User.current_user = nil
     end
 
     def traces

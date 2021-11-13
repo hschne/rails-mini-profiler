@@ -25,7 +25,7 @@ module RailsMiniProfiler
     end
 
     def check_rmp_user
-      user = self.class.method_defined?(:rmp_user) ? rmp_user : User.get(request.env).present?
+      user = User.get(request.env).present?
       redirect_back(fallback_location: fallback_location) unless user
     end
 

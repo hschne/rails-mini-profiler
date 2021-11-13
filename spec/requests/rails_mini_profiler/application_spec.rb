@@ -18,7 +18,7 @@ module RailsMiniProfiler
 
     describe 'GET /rails_mini_profiler' do
       context 'in development' do
-        it 'without user returns successful' do
+        it 'with user returns successful' do
           User.authorize('127.0.0.1')
 
           get rails_mini_profiler_url
@@ -26,10 +26,10 @@ module RailsMiniProfiler
           expect(response).to be_successful
         end
 
-        it 'without user falls back to provided user' do
+        it 'without user returns successful' do
           get rails_mini_profiler_url
 
-          expect(User.current_user).to eq('127.0.0.1')
+          expect(response).to be_successful
         end
       end
 

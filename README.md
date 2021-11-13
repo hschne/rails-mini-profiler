@@ -184,16 +184,6 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-The Rails Mini Profiler UI uses `config.user_provider` to authenticate users. Use `rmp_user` to overwrite this.
-
-```
-class ApplicationController < ActionController::Base
-  def rmp_user
-    request.ip
-  end
-end
-```
-
 `ApplicationController` is used as the default base class for UI controllers. To change it, you may use `configuration.ui.base_controller`.
 
 ### Profiling in Production
@@ -220,11 +210,7 @@ You must explicitly authorize profiling for users, as well as authenticate them 
 ```ruby
 class ApplicationController < ActionController::Base
   before_action do
-    RailsMiniProfiler::User.authorize(current_user.id) # Requests by this user will now be profiled
-  end
-
-  def rmp_user
-    current_user.id # This user will be used when accessing the UI
+    RailsMiniProfiler::User.authorize(current_user.id) # Requests by this user will now be profiled, and they get access to the UI
   end
 end
 ```

@@ -55,7 +55,7 @@ module RailsMiniProfiler
 
     def default_base_controller
       app_controller_exists = class_exists?('::ApplicationController')
-      return ::ApplicationController if app_controller_exists && ::ApplicationController.is_a?(ActionController::Base)
+      return ::ApplicationController if app_controller_exists && ::ApplicationController < ActionController::Base
 
       ActionController::Base
     end
