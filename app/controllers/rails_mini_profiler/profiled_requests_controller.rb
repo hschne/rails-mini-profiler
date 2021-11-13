@@ -4,6 +4,8 @@ require_dependency 'rails_mini_profiler/application_controller'
 
 module RailsMiniProfiler
   class ProfiledRequestsController < ApplicationController
+    include Pagy::Backend
+
     before_action :set_profiled_request, only: %i[show destroy]
 
     def index
@@ -46,7 +48,7 @@ module RailsMiniProfiler
     private
 
     def show_params
-      params.permit(:payload, :duration, :allocations, name: [])
+      params.permit(:id, :payload, :duration, :allocations, name: [])
     end
 
     def index_params

@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  class ApplicationController < ActionController::Base
-    include Pagy::Backend
-
+  class ApplicationController < RailsMiniProfiler.configuration.ui.base_controller
     rescue_from ActiveRecord::RecordNotFound, with: ->(error) { handle(error, 404) }
 
-    before_action :check_current_user
+    before_action :check_rmp_user
 
     protected
 
@@ -26,8 +24,13 @@ module RailsMiniProfiler
       end
     end
 
-    def check_current_user
-      redirect_back(fallback_location: root_path) unless User.get(request.env).present?
+    def check_rmp_user
+      user = self.class.method_defined?(:rmp_user) ? rmp_user : User.get(request.env).present?
+      redirect_back(fallback_location: fallback_location) unless user
+    end
+
+    def fallback_location
+      defined?(main_app.root_path) ? main_app.root_path : '/'
     end
   end
 end
