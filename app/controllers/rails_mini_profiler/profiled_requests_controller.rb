@@ -48,7 +48,7 @@ module RailsMiniProfiler
     private
 
     def show_params
-      params.permit(:payload, :duration, :allocations, name: [])
+      params.permit(:id, :payload, :duration, :allocations, name: [])
     end
 
     def index_params

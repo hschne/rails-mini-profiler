@@ -48,9 +48,16 @@ module RailsMiniProfiler
     def defaults!
       @badge_enabled = true
       @badge_position = 'top-left'
-      @base_controller = class_exists?('::ApplicationController') ? ::ApplicationController : ActionController::Base
+      @base_controller = default_base_controller
       @page_size = 25
       @webpacker_enabled = true
+    end
+
+    def default_base_controller
+      app_controller_exists = class_exists?('::ApplicationController')
+      return ::ApplicationController if app_controller_exists && ::ApplicationController.is_a?(ActionController::Base)
+
+      ActionController::Base
     end
 
     def class_exists?(class_name)
