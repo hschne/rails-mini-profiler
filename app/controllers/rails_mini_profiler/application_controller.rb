@@ -2,8 +2,6 @@
 
 module RailsMiniProfiler
   class ApplicationController < ActionController::Base
-    include Pagy::Backend
-
     rescue_from ActiveRecord::RecordNotFound, with: ->(error) { handle(error, 404) }
 
     before_action :check_current_user
@@ -27,7 +25,11 @@ module RailsMiniProfiler
     end
 
     def check_current_user
-      redirect_back(fallback_location: root_path) unless User.get(request.env).present?
+      redirect_back(fallback_location: fallback_location) unless User.get(request.env).present?
+    end
+
+    def fallback_location
+      defined?(main_app.root_path) ? main_app.root_path : '/'
     end
   end
 end

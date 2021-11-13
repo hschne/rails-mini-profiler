@@ -4,6 +4,8 @@ require_dependency 'rails_mini_profiler/application_controller'
 
 module RailsMiniProfiler
   class ProfiledRequestsController < ApplicationController
+    include Pagy::Backend
+
     before_action :set_profiled_request, only: %i[show destroy]
 
     def index

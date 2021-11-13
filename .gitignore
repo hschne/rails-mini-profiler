@@ -73,15 +73,14 @@ pickle-email-*.html
 !/log/.keep
 !/tmp/.keep
 
-# TODO Comment out this rule if you are OK with secrets being uploaded to the repo
-config/initializers/secret_token.rb
+# Secret keys
 config/master.key
+spec/dummy/config/master.key
 
 # Only include if you have production secrets in this file, which is no longer a Rails default
 # config/secrets.yml
 
 # dotenv, dotenv-rails
-# TODO Comment out these rules if environment variables can be committed
 .env
 .env.*
 

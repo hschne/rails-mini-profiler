@@ -114,7 +114,7 @@ Rails Mini Profiler provides a wide array of configuration options. You can find
 | `skip_paths`             | `[]`                         | An array of request paths that should not be profiled. Regex allowed.                           |
 | `storage`                | `Storage.new`                | Storage configuration. See [Storage](#Storage).                                                 |
 | `ui`                     | `UserInterface.new`          | UI configuration. See [UI](#UI).                                                                |
-| `user_provider`          | `Rack::Request.new(env).ip`  | How to identify users. See [Users](#Users)                                                      |
+| `user_provider`          | `Rack::Request.new(env).ip`  | How to identify users. See [Authorization](#Authorization)                                                      |
 
 ### Request Configuration
 
@@ -166,17 +166,17 @@ Rails Mini Profiler allows you to configure various UI features.
 | `webpacker_enabled` | `true`       | Use Webpacker if available? Disable to fall back to the asset pipeline.
 
 
-### Users
+### Authorization
 
 Profiling information is segregated by user ID. That means users cannot see each other's profiled requests.
 
-Per default, individual users are identified by their IP address. You may change this by setting a custom user provider:
+In non-production environments, individual users are identified by their IP address. You may change this by setting a custom user provider:
 
 ```ruby
 config.user_provider = proc { |env| Rack::Request.new(env).ip }
 ```
 
-You may also explicitly set the user from the application itself:
+You may also explicitly set the user by modifying your application controller:
 
 ```ruby
 class ApplicationController < ActionController::Base
@@ -185,8 +185,6 @@ class ApplicationController < ActionController::Base
   end
 end
 ```
-
-Note that you **must** set the current user when running Rails Mini Profiler in production. No profiles will be saved otherwise.
 
 ### Profiling in Production
 
@@ -202,7 +200,7 @@ RailsMiniProfiler.configure do |config|
 end
 ```
 
-Only requests by explicitly set users will be stored. To configure how individual users are identified see [Users](#Users)
+Note that you **must** explicitly authorize users in production. Without additional configuration (as outlined in [Authorization](#Authorization) ) no requests will be profiled and requests to the Rails Mini Profiler UI will be redirected to the application root.
 
 ## Why Rails Mini Profiler?
 

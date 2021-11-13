@@ -30,7 +30,7 @@ module RailsMiniProfiler
     end
 
     def find_current_user
-      return unless Rails.env.development? || Rails.env.test?
+      return if Rails.env.production?
 
       user = RailsMiniProfiler.configuration.user_provider.call(@env)
       User.current_user = user
