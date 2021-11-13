@@ -63,8 +63,6 @@ route:
 ```ruby
 # routes.rb
 Rails.application.routes.draw do
-  ...
-
   mount RailsMiniProfiler::Engine => '/rails_mini_profiler'
 end
 ```
@@ -140,7 +138,7 @@ Rails Mini Profiler does not offer an automatic way to clean up old profiling in
 
 ```ruby
 # Clockwork
-every(1.month, 'purge rails mini profiler' do
+every(1.month, 'purge rails mini profiler') do
     ProfiledRequestCleanupJob.perform_later
 end
 
@@ -158,25 +156,26 @@ end
 
 Rails Mini Profiler allows you to configure various UI features. 
 
-| Name                | Default      | Description                                                                                     |
-|---------------------|--------------|-------------------------------------------------------------------------------------------------|
-| `badge_enabled`     | `true`       | Should the hedgehog 🦔 badge be injected into pages?                                             |
-| `badge_position`    | `'top-left'` | Where to display the badge. Options are `'top-left', 'top-right', 'bottom-left, 'bottom-right'` |
-| `page_size`         | `25`         | The page size for lists shown in the UI.                                                        |
-| `webpacker_enabled` | `true`       | Use Webpacker if available? Disable to fall back to the asset pipeline.
+| Name                | Default                   | Description                                                                                     |
+|---------------------|---------------------------|-------------------------------------------------------------------------------------------------|
+| `badge_enabled`     | `true`                    | Should the hedgehog 🦔 badge be injected into pages?                                             |
+| `badge_position`    | `'top-left'`              | Where to display the badge. Options are `'top-left', 'top-right', 'bottom-left, 'bottom-right'` |
+| `base_controller`   | `::ApplicationController` | Which controller UI controllers should inherit from.                                            |
+| `page_size`         | `25`                      | The page size for lists shown in the UI.                                                        |
+| `webpacker_enabled` | `true`                    | Use Webpacker if available? Disable to fall back to the asset pipeline.                         |
 
 
 ### Authorization
 
-Profiling information is segregated by user ID. That means users cannot see each other's profiled requests.
+Profiling information is segregated by user ID. That means users cannot see each other's profiled requests. Per default, individual users are identified by their IP adress.
 
-In non-production environments, individual users are identified by their IP address. You may change this by setting a custom user provider:
+You may change this by setting a custom user provider:
 
 ```ruby
 config.user_provider = proc { |env| Rack::Request.new(env).ip }
 ```
 
-You may also explicitly set the user by modifying your application controller:
+You may also explicitly set the user by modifying your application controller. 
 
 ```ruby
 class ApplicationController < ActionController::Base
@@ -186,19 +185,51 @@ class ApplicationController < ActionController::Base
 end
 ```
 
+The Rails Mini Profiler UI uses `config.user_provider` to authenticate users that try to access it. You may change this by specifying a  `rmp_user` in your application controller:
+
+```
+class ApplicationController < ActionController::Base
+  def rmp_user
+    request.ip
+  end
+end
+```
+
+`ApplicationController` is used as the default base class for UI controllers. To change it, you may use `configuration.ui.base_controller`.
+
 ### Profiling in Production
 
 Rails Mini Profiler is not intended for performance reporting. There are other tools for that ( [Skylight](https://www.skylight.io/),
-[New Relic](https://newrelic.com/), [DataDog](https://www.datadoghq.com/)...).
+[New Relic](https://newrelic.com/), [DataDog](https://www.datadoghq.com/)...). But you can still use RMP in production to profile specific requests. 
 
-However, you can still use it in production to profile specific requests. Since profiling impacts performance, it is recommended
-that you limit which requests are being profiled:
+Per default, *no requests will be profiled* in production, and the Rails Mini Profiler UI will be inaccessible. 
+
+#### Enabling Profiling
+
+Since profiling impacts performance, it is recommended that you limit which requests are being profiled:
 
 ```ruby
 RailsMiniProfiler.configure do |config|
   config.enabled = proc { |env| env.headers['RMP_ENABLED'].present? }
 end
 ```
+
+#### Authorizing Users
+
+You must explicitly authorize profiling for users, as well as authenticate them to the UI:
+
+```ruby
+class ApplicationController < ActionController::Base
+  before_action do
+    RailsMiniProfiler::User.authorize(current_user.id) # Requests by this user will now be profiled
+  end
+
+  def rmp_user
+    current_user.id # This user will be used when accessing the UI
+  end
+end
+```
+
 
 Note that you **must** explicitly authorize users in production. Without additional configuration (as outlined in [Authorization](#Authorization) ) no requests will be profiled and requests to the Rails Mini Profiler UI will be redirected to the application root.
 
@@ -241,13 +272,13 @@ rails db:migrate
 
 Rails Mini Profiler supports API-only apps, but you have to make some small adjustments to use it. At the top of `application.rb` add [Sprockets](https://github.com/rails/sprockets-rails):
 
-```
+```ruby
 require "sprockets/railtie"
 ```
 
 Then, modify `application.rb`:
 
-```
+```ruby
 module ApiOnly
   class Application < Rails::Application
     

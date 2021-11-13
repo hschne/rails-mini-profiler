@@ -9,6 +9,8 @@ module RailsMiniProfiler
   # @!attribute badge_position
   #   @see Badge
   #   @return [String] the position of the interactive HTML badge
+  # @!attribute base_controller
+  #   @return [class] the controller the UI controllers should inherit from
   # @!attribute page_size
   #   @return [Integer] how many items to render per page in list views
   # @!attribute webpacker_enabled
@@ -33,6 +35,7 @@ module RailsMiniProfiler
 
     attr_accessor :badge_enabled,
                   :badge_position,
+                  :base_controller,
                   :page_size,
                   :webpacker_enabled
 
@@ -45,8 +48,16 @@ module RailsMiniProfiler
     def defaults!
       @badge_enabled = true
       @badge_position = 'top-left'
+      @base_controller = class_exists?('::ApplicationController') ? ::ApplicationController : ActionController::Base
       @page_size = 25
       @webpacker_enabled = true
+    end
+
+    def class_exists?(class_name)
+      klass = Module.const_get(class_name)
+      klass.is_a?(Class)
+    rescue NameError
+      false
     end
   end
 end
