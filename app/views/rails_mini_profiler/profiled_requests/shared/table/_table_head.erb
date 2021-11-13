@@ -107,7 +107,7 @@
           Clear filter
         </button>
       </div>
-      <% [100_00, 250_00].each do |duration| %>
+      <% [100_00, 250_00, 500_00].each do |duration| %>
         <%= label_tag nil, class: "dropdown-entry" do %>
           <%= radio_button_tag 'duration', duration.to_s , params.fetch(:duration, []).include?(duration.to_s),
                                class: "",
