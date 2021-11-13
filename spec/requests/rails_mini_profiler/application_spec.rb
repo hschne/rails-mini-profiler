@@ -4,6 +4,8 @@ require 'rails_helper'
 
 module RailsMiniProfiler
   RSpec.describe 'Application', type: :request do
+    after(:each) { User.current_user = nil }
+
     describe 'GET /index' do
       it 'creates a profiled request' do
         get movies_url(1)
@@ -15,8 +17,6 @@ module RailsMiniProfiler
     end
 
     describe 'GET /rails_mini_profiler' do
-      after(:each) { User.current_user = nil }
-
       context 'in development' do
         it 'without user returns successful' do
           User.authorize('127.0.0.1')
