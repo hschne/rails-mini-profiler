@@ -18,6 +18,8 @@ module RailsMiniProfiler
   #   @return [Array<String>] a list of regex patterns for paths to skip
   # @!attribute storage
   #   @return [Storage] the storage configuration
+  # @!attribute tracers
+  #   @return [Array<Symbol>] the list of enabled tracers
   # @!attribute ui
   #   @return [UserInterface] the ui configuration
   # @!attribute user_provider
@@ -30,6 +32,7 @@ module RailsMiniProfiler
                   :flamegraph_sample_rate,
                   :skip_paths,
                   :storage,
+                  :tracers,
                   :ui,
                   :user_provider
 
@@ -46,6 +49,7 @@ module RailsMiniProfiler
       @logger = RailsMiniProfiler::Logger.new(Rails.logger)
       @skip_paths = []
       @storage = Storage.new
+      @tracers = %i[controller instantiation sequel view rmp]
       @ui = UserInterface.new
       @user_provider = proc { |env| Rack::Request.new(env).ip }
     end

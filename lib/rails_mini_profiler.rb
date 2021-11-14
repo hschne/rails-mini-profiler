@@ -8,7 +8,7 @@ require 'rails_mini_profiler/version'
 require 'rails_mini_profiler/engine'
 
 require 'rails_mini_profiler/models/base_model'
-require 'rails_mini_profiler/tracing'
+require 'rails_mini_profiler/tracers'
 require 'rails_mini_profiler/configuration'
 
 require 'rails_mini_profiler/user'

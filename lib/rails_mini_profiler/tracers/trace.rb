@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  module Tracing
+  module Tracers
     # A simplified representation of a trace.
     #
     # Is transformed into [RailsMiniProfiler::Trace] when recording has finished.

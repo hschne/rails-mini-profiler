@@ -3,12 +3,24 @@
 module RailsMiniProfiler
   class InstantiationTracePresenter < TracePresenter
     def label
-      "#{model.class_name} Instantiation"
+      "#{class_name} Instantiation"
+    end
+
+    def class_name
+      payload['class_name']
+    end
+
+    def record_count
+      payload['record_count']
+    end
+
+    def db_runtime
+      payload['db_runtime']
     end
 
     def description
-      record_string = 'Record'.pluralize(model.record_count)
-      "Instantiated #{model.record_count} #{model.class_name} #{record_string}"
+      record_string = 'Record'.pluralize(record_count)
+      "Instantiated #{record_count} #{class_name} #{record_string}"
     end
   end
 end

@@ -18,7 +18,7 @@ module RailsMiniProfiler
       label
     end
 
-    def payload
+    def content
       nil
     end
 

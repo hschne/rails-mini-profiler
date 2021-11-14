@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 module RailsMiniProfiler
-  module Tracing
+  module Tracers
     RSpec.describe ControllerTracer do
       describe 'trace' do
         let(:payload) { { view_runtime: 10, db_runtime: 5, ignore: 100 } }

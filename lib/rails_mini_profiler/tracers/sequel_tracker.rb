@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  module Tracing
+  module Tracers
+    # Utility to clean up and simplify SQL Notification events.
+    #
+    # @api private
     class SqlTracker
       TRACKED_SQL_COMMANDS = %w[SELECT INSERT UPDATE DELETE].freeze
       UNTRACKED_NAMES = %w[SCHEMA].freeze

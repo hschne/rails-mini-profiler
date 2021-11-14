@@ -6,14 +6,26 @@ module RailsMiniProfiler
       sql_description
     end
 
+    def name
+      payload['name']
+    end
+
+    def sql
+      payload['sql']
+    end
+
+    def binds
+      payload['binds']
+    end
+
     alias description label
 
-    def payload
+    def content
       return nil if transaction?
 
       content_tag('div') do
         content_tag('pre', class: 'trace-payload') do
-          content_tag(:div, model.sql, class: 'sequel-trace-query')
+          content_tag(:div, sql, class: 'sequel-trace-query')
         end + binding_content
       end
     end
@@ -57,9 +69,9 @@ module RailsMiniProfiler
     end
 
     def simple_binds
-      return [] if model.binds.nil? || model.binds.empty?
+      return [] if binds.nil? || binds.empty?
 
-      model.binds.each_with_object({}) do |hash, object|
+      binds.each_with_object({}) do |hash, object|
         name = hash['name']
         value = hash['value']
         object[name] = value
