@@ -20,20 +20,13 @@ Metrics/AbcSize:
 
 Metrics/MethodLength:
   CountAsOne: ['array', 'heredoc']
-  IgnoredMethods: ['describe', 'context']
-  Max: 20
+  Max: 15
 
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'context']
-  Exclude: ['**/*.rake', '**/*_spec.rb']
-
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: single_quotes
-
-Style/StringLiteralsInInterpolation:
-  Enabled: true
-  EnforcedStyle: double_quotes
 
 Style/Documentation:
   Enabled: false
+
+Style/OpenStructUse:
+  Exclude: ['**/*_spec.rb']
