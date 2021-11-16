@@ -11,17 +11,12 @@ module RailsMiniProfiler
     def record(&block)
       return block.call unless enabled?
 
-      sample_rate = @configuration.flamegraph_sample_rate
       if StackProf.running?
         RailsMiniProfiler.logger.error('Stackprof is already running, cannot record Flamegraph')
         return block.call
       end
 
-      result = nil
-      flamegraph = StackProf.run(mode: :wall, raw: true, aggregate: false, interval: (sample_rate * 1000).to_i) do
-        result = block.call
-      end
-
+      flamegraph, result = record_flamegraph(block)
       unless flamegraph
         RailsMiniProfiler.logger.error('Failed to record Flamegraph, possibly due to concurrent requests')
         return result
@@ -32,6 +27,15 @@ module RailsMiniProfiler
     end
 
     private
+
+    def record_flamegraph(block)
+      sample_rate = @configuration.flamegraph_sample_rate
+      result = nil
+      flamegraph = StackProf.run(mode: :wall, raw: true, aggregate: false, interval: (sample_rate * 1000).to_i) do
+        result = block.call
+      end
+      [flamegraph, result]
+    end
 
     def enabled?
       defined?(StackProf) && StackProf.respond_to?(:run) && config_enabled?
