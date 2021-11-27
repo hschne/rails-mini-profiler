@@ -8,6 +8,27 @@
       </section>
       <section class="popover-body">
         <%= trace.payload %>
+
+        <% if trace.backtrace %>
+          <section class="popover-footer">
+            <div
+              class="backtrace"
+              data-controller="clipboard"
+              data-clipboard-filter=".+?(?=:in)"
+              data-clipboard-copied-message="Copied" >
+              <pre data-clipboard-target="source"><%= trace.backtrace %></pre>
+              <button
+                title="Copy to clipboard"
+                type="button"
+                data-action="clipboard#copy"
+                data-clipboard-target="button"
+              >
+                <%= inline_svg('copy.svg') %>
+              </button>
+            </div>
+          </section>
+        <% end %>
+
         <table class="trace-details-table">
           <thead>
           <tr>
@@ -30,25 +51,7 @@
         </table>
       </section>
 
-      <% if trace.backtrace %>
-        <section class="popover-footer">
-          <div
-            class="backtrace"
-            data-controller="clipboard"
-            data-clipboard-filter=".+?(?=:in)"
-            data-clipboard-copied-message="Copied" >
-            <pre data-clipboard-target="source"><%= trace.backtrace %></pre>
-            <button
-              title="Copy to clipboard"
-              type="button"
-              data-action="clipboard#copy"
-              data-clipboard-target="button"
-            >
-              <%= inline_svg('copy.svg') %>
-          </button>
-          </div>
-        </section>
-      <% end %>
+
     </div>
   </div>
 </li>

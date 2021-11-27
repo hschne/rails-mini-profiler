@@ -51,11 +51,15 @@
   border-radius: 5px;
 }
 
-.trace-table {
+.trace-details-table {
   width: 100%;
   border: hidden 1px var(--border-color);
   margin-top: 1em;
   border-collapse: collapse;
+}
+
+.trace-details-table tr th {
+  font-weight: var(--fw-semibold);
 }
 
 .trace-list-header {

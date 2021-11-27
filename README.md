@@ -74,18 +74,18 @@ top right that is injected into your pages.
 
 ![overview](docs/images/overview.png)
 
-Requests to your application will be profiled automatically. You can view all stored requests by navigating to `yourapp/rails_mini_profiler/profiled_requests`.
+Requests to your application will be profiled automatically. You can view and search all stored requests by navigating to `yourapp/rails_mini_profiler/profiled_requests`.
 
 ### Request Details
 
 <p align="center">
   <img alt="Light" src="docs/images/trace.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="Dark" src="docs/images/sequel.png" width="45%">
+  <img alt="Dark" src="docs/images/trace-details.png" width="45%">
 </p>
 
 This view shows you how your requests spend their time. How much of it is spent in the DB, how much in rendering views?
-By clicking on individual traces you can find out detailed information.
+May can filter and clicking on individual traces to gain deeper insights and see detailed information.
 
 ### Flamegraphs
 
@@ -114,13 +114,6 @@ Rails Mini Profiler provides a wide array of configuration options. You can find
 | `ui`                     | `UserInterface.new`          | UI configuration. See [UI](#UI).                                                                |
 | `user_provider`          | `Rack::Request.new(env).ip`  | How to identify users. See [Authorization](#Authorization)                                                      |
 
-### Request Configuration
-
-You may override the configuration by sending request parameters. The following parameters are available:
-
-| Name           | Description                                                                                 |
-| ---------------- | ------------------------------------------------------------------------------------------- |
-| `rmp_flamegraph` | Overrides `flamegraph_enabled` If set to `true` will redirect to the flamegraph immediatly. |
 
 ### Storage
 
@@ -163,6 +156,14 @@ Rails Mini Profiler allows you to configure various UI features.
 | `base_controller`   | `ApplicationController` | Which controller UI controllers should inherit from.                                            |
 | `page_size`         | `25`                      | The page size for lists shown in the UI.                                                        |
 | `webpacker_enabled` | `true`                    | Use Webpacker if available? Disable to fall back to the asset pipeline.                         |
+
+### Request Configuration
+
+You may override static configuration on a per-request by attaching request parameters. For example, `https://myapp.com/api/mydata?rmp_flamegraph=false`
+
+| Name           | Description                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------- |
+| `rmp_flamegraph` | Overrides `flamegraph_enabled` If set to `true` will redirect to the flamegraph immediately. |
 
 ### Authorization
 
