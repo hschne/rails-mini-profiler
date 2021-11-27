@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.7.0](https://www.github.com/hschne/rails-mini-profiler/compare/v0.6.0...v0.7.0) (2021-11-27)
+
+
+### Features
+
+* add trace filtering, closes [#67](https://www.github.com/hschne/rails-mini-profiler/issues/67) ([2722f92](https://www.github.com/hschne/rails-mini-profiler/commit/2722f92b8c7dad14b89a64716b28dc6a960b0992))
+
+
+### Bug Fixes
+
+* authentication thread issue, fixes [#99](https://www.github.com/hschne/rails-mini-profiler/issues/99) ([db62984](https://www.github.com/hschne/rails-mini-profiler/commit/db62984cf306b94db4c97808f303b0d3959b4afd))
+* production profiling authentication, fixes [#93](https://www.github.com/hschne/rails-mini-profiler/issues/93) ([#98](https://www.github.com/hschne/rails-mini-profiler/issues/98)) ([98f515b](https://www.github.com/hschne/rails-mini-profiler/commit/98f515b8519b88cb2383b22e5cd5762ccf831cdb))
+
 ## [0.6.0](https://www.github.com/hschne/rails-mini-profiler/compare/v0.5.0...v0.6.0) (2021-10-10)
 
 
