@@ -271,7 +271,7 @@ module ApiOnly
 end
 ```
 
-**Note: Sprockets and flash are currently required for some of Rails Mini Profiler's UI features. These modifications may no longer be needed in the future.
+**Note**: Sprockets and flash are currently required for some of Rails Mini Profiler's UI features. These modifications may no longer be needed in the future.
 
 ### No Flamegraphs are being recored?
 
