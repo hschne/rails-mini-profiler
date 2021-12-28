@@ -15,7 +15,7 @@ group :development do
 end
 
 group :test, :development do
-  gem 'activerecord-import', '~> 1.2'
+  gem 'activerecord-import', '~> 1.3'
   gem 'jb', '~> 0.8'
   gem 'pry', '~> 0.14'
   gem 'rubocop', '~> 1.23'
