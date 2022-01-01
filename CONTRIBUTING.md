@@ -9,7 +9,7 @@ If you are interested in what's planned for the future, check the [Next Release]
 
 ## Using the Issue Tracker
 
-Please use [GitHub issues](https://github.com/wagtail/wagtail/issues) to submit bugs or feature requests. 
+Please use [GitHub issues](https://github.com/hschne/rails-mini-profiler/issues) to submit bugs or feature requests. 
 
 ## Development
 
