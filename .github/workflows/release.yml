@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Generate Release 🗒️
-        uses: GoogleCloudPlatform/release-please-action@v2
+        uses: GoogleCloudPlatform/release-please-action@v3
         id: release
         with:
           release-type: ruby
