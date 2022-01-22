@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 module RailsMiniProfiler
-  module Tracing
+  module Tracers
     RSpec.describe ViewTracer do
       describe 'trace' do
         let(:payload) { { identifier: 'id', count: 5, ignore: 100 } }

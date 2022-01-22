@@ -1,20 +1,14 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  module Tracing
+  module Tracers
+    # Subscribe to application events. This is used during engine startup.
+    # @api private
     class Subscriptions
-      DEFAULT_SUBSCRIPTIONS = %w[
-        sql.active_record
-        instantiation.active_record
-        render_template.action_view
-        render_partial.action_view
-        process_action.action_controller
-        rails_mini_profiler.total_time
-      ].freeze
-
       class << self
-        def setup!(&callback)
-          DEFAULT_SUBSCRIPTIONS.each do |event|
+        # Subscribe to each individual active support event using a callback.
+        def setup!(subscriptions, &callback)
+          subscriptions.each do |event|
             subscribe(event, &callback)
           end
         end

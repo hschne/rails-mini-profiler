@@ -6,15 +6,6 @@ module RailsMiniProfiler
 
     before_action :check_rmp_user
 
-    protected
-
-    def present(model, presenter_class = nil, **kwargs)
-      klass = presenter_class || "RailsMiniProfiler::#{model.class.to_s.demodulize}Presenter".constantize
-      presenter = klass.new(model, view_context, **kwargs)
-      yield(presenter) if block_given?
-      presenter
-    end
-
     private
 
     def handle(error, status = 500)

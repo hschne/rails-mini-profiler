@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 module RailsMiniProfiler
-  module Tracing
+  module Tracers
     RSpec.describe SequelTracer do
       describe 'trace' do
         let(:payload) { { name: 'name', sql: 'select', binds: [], type_casted_binds: [], ignore: 'ignore' } }

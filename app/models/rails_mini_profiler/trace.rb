@@ -23,24 +23,9 @@
 module RailsMiniProfiler
   class Trace < RailsMiniProfiler::ApplicationRecord
     self.table_name = RailsMiniProfiler.storage_configuration.traces_table
-    self.inheritance_column = :name
 
     belongs_to :profiled_request,
                class_name: 'RailsMiniProfiler::ProfiledRequest',
                foreign_key: :rmp_profiled_request_id
-
-    class << self
-      def find_sti_class(name)
-        subclasses = {
-          'process_action.action_controller' => RailsMiniProfiler::ControllerTrace,
-          'sql.active_record' => RailsMiniProfiler::SequelTrace,
-          'instantiation.active_record' => RailsMiniProfiler::InstantiationTrace,
-          'rails_mini_profiler.total_time' => RailsMiniProfiler::RmpTrace,
-          'render_template.action_view' => RailsMiniProfiler::RenderTemplateTrace,
-          'render_partial.action_view' => RailsMiniProfiler::RenderPartialTrace
-        }
-        subclasses[name] || self
-      end
-    end
   end
 end
