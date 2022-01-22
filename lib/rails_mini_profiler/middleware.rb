@@ -5,7 +5,9 @@ module RailsMiniProfiler
     def initialize(app)
       @app = app
       @config = RailsMiniProfiler.configuration
-      Tracing::Subscriptions.setup! { |trace| track_trace(trace) }
+      @registry = Tracers::Registry.setup!(@config)
+      Tracers::Subscriptions.setup!(@registry.tracers.keys) { |trace| track_trace(trace) }
+      @trace_factory = Tracers::TraceFactory.new(@registry)
     end
 
     def call(env)
@@ -35,8 +37,8 @@ module RailsMiniProfiler
     def track_trace(event)
       return if traces.nil?
 
-      trace = RailsMiniProfiler::Tracing::TraceFactory.create(event)
-      traces.append(trace) unless trace.is_a?(RailsMiniProfiler::Tracing::NullTrace)
+      trace = @trace_factory.create(event)
+      traces.append(trace) unless trace.is_a?(RailsMiniProfiler::Tracers::NullTrace)
     end
 
     private

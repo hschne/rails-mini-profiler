@@ -67,6 +67,22 @@ module RailsMiniProfiler
       @configuration ||= RailsMiniProfiler.configuration
     end
 
+    def registry
+      @registry ||= RailsMiniProfiler::Tracers::Registry.new(configuration)
+    end
+
+    def present(model, presenter_class = nil, **kwargs)
+      klass = presenter_class || presenter_class(model)
+      klass.new(model, view_context, **kwargs)
+    end
+
+    def presenter_class(model)
+      return ProfiledRequestPresenter if model.is_a?(ProfiledRequest)
+
+      presenters = registry.presenters
+      presenters[model.name] || TracePresenter
+    end
+
     def payload_column
       if ActiveRecord::Base.connection.adapter_name == 'PostgreSQL'
         # Cast json field to text to have access to the LIKE operator

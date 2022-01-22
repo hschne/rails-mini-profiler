@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 module RailsMiniProfiler
-  module Tracing
+  module Tracers
     RSpec.describe SqlTracker do
       describe 'trace' do
         let(:query) { 'select' }

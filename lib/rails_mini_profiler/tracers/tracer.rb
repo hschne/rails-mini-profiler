@@ -1,8 +1,22 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  module Tracing
+  module Tracers
     class Tracer
+      class << self
+        def subscribes_to
+          []
+        end
+
+        def presents
+          TracePresenter
+        end
+
+        def build_from(event)
+          new(event).trace
+        end
+      end
+
       def initialize(event)
         @event = event_data(event)
       end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  module Tracing
+  module Tracers
     # A simplified representation of a trace.
     #
     # Is transformed into [RailsMiniProfiler::Trace] when recording has finished.
@@ -23,7 +23,7 @@ module RailsMiniProfiler
     # @!attribute backtrace
     #   @return [String] the line where this trace was recorded
     # @!attribute allocations
-    #   @return [Integer] the number of alloactions
+    #   @return [Integer] the number of allocations
     # @!attribute created_at
     #   @return [DateTime] the creation date
     # @!attribute updated_at

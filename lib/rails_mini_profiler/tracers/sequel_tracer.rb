@@ -1,8 +1,22 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  module Tracing
+  module Tracers
     class SequelTracer < Tracer
+      class << self
+        def subscribes_to
+          'sql.active_record'
+        end
+
+        def build_from(event)
+          new(event).trace
+        end
+
+        def presents
+          SequelTracePresenter
+        end
+      end
+
       def trace
         return NullTrace.new if ignore?
 

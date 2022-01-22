@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 module RailsMiniProfiler
-  module Tracing
+  module Tracers
     RSpec.describe Tracer do
       describe 'trace' do
         let(:event) { OpenStruct.new }
