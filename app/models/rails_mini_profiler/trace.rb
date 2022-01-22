@@ -27,6 +27,5 @@ module RailsMiniProfiler
     belongs_to :profiled_request,
                class_name: 'RailsMiniProfiler::ProfiledRequest',
                foreign_key: :rmp_profiled_request_id
-
   end
 end

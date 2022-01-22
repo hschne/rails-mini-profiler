@@ -23,7 +23,7 @@ module RailsMiniProfiler
     # @!attribute backtrace
     #   @return [String] the line where this trace was recorded
     # @!attribute allocations
-    #   @return [Integer] the number of alloactions
+    #   @return [Integer] the number of allocations
     # @!attribute created_at
     #   @return [DateTime] the creation date
     # @!attribute updated_at
