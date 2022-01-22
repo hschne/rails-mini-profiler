@@ -153,7 +153,7 @@ Rails Mini Profiler allows you to configure various UI features.
 |---------------------|---------------------------|-------------------------------------------------------------------------------------------------|
 | `badge_enabled`     | `true`                    | Should the hedgehog 🦔 badge be injected into pages?                                             |
 | `badge_position`    | `'top-left'`              | Where to display the badge. Options are `'top-left', 'top-right', 'bottom-left, 'bottom-right'` |
-| `base_controller`   | `ApplicationController` | Which controller UI controllers should inherit from.                                            |
+| `base_controller`   | `ApplicationController`   | Which controller UI controllers should inherit from.                                            |
 | `page_size`         | `25`                      | The page size for lists shown in the UI.                                                        |
 | `webpacker_enabled` | `true`                    | Use Webpacker if available? Disable to fall back to the asset pipeline.                         |
 

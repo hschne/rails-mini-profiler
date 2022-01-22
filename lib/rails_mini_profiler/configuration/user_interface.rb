@@ -35,9 +35,10 @@ module RailsMiniProfiler
 
     attr_accessor :badge_enabled,
                   :badge_position,
-                  :base_controller,
                   :page_size,
                   :webpacker_enabled
+
+    attr_writer :base_controller
 
     def initialize(**kwargs)
       defaults!
@@ -48,9 +49,16 @@ module RailsMiniProfiler
     def defaults!
       @badge_enabled = true
       @badge_position = 'top-left'
-      @base_controller = default_base_controller
+      # We must not set base controller during when the app loads, aka during autoload time, as we are loading
+      # constants. Rather, we only load the base controller constants when any engine controllers are first initialized
+      # and call #base_controller
+      @base_controller = nil
       @page_size = 25
       @webpacker_enabled = true
+    end
+
+    def base_controller
+      @base_controller ||= default_base_controller
     end
 
     def default_base_controller
