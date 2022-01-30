@@ -25,14 +25,13 @@ module RailsMiniProfiler
     def render
       return @original_response unless render_badge?
 
-      modified_response = Rack::Response.new([], @original_response.status, @original_response.headers)
+      modified_response = ResponseWrapper.new([], @original_response.status, @original_response.headers)
       modified_response.write(modified_body)
       modified_response.finish
 
-      response = @original_response.response
-      response.close if response.respond_to?(:close)
+      @original_response.close if @original_response.respond_to?(:close)
 
-      ResponseWrapper.new(@original_response.status, @original_response.headers, modified_response)
+      modified_response
     end
 
     private
@@ -49,14 +48,6 @@ module RailsMiniProfiler
         return false
       end
 
-      response = @original_response.response
-      # This fixes #115. Some middlewares do not return a properly formed rack body response, which results in errors
-      # when trying to retrieve the original body. In that case we just return.
-      unless response.respond_to?(:body)
-        RailsMiniProfiler.logger.debug("badge not rendered, response of type #{response.class} has no body method")
-        return false
-      end
-
       true
     end
 
@@ -64,7 +55,7 @@ module RailsMiniProfiler
     #
     # @return String The modified body
     def modified_body
-      body = @original_response.response.body
+      body = @original_response.body
       index = body.rindex(%r{</body>}i) || body.rindex(%r{</html>}i)
       if index
         body.dup.insert(index, badge_content)

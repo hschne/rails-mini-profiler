@@ -11,7 +11,7 @@ module RailsMiniProfiler
     end
 
     def call(env)
-      request = RequestWrapper.new(env: env)
+      request = RequestWrapper.new(env)
       request_context = RequestContext.new(request)
       return @app.call(env) unless Guard.new(request_context).profile?
 
@@ -19,9 +19,10 @@ module RailsMiniProfiler
       result = with_tracing(request_context) { profile(request_context) }
       return result unless request_context.authorized?
 
-      request_context.response = ResponseWrapper.new(*result)
+      status, headers, body = result
+      request_context.response = ResponseWrapper.new(body, status, headers)
       complete!(request_context)
-      request_context.saved? ? render_response(request_context) : result
+      request_context.saved? ? render_response(request_context).to_a : result
     ensure
       User.current_user = nil
     end
@@ -56,8 +57,7 @@ module RailsMiniProfiler
       redirect = Redirect.new(request_context).render
       return redirect if redirect
 
-      modified_response = Badge.new(request_context).render
-      [modified_response.status, modified_response.headers, modified_response.response]
+      Badge.new(request_context).render
     end
 
     def profile(request_context)

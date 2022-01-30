@@ -43,7 +43,7 @@ module RailsMiniProfiler
     def request=(request)
       self.request_body = request.body
       self.request_headers = request.headers
-      self.request_method = request.method
+      self.request_method = request.request_method
       self.request_path = request.path
       self.request_query_string = request.query_string
     end

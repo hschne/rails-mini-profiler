@@ -5,15 +5,17 @@ require 'rails_helper'
 module RailsMiniProfiler
   RSpec.describe ProfiledRequest, type: :model do
     describe 'request' do
-      let(:request_wrapper) do
-        RequestWrapper.new(
-          body: 'body',
-          headers: { header: 'value' },
-          method: 'GET',
-          path: '/path',
-          query_string: 'query'
-        )
+      let(:env) do
+        {
+          'rack.input' => StringIO.new('body'),
+          'REQUEST_METHOD' => 'GET',
+          'PATH_INFO' => '/path',
+          'QUERY_STRING' => 'query',
+          'HTTP_SAMPLE_HEADER' => 'value'
+        }
       end
+
+      let(:request_wrapper) { RequestWrapper.new(env) }
 
       before(:each) do
         subject.request = request_wrapper
@@ -24,7 +26,7 @@ module RailsMiniProfiler
       end
 
       it 'sets request headers' do
-        expect(subject.request_headers).to eq({ 'header' => 'value' })
+        expect(subject.request_headers).to eq({ 'HTTP_SAMPLE_HEADER' => 'value' })
       end
 
       it 'sets request method' do
@@ -41,17 +43,19 @@ module RailsMiniProfiler
     end
 
     describe 'response' do
-      let(:response_wrapper) do
-        OpenStruct.new(
-          body: 'body',
-          media_type: 'application/json',
-          headers: { header: 'value' },
-          status: 200
+      let(:response) do
+        ResponseWrapper.new(
+          'body',
+          200,
+          {
+            'HTTP_HEADER' => 'header',
+            'Content-Type' => 'application/json'
+          }
         )
       end
 
       before(:each) do
-        subject.response = response_wrapper
+        subject.response = response
       end
 
       it 'sets response body' do
@@ -63,7 +67,7 @@ module RailsMiniProfiler
       end
 
       it 'sets response headers' do
-        expect(subject.response_headers).to eq({ 'header' => 'value' })
+        expect(subject.response_headers).to eq({ 'HTTP_HEADER' => 'header', 'Content-Type' => 'application/json' })
       end
 
       it 'sets response status' do

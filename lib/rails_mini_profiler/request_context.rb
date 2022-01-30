@@ -9,7 +9,7 @@ module RailsMiniProfiler
   # @!attribute [r] request
   #   @return [RequestWrapper] the request as sent to the application
   # @!attribute response
-  #   @return [ResponseWrapper] the response as rendered by the application
+  #   @return [Rack::Response] the response as rendered by the application
   # @!attribute profiled_request
   #   @return [ProfiledRequest] the profiling data as gathered during profiling
   # @!attribute traces
@@ -21,6 +21,8 @@ module RailsMiniProfiler
 
     attr_accessor :response, :profiled_request, :traces, :flamegraph
 
+    # Create a new request context
+    #
     # @param request [RequestWrapper] the request as sent to the application
     def initialize(request)
       @request = request
@@ -58,10 +60,16 @@ module RailsMiniProfiler
       @saved = true
     end
 
+    # Check if the wrapped request has been profiled
+    #
+    # @return [Boolean] true if the wrapped request has been profiled
     def complete?
       @complete
     end
 
+    # Check if profiling results have been saved
+    #
+    # @return [Boolean] true if profiling results have been saved
     def saved?
       @saved
     end

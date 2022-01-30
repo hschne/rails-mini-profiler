@@ -1,24 +1,28 @@
 # frozen_string_literal: true
 
 module RailsMiniProfiler
-  class ResponseWrapper
-    attr_reader :response, :rack_response
-
-    delegate :status, :headers, to: :rack_response
-
-    def initialize(status, headers, response)
-      @rack_response = Rack::Response.new(response, status, headers)
-      @response = response
-    end
-
+  # A convenience wrapper extending {Rack::Response}
+  #
+  # @api private
+  class ResponseWrapper < Rack::Response
+    # Return the response body as String
+    #
+    # Depending on preceding middleware, response bodies may be Strings, Arrays or literally anything else. This method
+    # converts whatever it is to a string so we can store it later.
+    #
+    # @return [String] of the response body
     def body
-      return '' unless json? || xml?
-
-      response&.body || ''
-    end
-
-    def media_type
-      @media_type ||= @rack_response.media_type
+      body = super
+      case body
+      when String
+        body
+      when Array
+        body.join
+      when ActionDispatch::Response::RackBody
+        body.body
+      else
+        ''
+      end
     end
 
     def json?
