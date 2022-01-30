@@ -10,8 +10,6 @@ module RailsMiniProfiler
   #   @return [RequestWrapper] the request as sent to the application
   # @!attribute response
   #   @return [ResponseWrapper] the response as rendered by the application
-  # @!attribute profiled_request
-  #   @return [ProfiledRequest] the profiling data as gathered during profiling
   # @!attribute traces
   #   @return [Array<Models::Trace>] trace wrappers gathered during profiling
   # @!attribute flamegraph
@@ -19,7 +17,7 @@ module RailsMiniProfiler
   class RequestContext
     attr_reader :request
 
-    attr_accessor :response, :profiled_request, :traces, :flamegraph
+    attr_accessor :response, :traces, :flamegraph, :profiled_request
 
     # Create a new request context
     #
@@ -38,33 +36,18 @@ module RailsMiniProfiler
       @authorized ||= User.get(@env).present?
     end
 
-    # Completes profiling, setting all data and preparing for saving it.
-    def complete_profiling!
-      profiled_request.user_id = User.current_user
-      profiled_request.request = @request
-      profiled_request.response = @response
-      total_time = traces.find { |trace| trace.name == 'rails_mini_profiler.total_time' }
-      profiled_request.total_time = total_time
-      @complete = true
-    end
-
     # Save profiling data in the database.
     #
     # This will store the profiled request, as well as any attached traces and Flamgraph.
     def save_results!
       ActiveRecord::Base.transaction do
+        profiled_request = build_profiled_request
         profiled_request.flamegraph = RailsMiniProfiler::Flamegraph.new(data: flamegraph) if flamegraph.present?
         profiled_request.save
-        insert_traces unless traces.empty?
+        insert_traces(profiled_request) unless traces.empty?
+        @profiled_request = profiled_request
       end
       @saved = true
-    end
-
-    # Check if the wrapped request has been profiled
-    #
-    # @return [Boolean] true if the wrapped request has been profiled
-    def complete?
-      @complete
     end
 
     # Check if profiling results have been saved
@@ -76,7 +59,18 @@ module RailsMiniProfiler
 
     private
 
-    def insert_traces
+    def build_profiled_request
+      new_profiled_request = ProfiledRequest.new
+      new_profiled_request.user_id = User.current_user
+      new_profiled_request.request = @request
+      new_profiled_request.response = @response
+      total_time = traces.find { |trace| trace.name == 'rails_mini_profiler.total_time' }
+      new_profiled_request.total_time = total_time
+      new_profiled_request
+    end
+
+    # We insert multiple at once for performance reasons.
+    def insert_traces(profiled_request)
       return if traces.empty?
 
       timestamp = Time.zone.now
