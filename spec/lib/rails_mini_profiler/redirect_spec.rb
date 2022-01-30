@@ -5,7 +5,8 @@ require 'rails_helper'
 module RailsMiniProfiler
   RSpec.describe Redirect do
     describe 'render' do
-      let(:request) { RequestWrapper.new }
+      let(:env) { {} }
+      let(:request) { RequestWrapper.new(env) }
       let(:configuration) { Configuration.new }
       let(:profiled_request) { ProfiledRequest.new(id: 1) }
       let(:request_context) { RequestContext.new(request) }
@@ -15,7 +16,7 @@ module RailsMiniProfiler
       before(:each) { request_context.profiled_request = profiled_request }
 
       context 'with flamegraph parameter' do
-        let(:request) { RequestWrapper.new(query_string: 'rmp_flamegraph=true') }
+        let(:env) { { 'QUERY_STRING' => 'rmp_flamegraph=true' } }
 
         it('should redirect to flamegraph path') do
           expect(subject.render.first).to eq(302)
