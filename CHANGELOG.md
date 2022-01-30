@@ -1,5 +1,25 @@
 # Changelog
 
+### [0.7.1](https://github.com/hschne/rails-mini-profiler/compare/v0.7.0...v0.7.1) (2022-01-30)
+
+
+### Bug Fixes
+
+* deprecated autoloading, fixes [#110](https://github.com/hschne/rails-mini-profiler/issues/110) ([253a6e9](https://github.com/hschne/rails-mini-profiler/commit/253a6e9384047b06910f5b439c4b1a7354bfcfaa))
+* improve robustness when saving profiled requests, fixes [#86](https://github.com/hschne/rails-mini-profiler/issues/86) ([#118](https://github.com/hschne/rails-mini-profiler/issues/118)) ([8781898](https://github.com/hschne/rails-mini-profiler/commit/87818981d6af08c56729695def04d7232c00bfcd))
+* response without body, see [#115](https://github.com/hschne/rails-mini-profiler/issues/115) ([#116](https://github.com/hschne/rails-mini-profiler/issues/116)) ([baad01f](https://github.com/hschne/rails-mini-profiler/commit/baad01f4009a91353577c09c48a2a64b8e2b3227))
+
+
+### Miscellaneous
+
+* fix contributing ([da83e62](https://github.com/hschne/rails-mini-profiler/commit/da83e62d7e44fab998b13f2682a070081731c7c3))
+* fix updating version file ([c70002c](https://github.com/hschne/rails-mini-profiler/commit/c70002cb8bfe63259430053fcb0463a97be19223))
+* fix version ([9452a87](https://github.com/hschne/rails-mini-profiler/commit/9452a87b0143c2ce7d0e0c1320f1d17e847c3547))
+* modularize tracers ([#112](https://github.com/hschne/rails-mini-profiler/issues/112)) ([add2ec4](https://github.com/hschne/rails-mini-profiler/commit/add2ec4647609f442bc4c78b68524bfacf617738))
+* post-release 0.7.0 ([da80f06](https://github.com/hschne/rails-mini-profiler/commit/da80f06509303e12a9ea74e5befadd1274893302))
+* request/response wrappers ([#117](https://github.com/hschne/rails-mini-profiler/issues/117)) ([28def20](https://github.com/hschne/rails-mini-profiler/commit/28def20213bbb534493b69ee4c8baeeb907354ff))
+* update release info ([2a12afd](https://github.com/hschne/rails-mini-profiler/commit/2a12afd3d65183c9f90037279ae59464e3ef201c))
+
 ## [0.7.0](https://www.github.com/hschne/rails-mini-profiler/compare/v0.6.0...v0.7.0) (2021-11-27)
 
 
