@@ -10,6 +10,8 @@ module RailsMiniProfiler
   #   @return [RequestWrapper] the request as sent to the application
   # @!attribute response
   #   @return [ResponseWrapper] the response as rendered by the application
+  #   # @!attribute profiled_request
+  #   @return [ProfiledRequest] the profiling data as gathered during profiling
   # @!attribute traces
   #   @return [Array<Models::Trace>] trace wrappers gathered during profiling
   # @!attribute flamegraph
