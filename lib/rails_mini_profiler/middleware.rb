@@ -15,7 +15,6 @@ module RailsMiniProfiler
       request_context = RequestContext.new(request)
       return @app.call(env) unless Guard.new(request_context).profile?
 
-      request_context.profiled_request = ProfiledRequest.new
       result = with_tracing(request_context) { profile(request_context) }
       return result unless request_context.authorized?
 
@@ -45,7 +44,6 @@ module RailsMiniProfiler
     private
 
     def complete!(request_context)
-      request_context.complete_profiling!
       request_context.save_results!
       true
     rescue ActiveRecord::ActiveRecordError => e
