@@ -43,7 +43,7 @@ module RailsMiniProfiler
         end
       end
 
-      context 'with tillions' do
+      context 'with trillions' do
         it 'returns formatted number' do
           expect(helper.formatted_allocations(5_500_500_500_500)).to eq('5.5 T')
         end
