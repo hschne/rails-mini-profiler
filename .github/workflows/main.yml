@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         ruby-version: ["3.0", "2.7", "2.6"]
-        rails-version: ["6.0", "6.1"]
+        rails-version: ["6.1", "6.0" ]
       fail-fast: false
 
     env:
@@ -49,18 +49,17 @@ jobs:
 
     - name: Setup DB 🗄️
       run: |
-        bundle exec rake db:test:prepare
+        bin/rake db:test:prepare
 
     - name: Run Tests ✅
       run: |
-        bundle exec rake spec
+        bin/rake spec
       env:
         COVERAGE: true
-        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
 
     - name: Report Coverage
       # We don't need to upload coverage multiple times, just do it for latest versions, and only on master
-      if: github.ref == 'refs/heads/main' && matrix.ruby-version == 3.0 && matrix.rails-version == 6.1
+      if: github.ref == 'refs/heads/main' && matrix.ruby-version == 3.0 && matrix.rails-version == 7.0
       uses: paambaati/codeclimate-action@v3.0.0
       env:
         CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
