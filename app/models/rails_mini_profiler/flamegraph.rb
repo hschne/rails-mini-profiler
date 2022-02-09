@@ -5,7 +5,7 @@
 # Table name: rmp_flamegraphs
 #
 #  id                      :integer          not null, primary key
-#  rmp_profiled_request_id :bigint           not null
+#  rmp_profiled_request_id :integer          not null
 #  data                    :binary
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
