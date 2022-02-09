@@ -11,7 +11,7 @@ require 'rails_mini_profiler'
 
 module Dummy
   class Application < Rails::Application
-    config.load_defaults Rails::VERSION::STRING.to_f
+    config.load_defaults Rails::VERSION::MAJOR.to_f.to_s
 
     # Configuration for the application, engines, and railties goes here.
     #
