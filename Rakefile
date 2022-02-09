@@ -15,4 +15,19 @@ rspec.verbose = false
 require 'rubocop/rake_task'
 RuboCop::RakeTask.new
 
+task lint: %i[rubocop lint:js lint:css lint:commit]
+namespace :lint do
+  task :js do
+    system 'npm run lint'
+  end
+
+  task :css do
+    system 'npm run lint:scss'
+  end
+
+  task :commit do
+    system 'npm run lint:commit'
+  end
+end
+
 task default: %i[spec rubocop]
