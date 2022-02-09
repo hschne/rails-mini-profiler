@@ -3,6 +3,8 @@
 module RailsMiniProfiler
   module Tracers
     class Tracer
+      TIMESTAMP_MULTIPLIER = Rails::VERSION::MAJOR < 7 ? 100_000 : 100
+
       class << self
         def subscribes_to
           []
@@ -28,8 +30,8 @@ module RailsMiniProfiler
       private
 
       def event_data(event)
-        start = (event.time.to_f * 100).to_i
-        finish = (event.end.to_f * 100).to_i
+        start = (event.time.to_f * TIMESTAMP_MULTIPLIER).to_i
+        finish = (event.end.to_f * TIMESTAMP_MULTIPLIER).to_i
         {
           name: event.name,
           start: start,
