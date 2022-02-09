@@ -28,7 +28,7 @@ Setup RMP locally by executing:
 ```bash
 # Setup Rails
 bundle install
-rails db:setup
+bin/rails db:setup
 
 # Install Node and build assets
 npm install
@@ -42,11 +42,18 @@ Then code away!
 Rails Mini Profiler is a Rails Engine and can be tested out by mounting it in a 'real' Rails app. The `Dummy` application
 is such an app and  resides in `spec/dummy`. 
 
-To manually test your changes simply run `rails server` on the root level of your application. To execute the test suite
+To manually test your changes simply run `bin/rails server` on the root level of your application. To execute the test suite
 run 
 
 ```bash
-bundle exec rake spec
+bin/rspec
+```
+
+To locally test against multiple Rails versions use [Appraisal](https://github.com/thoughtbot/appraisal):
+
+```bash
+bin/appraisal install
+bin/appraisal rspec
 ```
 
 #### Working with Assets
@@ -58,12 +65,10 @@ For continuous compilation and live preview first start your Rails server and th
 npm run watch
 ```
 
-
-
 ### Prepping your PR
 
 Before opening your PR make sure to adhere to the repository code style and verify that all tests
-still pass. Run `rake` to execute both tests and [Rubocop](https://github.com/rubocop/rubocop)
+still pass. Run `bin/rake` to execute both tests and [Rubocop](https://github.com/rubocop/rubocop)
 
 Rails Mini Profiler uses [convential commits](https://www.conventionalcommits.org/en/v1.0.0/#summary). Before opening your pull request,
 consider updating your commit messages accordingly. If your commits don't adhere to conventional commits maintainers will squash your commits to adhere to the guidelines.
@@ -77,7 +82,7 @@ Finally, go to [GitHub](https://github.com/hschne/rails-mini-profiler) and creat
 RMP uses [Annotate](https://github.com/ctran/annotate_models) to annotate models. When making changes to the schema, run
 
 ```bash
-bundle exec annotate -i --models --exclude tests,fixtures 
+bin/annotate -i --models --exclude tests,fixtures 
 ```
 
 to update model annotations.
@@ -88,14 +93,5 @@ RMP uses [Speescope](https://github.com/jlfwong/speedscope) for Flamegraph rende
 Speedscope run
 
 ```bash
-rake speedscope:update
-```
-
-#### Appraisals
-
-To locally test against multiple Rails versions use [Appraisal](https://github.com/thoughtbot/appraisal):
-
-```bash
-bundle exec appraisal install
-bundle exec appraisal rake spec
+bin/rake speedscope:update
 ```
