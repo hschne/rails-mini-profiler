@@ -10,4 +10,5 @@ end
 
 appraise 'rails-7.0' do
   gem 'rails', '~> 7.0.0'
+  gem 'sprockets-rails', '~> 3.4'
 end
