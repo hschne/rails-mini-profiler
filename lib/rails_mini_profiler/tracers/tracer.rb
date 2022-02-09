@@ -28,8 +28,8 @@ module RailsMiniProfiler
       private
 
       def event_data(event)
-        start = (event.time.to_f * 100_000).to_i
-        finish = (event.end.to_f * 100_000).to_i
+        start = (event.time.to_f * 100).to_i
+        finish = (event.end.to_f * 100).to_i
         {
           name: event.name,
           start: start,
