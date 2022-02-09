@@ -34,7 +34,7 @@ module RailsMiniProfiler
           name: event.name,
           start: start,
           finish: finish,
-          duration: finish - start,
+          duration: event.duration,
           allocations: event.allocations,
           backtrace: Rails.backtrace_cleaner.clean(caller),
           payload: event.payload
