@@ -3,7 +3,7 @@
 module RailsMiniProfiler
   module Tracers
     class Tracer
-      TIMESTAMP_MULTIPLIER = Rails::VERSION::MAJOR < 7 ? 100_000 : 100
+      TIMESTAMP_MULTIPLIER = Rails::VERSION::MAJOR < 7 ? 100 : 1
 
       class << self
         def subscribes_to
