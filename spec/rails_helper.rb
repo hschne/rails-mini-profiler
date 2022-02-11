@@ -68,6 +68,4 @@ RSpec.configure do |config|
 
   config.include SpecHelpers
   config.include RailsMiniProfiler::Engine.routes.url_helpers
-
-  config.include DefaultFormat, type: :request
 end

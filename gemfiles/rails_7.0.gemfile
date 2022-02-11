@@ -3,7 +3,6 @@
 source "https://rubygems.org"
 
 gem "rails", "~> 7.0.0"
-gem "sprockets-rails", "~> 3.4"
 
 group :development do
   gem "annotate", "~> 3.1", github: "ctran/annotate_models"
@@ -18,6 +17,7 @@ group :test, :development do
   gem "jb", "~> 0.8"
   gem "pry", "~> 0.14"
   gem "rubocop", "~> 1.25"
+  gem "sprockets-rails"
   gem "sqlite3", "~> 1.4"
   gem "stackprof", "~> 0.2"
 end

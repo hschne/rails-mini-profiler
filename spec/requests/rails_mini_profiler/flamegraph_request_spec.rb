@@ -5,7 +5,6 @@ require 'rails_helper'
 module RailsMiniProfiler
   RSpec.describe 'Flamegraphs', type: :request do
     let(:user_id) { '127.0.0.1' }
-    let(:default_format) { 'text/html' }
 
     describe 'GET /show' do
       it 'returns http success' do

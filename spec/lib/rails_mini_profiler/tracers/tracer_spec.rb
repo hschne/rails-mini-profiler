@@ -19,9 +19,12 @@ module RailsMiniProfiler
         end
 
         it('stores starts and ends as milliseconds') do
-          ms_duration = subject.trace.finish - subject.trace.start
-          # if it's within 5, it must be the right order of magnitude
-          expect(ms_duration).to be_within(5).of(subject.trace.duration)
+          expect(subject.trace.duration).to be_within(5).of(@event.duration * 100)
+        end
+
+        it('stores start and ends as microseconds') do
+          expect(subject.trace.start).to be_within(100).of(@event.time.to_f * Tracer::TIMESTAMP_MULTIPLIER)
+          expect(subject.trace.finish).to be_within(100).of(@event.end.to_f * Tracer::TIMESTAMP_MULTIPLIER)
         end
       end
     end

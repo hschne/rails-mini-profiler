@@ -30,13 +30,18 @@ module RailsMiniProfiler
       private
 
       def event_data(event)
+        # Rails 7 changes event timings and now uses CPU milliseconds as float for start and end. We multiply by 100
+        # to convert the float with precision of 2 digits to integer, because integers are just easier to store and
+        # process than floats.
+        #
+        # See https://github.com/rails/rails/commit/81d0dc90becfe0b8e7f7f26beb66c25d84b8ec7f
         start = (event.time.to_f * TIMESTAMP_MULTIPLIER).to_i
         finish = (event.end.to_f * TIMESTAMP_MULTIPLIER).to_i
         {
           name: event.name,
           start: start,
           finish: finish,
-          duration: event.duration,
+          duration: (event.duration.to_f * 100).to_i,
           allocations: event.allocations,
           backtrace: Rails.backtrace_cleaner.clean(caller),
           payload: event.payload

@@ -7,8 +7,12 @@ module RailsMiniProfiler
     after(:each) { User.current_user = nil }
 
     describe 'POST /movie' do
+      let(:default_params) { { format: :json } }
+
+      let(:params) { { movie: { title: 'name' } }.merge(default_params) }
+
       it 'creates a profiled request ' do
-        post(movies_url, params: { movie: { title: 'name' } })
+        post(movies_url, params: params)
 
         expect(response).to be_redirect
 
@@ -16,32 +20,37 @@ module RailsMiniProfiler
       end
 
       it 'saves request data' do
-        post(movies_url, params: { movie: { title: 'name' } })
+        post(movies_url, params: params)
 
         expect(response).to be_redirect
 
         profiled_request = ProfiledRequest.find_by(request_path: '/movies')
         expect(profiled_request.request_method).to eq('POST')
         expect(profiled_request.request_query_string).to eq('')
-        expect(profiled_request.request_body).to eq('movie[title]=name')
-        expect(profiled_request.request_headers)
-          .to eq({ 'HTTP_HOST' => 'www.example.com', 'HTTP_ACCEPT' => 'application/json', 'HTTP_COOKIE' => '' })
+        expect(profiled_request.request_body).to eq('movie[title]=name&format=json')
       end
 
       it 'saves performance data' do
-        post(movies_url, params: { movie: { title: 'name' } })
+        events = []
+        ActiveSupport::Notifications.subscribe('rails_mini_profiler.total_time') do |event|
+          events << event
+        end
+
+        post(movies_url, params: params)
 
         expect(response).to be_redirect
-
+        trace = events.first
         profiled_request = ProfiledRequest.find_by(request_path: '/movies')
-        expect(profiled_request.start).to be >= 0
-        expect(profiled_request.finish).to be >= 0
-        expect(profiled_request.duration).to be >= 0
-        expect(profiled_request.allocations).to be >= 0
+        trace_start = trace.time.to_f * Tracers::Tracer::TIMESTAMP_MULTIPLIER
+        trace_end = trace.time.to_f * Tracers::Tracer::TIMESTAMP_MULTIPLIER
+        expect(profiled_request.start).to be_within(100).of(trace_start)
+        expect(profiled_request.finish).to be_within(100).of(trace_end)
+        expect(profiled_request.duration).to be_within(100).of(trace.duration * 100)
+        expect(profiled_request.allocations).to be_within(1000).of(trace.allocations)
       end
 
       it 'saves response data' do
-        post(movies_url, params: { movie: { title: 'name' } })
+        post(movies_url, params: params)
 
         expect(response).to be_redirect
 
