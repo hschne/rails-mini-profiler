@@ -60,7 +60,7 @@ jobs:
           echo "::set-output name=version::$version"
 
       - name: Set up Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '${{ steps.node-version.outputs.version }}'
           cache: 'npm'
