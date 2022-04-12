@@ -1,5 +1,22 @@
 # Changelog
 
+### [0.7.2](https://github.com/hschne/rails-mini-profiler/compare/v0.7.1...v0.7.2) (2022-04-12)
+
+
+### Bug Fixes
+
+* display milliseconds, matching given labels ([#127](https://github.com/hschne/rails-mini-profiler/issues/127)) ([6f4e7b7](https://github.com/hschne/rails-mini-profiler/commit/6f4e7b762e30a11b027cd3fcdbb799ae9707b4ec))
+* use event.duration directly ([7968965](https://github.com/hschne/rails-mini-profiler/commit/7968965d3c234746d0de2c2b407fecfb524aa05d))
+
+
+### Miscellaneous
+
+* add bundler binstubs to remove bundle exec ([1c4178c](https://github.com/hschne/rails-mini-profiler/commit/1c4178c76e94fa764e0f4d2bad81348a719f5d68))
+* make Rails 7 default development version ([#129](https://github.com/hschne/rails-mini-profiler/issues/129)) ([5e78c83](https://github.com/hschne/rails-mini-profiler/commit/5e78c83cf6941d9f2ed9ccf7951a8ccea2c62510))
+* post-release 0.7.1 ([82ecb6b](https://github.com/hschne/rails-mini-profiler/commit/82ecb6b429f9b944dbc48596dc19578998149d9b))
+* remove built-in gemfile helper ([0e888c2](https://github.com/hschne/rails-mini-profiler/commit/0e888c25ce8d2a5c048a85ddda35f49d3e1045bc))
+* update commitlint config ([7e45bba](https://github.com/hschne/rails-mini-profiler/commit/7e45bba5b60a579822445025000ae9625c41e053))
+
 ### [0.7.1](https://github.com/hschne/rails-mini-profiler/compare/v0.7.0...v0.7.1) (2022-01-30)
 
 
