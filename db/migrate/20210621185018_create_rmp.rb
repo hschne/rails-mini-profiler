@@ -2,7 +2,7 @@
 
 class CreateRmp < ActiveRecord::Migration[6.0]
   def change
-    create_table :rmp_profiled_requests do |t|
+    create_table :rmp_profiled_requests, charset: 'utf8' do |t|
       t.string :user_id
       t.bigint :start
       t.bigint :finish
@@ -23,7 +23,7 @@ class CreateRmp < ActiveRecord::Migration[6.0]
       t.index :created_at
     end
 
-    create_table :rmp_traces do |t|
+    create_table :rmp_traces, charset: 'utf8' do |t|
       t.belongs_to :rmp_profiled_request, null: false, foreign_key: true
       t.string :name
       t.bigint :start
@@ -36,7 +36,7 @@ class CreateRmp < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    create_table :rmp_flamegraphs do |t|
+    create_table :rmp_flamegraphs, charset: 'utf8' do |t|
       t.belongs_to :rmp_profiled_request, null: false, foreign_key: true
       t.binary :data
 
