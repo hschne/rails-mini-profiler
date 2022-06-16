@@ -1,6 +1,6 @@
 {
   "name": "@rails-mini-profiler/assets",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "Performance profiling for your Rails app, made simple",
   "main": "dist/rails-mini-profiler.js",
   "files": [
