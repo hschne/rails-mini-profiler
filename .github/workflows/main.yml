@@ -101,4 +101,4 @@ jobs:
         run: npm run lint:scss
 
       - name: Lint Commits 📝
-        uses: wagoid/commitlint-github-action@v4
+        uses: wagoid/commitlint-github-action@v5
