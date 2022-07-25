@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.3](https://github.com/hschne/rails-mini-profiler/compare/v0.7.2...v0.7.3) (2022-07-25)
+
+
+### Miscellaneous
+
+* post-release 0.7.2 ([7a34f5d](https://github.com/hschne/rails-mini-profiler/commit/7a34f5de1567bd63f984e7e9a962422bd29c7f0b))
+
 ## [0.7.2](https://github.com/hschne/rails-mini-profiler/compare/v0.7.1...v0.7.2) (2022-06-13)
 
 
