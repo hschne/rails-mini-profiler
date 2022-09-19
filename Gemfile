@@ -19,7 +19,7 @@ group :test, :development do
   gem 'pry', '~> 0.14'
   gem 'rubocop', '~> 1.35'
   gem 'sprockets-rails'
-  gem 'sqlite3', '~> 1.4'
+  gem 'sqlite3', '~> 1.5'
   gem 'stackprof', '~> 0.2'
 end
 

@@ -232,7 +232,9 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
+    sqlite3 (1.5.0)
+      mini_portile2 (~> 2.8.0)
+    sqlite3 (1.5.0-x86_64-linux)
     stackprof (0.2.17)
     strscan (3.0.3)
     thor (1.2.1)
@@ -263,7 +265,7 @@ DEPENDENCIES
   rubyzip (~> 2.3)
   simplecov (~> 0.21)
   sprockets-rails
-  sqlite3 (~> 1.4)
+  sqlite3 (~> 1.5)
   stackprof (~> 0.2)
 
 BUNDLED WITH
