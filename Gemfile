@@ -17,7 +17,7 @@ group :test, :development do
   gem 'activerecord-import', '~> 1.4'
   gem 'jb', '~> 0.8'
   gem 'pry', '~> 0.14'
-  gem 'rubocop', '~> 1.35'
+  gem 'rubocop', '~> 1.36'
   gem 'sprockets-rails'
   gem 'sqlite3', '~> 1.5'
   gem 'stackprof', '~> 0.2'

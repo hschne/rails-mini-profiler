@@ -205,7 +205,7 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.11.0)
-    rubocop (1.35.0)
+    rubocop (1.36.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.2.1)
@@ -241,7 +241,7 @@ GEM
     timeout (0.3.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    unicode-display_width (2.2.0)
+    unicode-display_width (2.3.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -261,7 +261,7 @@ DEPENDENCIES
   puma (~> 5.6)
   rails_mini_profiler!
   rspec-rails (~> 5.1)
-  rubocop (~> 1.35)
+  rubocop (~> 1.36)
   rubyzip (~> 2.3)
   simplecov (~> 0.21)
   sprockets-rails
