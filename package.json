@@ -40,7 +40,7 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "less": "^4.1.1",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.3",
     "postcss": "^8.3.6",
     "prettier": "2.3.2",
     "rollup": "^2.56.1",
