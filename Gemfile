@@ -9,7 +9,7 @@ group :development do
   gem 'annotate', '~> 3.1', github: 'ctran/annotate_models'
   gem 'appraisal', '~> 2.4'
   gem 'httparty', '~> 0.20.0', require: false
-  gem 'puma', '~> 5.6'
+  gem 'puma', '~> 6.0'
   gem 'rubyzip', '~> 2.3', require: false
 end
 
