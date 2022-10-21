@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: dummy
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+

@@ -40,6 +40,8 @@ module RailsMiniProfiler
              foreign_key: :rmp_profiled_request_id,
              dependent: :destroy
 
+    before_save :sanitize
+
     def request=(request)
       self.request_body = request.body
       self.request_headers = request.headers
@@ -60,6 +62,15 @@ module RailsMiniProfiler
       self.finish = total_time.finish
       self.duration = total_time.duration
       self.allocations = total_time.allocations
+    end
+
+    private
+
+    def sanitize
+      self.request_body ||= ''
+      self.request_body = request_body
+                            .encode('UTF-8', invalid: :replace, undef: :replace)
+                            .delete("\000")
     end
   end
 end
