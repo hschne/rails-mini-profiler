@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    rails_mini_profiler (0.7.2)
+    rails_mini_profiler (0.7.3)
       inline_svg (~> 1.7)
       jb (~> 0.8)
       pagy (>= 4.11, < 6.0)
