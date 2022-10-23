@@ -16,6 +16,7 @@ end
 group :test, :development do
   gem 'activerecord-import', '~> 1.4'
   gem 'jb', '~> 0.8'
+  gem 'pg', '~> 1.4'
   gem 'pry', '~> 0.14'
   gem 'rubocop', '~> 1.36'
   gem 'sprockets-rails'

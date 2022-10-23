@@ -4,6 +4,15 @@ require 'rails_helper'
 
 module RailsMiniProfiler
   RSpec.describe ProfiledRequest, type: :model do
+    describe 'save' do
+      it 'removes body null bytes' do
+        request = ProfiledRequest.new(request_body: "content\000")
+        request.save
+
+        expect(request.request_body).to eq('content')
+      end
+    end
+
     describe 'request' do
       let(:env) do
         {

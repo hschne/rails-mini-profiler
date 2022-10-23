@@ -87,6 +87,7 @@ bin/annotate -i --models --exclude tests,fixtures
 
 to update model annotations.
 
+
 #### Speedscope
 
 RMP uses [Speescope](https://github.com/jlfwong/speedscope) for Flamegraph rendering. To update to the latest release of
@@ -94,4 +95,13 @@ Speedscope run
 
 ```bash
 bin/rake speedscope:update
+```
+
+#### Database Support
+
+RMP _should_ work out with any database that Rails officially supports. To run tests or the dummy application with a
+specific database use the `DATABASE` environment variable:
+```base
+DATABASE=sqlite rails s
+DATABASE=postgres rails s
 ```
