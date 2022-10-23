@@ -45,7 +45,7 @@ module RailsMiniProfiler
         trace_end = trace.time.to_f * Tracers::Tracer::TIMESTAMP_MULTIPLIER
         expect(profiled_request.start).to be_within(100).of(trace_start)
         expect(profiled_request.finish).to be_within(100).of(trace_end)
-        expect(profiled_request.duration).to be_within(500).of(trace.duration * 100)
+        expect(profiled_request.duration).to be_within(1000).of(trace.duration * 100)
         expect(profiled_request.allocations).to be_within(1000).of(trace.allocations)
       end
 

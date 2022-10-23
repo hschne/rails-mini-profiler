@@ -25,6 +25,7 @@ class Speedscope
     msg('Downloading latest...')
     body = HTTParty.get(url, follow_redirects: true).body
     msg('Overwriting existing files...')
+    FileUtils.rm_f(Dir.glob(File.join(BASE_DIRECTORY, 'speedscope', '*')))
     overwrite_speedscope(body)
     msg('Done!')
   end
