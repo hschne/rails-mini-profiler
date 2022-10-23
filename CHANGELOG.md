@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.7.3](https://github.com/hschne/rails-mini-profiler/compare/v0.7.2...v0.7.3) (2022-10-23)
+
+
+### Bug Fixes
+
+* sanitize null bytes in request body ([#173](https://github.com/hschne/rails-mini-profiler/issues/173)) ([12c8358](https://github.com/hschne/rails-mini-profiler/commit/12c8358c2ced76084d38e750d750732417070e01))
+
+
+### Miscellaneous
+
+* post-release 0.7.2 ([7a34f5d](https://github.com/hschne/rails-mini-profiler/commit/7a34f5de1567bd63f984e7e9a962422bd29c7f0b))
+* update speedscope ([#174](https://github.com/hschne/rails-mini-profiler/issues/174)) ([3352624](https://github.com/hschne/rails-mini-profiler/commit/3352624668dd5e914c44c91971a29dd8b5b7f9b9))
+
 ## [0.7.2](https://github.com/hschne/rails-mini-profiler/compare/v0.7.1...v0.7.2) (2022-06-13)
 
 
