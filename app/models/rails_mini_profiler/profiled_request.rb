@@ -67,10 +67,16 @@ module RailsMiniProfiler
     private
 
     def sanitize
+      # When tracing requests that send or receive files which contain null bytes - or any body with null bytes - saving
+      # the request to Postgres will fail. So we sanitize request/response body first.
       self.request_body ||= ''
       self.request_body = request_body
                             .encode('UTF-8', invalid: :replace, undef: :replace)
                             .delete("\000")
+      self.response_body ||= ''
+      self.response_body = response_body
+                             .encode('UTF-8', invalid: :replace, undef: :replace)
+                             .delete("\000")
     end
   end
 end
