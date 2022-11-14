@@ -18,7 +18,7 @@ group :test, :development do
   gem 'jb', '~> 0.8'
   gem 'pg', '~> 1.4'
   gem 'pry', '~> 0.14'
-  gem 'rubocop', '~> 1.36'
+  gem 'rubocop', '~> 1.39'
   gem 'sprockets-rails'
   gem 'sqlite3', '~> 1.5'
   gem 'stackprof', '~> 0.2'
