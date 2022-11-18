@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.7.4](https://github.com/hschne/rails-mini-profiler/compare/v0.7.3...v0.7.4) (2022-11-18)
+
+
+### Bug Fixes
+
+* sanitize response body with null bytes ([#178](https://github.com/hschne/rails-mini-profiler/issues/178)) ([98ee2e3](https://github.com/hschne/rails-mini-profiler/commit/98ee2e3608562f0628b4653cc9f4b1b489544bc8))
+
+
+### Miscellaneous
+
+* change coverage path ([eeb1891](https://github.com/hschne/rails-mini-profiler/commit/eeb18914302763003fbc8c3bd0fae55d036e9215))
+* post-release 0.7.3 ([482b2b0](https://github.com/hschne/rails-mini-profiler/commit/482b2b0f7cb24dc178283d62fcd266222af48c53))
+* update codelimate action ([6a86568](https://github.com/hschne/rails-mini-profiler/commit/6a86568ed7edb4cda4126e36d93af44d71712cf0))
+
 ## [0.7.3](https://github.com/hschne/rails-mini-profiler/compare/v0.7.2...v0.7.3) (2022-10-23)
 
 
