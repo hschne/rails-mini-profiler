@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/ctran/annotate_models.git
-  revision: 77b8cac4dbc95e39f8fbfc5cbe9940289ca53e28
+  revision: ae0b79c0f816b2433a3f00b9a73b3aea1bd3e84b
   specs:
-    annotate (3.1.1)
+    annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
 
@@ -231,7 +231,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import (~> 1.4)
-  annotate (~> 3.1)!
+  annotate (~> 3.2)!
   appraisal (~> 2.4)
   httparty (~> 0.20.0)
   jb (~> 0.8)
