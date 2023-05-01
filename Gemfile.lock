@@ -128,7 +128,7 @@ GEM
     parallel (1.22.1)
     parser (3.1.2.1)
       ast (~> 2.4.1)
-    pg (1.4.4)
+    pg (1.5.3)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -235,7 +235,7 @@ DEPENDENCIES
   appraisal (~> 2.4)
   httparty (~> 0.20.0)
   jb (~> 0.8)
-  pg (~> 1.4)
+  pg (~> 1.5)
   pry (~> 0.14)
   puma (~> 6.0)
   rails_mini_profiler!
