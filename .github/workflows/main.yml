@@ -64,7 +64,7 @@ jobs:
     - name: Report Coverage
       # We don't need to upload coverage multiple times, just do it for latest versions, and only on master
       if: github.ref == 'refs/heads/main' && matrix.ruby-version == 3.0 && matrix.rails-version == 7.0
-      uses: paambaati/codeclimate-action@v3.2.0
+      uses: paambaati/codeclimate-action@v4.0.0
       with:
         coverageLocations: |
           ${{github.workspace}}/coverage/coverage.json:simplecov
