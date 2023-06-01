@@ -199,7 +199,7 @@ GEM
       parser (>= 3.1.1.0)
     ruby-progressbar (1.11.0)
     rubyzip (2.3.2)
-    simplecov (0.21.2)
+    simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
       simplecov_json_formatter (~> 0.1)
@@ -242,7 +242,7 @@ DEPENDENCIES
   rspec-rails (~> 6.0)
   rubocop (~> 1.39)
   rubyzip (~> 2.3)
-  simplecov (~> 0.21)
+  simplecov (~> 0.22)
   sprockets-rails
   sqlite3 (~> 1.5)
   stackprof (~> 0.2)
