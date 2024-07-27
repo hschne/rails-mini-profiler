@@ -11,7 +11,7 @@ module RailsMiniProfiler
     def index
       @profiled_requests = ProfiledRequest.where(user_id:).order(id: :desc)
       search = ProfiledRequestSearch.new(index_params, scope: @profiled_requests)
-      @pagy, @profiled_requests = pagy(search.results, items: configuration.ui.page_size)
+      @pagy, @profiled_requests = pagy(search.results, limit: configuration.ui.page_size)
       @profiled_requests = @profiled_requests.map { |request| present(request) }
     end
 
