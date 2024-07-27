@@ -13,7 +13,7 @@ PATH
       inline_svg (~> 1.9)
       jb (~> 0.8)
       pagy (>= 4.11)
-      rails (>= 6.0)
+      rails (>= 6.1)
 
 GEM
   remote: https://rubygems.org/
