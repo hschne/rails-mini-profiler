@@ -3,7 +3,7 @@
   <th style="width: 20px;" class="text-left">
     <%= label_tag nil do %>
       <%= check_box_tag 'selected[]', nil,
-                        params.fetch(:selected, []).size == @pagy.items,
+                        params.fetch(:selected, []).size == @pagy.in,
                         class: "request-checkbox",
                         data: {
                           action: 'click->selectable#selectAll',
