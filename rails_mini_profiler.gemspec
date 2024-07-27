@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir['{app,config,db,lib,public}/**/*', 'vendor/assets/**/*', 'LICENSE', 'README.md']
 
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.6.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 3.1.0')
 
   spec.add_dependency 'inline_svg', '~> 1.9'
   spec.add_dependency 'jb', '~> 0.8'
