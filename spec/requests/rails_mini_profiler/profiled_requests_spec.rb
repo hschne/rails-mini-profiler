@@ -12,19 +12,19 @@ module RailsMiniProfiler
 
     describe 'GET /index' do
       it 'renders a successful response' do
-        profiled_request = ProfiledRequest.create(user_id: user_id)
+        profiled_request = ProfiledRequest.create(user_id:)
 
-        get profiled_requests_url, params: params
+        get(profiled_requests_url, params:)
 
         expect(response_json.dig(0, 'id')).to eq(profiled_request.id)
       end
 
       context 'with search' do
         it 'with matching item returns successful' do
-          profiled_request = ProfiledRequest.create(user_id: user_id, request_path: '/first/second')
-          ProfiledRequest.create(user_id: user_id, request_path: '/first/third')
+          profiled_request = ProfiledRequest.create(user_id:, request_path: '/first/second')
+          ProfiledRequest.create(user_id:, request_path: '/first/third')
 
-          get profiled_requests_url(path: 'second'), params: params
+          get(profiled_requests_url(path: 'second'), params:)
 
           result = response_json
           expect(result.size).to eq(1)
@@ -42,11 +42,11 @@ module RailsMiniProfiler
         end
 
         it 'with stored items returns items' do
-          profiled_request = ProfiledRequest.create(user_id: user_id)
-          ProfiledRequest.create(user_id: user_id)
-          ProfiledRequest.create(user_id: user_id)
+          profiled_request = ProfiledRequest.create(user_id:)
+          ProfiledRequest.create(user_id:)
+          ProfiledRequest.create(user_id:)
 
-          get profiled_requests_url(page: 2), params: params
+          get(profiled_requests_url(page: 2), params:)
 
           expect(response_json.dig(0, 'id')).to eq(profiled_request.id)
         end
@@ -55,26 +55,26 @@ module RailsMiniProfiler
 
     describe 'GET /show' do
       it 'without item redirects and shows error' do
-        get profiled_request_url(-1), params: params
+        get(profiled_request_url(-1), params:)
 
         expect(response).to be_not_found
       end
 
       it 'with stored item returns successful' do
-        profiled_request = ProfiledRequest.create(user_id: user_id)
+        profiled_request = ProfiledRequest.create(user_id:)
 
-        get profiled_request_url(profiled_request.id), params: params
+        get(profiled_request_url(profiled_request.id), params:)
 
         expect(response_json['id']).to eq(profiled_request.id)
       end
 
       context 'with search' do
         it 'by payload returns matching traces' do
-          profiled_request = ProfiledRequest.create(user_id: user_id)
+          profiled_request = ProfiledRequest.create(user_id:)
           profiled_request.traces.create(payload: { sample: 'one' })
           trace = profiled_request.traces.create(payload: { sample: 'two' })
 
-          get profiled_request_url(profiled_request.id, payload: 'two'), params: params
+          get(profiled_request_url(profiled_request.id, payload: 'two'), params:)
 
           expect(response_json.dig('traces', 0, 'id')).to eq(trace.id)
         end
@@ -83,9 +83,9 @@ module RailsMiniProfiler
 
     describe 'DELETE /destroy' do
       it 'destroys the requested profiled_request' do
-        profiled_request = ProfiledRequest.create(user_id: user_id)
+        profiled_request = ProfiledRequest.create(user_id:)
 
-        delete profiled_request_url(profiled_request), params: params
+        delete(profiled_request_url(profiled_request), params:)
 
         expect(ProfiledRequest.exists?(profiled_request.id)).to be(false)
       end

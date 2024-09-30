@@ -83,7 +83,9 @@ module RailsMiniProfiler
       end
 
       it 'sets response headers' do
-        expect(subject.response_headers).to eq({ 'HTTP_HEADER' => 'header', 'Content-Type' => 'application/json' })
+        expect(subject.response_headers.transform_keys(&:downcase))
+          .to eq({ 'http_header' => 'header',
+                   'content-type' => 'application/json' })
       end
 
       it 'sets response status' do

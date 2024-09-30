@@ -15,16 +15,16 @@ end
 group :test, :development do
   gem "activerecord-import", "~> 1.4"
   gem "jb", "~> 0.8"
-  gem "pg", "~> 1.4"
+  gem "pg", "~> 1.5"
   gem "pry", "~> 0.14"
-  gem "rubocop", "~> 1.36"
+  gem "rubocop", "~> 1.39"
   gem "sprockets-rails"
   gem "sqlite3", "~> 1.5"
   gem "stackprof", "~> 0.2"
 end
 
 group :test do
-  gem "rspec-rails", "~> 5.1"
+  gem "rspec-rails", "~> 6.0"
   gem "simplecov", "~> 0.21"
 end
 
