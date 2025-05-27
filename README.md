@@ -17,9 +17,7 @@
 
 ## What's this?
 
-> **Rails Mini Profiler is archived**. Making it fit for Rails 7 and 8 would require significant updates, and I currently lack the time for the maintenance required. Additionally, after changing jobs, I don't currently have a use for this project, and it's hard to stay motivated under those circumstances. I would love to get back to the project in the future (as I still think it fills a niche in the ecosystem). Thank you for understanding!  
-
-Rails Mini Profiler is an easy-to-use performance profiler for your Rails applications. It is heavily inspired by [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler) and other APM tools. To find out how it stacks up against those check out [Why Rails Mini Profiler](#why-rails-mini-profiler)? 
+Rails Mini Profiler is an easy-to-use performance profiler for your Rails applications. It is heavily inspired by [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler) and other APM tools. To find out how it stacks up against those check out [Why Rails Mini Profiler](#why-rails-mini-profiler)?
 
 To see it in action view the preview below:
 
@@ -28,8 +26,6 @@ To see it in action view the preview below:
 [![Rails Mini Profiler Preview](http://img.youtube.com/vi/fSR8fCcsO8Q/0.jpg)](https://www.youtube.com/watch?v=fSR8fCcsO8Q)
 
 </div>
-
-**Note**: This gem is in early development and I'm looking for contributors. Try it out and leave some feedback, it really goes a long way in helping me out with development. Any [feature request](https://github.com/hschne/rails-mini-profiler/issues/new?assignees=&labels=type%3ABug&template=FEATURE_REQUEST.md&title=) or [bug report](https://github.com/hschne/rails-mini-profiler/issues/new?assignees=&labels=type%3AEnhancement&template=BUG_REPORT.md&title=) is welcome. If you like this project, leave a star to show your support! ⭐
 
 ## Getting Started
 
@@ -92,7 +88,7 @@ May can filter and clicking on individual traces to gain deeper insights and see
 ### Flamegraphs
 
 Rails Mini Profiler automatically records Flamegraphs for profiled requests. To enable this feature, add [Stackprof](https://github.com/tmm1/stackprof)
-to your Gemfile: 
+to your Gemfile:
 
 ```ruby
 gem 'stackprof'
@@ -106,16 +102,15 @@ Flamegraphs are rendered using [Speedscope](https://github.com/jlfwong/speedscop
 
 Rails Mini Profiler provides a wide array of configuration options. You can find details below. For an example configuration check `initializers/rails_mini_profiler.rb` (or [the template file](https://github.com/hschne/rails-mini-profiler/blob/main/lib/generators/rails_mini_profiler/templates/rails_mini_profiler.rb.erb)).
 
-| Name                     | Default                      | Description                                                                                     |
-|--------------------------|------------------------------|-------------------------------------------------------------------------------------------------|
-| `enabled`                | `true` (dev)/ `false` (prod) | Whether or not RMP is enabled                                                                   |
-| `flamegraph_enabled`     | `true`                       | Should flamegraphs be recorded automatically?                                                   |
-| `flamegraph_sample_rate` | `0.5`                        | The flamegraph sample rate. How many snapshots per millisecond are created.                     |
-| `skip_paths`             | `[]`                         | An array of request paths that should not be profiled. Regex allowed.                           |
-| `storage`                | `Storage.new`                | Storage configuration. See [Storage](#Storage).                                                 |
-| `ui`                     | `UserInterface.new`          | UI configuration. See [UI](#UI).                                                                |
-| `user_provider`          | `Rack::Request.new(env).ip`  | How to identify users. See [Authorization](#Authorization)                                                      |
-
+| Name                     | Default                      | Description                                                                 |
+| ------------------------ | ---------------------------- | --------------------------------------------------------------------------- |
+| `enabled`                | `true` (dev)/ `false` (prod) | Whether or not RMP is enabled                                               |
+| `flamegraph_enabled`     | `true`                       | Should flamegraphs be recorded automatically?                               |
+| `flamegraph_sample_rate` | `0.5`                        | The flamegraph sample rate. How many snapshots per millisecond are created. |
+| `skip_paths`             | `[]`                         | An array of request paths that should not be profiled. Regex allowed.       |
+| `storage`                | `Storage.new`                | Storage configuration. See [Storage](#Storage).                             |
+| `ui`                     | `UserInterface.new`          | UI configuration. See [UI](#UI).                                            |
+| `user_provider`          | `Rack::Request.new(env).ip`  | How to identify users. See [Authorization](#Authorization)                  |
 
 ### Storage
 
@@ -149,22 +144,21 @@ end
 
 ### UI
 
-Rails Mini Profiler allows you to configure various UI features. 
+Rails Mini Profiler allows you to configure various UI features.
 
-| Name                | Default                   | Description                                                                                     |
-|---------------------|---------------------------|-------------------------------------------------------------------------------------------------|
-| `badge_enabled`     | `true`                    | Should the hedgehog 🦔 badge be injected into pages?                                             |
-| `badge_position`    | `'top-left'`              | Where to display the badge. Options are `'top-left', 'top-right', 'bottom-left, 'bottom-right'` |
-| `base_controller`   | `ApplicationController`   | Which controller UI controllers should inherit from.                                            |
-| `page_size`         | `25`                      | The page size for lists shown in the UI.                                                        |
-| `webpacker_enabled` | `true`                    | Use Webpacker if available? Disable to fall back to the asset pipeline.                         |
+| Name              | Default                 | Description                                                                                     |
+| ----------------- | ----------------------- | ----------------------------------------------------------------------------------------------- |
+| `badge_enabled`   | `true`                  | Should the hedgehog 🦔 badge be injected into pages?                                            |
+| `badge_position`  | `'top-left'`            | Where to display the badge. Options are `'top-left', 'top-right', 'bottom-left, 'bottom-right'` |
+| `base_controller` | `ApplicationController` | Which controller UI controllers should inherit from.                                            |
+| `page_size`       | `25`                    | The page size for lists shown in the UI.                                                        |
 
 ### Request Configuration
 
 You may override static configuration on a per-request by attaching request parameters. For example, `https://myapp.com/api/mydata?rmp_flamegraph=false`
 
-| Name           | Description                                                                                 |
-| ---------------- | ------------------------------------------------------------------------------------------- |
+| Name             | Description                                                                                  |
+| ---------------- | -------------------------------------------------------------------------------------------- |
 | `rmp_flamegraph` | Overrides `flamegraph_enabled` If set to `true` will redirect to the flamegraph immediately. |
 
 ### Authorization
@@ -191,10 +185,10 @@ end
 
 ### Profiling in Production
 
-Rails Mini Profiler is not intended for performance reporting. There are other tools for that ( [Skylight](https://www.skylight.io/),
-[New Relic](https://newrelic.com/), [DataDog](https://www.datadoghq.com/)...). But you can still use RMP in production to profile specific requests. 
+Rails Mini Profiler is not intended for performance monitoring. There are other tools for that ( [RorVsWild](https://www.rorvswild.com/), [AppSignal](https://www.appsignal.com/), [Skylight](https://www.skylight.io/),
+[New Relic](https://newrelic.com/), [DataDog](https://www.datadoghq.com/)...). But you can still use RMP in production to profile specific requests.
 
-Per default, *no requests will be profiled* in production, and the Rails Mini Profiler UI will be inaccessible. 
+Per default, _no requests will be profiled_ in production, and the Rails Mini Profiler UI will be inaccessible.
 
 #### Enabling Profiling
 
@@ -240,13 +234,13 @@ As such, compared to `rack-mini-profiler`, it does not support non-Rails apps (e
 
 Rails Mini Profiler is in early development. As such, breaking changes may still be introduced on a regular basis. While Rails Mini Profiler is in pre-release we do not offer upgrade migrations.
 
-If an upgrade to Rails Mini Profiler breaks your application, we recommend that you clean house and start over. Re-run the initializer and overwrite existing files: 
+If an upgrade to Rails Mini Profiler breaks your application, we recommend that you clean house and start over. Re-run the initializer and overwrite existing files:
 
 ```bash
 rails rails_mini_profiler:install
 ```
 
-If only the DB schema is out of date, drop the offending tables and re-run migrations for the latest version: 
+If only the DB schema is out of date, drop the offending tables and re-run migrations for the latest version:
 
 ```
 rails rails_mini_profiler:install:migrations
@@ -266,7 +260,7 @@ Then, modify `application.rb`:
 ```ruby
 module ApiOnly
   class Application < Rails::Application
-    
+
     config.api_only = true # Either set this to false
     config.middleware.use ActionDispatch::Flash # Or add this
   end

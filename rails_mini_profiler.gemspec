@@ -26,8 +26,8 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = Gem::Requirement.new('>= 2.6.0')
 
-  spec.add_dependency 'inline_svg', '~> 1.9'
-  spec.add_dependency 'jb', '~> 0.8'
-  spec.add_dependency 'pagy', '>= 4.11'
-  spec.add_dependency 'rails', '>= 6.0'
+  spec.add_dependency 'inline_svg'
+  spec.add_dependency 'jb'
+  spec.add_dependency 'pagy'
+  spec.add_dependency 'rails', '>= 8.0'
 end

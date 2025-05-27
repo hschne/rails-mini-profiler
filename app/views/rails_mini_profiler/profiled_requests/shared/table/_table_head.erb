@@ -1,125 +1,193 @@
 <thead>
-<tr>
-  <th style="width: 20px;" class="text-left">
-    <%= label_tag nil do %>
-      <%= check_box_tag 'selected[]', nil,
-                        params.fetch(:selected, []).size == @pagy.items,
-                        class: "request-checkbox",
-                        data: {
-                          action: 'click->selectable#selectAll',
-                          'selectable-target': 'all'
-                        }
-      %>
-    <% end %>
-  </th>
-  <th style="width: 25%;" class="text-left" data-controller="dropdown">
-    <button data-action="click->dropdown#toggle click@window->dropdown#hide" data-dropdown-target="button" class="dropdown-toggle none">
-      Path <%= inline_svg('search.svg', class: 'table-filter-icon') %> </button>
-    <div data-controller="search" data-dropdown-target="menu" class="dropdown-container hidden">
-      <div class="dropdown-body">
-        <%= form_with url: profiled_requests_url, method: :get do |form| %>
-          <%= form.search_field :path,
-                                value: params[:path],
-                                placeholder: 'Search Path',
-                                class: 'dropdown-search-field',
-                                data: { 'filters-target': 'filter' } %>
-          <%= form.submit 'Search', class: 'btn-red', data: { action: 'click->search#submit' } -%>
-        <% end %>
+  <tr>
+    <th style="width: 20px;" class="text-left">
+      <%= label_tag nil do %>
+        <%= check_box_tag "selected[]",
+        nil,
+        params.fetch(:selected, []).size == @pagy.in,
+        class: "request-checkbox",
+        data: {
+          action: "click->selectable#selectAll",
+          "selectable-target": "all",
+        } %>
+      <% end %>
+    </th>
+    <th style="width: 25%;" class="text-left" data-controller="dropdown">
+      <button
+        data-action="click->dropdown#toggle click@window->dropdown#hide"
+        data-dropdown-target="button"
+        class="dropdown-toggle none"
+      >
+        Path
+        <%= inline_svg("search.svg", class: "table-filter-icon") %>
+      </button>
+      <div
+        data-controller="search"
+        data-dropdown-target="menu"
+        class="dropdown-container hidden"
+      >
+        <div class="dropdown-body">
+          <%= form_with url: profiled_requests_url, method: :get do |form| %>
+            <%= form.search_field :path,
+                              value: params[:path],
+                              placeholder: "Search Path",
+                              class: "dropdown-search-field",
+                              data: {
+                                "filters-target": "filter",
+                              } %>
+            <%= form.submit "Search", class: "btn-red", data: { action: "click->search#submit" } -%>
+          <% end %>
+        </div>
       </div>
-    </div>
-  </th>
-  <th style="width: 10%;" class="" data-controller="dropdown">
-    <button data-action="click->dropdown#toggle click@window->dropdown#hide" data-dropdown-target="button" class="dropdown-toggle none">
-      Method <%= inline_svg('filter.svg', class: 'table-filter-icon') %> </button>
-    <div data-controller="checklist" data-dropdown-target="menu" class="dropdown-container hidden">
-      <div class="dropdown-header">
-        Select Method...
-        <button class="clear-filters" data-action="checklist#checkNone">
-          Clear filter
+    </th>
+    <th style="width: 10%;" class="" data-controller="dropdown">
+      <button
+        data-action="click->dropdown#toggle click@window->dropdown#hide"
+        data-dropdown-target="button"
+        class="dropdown-toggle none"
+      >
+        Method
+        <%= inline_svg("filter.svg", class: "table-filter-icon") %>
+      </button>
+      <div
+        data-controller="checklist"
+        data-dropdown-target="menu"
+        class="dropdown-container hidden"
+      >
+        <div class="dropdown-header">
+          Select Method...
+          <button class="clear-filters" data-action="checklist#checkNone">
+            Clear filter
+          </button>
+        </div>
+        <% %w[get put post delete].map(&:upcase).each do |method| %>
+          <%= label_tag nil, class: "dropdown-entry" do %>
+            <%= check_box_tag "method[]",
+            method,
+            params.fetch(:method, []).include?(method),
+            class: "",
+            data: {
+              "filters-target": "filter",
+            } %>
+            <%= method %>
+          <% end %>
+        <% end %>
+        <button class="dropdown-footer" data-action="filters#apply">
+          Apply
         </button>
       </div>
-      <% %w[get put post delete].map(&:upcase).each do |method| %>
-        <%= label_tag nil, class: "dropdown-entry" do %>
-          <%= check_box_tag 'method[]', method, params.fetch(:method, []).include?(method),
-                            class: "",
-                            data: { 'filters-target': "filter" } %>
-          <%= method %>
-        <% end %>
-      <% end %>
-      <button class="dropdown-footer" data-action="filters#apply">
-        Apply
+    </th>
+    <th style="width: 10%;" class="" data-controller="dropdown">
+      <button
+        data-action="click->dropdown#toggle click@window->dropdown#hide"
+        data-dropdown-target="button"
+        class="dropdown-toggle none"
+      >
+        Status
+        <%= inline_svg("filter.svg", class: "table-filter-icon") %>
       </button>
-    </div>
-  </th>
-  <th style="width: 10%;" class="" data-controller="dropdown">
-    <button data-action="click->dropdown#toggle click@window->dropdown#hide" data-dropdown-target="button" class="dropdown-toggle none">
-      Status <%= inline_svg('filter.svg', class: 'table-filter-icon') %> </button>
-    <div data-controller="checklist" data-dropdown-target="menu" class="dropdown-container hidden">
-      <div class="dropdown-header">
-        Select Status...
-        <button class="clear-filters" data-action="checklist#checkNone filters#apply">
-          Clear filter
+      <div
+        data-controller="checklist"
+        data-dropdown-target="menu"
+        class="dropdown-container hidden"
+      >
+        <div class="dropdown-header">
+          Select Status...
+          <button class="clear-filters" data-action="checklist#checkNone filters#apply">
+            Clear filter
+          </button>
+        </div>
+        <% %w[200 300 400 500].each do |status| %>
+          <%= label_tag nil, class: "dropdown-entry" do %>
+            <%= check_box_tag "status[]",
+            status,
+            params.fetch(:status, []).include?(status),
+            class: "",
+            data: {
+              "filters-target": "filter",
+            } %>
+            <%= status %>
+          <% end %>
+        <% end %>
+        <button class="dropdown-footer" data-action="filters#apply">
+          Apply
         </button>
       </div>
-      <% %w[200 300 400 500].each do |status| %>
-        <%= label_tag nil, class: "dropdown-entry" do %>
-          <%= check_box_tag 'status[]', status, params.fetch(:status, []).include?(status),
-                            class: "",
-                            data: { 'filters-target': "filter" } %>
-          <%= status %>
-        <% end %>
-      <% end %>
-      <button class="dropdown-footer" data-action="filters#apply">
-        Apply
+    </th>
+    <th style="width: 15%;" class="" data-controller="dropdown">
+      <button
+        data-action="click->dropdown#toggle click@window->dropdown#hide"
+        data-dropdown-target="button"
+        class="dropdown-toggle none"
+      >
+        Media Type
+        <%= inline_svg("filter.svg", class: "table-filter-icon") %>
       </button>
-    </div>
-  </th>
-  <th style="width: 15%;" class="" data-controller="dropdown">
-    <button data-action="click->dropdown#toggle click@window->dropdown#hide" data-dropdown-target="button" class="dropdown-toggle none">
-      Media Type <%= inline_svg('filter.svg', class: 'table-filter-icon') %> </button>
-    <div data-controller="checklist" data-dropdown-target="menu" class="dropdown-container hidden">
-      <div class="dropdown-header">
-        Select Media Type...
-        <button class="clear-filters" data-action="checklist#checkNone filters#apply">
-          Clear filter
+      <div
+        data-controller="checklist"
+        data-dropdown-target="menu"
+        class="dropdown-container hidden"
+      >
+        <div class="dropdown-header">
+          Select Media Type...
+          <button class="clear-filters" data-action="checklist#checkNone filters#apply">
+            Clear filter
+          </button>
+        </div>
+        <% %w[text/html application/json application/xml].each do |media_type| %>
+          <%= label_tag nil, class: "dropdown-entry" do %>
+            <%= check_box_tag "media_type[]",
+            media_type,
+            params.fetch(:media_type, []).include?(media_type),
+            class: "",
+            data: {
+              target: "filters.filter",
+            } %>
+            <%= media_type %>
+          <% end %>
+        <% end %>
+        <button class="dropdown-footer" data-action="filters#apply">
+          Apply
         </button>
       </div>
-      <% %w[text/html application/json application/xml].each do |media_type| %>
-        <%= label_tag nil, class: "dropdown-entry" do %>
-          <%= check_box_tag 'media_type[]', media_type, params.fetch(:media_type, []).include?(media_type),
-                            class: "",
-                            data: { target: "filters.filter" } %>
-          <%= media_type %>
-        <% end %>
-      <% end %>
-      <button class="dropdown-footer" data-action="filters#apply">
-        Apply
+    </th>
+    <th style="width: 10%;" class="text-left" data-controller="dropdown">
+      <button
+        data-action="click->dropdown#toggle click@window->dropdown#hide"
+        data-dropdown-target="button"
+        class="dropdown-toggle none"
+      >
+        Duration
+        <%= inline_svg("filter.svg", class: "table-filter-icon") %>
       </button>
-    </div>
-  </th>
-  <th style="width: 10%;" class="text-left" data-controller="dropdown">
-    <button data-action="click->dropdown#toggle click@window->dropdown#hide" data-dropdown-target="button" class="dropdown-toggle none">
-      Duration <%= inline_svg('filter.svg', class: 'table-filter-icon') %> </button>
-    <div data-controller="checklist" data-dropdown-target="menu" class="dropdown-container hidden">
-      <div class="dropdown-header">
-        Select Duration...
-        <button class="clear-filters" data-action="checklist#checkNone filters#apply">
-          Clear filter
+      <div
+        data-controller="checklist"
+        data-dropdown-target="menu"
+        class="dropdown-container hidden"
+      >
+        <div class="dropdown-header">
+          Select Duration...
+          <button class="clear-filters" data-action="checklist#checkNone filters#apply">
+            Clear filter
+          </button>
+        </div>
+        <% [100_00, 250_00, 500_00].each do |duration| %>
+          <%= label_tag nil, class: "dropdown-entry" do %>
+            <%= radio_button_tag "duration",
+            duration.to_s,
+            params.fetch(:duration, []).include?(duration.to_s),
+            class: "",
+            data: {
+              target: "filters.filter",
+            } %>
+            <%= "> #{duration / 100}ms" %>
+          <% end %>
+        <% end %>
+        <button class="dropdown-footer" data-action="filters#apply">
+          Apply
         </button>
       </div>
-      <% [100_00, 250_00, 500_00].each do |duration| %>
-        <%= label_tag nil, class: "dropdown-entry" do %>
-          <%= radio_button_tag 'duration', duration.to_s , params.fetch(:duration, []).include?(duration.to_s),
-                               class: "",
-                               data: { target: "filters.filter" } %>
-          <%= "> #{duration / 100}ms" %>
-        <% end %>
-      <% end %>
-      <button class="dropdown-footer" data-action="filters#apply">
-        Apply
-      </button>
-    </div>
-  </th>
-  <th style="width: 15%;" class="text-left">Date</th>
-</tr>
+    </th>
+    <th style="width: 15%;" class="text-left">Date</th>
+  </tr>
 </thead>

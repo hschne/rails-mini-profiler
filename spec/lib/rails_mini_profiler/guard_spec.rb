@@ -25,13 +25,7 @@ module RailsMiniProfiler
       end
 
       context 'with profiler mount path' do
-        let(:env) { { 'PATH_INFO' => "/#{Engine.routes.find_script_name({})}/1" } }
-
-        it('should be false') { expect(subject.profile?).to be(false) }
-      end
-
-      context 'with pack path' do
-        let(:env) { { 'PATH_INFO' => '/packs/js/abc' } }
+        let(:env) { { 'PATH_INFO' => "/#{Engine.routes.url_helpers.root_path}/1" } }
 
         it('should be false') { expect(subject.profile?).to be(false) }
       end

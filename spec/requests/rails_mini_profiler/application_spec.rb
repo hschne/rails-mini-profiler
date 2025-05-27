@@ -56,8 +56,7 @@ module RailsMiniProfiler
 
         profiled_request = ProfiledRequest.find_by(request_path: '/movies')
         expect(profiled_request.response_status).to eq(302)
-        expect(profiled_request.response_body).to match('You are being')
-        expect(profiled_request.response_headers['Content-Type']).to eq('text/html; charset=utf-8')
+        expect(profiled_request.response_headers['content-type']).to eq('text/html; charset=utf-8')
         expect(profiled_request.response_media_type).to eq('text/html')
       end
     end

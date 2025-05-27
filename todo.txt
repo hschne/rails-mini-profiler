@@ -1,0 +1,5 @@
+2025-05-27 Use importmap for FE assets
+2025-05-27 Rewrite RSpec to minitest
+2025-05-27 Make everything plain CSS
+2025-05-27 Remove uncessary runtime dependencies (pagy, jb, inlinesvg)
+

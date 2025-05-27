@@ -60,10 +60,9 @@ function setupTraceBars() {
   traceBars.forEach((bar) => {
     const popover = bar.children[0];
     tippy(bar, {
-      trigger: "click",
       content: popover,
       theme: "rmp",
-      maxWidth: "700px",
+      maxWidth: "50rem",
       placement: "bottom",
       interactive: true,
       onShow(instance) {

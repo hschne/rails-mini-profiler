@@ -4,7 +4,7 @@
   padding: 1.5rem 0;
   margin: 0;
   background: var(--primary);
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px 0 rgb(0, 0, 0 / 20%);
 }
 
 .header a {
@@ -32,6 +32,8 @@
 .home-title {
   padding: 0 0 0 1rem;
   margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--fw-bold);
 }
 
 .header-links {

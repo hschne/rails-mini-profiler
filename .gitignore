@@ -57,9 +57,8 @@ flycheck_*.el
 *.rbc
 capybara-*.html
 .rspec
-/db/*.sqlite3
-/db/*.sqlite3-journal
-/db/*.sqlite3-[0-9]*
+*.sqlite3
+*.sqlite3-*
 /public/system
 /coverage/
 /spec/tmp
