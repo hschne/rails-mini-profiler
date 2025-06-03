@@ -15,8 +15,11 @@ export default class extends Controller {
 
     let text = this.sourceTarget.innerText;
     const filter = this.data.get("filter");
-    if (filter) {
-      text = new RegExp(filter).exec(text)[0];
+    if (filter && text) {
+      const match = new RegExp(filter).exec(text);
+      if (match) {
+        text = match[0];
+      }
     }
     const temporaryInput = document.createElement("textarea");
     temporaryInput.value = text;

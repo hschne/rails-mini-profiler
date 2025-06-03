@@ -1,8 +1,5 @@
 import "../stylesheets/rails-mini-profiler.scss";
 
-import tippy from "tippy.js";
-import "tippy.js/dist/tippy.css";
-
 import { Application } from "@hotwired/stimulus";
 import { Dropdown } from "tailwindcss-stimulus-components";
 import Checklist from "../js/checklist_controller";
@@ -11,6 +8,7 @@ import Filter from "../js/filter_controller";
 import Search from "../js/search_controller";
 import Enable from "../js/enable_controller";
 import Clipboard from "../js/clipboard_controller";
+import Popover from "../js/popover_controller.js";
 
 const application = Application.start();
 
@@ -21,6 +19,7 @@ application.register("filters", Filter);
 application.register("search", Search);
 application.register("enable", Enable);
 application.register("clipboard", Clipboard);
+application.register("popover", Popover);
 
 function setupTraceSearch() {
   const traceNameSearch = document.getElementById("trace-search");
@@ -55,40 +54,11 @@ function setupRequestTable() {
   }
 }
 
-function setupTraceBars() {
-  const traceBars = document.querySelectorAll(".trace-bar");
-  traceBars.forEach((bar) => {
-    const popover = bar.children[0];
-    tippy(bar, {
-      content: popover,
-      theme: "rmp",
-      maxWidth: "50rem",
-      placement: "bottom",
-      interactive: true,
-      onShow(instance) {
-        instance.popper
-          .querySelector(".popover-close")
-          .addEventListener("click", () => {
-            instance.hide();
-          });
-      },
-      onHide(instance) {
-        instance.popper
-          .querySelector(".popover-close")
-          .removeEventListener("click", () => {
-            instance.hide();
-          });
-      },
-    });
-  });
-}
-
 // Trace Bar Popovers
 document.addEventListener(
   "DOMContentLoaded",
   () => {
     setupRequestTable();
-    setupTraceBars();
     setupTraceSearch();
   },
   false

@@ -51,8 +51,8 @@ export default [
     input: input,
     context: "window",
     output: {
-      file: pkg.main,
-      format: "esm",
+      dir: "app/assets/builds",
+      format: "umd",
       name: "RailsMiniProfiler",
       sourcemap: process.env.NODE_ENV === "production" ? false : "inline",
       banner: banner,
@@ -63,7 +63,7 @@ export default [
     input: input,
     context: "window",
     output: {
-      file: "vendor/assets/javascripts/rails-mini-profiler.js",
+      dir: "vendor/assets/javascripts",
       format: "umd",
       name: "RailsMiniProfiler",
       sourcemap: process.env.NODE_ENV === "production" ? false : "inline",

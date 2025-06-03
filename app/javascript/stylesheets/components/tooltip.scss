@@ -1,0 +1,99 @@
+#tooltip {
+  width: max-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #222;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 90%;
+}
+
+.floating-tooltip {
+  position: absolute;
+  background: white;
+  border: 1px solid var(--grey-300);
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  max-width: 400px;
+  font-size: 14px;
+  line-height: 1.4;
+
+  .popover-header {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--grey-200);
+
+    .popover-description {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--grey-700);
+    }
+
+    .popover-close {
+      display: none; // Hide close button in floating tooltips
+    }
+  }
+
+  .popover-body {
+    color: var(--grey-600);
+
+    .trace-details-table {
+      width: 100%;
+      margin-top: 8px;
+      font-size: 12px;
+
+      th,
+      td {
+        padding: 4px 8px;
+        text-align: left;
+
+        &.text-right {
+          text-align: right;
+        }
+      }
+
+      thead th {
+        font-weight: 600;
+        color: var(--grey-500);
+        border-bottom: 1px solid var(--grey-200);
+      }
+    }
+  }
+
+  .popover-footer {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--grey-200);
+  }
+
+  // Styling for backtrace section
+  .backtrace {
+    background: var(--grey-50);
+    border-radius: 4px;
+    font-size: 11px;
+
+    pre {
+      margin: 0;
+      max-height: 120px;
+      overflow-y: auto;
+      color: var(--grey-600);
+    }
+
+    button {
+      background: var(--grey-200);
+      border-radius: 3px;
+      padding: 4px;
+
+      &:hover {
+        background: var(--grey-300);
+      }
+    }
+  }
+}
+

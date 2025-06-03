@@ -54,6 +54,7 @@
     "stylelint-scss": "^6.12.0"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.7.1",
     "@hotwired/stimulus": "^3.0.0",
     "tailwindcss-stimulus-components": "^3.0.0",
     "tippy.js": "^6.3.1"
