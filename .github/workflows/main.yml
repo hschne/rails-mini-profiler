@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         ruby-version: ["3.4", "3.3", "3.2"]
-        rails-version: ["8.0", "7.2"]
+        rails-version: ["8.0"]
         # Run coverage only for latest versions
         include:
           - ruby-version: "3.4"
