@@ -51,18 +51,6 @@ export default [
     input: input,
     context: "window",
     output: {
-      dir: "app/assets/builds",
-      format: "umd",
-      name: "RailsMiniProfiler",
-      sourcemap: process.env.NODE_ENV === "production" ? false : "inline",
-      banner: banner,
-    },
-    plugins: plugins,
-  },
-  {
-    input: input,
-    context: "window",
-    output: {
       dir: "vendor/assets/javascripts",
       format: "umd",
       name: "RailsMiniProfiler",
