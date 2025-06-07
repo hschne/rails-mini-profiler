@@ -8,20 +8,12 @@ load 'rails/tasks/statistics.rake'
 
 require 'bundler/gem_tasks'
 
-begin
-  require 'rspec/core/rake_task'
-  rspec = RSpec::Core::RakeTask.new(:spec)
-  rspec.verbose = false
-rescue LoadError
-  # Not available
-end
+require 'rspec/core/rake_task'
+rspec = RSpec::Core::RakeTask.new(:spec)
+rspec.verbose = false
 
-begin
-  require 'rubocop/rake_task'
-  RuboCop::RakeTask.new
-rescue LoadError
-  # Not available
-end
+require 'rubocop/rake_task'
+RuboCop::RakeTask.new
 
 task lint: %i[rubocop lint:js lint:css lint:commit]
 namespace :lint do
