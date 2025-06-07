@@ -71,9 +71,9 @@ module RailsMiniProfiler
       @registry ||= RailsMiniProfiler::Tracers::Registry.new(configuration)
     end
 
-    def present(model, presenter_class = nil, **kwargs)
+    def present(model, presenter_class = nil, **)
       klass = presenter_class || presenter_class(model)
-      klass.new(model, view_context, **kwargs)
+      klass.new(model, view_context, **)
     end
 
     def presenter_class(model)

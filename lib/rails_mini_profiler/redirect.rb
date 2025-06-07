@@ -3,7 +3,6 @@
 module RailsMiniProfiler
   # Renders a redirect response if the user should be redirected from the original request
   class Redirect
-
     # @param request_context [RequestContext] the current request context
     def initialize(request_context)
       @request = request_context.request
@@ -18,7 +17,9 @@ module RailsMiniProfiler
     # @return [Array] response with status 302 and the new location to redirect to
     def render
       params = CGI.parse(@request.query_string).transform_values(&:first).with_indifferent_access
-      return redirect_to(RailsMiniProfiler::Engine.routes.url_helpers.flamegraph_path(@profiled_request.id)) if params[:rmp_flamegraph].present?
+      if params[:rmp_flamegraph].present?
+        return redirect_to(RailsMiniProfiler::Engine.routes.url_helpers.flamegraph_path(@profiled_request.id))
+      end
 
       false
     end

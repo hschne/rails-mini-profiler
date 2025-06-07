@@ -32,8 +32,8 @@ class Speedscope
 
   private
 
-  def msg(*args)
-    @stdout.puts(*args)
+  def msg(*)
+    @stdout.puts(*)
   end
 
   def new_version_available?

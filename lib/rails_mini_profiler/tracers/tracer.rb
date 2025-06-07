@@ -3,6 +3,8 @@
 module RailsMiniProfiler
   module Tracers
     class Tracer
+      TIMESTAMP_MULTIPLIER = 100_000
+
       class << self
         def subscribes_to
           []
@@ -33,8 +35,8 @@ module RailsMiniProfiler
         # process than floats.
         #
         # See https://github.com/rails/rails/commit/81d0dc90becfe0b8e7f7f26beb66c25d84b8ec7f
-        start_time = (event.time.to_f * 1_000_00).to_i
-        finish_time = (event.end.to_f * 1_000_00).to_i
+        start_time = (event.time.to_f * 100).to_i
+        finish_time = (event.end.to_f * 100).to_i
         {
           name: event.name,
           start: start_time,

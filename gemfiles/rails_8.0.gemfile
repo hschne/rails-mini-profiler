@@ -4,4 +4,28 @@ source "https://rubygems.org"
 
 gem "rails", "~> 8.0.0"
 
+group :development do
+  gem "annotaterb"
+  gem "appraisal"
+  gem "httparty", require: false
+  gem "puma"
+  gem "rubyzip", require: false
+end
+
+group :test, :development do
+  gem "activerecord-import"
+  gem "debug"
+  gem "jb"
+  gem "pg"
+  gem "rubocop"
+  gem "sprockets-rails"
+  gem "sqlite3"
+  gem "stackprof"
+end
+
+group :test do
+  gem "rspec-rails"
+  gem "simplecov"
+end
+
 gemspec path: "../"

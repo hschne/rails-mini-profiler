@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The test environment is used exclusively to run your application's
 # test suite. You never need to work with it otherwise. Remember that
 # your test database is "scratch space" for the test suite and is wiped
@@ -13,10 +15,10 @@ Rails.application.configure do
   # this is usually not necessary, and can slow down your test suite. However, it's
   # recommended that you enable it in continuous integration systems to ensure eager
   # loading is working properly before deploying your code.
-  config.eager_load = ENV["CI"].present?
+  config.eager_load = ENV['CI'].present?
 
   # Configure public file server for tests with cache-control for performance.
-  config.public_file_server.headers = { "cache-control" => "public, max-age=3600" }
+  config.public_file_server.headers = { 'cache-control' => 'public, max-age=3600' }
 
   # Show full error reports.
   config.consider_all_requests_local = true
@@ -37,7 +39,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :test
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
+  config.action_mailer.default_url_options = { host: 'example.com' }
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr

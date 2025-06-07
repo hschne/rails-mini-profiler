@@ -2,9 +2,9 @@ name: main
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -12,64 +12,59 @@ jobs:
 
     strategy:
       matrix:
-        ruby-version: ["3.0", "2.7", "2.6"]
-        rails-version: ["7.0", "6.1", "6.0" ]
-        exclude:
-        - ruby-version: 2.6
-          rails-version: 7.0
+        ruby-version: ["3.4", "3.3", "3.2"]
+        rails-version: ["8.0", "7.2"]
+        # Run coverage only for latest versions
+        include:
+          - ruby-version: "3.4"
+            rails-version: "8.0"
+            coverage: true
       fail-fast: false
 
     env:
-      BUNDLE_WITHOUT: 'development'
       BUNDLE_GEMFILE: "${{ github.workspace }}/gemfiles/rails_${{matrix.rails-version}}.gemfile"
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Ruby ${{ matrix.ruby-version }} / Rails ${{ matrix.rails-version }}
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true
+      - name: Set up Ruby ${{ matrix.ruby-version }} / Rails ${{ matrix.rails-version }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+          cache-version: 3
 
-    - name: Read Node Version
-      id: node-version
-      run: |
-        version=$(cat .tool-versions| grep nodejs | cut -d' ' -f2)
-        echo "::set-output name=version::$version"
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".tool-versions"
+          cache: "npm"
 
-    - name: Set up Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: '${{ steps.node-version.outputs.version }}'
-        cache: 'npm'
+      - name: Install Packages
+        uses: bahmutov/npm-install@v1
 
-    - name: Install Packages
-      uses: bahmutov/npm-install@v1
+      - name: Compile Assets
+        run: npm run build
 
-    - name: Compile Assets
-      run: npm run build
+      - name: Setup DB 🗄️
+        run: |
+          bundle exec rake db:test:prepare
 
-    - name: Setup DB 🗄️
-      run: |
-        bin/rake db:test:prepare
+      - name: Run Tests ✅
+        run: |
+          bundle exec rake spec
+        env:
+          COVERAGE: true
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
 
-    - name: Run Tests ✅
-      run: |
-        bin/rake spec
-      env:
-        COVERAGE: true
-        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-
-    - name: Report Coverage
-      # We don't need to upload coverage multiple times, just do it for latest versions, and only on master
-      if: github.ref == 'refs/heads/main' && matrix.ruby-version == 3.0 && matrix.rails-version == 7.0
-      uses: paambaati/codeclimate-action@v4.0.0
-      with:
-        coverageLocations: |
-          ${{github.workspace}}/coverage/coverage.json:simplecov
-      env:
-        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+      - name: Report Coverage
+        if: github.ref == 'refs/heads/main' && matrix.coverage == true
+        uses: paambaati/codeclimate-action@v4.0.0
+        with:
+          coverageLocations: |
+            ${{github.workspace}}/coverage/coverage.json:simplecov
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
 
   lint:
     runs-on: ubuntu-latest
@@ -92,8 +87,8 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: '${{ steps.node-version.outputs.version }}'
-          cache: 'npm'
+          node-version: "${{ steps.node-version.outputs.version }}"
+          cache: "npm"
 
       - name: Install Packages
         uses: bahmutov/npm-install@v1

@@ -7,9 +7,9 @@ module RailsMiniProfiler
     class Subscriptions
       class << self
         # Subscribe to each individual active support event using a callback.
-        def setup!(subscriptions, &callback)
+        def setup!(subscriptions, &)
           subscriptions.each do |event|
-            subscribe(event, &callback)
+            subscribe(event, &)
           end
         end
 

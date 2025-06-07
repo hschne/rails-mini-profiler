@@ -297,7 +297,6 @@ spec/dummy/log/**
 spec/dummy/tmp/**
 
 vendor/assets
-app/assets/builds
 
 gemfiles/*.gemfile.lock
 gemfiles/.bundle

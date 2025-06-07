@@ -1,2 +1,4 @@
 #!/usr/bin/env ruby
-exec "./bin/rails", "server", *ARGV
+# frozen_string_literal: true
+
+exec './bin/rails', 'server', *ARGV

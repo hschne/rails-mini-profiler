@@ -53,16 +53,10 @@ jobs:
           fi
           echo "::set-output name=version::$version"
 
-      - name: Read Node Version
-        id: node-version
-        run: |
-          version=$(cat .tool-versions| grep nodejs | cut -d' ' -f2)
-          echo "::set-output name=version::$version"
-
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "${{ steps.node-version.outputs.version }}"
+          node-version-file: ".tool-versions"
           cache: "npm"
           registry-url: "https://registry.npmjs.org"
 
@@ -96,12 +90,6 @@ jobs:
           gem push *.gem
         env:
           RUBYGEMS_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
-
-      - name: Publish Package 📦
-        run: |
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_KEY }}
 
       - name: Commit Updated Files 📤
         uses: EndBug/add-and-commit@v9

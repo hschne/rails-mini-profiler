@@ -83,7 +83,7 @@ html {
   --font-size-4xl: calc(var(--font-size-2xl) * var(--font-scale-ratio));
   --space-unit: 1rem;
   --space-xxs: calc(0.25 * var(--space-unit));
-  --shadow-color: rgba(0, 0, 0, 0.2);
+  --shadow-color: rgb(0 0 0 / 20%);
   --space-xs: calc(0.5 * var(--space-unit));
   --space-sm: calc(0.75 * var(--space-unit));
   --space-md: calc(1 * var(--space-unit));

@@ -4,7 +4,7 @@ module RailsMiniProfiler
   class BaseSearch
     def initialize(params = nil, **kwargs)
       config = self.class.config
-      options = params&.to_h || {}
+      options = params.to_h
       options = options.merge(kwargs)
       @scope = options.delete(:scope) || (config[:scope] && instance_eval(&config[:scope]))
       @options = (options.delete(:options) || config[:options]).stringify_keys
@@ -33,8 +33,8 @@ module RailsMiniProfiler
         define_method(name) { @search.param name }
       end
 
-      def results(**kwargs)
-        new(**kwargs).results
+      def results(**)
+        new(**).results
       end
 
       def config
