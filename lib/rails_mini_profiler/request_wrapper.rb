@@ -9,11 +9,28 @@ module RailsMiniProfiler
     #
     # @return [String] the request body
     def body
-      return '' unless super
+      input = super
+      return '' unless input
 
-      body = super.read
-      super.rewind
-      body
+      # Store current position
+      current_pos = input.pos if input.respond_to?(:pos)
+
+      # Rewind to beginning to read full content
+      input.rewind if input.respond_to?(:rewind)
+      body_content = input.read
+
+      # Restore position
+      if current_pos && input.respond_to?(:seek)
+        input.seek(current_pos)
+      elsif input.respond_to?(:rewind)
+        input.rewind
+      end
+
+      body_content || ''
+    rescue StandardError => e
+      # If we can't read the body, return empty string
+      RailsMiniProfiler.logger.debug("Failed to read request body: #{e.message}")
+      ''
     end
 
     # The request headers

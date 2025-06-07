@@ -43,8 +43,8 @@ module RailsMiniProfiler
 
         it 'with stored items returns items' do
           profiled_request = ProfiledRequest.create(user_id: user_id)
-          ProfiledRequest.create(user_id: user_id)
-          ProfiledRequest.create(user_id: user_id)
+          ProfiledRequest.create!(user_id: user_id)
+          ProfiledRequest.create!(user_id: user_id)
 
           get profiled_requests_url(page: 2), params: params
 

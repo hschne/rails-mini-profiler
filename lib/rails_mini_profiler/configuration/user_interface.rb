@@ -13,8 +13,6 @@ module RailsMiniProfiler
   #   @return [class] the controller the UI controllers should inherit from
   # @!attribute page_size
   #   @return [Integer] how many items to render per page in list views
-  # @!attribute webpacker_enabled
-  #   @return [Boolean] if webpacker assets should be used. Disable to fall back to the asset pipeline
   class UserInterface
     class << self
       # Construct a new UI configuration instance
@@ -35,8 +33,7 @@ module RailsMiniProfiler
 
     attr_accessor :badge_enabled,
                   :badge_position,
-                  :page_size,
-                  :webpacker_enabled
+                  :page_size
 
     attr_writer :base_controller
 
@@ -49,12 +46,11 @@ module RailsMiniProfiler
     def defaults!
       @badge_enabled = true
       @badge_position = 'top-left'
-      # We must not set base controller during when the app loads, aka during autoload time, as we are loading
+      # We must not set base controller when the app loads, aka during autoload time, as we are loading
       # constants. Rather, we only load the base controller constants when any engine controllers are first initialized
       # and call #base_controller
       @base_controller = nil
       @page_size = 25
-      @webpacker_enabled = true
     end
 
     def base_controller

@@ -24,7 +24,7 @@ module RailsMiniProfiler
           ResponseWrapper.new(
             'content',
             200,
-            { 'Content-Type' => 'application/json' }
+            { 'content-type' => 'application/json' }
           )
         end
 
@@ -36,7 +36,7 @@ module RailsMiniProfiler
           ResponseWrapper.new(
             'content',
             200,
-            { 'Content-Type' => 'text/html' }
+            { 'content-type' => 'text/html' }
           )
         end
 
@@ -54,7 +54,7 @@ module RailsMiniProfiler
             ResponseWrapper.new(
               '<body>content</body>',
               200,
-              { 'Content-Type' => 'text/html' }
+              { 'content-type' => 'text/html' }
             )
           end
 
@@ -69,7 +69,7 @@ module RailsMiniProfiler
             ResponseWrapper.new(
               '<body>content</body>',
               200,
-              { 'Content-Type' => 'text/html' }
+              { 'content-type' => 'text/html' }
             )
           end
 

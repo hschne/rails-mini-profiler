@@ -76,7 +76,7 @@ module RailsMiniProfiler
       return if traces.empty?
 
       timestamp = Time.zone.now
-      inserts = traces.map do |trace|
+      inserts = traces.reverse.map do |trace|
         {
           rmp_profiled_request_id: profiled_request.id,
           created_at: timestamp,

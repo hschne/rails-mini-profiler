@@ -9,7 +9,6 @@ module RailsMiniProfiler
   class Badge
     include InlineSvg::ActionView::Helpers
     include RailsMiniProfiler::ApplicationHelper
-    include Engine.routes.url_helpers
 
     # @param request_context [RequestContext] The current request context
     # @param configuration [Configuration] The current configuration
@@ -37,7 +36,7 @@ module RailsMiniProfiler
     private
 
     def render_badge?
-      content_type = @original_response.headers['Content-Type']
+      content_type = @original_response.headers['content-type'] || @original_response.headers['Content-Type']
       unless content_type =~ %r{text/html}
         RailsMiniProfiler.logger.debug("badge not rendered, response has content type #{content_type}")
         return false
@@ -72,6 +71,11 @@ module RailsMiniProfiler
       @position = css_position
       template = ERB.new(html)
       template.result(binding)
+    end
+
+    # Provide access to route helpers for ERB template
+    def profiled_request_path(id)
+      RailsMiniProfiler::Engine.routes.url_helpers.profiled_request_path(id)
     end
 
     # Transform the configuration position into CSS style positions

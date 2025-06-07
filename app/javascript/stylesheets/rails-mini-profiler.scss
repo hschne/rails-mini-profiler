@@ -1,31 +1,32 @@
-@import 'flashes';
-@import 'flamegraph';
-@import 'profiled_requests';
-@import 'traces';
-@import 'components/buttons';
-@import 'components/input';
-@import 'components/navbar';
-@import 'components/pagination';
-@import 'components/page_header';
-@import 'components/dropdown';
-@import 'components/placeholder';
-@import 'components/trace';
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@use "flashes";
+@use "flamegraph";
+@use "profiled_requests";
+@use "traces";
+@use "components/buttons";
+@use "components/input";
+@use "components/navbar";
+@use "components/pagination";
+@use "components/page_header";
+@use "components/dropdown";
+@use "components/placeholder";
+@use "components/trace";
+@use "components/tooltip";
+@import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap";
 
 @font-face {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
 }
 
 @font-face {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
 }
@@ -35,7 +36,7 @@ html {
   height: 100%;
   padding: 0;
   margin: 0;
-  font-family: 'Open Sans', monospace;
+  font-family: "Open Sans", monospace;
 
   --grey-50: #f9fafb;
   --grey-100: #f3f4f6;
@@ -63,6 +64,35 @@ html {
   --fw-normal: 400;
   --fw-semibold: 600;
   --fw-bold: 700;
+  --font-base-size: 1rem;
+  --font-scale-ratio: 1.3;
+  --color-text: var(--color-grey-900);
+  --color-text-secondary: var(--color-grey-600);
+  --color-background: var(--color-grey-50);
+  --color-background-code: var(--color-info-950);
+  --color-background-inline-code: var(--color-grey-100);
+  --color-background-thead: var(--color-grey-100);
+  --color-link-active: var(--color-grey-700);
+  --color-link-hover: var(--color-grey-600);
+  --font-size-sm: calc(var(--font-base-size) / var(--font-scale-ratio));
+  --font-size-md: var(--font-base-size);
+  --font-size-lg: calc(var(--font-size-md) * var(--font-scale-ratio));
+  --font-size-xl: calc(var(--font-size-lg) * var(--font-scale-ratio));
+  --font-size-2xl: calc(var(--font-size-xl) * var(--font-scale-ratio));
+  --font-size-3xl: calc(var(--font-size-2xl) * var(--font-scale-ratio));
+  --font-size-4xl: calc(var(--font-size-2xl) * var(--font-scale-ratio));
+  --space-unit: 1rem;
+  --space-xxs: calc(0.25 * var(--space-unit));
+  --shadow-color: rgb(0 0 0 / 20%);
+  --space-xs: calc(0.5 * var(--space-unit));
+  --space-sm: calc(0.75 * var(--space-unit));
+  --space-md: calc(1 * var(--space-unit));
+  --space-lg: calc(1.5 * var(--space-unit));
+  --space-xl: calc(2 * var(--space-unit));
+  --space-2xl: calc(3.25 * var(--space-unit));
+  --space-3xl: calc(5.25 * var(--space-unit));
+  --border-radius-sm: 5px;
+  --border-radius-md: 10px;
 }
 
 * {
@@ -120,9 +150,9 @@ main {
 
 .pill {
   padding: 0.1rem 0.4rem;
+  border-radius: 5px;
   margin: 0.2rem 0;
   background: var(--grey-200);
-  border-radius: 5px;
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.1rem;
@@ -131,11 +161,20 @@ main {
 /* --------------------------------------- */
 
 .popover {
-  display: flex;
+  position: absolute;
+  z-index: 1000;
+  display: none;
   width: 600px;
   flex-direction: column;
   padding: 1em;
-  color: black;
+  border: 1px solid var(--grey-200);
+  border-radius: 6px;
+  background: white;
+  box-shadow: 0 4px 12px 0 var(--shadow-color);
+}
+
+.popover.visible {
+  display: flex;
 }
 
 .popover-header {
@@ -165,27 +204,4 @@ main {
 
 .popover-footer {
   border-top: 1px solid var(--grey-50);
-}
-
-.tippy-box[data-theme~='rmp'] {
-  background: white;
-  border-radius: 5px;
-  box-shadow: 8px 0 30px 4px rgba(0, 0, 0, 0.2), 8px 4px 10px 0 rgba(0, 0, 0, 0.05);
-  transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
-}
-
-.tippy-box[data-theme~='rmp'][data-placement^='top'] > .tippy-arrow::before {
-  border-top-color: white;
-}
-
-.tippy-box[data-theme~='rmp'][data-placement^='bottom'] > .tippy-arrow::before {
-  border-bottom-color: white;
-}
-
-.tippy-box[data-theme~='rmp'][data-placement^='left'] > .tippy-arrow::before {
-  border-left-color: white;
-}
-
-.tippy-box[data-theme~='rmp'][data-placement^='right'] > .tippy-arrow::before {
-  border-right-color: white;
 }

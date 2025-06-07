@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.2
   NewCops: enable
   SuggestExtensions: false
   Exclude:
@@ -8,10 +8,18 @@ AllCops:
     - gemfiles/**/*
     - db/migrate/*.rb
     - bin/*
-    - !ruby/regexp /schema\.rb$/
 
 Layout/LineLength:
   Max: 120
+
+Naming/PredicateName:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Max: 15
+
+Metrics/PerceivedComplexity:
+  Max: 16
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented_relative_to_receiver
@@ -20,14 +28,14 @@ Metrics/AbcSize:
   Max: 20
 
 Metrics/MethodLength:
-  CountAsOne: ['array', 'heredoc']
+  CountAsOne: ["array", "heredoc"]
   Max: 15
 
 Metrics/BlockLength:
-  IgnoredMethods: ['describe', 'context']
+  Enabled: false
 
 Style/Documentation:
   Enabled: false
 
 Style/OpenStructUse:
-  Exclude: ['**/*_spec.rb']
+  Exclude: ["**/*_spec.rb"]

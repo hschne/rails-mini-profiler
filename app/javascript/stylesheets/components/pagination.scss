@@ -24,8 +24,8 @@
 
 .pagy-nav > .page.next a,
 .pagy-nav > .page.next.disabled {
-  border-right: 1px solid var(--border-color);
   border-radius: 0 5px 5px 0;
+  border-right: 1px solid var(--border-color);
 }
 
 .pagy-nav > .page.active {

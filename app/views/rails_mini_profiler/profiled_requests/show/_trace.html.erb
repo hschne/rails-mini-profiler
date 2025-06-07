@@ -1,57 +1,55 @@
-<li class="trace <%= trace.type %>">
+<li class="trace <%= trace.type %>" data-controller="popover">
   <span class="trace-name " style="width: calc(calc(<%= trace.from_start_percent %>% * .9) + 10%)"><%= trace.label %></span>
-  <div class="trace-bar" style="width: max(calc(<%= trace.duration_percent %>% * .9), 5px)">
-    <div class="popover">
-      <section class="popover-header">
-        <h1 class="popover-description"><%= trace.description %></h1>
-        <button class="popover-close">x</button>
-      </section>
-      <section class="popover-body">
-        <%= trace.content %>
+  <div class="trace-bar" style="width: max(calc(<%= trace.duration_percent %>% * .9), 5px)" data-popover-target="clickable"></div>
 
-        <% if trace.backtrace %>
-          <section class="popover-footer">
-            <div
-              class="backtrace"
-              data-controller="clipboard"
-              data-clipboard-filter=".+?(?=:in)"
-              data-clipboard-copied-message="Copied" >
-              <pre data-clipboard-target="source"><%= trace.backtrace %></pre>
-              <button
-                title="Copy to clipboard"
-                type="button"
-                data-action="clipboard#copy"
-                data-clipboard-target="button"
-              >
-                <%= inline_svg('copy.svg') %>
-              </button>
-            </div>
-          </section>
-        <% end %>
+  <div class="popover" data-popover-target="popover">
+    <section class="popover-header">
+      <h1 class="popover-description"><%= trace.description %></h1>
+      <button class="popover-close">x</button>
+    </section>
+    <section class="popover-body">
+      <%= trace.content %>
 
-        <table class="trace-details-table">
-          <thead>
-          <tr>
-            <th class="text-left"></th>
-            <th class="text-right">Response Time</th>
-            <th class="text-right">Allocations</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>Total</td>
-            <td class="text-right"><%= trace.duration %>ms</td>
-            <td class="text-right"><%= trace.allocations %></td>
-          </tr>
-          <tr>
-            <td>Relative</td>
-            <td class="text-right"><%= trace.duration_percent %>%</td>
-            <td class="text-right"><%= trace.allocations_percent %>%</td>
-          </tr>
-        </table>
-      </section>
+      <% if trace.backtrace %>
+        <section class="popover-footer">
+          <div
+            class="backtrace"
+            data-controller="clipboard"
+            data-clipboard-filter=".+?(?=:in)"
+            data-clipboard-copied-message="Copied" >
+            <pre data-clipboard-target="source"><%= trace.backtrace %></pre>
+            <button
+              title="Copy to clipboard"
+              type="button"
+              data-action="clipboard#copy"
+              data-clipboard-target="button"
+            >
+              <%= inline_svg('copy.svg') %>
+            </button>
+          </div>
+        </section>
+      <% end %>
 
-
-    </div>
+      <table class="trace-details-table">
+        <thead>
+        <tr>
+          <th class="text-left"></th>
+          <th class="text-right">Response Time</th>
+          <th class="text-right">Allocations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Total</td>
+          <td class="text-right"><%= trace.duration %>ms</td>
+          <td class="text-right"><%= trace.allocations %></td>
+        </tr>
+        <tr>
+          <td>Relative</td>
+          <td class="text-right"><%= trace.duration_percent %>%</td>
+          <td class="text-right"><%= trace.allocations_percent %>%</td>
+        </tr>
+      </table>
+    </section>
   </div>
 </li>

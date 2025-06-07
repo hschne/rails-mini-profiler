@@ -2,11 +2,11 @@ name: release
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
     inputs:
       version:
-        description: 'The release version'
+        description: "The release version"
         required: true
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
           release-type: ruby
           package-name: rails-mini-profiler
           bump-minor-pre-major: true
-          version-file: 'dummy.rb' # Don't set the version file, we do version increments ourselves on release
+          version-file: "dummy.rb" # Don't set the version file, we do version increments ourselves on release
           changelog-types: '[{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false},{"type":"refactor","section":"Miscellaneous","hidden":false}]'
 
   release:
@@ -41,7 +41,7 @@ jobs:
         with:
           bundler-cache: true
         env:
-          BUNDLE_WITHOUT: 'development'
+          BUNDLE_WITHOUT: "development"
 
       - name: Release Version
         id: release-version
@@ -53,21 +53,15 @@ jobs:
           fi
           echo "::set-output name=version::$version"
 
-      - name: Read Node Version
-        id: node-version
-        run: |
-          version=$(cat .tool-versions| grep nodejs | cut -d' ' -f2)
-          echo "::set-output name=version::$version"
-
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '${{ steps.node-version.outputs.version }}'
-          cache: 'npm'
-          registry-url: 'https://registry.npmjs.org'
+          node-version-file: ".tool-versions"
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org"
 
-      - name: Install Packages
-        uses: bahmutov/npm-install@v1
+      - name: Install dependencies
+        run: npm ci
 
       - name: Compile Assets
         run: npm run build
@@ -96,12 +90,6 @@ jobs:
           gem push *.gem
         env:
           RUBYGEMS_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
-
-      - name: Publish Package 📦
-        run: |
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_KEY }}
 
       - name: Commit Updated Files 📤
         uses: EndBug/add-and-commit@v9

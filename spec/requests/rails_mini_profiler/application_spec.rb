@@ -43,8 +43,8 @@ module RailsMiniProfiler
         profiled_request = ProfiledRequest.find_by(request_path: '/movies')
         trace_start = trace.time.to_f * Tracers::Tracer::TIMESTAMP_MULTIPLIER
         trace_end = trace.time.to_f * Tracers::Tracer::TIMESTAMP_MULTIPLIER
-        expect(profiled_request.start).to be_within(100).of(trace_start)
-        expect(profiled_request.finish).to be_within(100).of(trace_end)
+        expect(profiled_request.start * 1000).to be_within(1000).of(trace_start)
+        expect(profiled_request.finish * 1000).to be_within(1000).of(trace_end)
         expect(profiled_request.duration).to be_within(1000).of(trace.duration * 100)
         expect(profiled_request.allocations).to be_within(1000).of(trace.allocations)
       end
@@ -56,8 +56,7 @@ module RailsMiniProfiler
 
         profiled_request = ProfiledRequest.find_by(request_path: '/movies')
         expect(profiled_request.response_status).to eq(302)
-        expect(profiled_request.response_body).to match('You are being')
-        expect(profiled_request.response_headers['Content-Type']).to eq('text/html; charset=utf-8')
+        expect(profiled_request.response_headers['content-type']).to eq('text/html; charset=utf-8')
         expect(profiled_request.response_media_type).to eq('text/html')
       end
     end

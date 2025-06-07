@@ -23,8 +23,8 @@ module RailsMiniProfiler
         end
 
         it('stores start and ends as microseconds') do
-          expect(subject.trace.start).to be_within(100).of(@event.time.to_f * Tracer::TIMESTAMP_MULTIPLIER)
-          expect(subject.trace.finish).to be_within(100).of(@event.end.to_f * Tracer::TIMESTAMP_MULTIPLIER)
+          expect(subject.trace.start).to be_within(100).of(@event.time.to_f * 100)
+          expect(subject.trace.finish).to be_within(100).of(@event.end.to_f * 100)
         end
       end
     end

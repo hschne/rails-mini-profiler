@@ -1,8 +1,6 @@
-version: '3.1'
-
 services:
   postgres:
-    image: postgres:15
+    image: postgres:latest
     environment:
       POSTGRES_USER: dummy
       POSTGRES_PASSWORD: postgres
@@ -14,4 +12,3 @@ services:
 
 volumes:
   postgres-data:
-

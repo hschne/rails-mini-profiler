@@ -4,20 +4,15 @@ module RailsMiniProfiler
   module ApplicationHelper
     include Pagy::Frontend
 
-    def present(model, presenter_class = nil, **kwargs)
+    def present(model, presenter_class = nil, **)
       klass = presenter_class || "#{model.class}Presenter".constantize
-      presenter = klass.new(model, self, **kwargs)
+      presenter = klass.new(model, self, **)
       yield(presenter) if block_given?
       presenter
     end
 
     def inline_svg(path, options = {})
-      if defined?(Webpacker::Engine) && RailsMiniProfiler.configuration.ui.webpacker_enabled
-        path = "media/images/#{path}"
-        inline_svg_pack_tag(path, options)
-      else
-        inline_svg_tag(path, options)
-      end
+      inline_svg_tag(path, options)
     end
   end
 end

@@ -11,7 +11,7 @@ module RailsMiniProfiler
     def index
       @profiled_requests = ProfiledRequest.where(user_id: user_id).order(id: :desc)
       search = ProfiledRequestSearch.new(index_params, scope: @profiled_requests)
-      @pagy, @profiled_requests = pagy(search.results, items: configuration.ui.page_size)
+      @pagy, @profiled_requests = pagy(search.results, limit: configuration.ui.page_size)
       @profiled_requests = @profiled_requests.map { |request| present(request) }
     end
 
@@ -71,9 +71,9 @@ module RailsMiniProfiler
       @registry ||= RailsMiniProfiler::Tracers::Registry.new(configuration)
     end
 
-    def present(model, presenter_class = nil, **kwargs)
+    def present(model, presenter_class = nil, **)
       klass = presenter_class || presenter_class(model)
-      klass.new(model, view_context, **kwargs)
+      klass.new(model, view_context, **)
     end
 
     def presenter_class(model)
