@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'forwardable'
-require 'pagy'
 
 require 'rails_mini_profiler/version'
 require 'rails_mini_profiler/engine'
@@ -9,6 +8,7 @@ require 'rails_mini_profiler/engine'
 require 'rails_mini_profiler/models/base_model'
 require 'rails_mini_profiler/tracers'
 require 'rails_mini_profiler/configuration'
+require 'rails_mini_profiler/pagination'
 
 require 'rails_mini_profiler/user'
 require 'rails_mini_profiler/request_context'

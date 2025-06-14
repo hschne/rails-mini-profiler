@@ -1,13 +1,11 @@
-.pagy-nav {
+.pagination {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1em 0;
 }
 
-.pagy-nav > .page.disabled,
-.pagy-nav > .page.active,
-.pagy-nav > .page > a {
+.pagination-link {
   padding: 0.5rem 1rem;
   border: 1px solid var(--border-color);
   border-right: none;
@@ -15,20 +13,19 @@
   color: var(--grey-900);
   cursor: pointer;
   text-decoration: none;
+  display: inline-block;
 }
 
-.pagy-nav > .page.prev a,
-.pagy-nav > .page.prev.disabled {
+.pagination-link.pagination-prev {
   border-radius: 5px 0 0 5px;
 }
 
-.pagy-nav > .page.next a,
-.pagy-nav > .page.next.disabled {
+.pagination-link.pagination-next {
   border-radius: 0 5px 5px 0;
   border-right: 1px solid var(--border-color);
 }
 
-.pagy-nav > .page.active {
+.pagination-link.pagination-current {
   border-color: var(--red-500);
   background: var(--red-500);
   color: white;
@@ -39,7 +36,7 @@
   }
 }
 
-.pagy-nav > .page.disabled {
+.pagination-link.disabled {
   color: var(--grey-500);
   cursor: default;
 
@@ -48,8 +45,20 @@
   }
 }
 
-.pagy-nav > .page.disabled:hover,
-.pagy-nav > .page.active:hover,
-.pagy-nav > .page > a:hover {
+.pagination-link:hover {
   background: var(--grey-100);
+}
+
+.pagination-link.disabled:hover,
+.pagination-link.pagination-current:hover {
+  background: var(--red-500);
+}
+
+.pagination-link.pagination-ellipsis {
+  cursor: default;
+  color: var(--grey-500);
+
+  &:hover {
+    background: white;
+  }
 }

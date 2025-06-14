@@ -3,7 +3,6 @@ PATH
   specs:
     rails_mini_profiler (0.7.3)
       jb
-      pagy
       rails (>= 7.2)
 
 GEM
@@ -162,7 +161,6 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.8-x86_64-linux-musl)
       racc (~> 1.4)
-    pagy (9.3.4)
     parallel (1.27.0)
     parser (3.3.8.0)
       ast (~> 2.4.1)

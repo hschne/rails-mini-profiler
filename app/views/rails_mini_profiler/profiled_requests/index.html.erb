@@ -5,5 +5,5 @@
   <%= render "rails_mini_profiler/profiled_requests/shared/header/header" %>
   <%= render "rails_mini_profiler/profiled_requests/shared/table/table" %>
 </div>
-<%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+<%= present(@pagination, RailsMiniProfiler::PaginationPresenter).links %>
 <br>
