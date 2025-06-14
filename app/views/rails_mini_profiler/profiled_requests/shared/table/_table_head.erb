@@ -4,7 +4,7 @@
       <%= label_tag nil do %>
         <%= check_box_tag "selected[]",
         nil,
-        params.fetch(:selected, []).size == @pagy.in,
+        params.fetch(:selected, []).size == @pagination.total_count,
         class: "request-checkbox",
         data: {
           action: "click->selectable#selectAll",

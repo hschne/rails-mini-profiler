@@ -28,6 +28,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'inline_svg'
   spec.add_dependency 'jb'
-  spec.add_dependency 'pagy'
   spec.add_dependency 'rails', '>= 7.2'
 end
