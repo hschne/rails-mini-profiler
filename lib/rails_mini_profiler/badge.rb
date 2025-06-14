@@ -7,7 +7,6 @@ module RailsMiniProfiler
   #
   # @api private
   class Badge
-    include InlineSvg::ActionView::Helpers
     include RailsMiniProfiler::ApplicationHelper
 
     # @param request_context [RequestContext] The current request context

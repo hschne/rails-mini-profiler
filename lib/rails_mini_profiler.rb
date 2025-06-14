@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'forwardable'
-require 'inline_svg'
 
 require 'rails_mini_profiler/version'
 require 'rails_mini_profiler/engine'
