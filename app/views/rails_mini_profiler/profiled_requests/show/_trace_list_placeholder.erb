@@ -1,12 +1,16 @@
 <tr class="no-row">
   <td colspan="100%">
     <div class="placeholder">
-      <%= inline_svg('logo_variant.svg', class: 'placeholder-image') %>
+      <%= icon("logo_variant", class: "placeholder-image") %>
       <div class="placeholder-text">
         <h2>No Traces found!</h2>
         <p>Modify filters or reload this page</p>
       </div>
-      <%= link_to('Clear Filters', profiled_request_url(@profiled_request.id), class: 'placeholder-link') %>
+      <%= link_to(
+        "Clear Filters",
+        profiled_request_url(@profiled_request.id),
+        class: "placeholder-link",
+      ) %>
     </div>
   </td>
 </tr>

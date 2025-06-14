@@ -31,7 +31,12 @@
     padding-bottom: 2px;
   }
 </style>
-<a id="rails-mini-profiler-badge" href="<%= profiled_request_path(@profiled_request.id) %>" data-turbolinks="false" title="View performance data">
-  <%= inline_svg('logo_variant.svg') %>
+<a
+  id="rails-mini-profiler-badge"
+  href="<%= profiled_request_path(@profiled_request.id) %>"
+  data-turbolinks="false"
+  title="View performance data"
+>
+  <%= icon("logo_variant") %>
   <%= (@profiled_request.duration.to_f / 100).round %>ms
 </a>
