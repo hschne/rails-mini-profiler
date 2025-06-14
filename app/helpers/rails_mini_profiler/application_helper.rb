@@ -11,8 +11,15 @@ module RailsMiniProfiler
       presenter
     end
 
-    def inline_svg(path, options = {})
-      inline_svg_tag(path, options)
+    def icon(name, **kwargs)
+      root = RailsMiniProfiler::Engine.root
+      icon_path = File.read(root.join('app', 'assets', 'images', "#{name}.svg"))
+
+      Nokogiri::HTML::DocumentFragment.parse(icon_path)
+        .at_css('svg')
+        .tap { _1['class'] = kwargs[:class] }
+        .to_html
+        .html_safe
     end
   end
 end
