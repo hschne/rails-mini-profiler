@@ -2,8 +2,6 @@
 
 module RailsMiniProfiler
   module ApplicationHelper
-    include Pagy::Frontend
-
     def present(model, presenter_class = nil, **)
       klass = presenter_class || "#{model.class}Presenter".constantize
       presenter = klass.new(model, self, **)
@@ -20,6 +18,10 @@ module RailsMiniProfiler
         .tap { _1['class'] = kwargs[:class] }
         .to_html
         .html_safe
+    end
+
+    def pagination_links(pagination, path_params = {})
+      present(pagination, PaginationPresenter).links(path_params)
     end
   end
 end
