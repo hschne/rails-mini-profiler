@@ -1,9 +1,9 @@
-
 <div
   data-controller="filters selectable"
-  data-action="search-controller:submit@window->filters#apply">
+  data-action="search-controller:submit@window->filters#apply"
+>
   <%= render "rails_mini_profiler/profiled_requests/shared/header/header" %>
   <%= render "rails_mini_profiler/profiled_requests/shared/table/table" %>
 </div>
-<%= present(@pagination, RailsMiniProfiler::PaginationPresenter).links %>
+<%= @pagination.links %>
 <br>

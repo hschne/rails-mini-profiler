@@ -2,18 +2,24 @@
 
 module RailsMiniProfiler
   class Pagination
-    attr_reader :page, :per_page, :total_count, :total_pages
+    attr_reader :page, :page_size, :total_count, :total_pages
 
-    def initialize(page:, per_page:, total_count:)
+    def initialize(collection, page:, page_size:)
+      @collection = collection
+      @page_size = page_size
       @page = [page, 1].max
-      @per_page = per_page
-      @total_count = total_count
-      @total_pages = (total_count.to_f / per_page).ceil
+      @total_count = @collection.count
+      @total_pages = (@total_count.to_f / @page_size).ceil
       @page = [@page, @total_pages].min if @total_pages.positive?
     end
 
+    def paginate
+      result = @collection.limit(@page_size).offset(offset)
+      [self, result]
+    end
+
     def offset
-      (page - 1) * per_page
+      (page - 1) * @page_size
     end
 
     def has_previous?

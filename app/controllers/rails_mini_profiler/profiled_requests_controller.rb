@@ -11,6 +11,7 @@ module RailsMiniProfiler
       search = ProfiledRequestSearch.new(index_params, scope: @profiled_requests)
 
       @pagination, @profiled_requests = pagination(search)
+      @pagination = present(@pagination, PaginationPresenter)
       @profiled_requests = @profiled_requests.map { |request| present(request) }
     end
 
@@ -83,18 +84,11 @@ module RailsMiniProfiler
     end
 
     def pagination(search)
-      page = (params[:page] || 1).to_i
-      per_page = configuration.ui.page_size
-      total_count = search.results.count
-
-      pagination = Pagination.new(
-        page: page,
-        per_page: per_page,
-        total_count: total_count
-      )
-
-      profiled_requests = search.results.limit(per_page).offset(pagination.offset)
-      [pagination, profiled_requests]
+      Pagination
+        .new(search.results,
+             page: (params[:page] || 1).to_i,
+             page_size: configuration.ui.page_size)
+        .paginate
     end
 
     def payload_column

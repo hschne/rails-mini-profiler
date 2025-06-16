@@ -19,9 +19,5 @@ module RailsMiniProfiler
         .to_html
         .html_safe
     end
-
-    def pagination_links(pagination, path_params = {})
-      present(pagination, PaginationPresenter).links(path_params)
-    end
   end
 end
