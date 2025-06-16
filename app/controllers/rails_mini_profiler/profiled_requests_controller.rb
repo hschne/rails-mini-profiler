@@ -4,14 +4,14 @@ require_dependency 'rails_mini_profiler/application_controller'
 
 module RailsMiniProfiler
   class ProfiledRequestsController < ApplicationController
-    include Pagy::Backend
-
     before_action :set_profiled_request, only: %i[show destroy]
 
     def index
       @profiled_requests = ProfiledRequest.where(user_id: user_id).order(id: :desc)
       search = ProfiledRequestSearch.new(index_params, scope: @profiled_requests)
-      @pagy, @profiled_requests = pagy(search.results, limit: configuration.ui.page_size)
+
+      @pagination, @profiled_requests = pagination(search)
+      @pagination = present(@pagination, PaginationPresenter)
       @profiled_requests = @profiled_requests.map { |request| present(request) }
     end
 
@@ -81,6 +81,14 @@ module RailsMiniProfiler
 
       presenters = registry.presenters
       presenters[model.name] || TracePresenter
+    end
+
+    def pagination(search)
+      Pagination
+        .new(search.results,
+             page: (params[:page] || 1).to_i,
+             page_size: configuration.ui.page_size)
+        .paginate
     end
 
     def payload_column

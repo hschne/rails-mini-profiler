@@ -27,6 +27,5 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = Gem::Requirement.new('>= 3.2')
 
   spec.add_dependency 'jb'
-  spec.add_dependency 'pagy'
   spec.add_dependency 'rails', '>= 7.2'
 end
