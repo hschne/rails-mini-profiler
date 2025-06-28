@@ -1,0 +1,98 @@
+#tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  padding: 5px;
+  border-radius: 4px;
+  background: #222;
+  color: white;
+  font-size: 90%;
+  font-weight: bold;
+}
+
+.floating-tooltip {
+  position: absolute;
+  z-index: 1000;
+  max-width: 400px;
+  padding: 12px;
+  border: 1px solid var(--grey-300);
+  border-radius: 6px;
+  background: white;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.floating-tooltip .popover-header {
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--grey-200);
+  margin-bottom: 8px;
+}
+
+.floating-tooltip .popover-header .popover-description {
+  margin: 0;
+  color: var(--grey-700);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.floating-tooltip .popover-header .popover-close {
+  display: none;
+}
+
+.floating-tooltip .popover-body {
+  color: var(--grey-600);
+}
+
+.floating-tooltip .popover-body .trace-details-table {
+  width: 100%;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.floating-tooltip .popover-body .trace-details-table th,
+.floating-tooltip .popover-body .trace-details-table td {
+  padding: 4px 8px;
+  text-align: left;
+}
+
+.floating-tooltip .popover-body .trace-details-table th.text-right,
+.floating-tooltip .popover-body .trace-details-table td.text-right {
+  text-align: right;
+}
+
+.floating-tooltip .popover-body .trace-details-table thead th {
+  border-bottom: 1px solid var(--grey-200);
+  color: var(--grey-500);
+  font-weight: 600;
+}
+
+.floating-tooltip .popover-footer {
+  padding-top: 8px;
+  border-top: 1px solid var(--grey-200);
+  margin-top: 8px;
+}
+
+.floating-tooltip .backtrace {
+  border-radius: 4px;
+  background: var(--grey-50);
+  font-size: 11px;
+}
+
+.floating-tooltip .backtrace pre {
+  max-height: 120px;
+  margin: 0;
+  color: var(--grey-600);
+  overflow-y: auto;
+}
+
+.floating-tooltip .backtrace button {
+  padding: 4px;
+  border-radius: 3px;
+  background: var(--grey-200);
+}
+
+.floating-tooltip .backtrace button:hover {
+  background: var(--grey-300);
+}

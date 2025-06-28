@@ -25,12 +25,12 @@
 
 .placeholder-link {
   color: var(--grey-400);
+}
 
-  &:visited {
-    color: var(--grey-400);
-  }
+.placeholder-link:visited {
+  color: var(--grey-400);
+}
 
-  &:hover {
-    color: var(--grey-900);
-  }
+.placeholder-link:hover {
+  color: var(--grey-900);
 }

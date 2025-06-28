@@ -19,16 +19,10 @@ module RailsMiniProfiler
       app.middleware.insert_before(ActionDispatch::Static, ActionDispatch::Static, "#{root}/public")
     end
 
-    # If sprockets is not being used then there is no need to hook into asset compilation. Calling config.assets
-    # without Sprockets installed breaks compilation.
-    if defined?(Sprockets::Rails)
-      initializer 'rails_mini_profiler.assets.precompile', group: :all do |app|
-        app.config.assets.precompile += %w[
-          rails_mini_profiler.js
-          rails_mini_profiler/application.css
-          vendor/assets/images
-        ]
-      end
+    initializer 'rails_mini_profiler.assets' do |app|
+      app.config.assets.paths << root.join('app/assets/stylesheets')
+      app.config.assets.paths << root.join('app/javascript')
+      app.config.assets.precompile += %w[rails_mini_profiler_manifest rails_mini_profiler/rails-mini-profiler.css]
     end
   end
 end

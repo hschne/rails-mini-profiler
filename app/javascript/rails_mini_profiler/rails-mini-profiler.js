@@ -1,14 +1,12 @@
-import "../stylesheets/rails-mini-profiler.scss";
-
 import { Application } from "@hotwired/stimulus";
 import { Dropdown } from "tailwindcss-stimulus-components";
-import Checklist from "../js/checklist_controller";
-import Selectable from "../js/select_controller";
-import Filter from "../js/filter_controller";
-import Search from "../js/search_controller";
-import Enable from "../js/enable_controller";
-import Clipboard from "../js/clipboard_controller";
-import Popover from "../js/popover_controller.js";
+import Checklist from "./controllers/checklist_controller";
+import Selectable from "./controllers/select_controller";
+import Filter from "./controllers/filter_controller";
+import Search from "./controllers/search_controller";
+import Enable from "./controllers/enable_controller";
+import Clipboard from "./controllers/clipboard_controller";
+import Popover from "./controllers/popover_controller.js";
 
 const application = Application.start();
 

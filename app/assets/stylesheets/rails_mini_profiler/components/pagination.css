@@ -30,19 +30,19 @@
   background: var(--red-500);
   color: white;
   cursor: default;
+}
 
-  &:hover {
-    background: var(--red-500);
-  }
+.pagination-link.pagination-current:hover {
+  background: var(--red-500);
 }
 
 .pagination-link.disabled {
   color: var(--grey-500);
   cursor: default;
+}
 
-  &:hover {
-    background: white;
-  }
+.pagination-link.disabled:hover {
+  background: white;
 }
 
 .pagination-link:hover {
@@ -57,8 +57,8 @@
 .pagination-link.pagination-ellipsis {
   cursor: default;
   color: var(--grey-500);
+}
 
-  &:hover {
-    background: white;
-  }
+.pagination-link.pagination-ellipsis:hover {
+  background: white;
 }
