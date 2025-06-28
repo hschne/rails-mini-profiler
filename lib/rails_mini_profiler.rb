@@ -23,6 +23,8 @@ require 'rails_mini_profiler/middleware'
 
 # Main namespace for Rails Mini Profiler
 module RailsMiniProfiler
+  mattr_accessor :importmap, default: Importmap::Map.new
+
   class << self
     # Create a new configuration object
     #

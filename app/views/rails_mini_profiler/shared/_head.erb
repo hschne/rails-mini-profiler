@@ -3,6 +3,10 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%= javascript_include_tag "rails-mini-profiler" %>
-  <%= stylesheet_link_tag "rails-mini-profiler", media: "all" %>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="turbo-cache-control" content="no-cache">
+
+  <%= javascript_importmap_tags "application", importmap: RailsMiniProfiler.importmap %>
+  <%= stylesheet_link_tag "rails_mini_profiler/rails-mini-profiler",
+  "data-turbo-track": "reload" %>
 </head>

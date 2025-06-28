@@ -34,18 +34,6 @@ jobs:
           bundler-cache: true
           cache-version: 3
 
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".tool-versions"
-          cache: "npm"
-
-      - name: Install Packages
-        uses: bahmutov/npm-install@v1
-
-      - name: Compile Assets
-        run: npm run build
-
       - name: Setup DB 🗄️
         run: |
           bundle exec rake db:test:prepare
@@ -78,29 +66,26 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Read Node Version
-        id: node-version
-        run: |
-          version=$(cat .tool-versions| grep nodejs | cut -d' ' -f2)
-          echo "::set-output name=version::$version"
-
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "${{ steps.node-version.outputs.version }}"
-          cache: "npm"
-
-      - name: Install Packages
-        uses: bahmutov/npm-install@v1
-
       - name: Run RuboCop 🚓
         run: bundle exec rake rubocop
 
+      - uses: pnpm/action-setup@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".tool-versions"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Run JS Linter 🔎
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Run SCSS Linter ✨
-        run: npm run lint:scss
+        run: pnpm run lint:css
 
       - name: Lint Commits 📝
-        uses: wagoid/commitlint-github-action@v5
+        if: github.event_name == 'pull_request'
+        run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose

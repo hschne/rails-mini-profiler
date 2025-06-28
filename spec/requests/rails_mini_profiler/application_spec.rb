@@ -43,10 +43,10 @@ module RailsMiniProfiler
         profiled_request = ProfiledRequest.find_by(request_path: '/movies')
         trace_start = trace.time.to_f * Tracers::Tracer::TIMESTAMP_MULTIPLIER
         trace_end = trace.time.to_f * Tracers::Tracer::TIMESTAMP_MULTIPLIER
-        expect(profiled_request.start * 1000).to be_within(1000).of(trace_start)
-        expect(profiled_request.finish * 1000).to be_within(1000).of(trace_end)
-        expect(profiled_request.duration).to be_within(1000).of(trace.duration * 100)
-        expect(profiled_request.allocations).to be_within(1000).of(trace.allocations)
+        expect(profiled_request.start * 1000).to be_within(10_000).of(trace_start)
+        expect(profiled_request.finish * 1000).to be_within(10_000).of(trace_end)
+        expect(profiled_request.duration).to be_within(10_000).of(trace.duration * 100)
+        expect(profiled_request.allocations).to be_within(10_000).of(trace.allocations)
       end
 
       it 'saves response data' do

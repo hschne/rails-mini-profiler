@@ -1,6 +1,4 @@
-(A) 2025-05-27 Remove uncessary runtime dependencies (pagy, jb, inlinesvg)
-(B) 2025-05-27 Make everything plain CSS
-(B) 2025-05-27 Use importmap for FE assets
+(A) 2025-05-27 Remove jb dependency
 (C) 2025-06-03 Fix copy closing the popover
 (C) 2025-06-03 Fix clear filter link not working
 (E) 2025-05-27 Rewrite RSpec to minitest

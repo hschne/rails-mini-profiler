@@ -1,21 +1,29 @@
 <tr data-link="<%= profiled_request_path(profiled_request.id) %>">
   <td class="">
     <%= label_tag nil do %>
-      <%= check_box_tag 'id[]', profiled_request.id,
-                        params.fetch(:selected, []).include?(profiled_request.id),
-                        class: "request-checkbox",
-                        data: {
-                          'selectable-target': 'selectable',
-                          'filters-target': 'filter',
-                           action: 'click->selectable#onSelected'
-                        },
-                        onclick: "event.stopPropagation();" %>
+      <%= check_box_tag "id[]",
+      profiled_request.id,
+      params.fetch(:selected, []).include?(profiled_request.id),
+      class: "request-checkbox",
+      data: {
+        "selectable-target": "selectable",
+        "filters-target": "filter",
+        action: "click->selectable#onSelected",
+      },
+      onclick: "event.stopPropagation();" %>
     <% end %>
   </td>
-  <td class="request-path"><%= profiled_request.request_name %></td>
-  <td class="text-left"> <%= profiled_request.request_method %> </td>
-  <td class="text-left"> <%= profiled_request.response_status %> </td>
-  <td class="text-left"> <%= profiled_request.response_media_type %> </td>
-  <td class="text-left"><%= profiled_request.duration %> ms</td>
+  <td class="request-path"><%= link_to(profiled_request.request_name, profiled_request) %></td>
+  <td class="text-left">
+    <%= profiled_request.request_method %>
+  </td>
+  <td class="text-left">
+    <%= profiled_request.response_status %>
+  </td>
+  <td class="text-left">
+    <%= profiled_request.response_media_type %>
+  </td>
+  <td class="text-left"><%= profiled_request.duration %>
+    ms</td>
   <td class="text-left"><%= profiled_request.created_at %></td>
 </tr>

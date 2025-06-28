@@ -8,11 +8,12 @@ button,
   font-size: 1rem;
   text-align: center;
   text-decoration: none;
+}
 
-  &:disabled {
-    background: var(--grey-200);
-    cursor: not-allowed;
-  }
+button:disabled,
+.button:disabled {
+  background: var(--grey-200);
+  cursor: not-allowed;
 }
 
 .btn-red {
@@ -20,27 +21,27 @@ button,
   color: white;
   font-weight: 600;
   outline: none;
+}
 
-  &:hover {
-    background: var(--red-600);
-  }
+.btn-red:hover {
+  background: var(--red-600);
 }
 
 .btn-grey {
   background: var(--grey-200);
+}
 
-  &:hover {
-    background: var(--grey-100);
-  }
+.btn-grey:hover {
+  background: var(--grey-100);
 }
 
 .btn-white {
   border: 1px solid var(--grey-200);
   background: white;
+}
 
-  &:hover {
-    background: var(--grey-100);
-  }
+.btn-white:hover {
+  background: var(--grey-100);
 }
 
 button:hover {
@@ -52,8 +53,8 @@ button.none {
   border: none;
   background: none;
   outline: none;
+}
 
-  &:hover {
-    box-shadow: none;
-  }
+button.none:hover {
+  box-shadow: none;
 }

@@ -18,8 +18,8 @@ group :test, :development do
   gem 'debug'
   gem 'jb'
   gem 'pg'
+  gem 'propshaft'
   gem 'rubocop'
-  gem 'sprockets-rails'
   gem 'sqlite3'
   gem 'stackprof'
 end
