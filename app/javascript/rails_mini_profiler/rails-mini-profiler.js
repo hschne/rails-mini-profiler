@@ -1,12 +1,5 @@
-import { Application } from "@hotwired/stimulus";
-import { Dropdown } from "tailwindcss-stimulus-components";
-import Checklist from "./controllers/checklist_controller";
-import Selectable from "./controllers/select_controller";
-import Filter from "./controllers/filter_controller";
-import Search from "./controllers/search_controller";
-import Enable from "./controllers/enable_controller";
-import Clipboard from "./controllers/clipboard_controller";
-import Popover from "./controllers/popover_controller.js";
+import "@hotwired/turbo-rails";
+import "controllers";
 
 const application = Application.start();
 

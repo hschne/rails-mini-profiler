@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'importmap-rails'
+
 module RailsMiniProfiler
   # The Rails Mini Profiler engine
   #
@@ -23,6 +25,17 @@ module RailsMiniProfiler
       app.config.assets.paths << root.join('app/assets/stylesheets')
       app.config.assets.paths << root.join('app/javascript')
       app.config.assets.precompile += %w[rails_mini_profiler_manifest rails_mini_profiler/rails-mini-profiler.css]
+    end
+
+    initializer 'rails_mini_profiler.importmap', after: 'importmap' do |app|
+      MissionControl::Jobs.importmap.draw(root.join('config/importmap.rb'))
+      if app.config.importmap.sweep_cache && app.config.reloading_enabled?
+        MissionControl::Jobs.importmap.cache_sweeper(watches: root.join('app/javascript'))
+
+        ActiveSupport.on_load(:action_controller_base) do
+          before_action { MissionControl::Jobs.importmap.cache_sweeper.execute_if_updated }
+        end
+      end
     end
   end
 end
