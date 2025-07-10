@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.8.0](https://github.com/hschne/rails-mini-profiler/compare/v0.7.3...v0.8.0) (2025-07-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* move to importmaps ([#251](https://github.com/hschne/rails-mini-profiler/issues/251))
+* update for Rails 8 ([#242](https://github.com/hschne/rails-mini-profiler/issues/242))
+
+### Features
+
+* update for Rails 8 ([#242](https://github.com/hschne/rails-mini-profiler/issues/242)) ([8722ae2](https://github.com/hschne/rails-mini-profiler/commit/8722ae2fa4276f263be671ce6bbdfdde6a9a3b13))
+
+
+### Bug Fixes
+
+* sanitize response body with null bytes ([#178](https://github.com/hschne/rails-mini-profiler/issues/178)) ([98ee2e3](https://github.com/hschne/rails-mini-profiler/commit/98ee2e3608562f0628b4653cc9f4b1b489544bc8))
+
+
+### Miscellaneous
+
+* allow up-to-date pagy versions ([b6d7c62](https://github.com/hschne/rails-mini-profiler/commit/b6d7c62459d6b95add831464ad3fefc997b8c239))
+* change coverage path ([eeb1891](https://github.com/hschne/rails-mini-profiler/commit/eeb18914302763003fbc8c3bd0fae55d036e9215))
+* move to importmaps ([#251](https://github.com/hschne/rails-mini-profiler/issues/251)) ([b9c3798](https://github.com/hschne/rails-mini-profiler/commit/b9c3798c77a8ca210e757550edc51b01204b3736))
+* post-release 0.7.3 ([482b2b0](https://github.com/hschne/rails-mini-profiler/commit/482b2b0f7cb24dc178283d62fcd266222af48c53))
+* remove inline svg dependency ([#243](https://github.com/hschne/rails-mini-profiler/issues/243)) ([f41de05](https://github.com/hschne/rails-mini-profiler/commit/f41de05be94a3e7ada5c6776c0e6c921f759b822))
+* remove pagy dependency ([#244](https://github.com/hschne/rails-mini-profiler/issues/244)) ([7e90b56](https://github.com/hschne/rails-mini-profiler/commit/7e90b566f9795d63e8a625831f8e8bb1d8951334))
+* update codelimate action ([6a86568](https://github.com/hschne/rails-mini-profiler/commit/6a86568ed7edb4cda4126e36d93af44d71712cf0))
+
 ## [0.7.3](https://github.com/hschne/rails-mini-profiler/compare/v0.7.2...v0.7.3) (2022-10-23)
 
 
