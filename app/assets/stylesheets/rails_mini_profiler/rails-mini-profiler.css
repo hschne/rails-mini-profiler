@@ -1,17 +1,18 @@
-@use "flashes";
-@use "flamegraph";
-@use "profiled_requests";
-@use "traces";
-@use "components/buttons";
-@use "components/input";
-@use "components/navbar";
-@use "components/pagination";
-@use "components/page_header";
-@use "components/dropdown";
-@use "components/placeholder";
-@use "components/trace";
-@use "components/tooltip";
-@import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap";
+@import url("flashes.css");
+@import url("flamegraph.css");
+@import url("profiled_requests.css");
+@import url("traces.css");
+@import url("components/buttons.css");
+@import url("components/input.css");
+@import url("components/navbar.css");
+@import url("components/pagination.css");
+@import url("components/page_header.css");
+@import url("components/dropdown.css");
+@import url("components/placeholder.css");
+@import url("components/trace.css");
+@import url("components/tooltip.css");
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
 
 @font-face {
   font-family: "Open Sans";
@@ -205,3 +206,4 @@ main {
 .popover-footer {
   border-top: 1px solid var(--grey-50);
 }
+

@@ -249,13 +249,7 @@ rails db:migrate
 
 ### Support for API-Only Apps
 
-Rails Mini Profiler supports API-only apps, but you have to make some small adjustments to use it. At the top of `application.rb` add [Sprockets](https://github.com/rails/sprockets-rails):
-
-```ruby
-require "sprockets/railtie"
-```
-
-Then, modify `application.rb`:
+Rails Mini Profiler supports API-only apps, but you have to make some small adjustments to use it. Modify `application.rb`:
 
 ```ruby
 module ApiOnly
@@ -266,8 +260,6 @@ module ApiOnly
   end
 end
 ```
-
-**Note**: Sprockets and flash are currently required for some of Rails Mini Profiler's UI features. These modifications may no longer be needed in the future.
 
 ### No Flamegraphs are being recored?
 

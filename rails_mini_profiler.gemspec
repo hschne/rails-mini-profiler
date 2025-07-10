@@ -22,10 +22,13 @@ Gem::Specification.new do |spec|
     'rubygems_mfa_required' => 'true'
   }
 
-  spec.files = Dir['{app,config,db,lib,public}/**/*', 'vendor/assets/**/*', 'LICENSE', 'README.md']
+  spec.files = Dir['{app,config,db,lib,public}/**/*', 'LICENSE', 'README.md']
 
   spec.required_ruby_version = Gem::Requirement.new('>= 3.2')
 
+  spec.add_dependency 'importmap-rails', '>= 1.2.1'
   spec.add_dependency 'jb'
   spec.add_dependency 'rails', '>= 7.2'
+  spec.add_dependency 'stimulus-rails'
+  spec.add_dependency 'turbo-rails'
 end

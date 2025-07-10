@@ -1,25 +1,5 @@
-import "../stylesheets/rails-mini-profiler.scss";
-
-import { Application } from "@hotwired/stimulus";
-import { Dropdown } from "tailwindcss-stimulus-components";
-import Checklist from "../js/checklist_controller";
-import Selectable from "../js/select_controller";
-import Filter from "../js/filter_controller";
-import Search from "../js/search_controller";
-import Enable from "../js/enable_controller";
-import Clipboard from "../js/clipboard_controller";
-import Popover from "../js/popover_controller.js";
-
-const application = Application.start();
-
-application.register("dropdown", Dropdown);
-application.register("checklist", Checklist);
-application.register("selectable", Selectable);
-application.register("filters", Filter);
-application.register("search", Search);
-application.register("enable", Enable);
-application.register("clipboard", Clipboard);
-application.register("popover", Popover);
+import "@hotwired/turbo-rails";
+import "controllers";
 
 function setupTraceSearch() {
   const traceNameSearch = document.getElementById("trace-search");

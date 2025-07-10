@@ -1,4 +1,4 @@
-@use "components/profiled_request_table";
+@import url("components/profiled_request_table.css");
 
 .search-field {
   box-sizing: border-box;
@@ -18,8 +18,8 @@
   background: var(--red-500);
   color: white;
   font-weight: 600;
+}
 
-  &:hover {
-    background: var(--red-600);
-  }
+.clear-action button:hover {
+  background: var(--red-600);
 }
