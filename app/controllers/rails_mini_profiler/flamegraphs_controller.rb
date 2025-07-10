@@ -8,7 +8,12 @@ module RailsMiniProfiler
 
     before_action :set_flamegraph, only: %i[show]
 
-    def show; end
+    def show
+      respond_to do |format|
+        format.html
+        format.json { render json: @flamegraph }
+      end
+    end
 
     private
 

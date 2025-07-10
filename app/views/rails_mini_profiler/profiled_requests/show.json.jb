@@ -1,5 +1,0 @@
-# frozen_string_literal: true
-
-request = render 'models/profiled_request', profiled_request: @profiled_request
-request[:traces] = render partial: 'models/trace', collection: @traces, as: :trace
-request

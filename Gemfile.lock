@@ -310,7 +310,6 @@ DEPENDENCIES
   appraisal
   debug
   httparty
-  jb
   pg
   puma
   rails_mini_profiler!

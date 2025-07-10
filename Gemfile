@@ -16,7 +16,6 @@ end
 group :test, :development do
   gem 'activerecord-import'
   gem 'debug'
-  gem 'jb'
   gem 'pg'
   gem 'rubocop'
   gem 'sprockets-rails'

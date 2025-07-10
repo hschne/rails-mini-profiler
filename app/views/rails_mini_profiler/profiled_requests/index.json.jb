@@ -1,3 +1,0 @@
-# frozen_string_literal: true
-
-render partial: 'models/profiled_request', collection: @profiled_requests, as: :profiled_request

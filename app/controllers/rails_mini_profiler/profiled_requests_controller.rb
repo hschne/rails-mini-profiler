@@ -13,6 +13,11 @@ module RailsMiniProfiler
       @pagination, @profiled_requests = pagination(search)
       @pagination = present(@pagination, PaginationPresenter)
       @profiled_requests = @profiled_requests.map { |request| present(request) }
+      
+      respond_to do |format|
+        format.html
+        format.json { render json: @profiled_requests.map(&:attributes) }
+      end
     end
 
     def show
@@ -27,6 +32,15 @@ module RailsMiniProfiler
                   .order(:start)
                   .map { |trace| present(trace, context: context) }
       @profiled_request = present(@profiled_request)
+      
+      respond_to do |format|
+        format.html
+        format.json do
+          render json: @profiled_request.attributes.merge(
+            traces: @traces.map(&:attributes)
+          )
+        end
+      end
     end
 
     def destroy

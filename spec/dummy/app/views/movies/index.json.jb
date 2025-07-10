@@ -1,3 +1,0 @@
-# frozen_string_literal: true
-
-render partial: 'movie', collection: @movies, as: :movie
